@@ -6,70 +6,86 @@
 - React Router DOM v7 (`BrowserRouter` en App.jsx, `<a href>` en componentes — NO `<Link>`)
 - IBM Plex Mono como fuente principal (local `@font-face`)
 
+## Repositorio y Deploy
+- GitHub: `https://github.com/Superhas2407/nexo-pro`
+- Deploy: Vercel (conectado al repo)
+- `vercel.json` en raíz con rewrites para SPA routing
+
 ## Estructura
 ```
 nexo-app/
   public/           # Fotos de productos (JPG/PNG)
-    iphone-reveal.jpg          # Hero scroll reveal desktop
-    iphone-reveal-mobile.jpg   # Hero scroll reveal mobile (portrait)
-    dji-mic-hero.jpg           # Hero desktop
-    dji-mic-hero-mobile.jpg    # Hero mobile (portrait)
+    iphone-reveal.jpg              # Scroll reveal iPhone desktop
+    iphone-reveal-mobile.jpg       # Scroll reveal iPhone mobile
+    dji-reveal.jpg                 # Scroll reveal DJI desktop
+    dji-reveal-mobile.jpg          # Scroll reveal DJI mobile
+    iphone-silver-shop.png         # Catálogo PNG sin fondo
+    iphone-orange-shop.png
+    iphone-deepblue-shop.png
+    dji-osmo7-shop.png
+    dji-osmo7p-shop.png
+    dji-osmo8-shop.png
+    dji-osmo7-hand.jpg             # Lifestyle hover
+    dji-osmo7p-hand.jpg
+    dji-osmo8-hand.jpg
+    iphone-silver-hand.jpg
+    iphone-orange-hand.jpg
+    iphone-deepblue-hand.jpg
   src/
     data/
       products.js              # Catálogo de productos — fuente de verdad
     hooks/
-      useBreakpoint.js         # Hook responsive: useBreakpoint(768) → isMobile
+      useBreakpoint.js         # useBreakpoint(768) → isMobile bool
     components/
-      Navbar.jsx               # Flat full-width, sticky top:0, height 68px
+      Navbar.jsx               # Sticky top:0, height 68px. Tiene SearchOverlay + SidePanel (carrito/favoritos)
       AnnouncementBar.jsx      # Barra superior, oculta en mobile
-      HeroSlider.jsx           # Hero 100svh, imagen diferente mobile/desktop
-      IphoneReveal.jsx         # Sticky scroll reveal iPhone 17 Pro (240vh container)
-      ProductLines.jsx         # Carrusel de iPhones en landing (solo Apple/iphone)
-      ProductSlideshow.jsx     # Slideshow reutilizable con zoom y modo peek mobile
-      CategoryBanners.jsx      # 4 banners: flex desktop, 2×2 grid mobile
-      ProductCard.jsx          # Card 3:4 con hover swap de imagen
+      HeroSlider.jsx           # Hero 100svh
+      IphoneReveal.jsx         # Sticky scroll reveal iPhone 17 Pro
+      DjiReveal.jsx            # Sticky scroll reveal DJI Osmo Mobile
+      ProductLines.jsx         # Carrusel iPhones en landing (lightBg=true)
+      DjiLines.jsx             # Carrusel DJI en landing (lightBg=true, darkTheme=true)
+      ProductSlideshow.jsx     # Slideshow reutilizable
+      FeaturedProducts.jsx     # "Lo más vendido" con tabs, usa products.js real
+      CategoryBanners.jsx      # 4 banners de categoría
+      ProductCard.jsx          # Card 3:4 con hover swap
       ProductModal.jsx         # Modal full-screen (spread + detalle + specs)
-      LandingProductModal.jsx  # Modal cinematic para landing (no usado actualmente)
+      LandingProductModal.jsx  # No usado actualmente
       WhatsAppFab.jsx
       Footer.jsx
       Brands.jsx
       WhyUs.jsx
       BrandBanners.jsx
-      FeaturedProducts.jsx
     pages/
       Store.jsx     # /tienda — grid + filtros + deep link ?producto=id&color=Color
-      Landing.jsx   # / — orden: Hero → IphoneReveal → ProductLines → CategoryBanners → ...
+      Landing.jsx   # /
 ```
 
 ## Orden de secciones en Landing.jsx
 ```
 AnnouncementBar → Navbar → HeroSlider → IphoneReveal → ProductLines →
-CategoryBanners → FeaturedProducts → BrandBanners → WhyUs → Brands → Footer → WhatsAppFab
+DjiReveal → DjiLines → CategoryBanners → FeaturedProducts →
+BrandBanners → WhyUs → Brands → Footer → WhatsAppFab
 ```
 
 ## Modelo de datos (products.js)
-
-Cada producto tiene `colorVariants[]`, no entradas separadas por color:
 
 ```js
 {
   id: 'iphone-17-pro',
   brand: 'Apple', category: 'iphone',
   name: 'iPhone 17 Pro',
-  tag: 'Nuevo',         // badge en la card
-  bgText: '17 PRO',     // texto gigante en spread del modal
+  tag: 'Nuevo',         // badge: 'Nuevo' | 'Pro' | 'Popular' | 'Exclusivo' | null
+  bgText: '17 PRO',     // texto gigante en spread del modal (null = sin spread)
   colorVariants: [
     {
       color: 'Silver', hex: '#E3E3E3',
-      image: '/iphone-silver-shop.png',    // foto principal (PNG sin fondo)
+      image: '/iphone-silver-shop.png',    // PNG sin fondo
       hoverImage: '/iphone-silver-hand.jpg',
-      images: [...],    // opcional: array de múltiples fotos para el modal
+      images: [...],    // opcional: galería en modal (solo si > 1 foto real)
       storage: [{ label: '256 GB', price: 1270 }],
     },
   ],
-  specs: [              // opcional: aparece como sección scrollable en modal
-    { label: 'Pantalla', value: '6.3" Super Retina XDR · ProMotion 120Hz' },
-  ],
+  specs: [{ label: 'Pantalla', value: '6.3"...' }],  // opcional
 }
 ```
 
@@ -77,74 +93,83 @@ Cada producto tiene `colorVariants[]`, no entradas separadas por color:
 
 ## Convenciones importantes
 
-- **Precios**: formato `REF X,XXX` sin signo de peso ni MXN
-- **Tipografía**: texto pequeño (< 13px) → `fontWeight: 600` para legibilidad con monospace
-- **Imágenes de tienda**: PNG sin fondo (Photoroom) → flotan sobre cualquier fondo
-- **Imágenes lifestyle**: JPEG con contexto (mano, persona, cielo, etc.)
+- **Precios**: formato `REF X,XXX` — sin $, sin MXN, sin Bs
+- **Tipografía**: texto < 13px → `fontWeight: 600` para legibilidad con monospace
+- **PNG sin fondo**: `objectFit: 'contain'` en cards y slideshow
+- **JPEG lifestyle**: `objectFit: 'cover'` (en hover de cards)
 - **overflow-x**: usar `clip` en `#root`, NO `hidden` (rompe `position: sticky`)
-- **Navbar sticky**: `top: 0`, height = 68px
-- **Filter bar sticky (tienda)**: `top: 68px`
-- **Altura segura**: usar `100svh` (no `100vh`) para soporte mobile
+- **Navbar**: `top: 0`, height = 68px
+- **Filter bar (tienda)**: `top: 68px`
+- **Altura**: usar `100svh` (no `100vh`)
+- **WhatsApp**: número `584223194044`
 
-## Responsive
+## Navbar.jsx
 
-`useBreakpoint(768)` devuelve `isMobile` — úsalo para lógica JS.
-CSS media queries en `index.css` para clases (`store-grid`, nav visibility, etc.).
+Contiene tres overlays internos:
+- `SearchOverlay` — busca en tiempo real sobre `products.js`, chips de populares
+- `SidePanel` carrito — drawer lateral derecho, CTA a WhatsApp
+- `SidePanel` favoritos — drawer lateral derecho, CTA a /tienda
 
-## IphoneReveal.jsx
+## IphoneReveal.jsx / DjiReveal.jsx
 
-Sticky scroll reveal para iPhone 17 Pro:
-- Container: `240vh` (mobile `260vh`), `position: relative`
+Mismo patrón sticky scroll reveal:
+- Container: `240vh` desktop / `260vh` mobile, `position: relative`
 - Inner sticky: `100svh`, `overflow: hidden`, `background: #000`
 - `useScroll` con `offset: ['start start', 'end end']`
-- Imagen: `/iphone-reveal.jpg` (desktop), `/iphone-reveal-mobile.jpg` (mobile)
-- Texto: "iPhone 17" label teal + "Pro" título grande (`fontWeight: 200`)
-- Animaciones: imgScale, imgY, overlayOp, eyeOp, titleOp, infoOp, ctaOp, hintOp
+- **Mobile**: sin zoom (imgScale fijo en 1), todo el contenido visible desde el inicio (opacidades en 1)
+- **Desktop**: animaciones progresivas con scroll
 
-## ProductLines.jsx (Landing)
+## ProductLines.jsx / DjiLines.jsx
 
-- Solo muestra iPhones (brand Apple, category iphone)
-- Items generados dinámicamente desde `products.js` vía `buildItems()` — un card por colorVariant
-- Deduplica imágenes iguales (Silver de Pro y Pro Max no se repiten)
-- Link a `/tienda?producto=<id>&color=<color>` para deep link directo al producto+color
-- `ProductSlideshow` recibe `lightBg={true}` → sin zoom al hacer click, info aparece abajo
+- `buildItems()` genera items desde `products.js` — un card por colorVariant
+- Deduplica imágenes (Set de paths usados)
+- Link a `/tienda?producto=<id>&color=<color>` para deep link
+- `ProductSlideshow` props: `lightBg={true}` (no zoom, no scroll block) + `darkTheme` para colores
 
 ## ProductSlideshow.jsx
 
-Props relevantes:
-- `lightBg` (bool): desactiva zoom, adapta colores del info panel a fondo claro, activa modo peek en mobile
-- Modo mobile+lightBg: `MobilePeekCarousel` — scroll snap horizontal con IntersectionObserver para auto-seleccionar card centrado
+Props:
+- `lightBg` — comportamiento landing: no zoom, no scroll capture, peek mobile
+- `darkTheme` — colores blancos (para secciones oscuras como DjiLines)
+- `imageFit` — `'cover'` (default) o `'contain'` (para PNG de gimbals)
+- Mobile + lightBg → `MobilePeekCarousel` (scroll snap + IntersectionObserver)
 
 ## ProductModal.jsx
 
 Props:
-- `product` — objeto completo de products.js
-- `onClose`
-- `initialColorIdx` (default 0) — abre en ese colorVariant
-- `skipSpread` (bool) — salta el spread y va directo al detalle
+- `initialColorIdx` (default 0)
+- `skipSpread` (bool) — omite el spread, va directo a detalle del color
 
-Dos modos:
-1. **Spread** — "ELIGE UN COLOR", iPhones en fila con `bgText`. Solo si `colorVariants.length > 1 && bgText && !skipSpread`
-2. **Detalle** — 3 columnas: info izquierda, imagen centro, ghost derecho. Specs scrollables abajo.
+Galería en modal: solo muestra thumbnails si `colorVariant.images?.length > 1`
 
 ## Store.jsx — Deep link
 
-Al entrar con `?producto=iphone-17-pro&color=Silver`:
-- Lee params con `URLSearchParams`
-- Encuentra el producto y el colorVariant index
-- Abre `ProductModal` con `initialColorIdx` y `skipSpread=true` → va directo al detalle del color
+`?producto=iphone-17-pro&color=Silver` → abre ProductModal directo al color con `skipSpread=true`
+
+## FeaturedProducts.jsx
+
+- Usa `products.js` real (no datos hardcoded)
+- Tabs: "Más populares" y "Nuevos" — cada tab define un array de product IDs
+- Cards linkean a `/tienda?producto=<id>`
+- Hover swap: PNG catálogo → JPEG lifestyle
+
+## ProductCard.jsx (tienda)
+
+- PNG → `objectFit: 'contain'` + `padding: 12px`
+- JPEG → `objectFit: 'cover'`
+- Detectado automáticamente por extensión de archivo
 
 ## Dev server
 ```bash
-cd nexo-app
-npm run dev
+cd nexo-app && npm run dev
 ```
 Puerto: http://localhost:5173
 
 ## Paleta de colores
 - Fondo oscuro: `#040e0f`
 - Cian primario: `#0ea7b7`
-- Cian oscuro: `#07626a`
+- Cian oscuro: `#07626a` / `#075356`
 - Texto principal: `#111`
 - Fondo tienda: `#f5f5f3`
 - Fondo iPhone section: `#f5f5f7`
+- Fondo DJI section: `#0d0d0f`
