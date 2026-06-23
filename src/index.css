@@ -1,0 +1,288 @@
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('/fonts/IBMPlexMono-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('/fonts/IBMPlexMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('/fonts/IBMPlexMono-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+body {
+  font-family: 'IBM Plex Mono', monospace;
+  color: #1a1a1a;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root { width: 100%; overflow-x: clip; }
+
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; }
+p, h1, h2, h3 { text-wrap: pretty; }
+
+/* Focus visible — a11y */
+:focus-visible {
+  outline: 2px solid #0ea7b7;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Navbar ─────────────────────────────────────── */
+.navbar {
+  padding-left: 48px;
+  padding-right: 48px;
+}
+
+/* Navbar responsive helpers */
+.nav-links-desktop { display: flex; }
+.nav-spacer-mobile { display: none; }
+.nav-right-mobile  { display: none; }
+
+/* ─── Subnav scroll wrapper ──────────────────────── */
+.subnav-scroll-wrap {
+  padding: 0 48px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.subnav-scroll-wrap::-webkit-scrollbar { display: none; }
+
+/* ─── Section horizontal padding ─────────────────── */
+.section-pad {
+  padding-left: 48px;
+  padding-right: 48px;
+}
+
+/* ─── Hero ───────────────────────────────────────── */
+.hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  height: 100%;
+  min-height: 520px;
+}
+
+.hero-illustration {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 280px;
+}
+
+/* ─── Brand banners ──────────────────────────────── */
+.banner-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 64px;
+}
+
+.banner-illustration {
+  flex: none;
+}
+
+/* ─── Products grid ──────────────────────────────── */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* ─── Store grid ─────────────────────────────────── */
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* ─── Categories grid ────────────────────────────── */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* ─── WhyUs stats bar ────────────────────────────── */
+.whyus-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+.whyus-item {
+  padding-left: 40px;
+}
+
+/* ─── Footer grid ────────────────────────────────── */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ─── Announcement bar ───────────────────────────── */
+.ann-sep  { display: inline; }
+.ann-item { display: inline; }
+
+/* ─── Responsive: tablet ─────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Navbar */
+  .navbar { padding-left: 16px; padding-right: 16px; }
+  .nav-links-desktop { display: none !important; }
+  .nav-right-desktop { display: none !important; }
+  .nav-spacer-mobile { display: flex !important; }
+  .nav-right-mobile  { display: flex !important; }
+
+  .navbar-search { display: none; }
+  .navbar-spacer { display: none; }
+  .navbar-wa-text { display: none; }
+  .navbar-shipping { display: none; }
+  .navbar-logo-wrap svg { height: 32px !important; width: auto !important; }
+
+  .subnav-inner { padding: 0 !important; }
+  .subnav-scroll-wrap { padding: 0 12px !important; }
+  .subnav-icons { padding-left: 8px !important; }
+
+  /* Announcement bar — solo 1 ítem en tablet/mobile */
+  .ann-sep  { display: none; }
+  .ann-item { display: none; }
+
+  /* Sections */
+  .section-pad {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .hero-inner {
+    padding: 40px 20px 48px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0;
+    height: auto;
+    min-height: 100%;
+  }
+
+  .hero-illustration { display: none; }
+
+  .hero-content {
+    max-width: 100% !important;
+    flex: none !important;
+  }
+
+  .banner-inner {
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .banner-illustration { display: none; }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .store-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .whyus-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 24px;
+  }
+
+  .whyus-item {
+    border-left: none !important;
+    padding-left: 0 !important;
+  }
+
+  /* Glass cards — 2 columnas en tablet/mobile */
+  .glass-stack { gap: 12px !important; }
+  .glass-box {
+    flex: 0 0 calc(50% - 6px) !important;
+    min-width: calc(50% - 6px) !important;
+  }
+  .glass-box [style*="minHeight"] {
+    padding: 28px !important;
+    min-height: 190px !important;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 20px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
+/* ─── Responsive: mobile pequeño ────────────────── */
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .store-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  /* Glass cards — 1 columna en móvil pequeño */
+  .glass-box {
+    flex: 0 0 100% !important;
+    min-width: 100% !important;
+  }
+}
+
+@keyframes wa-pulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.35); }
+  50%       { box-shadow: 0 4px 32px rgba(37,211,102,0.65); }
+}
