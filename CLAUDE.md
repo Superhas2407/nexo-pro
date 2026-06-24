@@ -19,18 +19,24 @@ nexo-app/
     iphone-reveal-mobile.jpg       # Scroll reveal iPhone mobile
     dji-reveal.jpg                 # Scroll reveal DJI desktop
     dji-reveal-mobile.jpg          # Scroll reveal DJI mobile
-    iphone-silver-shop.png         # Catálogo PNG sin fondo
-    iphone-orange-shop.png
-    iphone-deepblue-shop.png
-    dji-osmo7-shop.png
-    dji-osmo7p-shop.png
-    dji-osmo8-shop.png
-    dji-osmo7-hand.jpg             # Lifestyle hover
-    dji-osmo7p-hand.jpg
-    dji-osmo8-hand.jpg
-    iphone-silver-hand.jpg
-    iphone-orange-hand.jpg
-    iphone-deepblue-hand.jpg
+    iphone-silver-shop.webp        # Catálogo (fondo transparente → WebP)
+    iphone-orange-shop.webp
+    iphone-deepblue-shop.webp
+    dji-osmo7-shop.webp
+    dji-osmo7p-shop.webp
+    dji-osmo8-shop.webp
+    dji-mic2-shop.webp             # DJI Mic Mini
+    shokz-openrun2-shop.webp       # Shokz OpenRun Pro 2
+    boya-wm3-shop.webp             # BOYA Mini 2
+    dji-osmo7-hand.webp            # Lifestyle hover
+    dji-osmo7p-hand.webp
+    dji-osmo8-hand.webp
+    iphone-silver-hand.webp
+    iphone-orange-hand.webp
+    iphone-deepblue-hand.webp
+    dji-mic2-hand.webp
+    shokz-openrun2-hand.webp
+    boya-wm3-hand.webp
   src/
     data/
       products.js              # Catálogo de productos — fuente de verdad
@@ -63,7 +69,7 @@ nexo-app/
 ## Orden de secciones en Landing.jsx
 ```
 AnnouncementBar → Navbar → HeroSlider → IphoneReveal → ProductLines →
-DjiReveal → DjiLines → CategoryBanners → FeaturedProducts →
+DjiReveal → DjiLines → CategoryShowcase → FeaturedProducts →
 BrandBanners → WhyUs → Brands → Footer → WhatsAppFab
 ```
 

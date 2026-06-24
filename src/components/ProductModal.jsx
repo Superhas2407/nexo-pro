@@ -48,11 +48,15 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
+    window.history.pushState({ modal: true }, '')
     const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    const onPop = () => onClose()
     window.addEventListener('keydown', onKey)
+    window.addEventListener('popstate', onPop)
     return () => {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', onKey)
+      window.removeEventListener('popstate', onPop)
     }
   }, [onClose])
 

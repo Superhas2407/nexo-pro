@@ -9,14 +9,14 @@ export const products = [
     colorVariants: [
       {
         color: 'Silver', hex: '#E3E3E3',
-        image: '/iphone-silver-shop.png',
-        hoverImage: '/iphone-silver-hand.jpg',
+        image: '/iphone-silver-shop.webp',
+        hoverImage: '/iphone-silver-hand.webp',
         storage: [{ label: '256 GB', price: 1270 }],
       },
       {
         color: 'Orange', hex: '#FF6B35',
-        image: '/iphone-orange-shop.png',
-        hoverImage: '/iphone-orange-hand.jpg',
+        image: '/iphone-orange-shop.webp',
+        hoverImage: '/iphone-orange-hand.webp',
         storage: [
           { label: '512 GB', price: 1590 },
           { label: '1 TB',   price: 1790 },
@@ -49,14 +49,14 @@ export const products = [
     colorVariants: [
       {
         color: 'Silver Blue', hex: '#A8C4D4',
-        image: '/iphone-deepblue-shop.png',
-        hoverImage: '/iphone-deepblue-hand.jpg',
+        image: '/iphone-deepblue-shop.webp',
+        hoverImage: '/iphone-deepblue-hand.webp',
         storage: [{ label: '256 GB', price: 1290 }],
       },
       {
         color: 'Silver', hex: '#E3E3E3',
-        image: '/iphone-silver-shop.png',
-        hoverImage: '/iphone-silver-hand.jpg',
+        image: '/iphone-silver-shop.webp',
+        hoverImage: '/iphone-silver-hand.webp',
         storage: [
           { label: '512 GB', price: 1590 },
           { label: '1 TB',   price: 1790 },
@@ -89,8 +89,8 @@ export const products = [
     colorVariants: [
       {
         color: null, hex: '#f5f5f0',
-        image: '/airpods-shop-1.png', hoverImage: '/airpods-hand.jpg',
-        images: ['/airpods-shop-1.png', '/airpods-shop-2.png', '/airpods-hand.jpg'],
+        image: '/airpods-shop-1.png', hoverImage: '/airpods-hand.webp',
+        images: ['/airpods-shop-1.png', '/airpods-shop-2.png', '/airpods-hand.webp'],
         storage: [{ label: null, price: 270 }],
         specs: [
           { label: 'Chip',              value: 'H2 · cancelación activa de ruido' },
@@ -116,8 +116,8 @@ export const products = [
     tag: null, bgText: null,
     colorVariants: [{
       color: null, hex: '#2a2a2a',
-      image: '/dji-osmo7-shop.png',
-      hoverImage: '/dji-osmo7-hand.jpg',
+      image: '/dji-osmo7-shop.webp',
+      hoverImage: '/dji-osmo7-hand.webp',
       storage: [{ label: null, price: 120 }],
     }],
     specs: [
@@ -140,8 +140,8 @@ export const products = [
     tag: 'Popular', bgText: null,
     colorVariants: [{
       color: null, hex: '#2a2a2a',
-      image: '/dji-osmo7p-shop.png',
-      hoverImage: '/dji-osmo7p-hand.jpg',
+      image: '/dji-osmo7p-shop.webp',
+      hoverImage: '/dji-osmo7p-hand.webp',
       storage: [{ label: null, price: 180 }],
     }],
     specs: [
@@ -164,8 +164,8 @@ export const products = [
     tag: 'Nuevo', bgText: null,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/dji-osmo8-shop.png',
-      hoverImage: '/dji-osmo8-hand.jpg',
+      image: '/dji-osmo8-shop.webp',
+      hoverImage: '/dji-osmo8-hand.webp',
       storage: [{ label: null, price: 210 }],
     }],
     specs: [
@@ -187,10 +187,21 @@ export const products = [
     name: 'DJI Mic Mini',
     tag: null, bgText: null,
     colorVariants: [{
-      color: null, hex: null,
-      image: '/banner-dji-mic.jpg', hoverImage: null,
+      color: null, hex: '#2a2a2a',
+      image: '/dji-mic2-shop.webp',
+      hoverImage: '/dji-mic2-hand.webp',
       storage: [{ label: null, price: 59 }],
     }],
+    specs: [
+      { label: 'Transmisores',  value: '2 transmisores clip-on · rango 250 m' },
+      { label: 'Micrófono',     value: 'Omnidireccional · grabación interna integrada' },
+      { label: 'Cancelación',   value: 'AI Environmental Noise Canceling' },
+      { label: 'Batería',       value: '6 hrs transmisor · 18 hrs con estuche' },
+      { label: 'Formato',       value: '32-bit float · WAV sin pérdidas' },
+      { label: 'Pantalla',      value: 'OLED en receptor' },
+      { label: 'Conectividad',  value: '2.4 GHz · salida de 3.5 mm y USB-C' },
+      { label: 'Memoria',       value: '8 GB interna por transmisor' },
+    ],
   },
 
   // ── Oakley Meta HSTN ──────────────────────────────────────
@@ -202,14 +213,14 @@ export const products = [
     colorVariants: [
       {
         color: 'Black', hex: '#1a1a1a',
-        image: '/oakley-hstn-black-shop.jpg',
-        hoverImage: '/oakley-hstn-black-hand.jpg',
+        image: '/oakley-hstn-black-shop.webp',
+        hoverImage: '/oakley-hstn-black-hand.webp',
         storage: [{ label: null, price: 299 }],
       },
       {
         color: 'Prizm Red', hex: '#8B2020',
-        image: '/oakley-hstn-red-shop.jpg',
-        hoverImage: '/oakley-hstn-red-hand.jpg',
+        image: '/oakley-hstn-red-shop.webp',
+        hoverImage: '/oakley-hstn-red-hand.webp',
         storage: [{ label: null, price: 299 }],
       },
     ],
@@ -234,14 +245,14 @@ export const products = [
     colorVariants: [
       {
         color: 'Prizm 24K', hex: '#C8952A',
-        image: '/oakley-vanguard-gold-shop.jpg',
-        hoverImage: '/oakley-vanguard-gold-hand.jpg',
+        image: '/oakley-vanguard-gold-shop.webp',
+        hoverImage: '/oakley-vanguard-gold-hand.webp',
         storage: [{ label: null, price: 449 }],
       },
       {
         color: 'Prizm Ruby', hex: '#7B1F2E',
-        image: '/oakley-vanguard-ruby-shop.jpg',
-        hoverImage: '/oakley-vanguard-ruby-hand.jpg',
+        image: '/oakley-vanguard-ruby-shop.webp',
+        hoverImage: '/oakley-vanguard-ruby-hand.webp',
         storage: [{ label: null, price: 449 }],
       },
     ],
@@ -265,23 +276,43 @@ export const products = [
     tag: 'Popular', bgText: null,
     colorVariants: [{
       color: 'Orange', hex: '#e8500a',
-      image: null, hoverImage: null,
+      image: '/shokz-openrun2-shop.webp',
+      hoverImage: '/shokz-openrun2-hand.webp',
       storage: [{ label: null, price: 159 }],
     }],
+    specs: [
+      { label: 'Tecnología',    value: 'Conducción ósea · oídos abiertos' },
+      { label: 'Batería',       value: 'Hasta 12 hrs · carga rápida 5 min = 1.5 hrs' },
+      { label: 'Resistencia',   value: 'IP55 · resistente a sudor y lluvia' },
+      { label: 'Peso',          value: '29 g' },
+      { label: 'Micrófono',     value: 'Dual con cancelación de ruido AI' },
+      { label: 'Conectividad',  value: 'Bluetooth 5.3 · multipoint 2 dispositivos' },
+      { label: 'Carga',         value: 'Magnética propietaria' },
+    ],
   },
 
-  // ── Boya Mic Mini ─────────────────────────────────────────
+  // ── BOYA Mini 2 ───────────────────────────────────────────
   {
-    id: 'boya-mic-mini',
+    id: 'boya-mini2',
     brand: 'Boya', category: 'audio',
-    name: 'Boya Mic Mini',
+    name: 'BOYA Mini 2',
     tag: null, bgText: null,
     colorVariants: [{
-      color: null, hex: null,
-      image: null, hoverImage: null,
-      storage: [{ label: null, price: 39 }],
+      color: null, hex: '#1a1a1a',
+      image: '/boya-wm3-shop.webp',
+      hoverImage: '/boya-wm3-hand.webp',
+      storage: [{ label: null, price: 89 }],
     }],
+    specs: [
+      { label: 'Transmisores',  value: '2 transmisores clip-on inalámbricos' },
+      { label: 'Receptor',      value: 'USB-C integrado · plug & play' },
+      { label: 'Rango',         value: 'Hasta 100 m' },
+      { label: 'Batería',       value: '5 hrs transmisor · 10 hrs con estuche' },
+      { label: 'Compatibilidad',value: 'iPhone USB-C · Android · iPad · cámara' },
+      { label: 'Estuche',       value: 'Carga portátil incluida' },
+    ],
   },
+
 ]
 
 export const categories = [
@@ -293,7 +324,7 @@ export const categories = [
   { id: 'audio',     label: 'Audio' },
 ]
 
-export const brands = ['Apple', 'DJI', 'Oakley', 'Shokz', 'Boya']
+export const brands = ['Apple', 'DJI', 'Oakley', 'Shokz', 'BOYA']
 
 // Precio mínimo entre todos los colorVariants y storage
 export const basePrice = (p) =>

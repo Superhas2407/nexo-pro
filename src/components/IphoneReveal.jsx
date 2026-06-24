@@ -45,7 +45,7 @@ export default function IphoneReveal() {
           scale: imgScale, y: imgY,
         }}>
           <img
-            src={isMobile ? '/iphone-reveal-mobile.jpg' : '/iphone-reveal.jpg'}
+            src={isMobile ? '/iphone-reveal-mobile.webp' : '/iphone-reveal.webp'}
             alt="iPhone 17 Pro Orange"
             style={{
               width: '100%', height: '100%',

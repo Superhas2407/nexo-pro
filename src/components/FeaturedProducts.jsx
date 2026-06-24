@@ -156,6 +156,7 @@ export default function FeaturedProducts() {
               marginLeft: 20, fontSize: 13, color: '#0ea7b7',
               fontWeight: 500, textDecoration: 'none',
               display: 'inline-flex', alignItems: 'center', gap: 4,
+              padding: '8px 4px',
             }}>
               Ver todo →
             </a>

@@ -43,7 +43,7 @@ export default function DjiReveal() {
           scale: imgScale, y: imgY,
         }}>
           <img
-            src={isMobile ? '/dji-reveal-mobile.jpg' : '/dji-reveal.jpg'}
+            src={isMobile ? '/dji-reveal-mobile.webp' : '/dji-reveal.webp'}
             alt="DJI Osmo Mobile 7"
             style={{
               width: '100%', height: '100%',

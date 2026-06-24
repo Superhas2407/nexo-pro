@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { useBreakpoint } from '../hooks/useBreakpoint'
 
 const banners = [
-  { image: '/banner-iphone.jpg',    label: 'iPhone',             sub: 'Toda la línea desbloqueada',    href: '#' },
-  { image: '/banner-dji-mic.jpg',   label: 'DJI Audio',          sub: 'Micrófonos profesionales',      href: '#' },
-  { image: '/banner-dji-osmo.jpg',  label: 'DJI Estabilizadores',sub: 'Para creadores de contenido',   href: '#' },
-  { image: '/banner-oakley.jpg',    label: 'Oakley Meta',        sub: 'Lentes inteligentes',           href: '#' },
+  { image: '/banner-iphone.webp',    label: 'iPhone',             sub: 'Toda la línea desbloqueada',    href: '#' },
+  { image: '/banner-dji-mic.webp',   label: 'DJI Audio',          sub: 'Micrófonos profesionales',      href: '#' },
+  { image: '/banner-dji-osmo.webp',  label: 'DJI Estabilizadores',sub: 'Para creadores de contenido',   href: '#' },
+  { image: '/banner-oakley.webp',    label: 'Oakley Meta',        sub: 'Lentes inteligentes',           href: '#' },
 ]
 
 export default function CategoryBanners() {

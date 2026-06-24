@@ -15,7 +15,7 @@ export default function HeroSlider() {
     }}>
       {/* Imagen de fondo — mobile vs desktop */}
       <img
-        src={isMobile ? '/dji-mic-hero-mobile.jpg' : '/dji-mic-hero.jpg'}
+        src={isMobile ? '/dji-mic-hero-mobile.webp' : '/dji-mic-hero.webp'}
         alt=""
         aria-hidden="true"
         style={{

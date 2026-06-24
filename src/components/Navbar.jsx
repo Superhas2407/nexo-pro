@@ -173,9 +173,9 @@ function SearchOverlay({ onClose }) {
 
 /* ── Cart recommendations ────────────────────────────────── */
 const CART_RECS = [
-  { label: 'iPhone 17 Pro', image: '/iphone-orange-hand.jpg', href: '/tienda?categoria=iphone' },
-  { label: 'DJI Osmo',      image: '/dji-osmo7p-hand.jpg',    href: '/tienda?categoria=dji-estab' },
-  { label: 'Oakley Meta',   image: '/oakley-hstn-red-hand.jpg', href: '/tienda?categoria=oakley' },
+  { label: 'iPhone 17 Pro', image: '/iphone-orange-hand.webp', href: '/tienda?categoria=iphone' },
+  { label: 'DJI Osmo',      image: '/dji-osmo7p-hand.webp',    href: '/tienda?categoria=dji-estab' },
+  { label: 'Oakley Meta',   image: '/oakley-hstn-red-hand.webp', href: '/tienda?categoria=oakley' },
 ]
 
 function CartRecs({ onClose }) {
@@ -544,7 +544,7 @@ export default function Navbar() {
   const { cart, wishlist, removeFromCart, updateQty, removeFromWishlist, cartTotal, cartWaText } = useShop()
 
   useEffect(() => {
-    const onScroll = () => setAtTop(window.scrollY < 60)
+    const onScroll = () => setAtTop(window.scrollY < window.innerHeight - 100)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -579,8 +579,7 @@ export default function Navbar() {
         position: 'fixed', top: 0, left: 0, right: 0,
         height: 110, pointerEvents: 'none', zIndex: 99,
         background: 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 100%)',
-        opacity: atTop ? 1 : 0,
-        transition: 'opacity 0.35s ease',
+        opacity: 1,
       }} />
 
       <header ref={headerRef} style={{ position: 'sticky', top: 0, zIndex: 100, background: 'transparent', pointerEvents: 'none', padding: '14px 24px' }}>
@@ -686,9 +685,9 @@ export default function Navbar() {
             <div style={{ padding: '12px 12px 12px' }}>
               {/* Categorías con imagen */}
               {[
-                { label: 'iPhone',      sub: 'iPhone 17 Pro & Pro Max', image: '/iphone-orange-hand.jpg',    href: '/tienda?categoria=iphone' },
-                { label: 'DJI',         sub: 'Estabilizadores & Audio',  image: '/dji-osmo7p-hand.jpg',      href: '/tienda?categoria=dji-estab' },
-                { label: 'Oakley Meta', sub: 'HSTN & Vanguard',          image: '/oakley-hstn-red-hand.jpg', href: '/tienda?categoria=oakley' },
+                { label: 'iPhone',      sub: 'iPhone 17 Pro & Pro Max', image: '/iphone-orange-hand.webp',    href: '/tienda?categoria=iphone' },
+                { label: 'DJI',         sub: 'Estabilizadores & Audio',  image: '/dji-osmo7p-hand.webp',      href: '/tienda?categoria=dji-estab' },
+                { label: 'Oakley Meta', sub: 'HSTN & Vanguard',          image: '/oakley-hstn-red-hand.webp', href: '/tienda?categoria=oakley' },
               ].map((item, i) => (
                 <a key={i} href={item.href} onClick={() => setMobileOpen(false)} style={{
                   display: 'flex', alignItems: 'center', gap: 14,
@@ -929,7 +928,7 @@ export default function Navbar() {
 }
 
 const iconBtn = {
-  width: 38, height: 38, borderRadius: 8,
+  width: 44, height: 44, borderRadius: 8,
   border: 'none', background: 'transparent',
   cursor: 'pointer', display: 'flex',
   alignItems: 'center', justifyContent: 'center',

@@ -92,7 +92,7 @@ export default function Store() {
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
                 style={{
-                  padding: '6px 16px',
+                  padding: '10px 16px',
                   borderRadius: 99,
                   border: activeCategory === cat.id
                     ? '1.5px solid #111'

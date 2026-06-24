@@ -5,25 +5,25 @@ const categories = [
   {
     label: 'iPhone',
     sub: 'iPhone 17 Pro & Pro Max',
-    image: '/iphone-orange-hand.jpg',
+    image: '/iphone-orange-hand.webp',
     href: '/tienda?categoria=iphone',
   },
   {
     label: 'DJI',
     sub: 'Estabilizadores & Audio',
-    image: '/dji-osmo7p-hand.jpg',
+    image: '/dji-osmo7p-hand.webp',
     href: '/tienda?categoria=dji-estab',
   },
   {
     label: 'Oakley Meta',
     sub: 'HSTN & Vanguard',
-    image: '/oakley-hstn-red-hand.jpg',
+    image: '/oakley-hstn-red-hand.webp',
     href: '/tienda?categoria=oakley',
   },
   {
     label: 'Audio',
     sub: 'AirPods & Micrófonos',
-    image: '/airpods-hand.jpg',
+    image: '/airpods-hand.webp',
     href: '/tienda?categoria=audio',
   },
 ]
@@ -142,7 +142,7 @@ export default function CategoryShowcase() {
           <h2 style={{ fontSize: 20, fontWeight: 500, letterSpacing: -0.8, color: '#111', margin: 0 }}>
             Explora la colección.
           </h2>
-          <a href="/tienda" style={{ fontSize: 13, color: '#0ea7b7', fontWeight: 500, textDecoration: 'none', whiteSpace: 'nowrap' }}>
+          <a href="/tienda" style={{ fontSize: 13, color: '#0ea7b7', fontWeight: 500, textDecoration: 'none', whiteSpace: 'nowrap', padding: '8px 0 8px 12px' }}>
             Ver todo →
           </a>
         </div>
@@ -159,7 +159,7 @@ export default function CategoryShowcase() {
           <h2 style={{ fontSize: 28, fontWeight: 500, letterSpacing: -0.8, color: '#111', margin: 0 }}>
             Explora la colección.
           </h2>
-          <a href="/tienda" style={{ fontSize: 13, color: '#0ea7b7', fontWeight: 500, textDecoration: 'none', whiteSpace: 'nowrap' }}>
+          <a href="/tienda" style={{ fontSize: 13, color: '#0ea7b7', fontWeight: 500, textDecoration: 'none', whiteSpace: 'nowrap', padding: '8px 0 8px 12px' }}>
             Ver todo →
           </a>
         </div>

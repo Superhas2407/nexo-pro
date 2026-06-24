@@ -61,8 +61,8 @@ export default function ProductCard({ product, onClick }) {
             style={{
               position: 'absolute', inset: 0,
               width: '100%', height: '100%',
-              objectFit: mainImage.endsWith('.png') ? 'contain' : 'cover',
-              padding: mainImage.endsWith('.png') ? '12px' : 0,
+              objectFit: mainImage.includes('-shop.') ? 'contain' : 'cover',
+              padding: mainImage.includes('-shop.') ? '12px' : 0,
               opacity: (hovered && hoverImage) ? 0 : 1,
               transform: hovered && !hoverImage ? 'scale(1.04)' : 'scale(1)',
               transition: 'opacity 0.45s ease, transform 0.5s ease',

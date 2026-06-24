@@ -43,7 +43,7 @@ export default function OakleyReveal() {
           scale: imgScale, y: imgY,
         }}>
           <img
-            src={isMobile ? '/oakley-reveal-mobile.jpg' : '/oakley-reveal.jpg'}
+            src={isMobile ? '/oakley-reveal-mobile.webp' : '/oakley-reveal.webp'}
             alt="Oakley Meta Smart Glasses"
             style={{
               width: '100%', height: '100%',
