@@ -18,7 +18,7 @@ export const products = [
         image: '/iphone-orange-shop.webp',
         hoverImage: '/iphone-orange-hand.webp',
         storage: [
-          { label: '512 GB', price: 1590 },
+          { label: '512 GB', price: 1620 },
           { label: '1 TB',   price: 1790 },
         ],
       },
