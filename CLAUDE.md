@@ -105,10 +105,48 @@ BrandBanners → WhyUs → Brands → Footer → WhatsAppFab
 
 ## Navbar.jsx
 
-Contiene tres overlays internos:
+Contiene cuatro overlays internos:
 - `SearchOverlay` — busca en tiempo real sobre `products.js`, chips de populares
-- `SidePanel` carrito — drawer lateral derecho, CTA a WhatsApp
-- `SidePanel` favoritos — drawer lateral derecho, CTA a /tienda
+- `SidePanel` carrito — panel flotante debajo del pill, CTA a WhatsApp
+- `SidePanel` favoritos — panel flotante debajo del pill, CTA a /tienda
+- Menú mobile — panel flotante con categorías + thumbnails (Nomad style)
+
+### SidePanel — comportamiento clave
+- **Posicionamiento**: `pillRef.getBoundingClientRect().bottom + 8` capturado UNA vez al abrir (no se recalcula en scroll)
+- **Mobile** (`window.innerWidth < 768`): `left: 16, right: 16` (centrado, como el menú hamburguesa)
+- **Desktop**: `right: 24, width: 340`
+- `maxHeight: calc(100svh - panelTop - 16px)` — altura natural, no forzada a pantalla completa
+- `borderRadius: 20`, animación fade+slide down (no slide lateral)
+- Body scroll se bloquea al abrir: `document.body.style.overflow = 'hidden'`
+
+### Cart empty state — CartRecs
+- Carrusel horizontal edge-to-edge con `paddingLeft: 20, paddingRight: 20`
+- Cards `flex: '0 0 120px'`, `aspectRatio: '3/4'`, fondo blanco con `padding: 8`, `border: 1.5px solid #e8e8e8`
+- Drag-to-scroll con mouse (mousedown/mousemove/mouseup)
+- Dots de paginación que siguen el scroll
+- Backdrop gris `#f5f5f3` en cart con items, cards blancas con `borderRadius: 14, boxShadow`
+
+### Cart con items — diseño Nomad
+- Fondo del área de items: `#f5f5f3`
+- Cada item: tarjeta blanca `borderRadius: 14, padding: 12, boxShadow`
+- Imagen: 64×64px, `borderRadius: 10`
+- Nombre: `fontWeight: 700, fontSize: 14`
+- Subtítulo: `fontWeight: 500, fontSize: 12, color: #888`
+- Qty: pill con borde `border: 1px solid #e5e5e5, borderRadius: 99`
+- Eliminar: ícono trash SVG arriba derecha
+- Footer: `background: #fff`, "Subtotal" `fontWeight: 700`, botón negro `borderRadius: 99`
+
+### Menú hamburguesa mobile
+- Panel flotante: `position: fixed`, `top: getPillBottom()`, `left: 16, right: 16`
+- `borderRadius: 20`, `background: #f2f2f2`, `maxHeight: calc(100svh - 96px)`
+- Categorías con thumbnail 56×56px + label bold + subtítulo
+- Animación fade+slide down con AnimatePresence
+- Body scroll bloqueado al abrir
+
+### pillRef vs headerRef
+- `headerRef` → en el `<header>` element (incluye padding 14px arriba y abajo)
+- `pillRef` → en el div del pill (altura exacta del pill)
+- Siempre usar `pillRef` para posicionar dropdowns — evita que el announcement bar desplace el panel
 
 ## IphoneReveal.jsx / DjiReveal.jsx
 

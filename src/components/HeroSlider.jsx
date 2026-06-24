@@ -91,7 +91,7 @@ export default function HeroSlider() {
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </a>
-          <a href="https://wa.me/" style={{
+          <a href="https://wa.me/584223194044?text=Hola!%20Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20productos%20de%20Nexo%20Pro." style={{
             display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
             border: '1.5px solid rgba(255,255,255,0.35)', color: '#fff',
             fontSize: 14, fontWeight: 500,

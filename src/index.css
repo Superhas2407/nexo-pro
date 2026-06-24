@@ -156,6 +156,10 @@ p, h1, h2, h3 { text-wrap: pretty; }
 .ann-sep  { display: inline; }
 .ann-item { display: inline; }
 
+/* ─── Hide scrollbar utility ─────────────────────── */
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
 /* ─── Responsive: tablet ─────────────────────────── */
 @media (max-width: 768px) {
 

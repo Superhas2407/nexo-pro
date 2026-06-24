@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { basePrice } from '../data/products'
+import { useShop } from '../context/ShopContext'
 
 export default function ProductCard({ product, onClick }) {
   const [hovered, setHovered] = useState(false)
   const [imgError, setImgError] = useState(false)
-
+  const { isInWishlist, toggleWishlist } = useShop()
   const firstVariant = product.colorVariants[0]
+  const inWish = isInWishlist(product.id, firstVariant.color)
+
   const mainImage = firstVariant.image
   const hoverImage = firstVariant.hoverImage
 
@@ -92,6 +95,29 @@ export default function ProductCard({ product, onClick }) {
             }}
           />
         )}
+
+        {/* Wishlist button */}
+        <button
+          onClick={e => { e.stopPropagation(); toggleWishlist(product, firstVariant) }}
+          style={{
+            position: 'absolute', top: 8, right: 8, zIndex: 2,
+            width: 32, height: 32, borderRadius: '50%',
+            border: 'none', background: 'rgba(255,255,255,0.9)',
+            cursor: 'pointer', display: 'flex',
+            alignItems: 'center', justifyContent: 'center',
+            color: inWish ? '#e53935' : '#bbb',
+            boxShadow: '0 1px 4px rgba(0,0,0,0.1)',
+            transition: 'color 0.2s, transform 0.15s',
+          }}
+          onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.12)'}
+          onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24"
+            fill={inWish ? 'currentColor' : 'none'}
+            stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+          </svg>
+        </button>
 
         {/* Tag badge */}
         {product.tag && tagColors[product.tag] && (

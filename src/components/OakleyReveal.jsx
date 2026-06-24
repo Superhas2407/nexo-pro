@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useBreakpoint } from '../hooks/useBreakpoint'
 
-export default function DjiReveal() {
+export default function OakleyReveal() {
   const containerRef = useRef(null)
   const isMobile = useBreakpoint(768)
 
@@ -11,9 +11,9 @@ export default function DjiReveal() {
     offset: ['start start', 'end end'],
   })
 
-  const imgScale  = useTransform(scrollYProgress, [0, 0.55], isMobile ? [1, 1] : [1.4, 1])
-  const imgY      = useTransform(scrollYProgress, [0, 0.55], isMobile ? ['0%', '0%'] : ['-10%', '0%'])
-  const overlayOp = useTransform(scrollYProgress, [0, 0.4, 0.8], [0.8, 0.5, 0.68])
+  const imgScale  = useTransform(scrollYProgress, [0, 0.55], isMobile ? [1, 1] : [1.08, 1])
+  const imgY      = useTransform(scrollYProgress, [0, 0.55], isMobile ? ['0%', '0%'] : ['-4%', '0%'])
+  const overlayOp = useTransform(scrollYProgress, [0, 0.4, 0.8], [0.45, 0.25, 0.55])
 
   const eyeOp   = useTransform(scrollYProgress, [0, 0.18], isMobile ? [1, 1] : [0, 1])
   const eyeY    = useTransform(scrollYProgress, [0, 0.18], isMobile ? [0, 0] : [20, 0])
@@ -34,7 +34,7 @@ export default function DjiReveal() {
       <div style={{
         position: 'sticky', top: 0,
         height: '100svh', overflow: 'hidden',
-        background: '#000',
+        background: '#c8b89a',
       }}>
 
         {/* Imagen principal */}
@@ -43,20 +43,27 @@ export default function DjiReveal() {
           scale: imgScale, y: imgY,
         }}>
           <img
-            src={isMobile ? '/dji-reveal-mobile.jpg' : '/dji-reveal.jpg'}
-            alt="DJI Osmo Mobile 7"
+            src={isMobile ? '/oakley-reveal-mobile.jpg' : '/oakley-reveal.jpg'}
+            alt="Oakley Meta Smart Glasses"
             style={{
               width: '100%', height: '100%',
               objectFit: 'cover',
-              objectPosition: isMobile ? 'center 20%' : 'center 30%',
+              objectPosition: isMobile ? 'center 30%' : 'center 40%',
             }}
           />
         </motion.div>
 
-        {/* Overlay */}
+        {/* Overlay fijo — oscurece el bottom para legibilidad */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0) 35%, rgba(0,0,0,0.82) 100%)',
+          pointerEvents: 'none',
+        }} />
+
+        {/* Overlay animado — efecto cinético en scroll */}
         <motion.div style={{
           position: 'absolute', inset: 0,
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.85) 100%)',
+          background: 'rgba(0,0,0,0.18)',
           opacity: overlayOp,
           pointerEvents: 'none',
         }} />
@@ -78,7 +85,7 @@ export default function DjiReveal() {
               color: '#0ea7b7',
               margin: '0 0 10px', lineHeight: 1,
             }}>
-              DJI Osmo Mobile
+              Oakley × Meta
             </motion.p>
             <motion.h2 style={{
               opacity: titleOp, y: titleY,
@@ -87,11 +94,11 @@ export default function DjiReveal() {
               color: '#fff', lineHeight: 0.9,
               marginBottom: 20,
             }}>
-              Estabiliza
+              Línea Oakley
             </motion.h2>
           </div>
 
-          {/* Modelo + precio */}
+          {/* Modelos + precio */}
           <motion.div style={{
             opacity: infoOp, y: infoY,
             display: 'flex', alignItems: 'center',
@@ -101,11 +108,11 @@ export default function DjiReveal() {
               fontSize: 12, color: 'rgba(255,255,255,0.45)',
               fontWeight: 400, letterSpacing: 0.5,
             }}>
-              7 · 7P · 8
+              HSTN · Vanguard
             </span>
             <span style={{ width: 1, height: 10, background: 'rgba(255,255,255,0.18)' }} />
             <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.85)', fontWeight: 500, letterSpacing: 0.5 }}>
-              Desde REF 120
+              Desde REF 299
             </span>
           </motion.div>
 
@@ -117,7 +124,7 @@ export default function DjiReveal() {
             width: isMobile ? '100%' : 'auto',
           }}>
             <a
-              href="/tienda?categoria=dji-estab"
+              href="/tienda?categoria=oakley"
               style={{
                 display: 'inline-flex', alignItems: 'center',
                 justifyContent: 'center', gap: 8,
@@ -130,13 +137,13 @@ export default function DjiReveal() {
               onMouseEnter={e => e.currentTarget.style.background = '#3dc8d6'}
               onMouseLeave={e => e.currentTarget.style.background = '#0ea7b7'}
             >
-              Ver estabilizadores
+              Ver lentes
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
             </a>
             <a
-              href="https://wa.me/584223194044?text=Hola!%20Me%20interesan%20los%20estabilizadores%20DJI.%20%C2%BFDisponibilidad%3F"
+              href="https://wa.me/584223194044"
               style={{
                 display: 'inline-flex', alignItems: 'center',
                 justifyContent: 'center', gap: 8,

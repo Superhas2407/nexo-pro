@@ -1,66 +1,102 @@
-import AppleGlassStack from './AppleGlassStack'
+import { useBreakpoint } from '../hooks/useBreakpoint'
 
 const items = [
   {
-    title: '100%',
+    stat: '100%',
     label: 'Originales',
     body: 'Distribuidores autorizados de todas las marcas que ofrecemos.',
   },
   {
-    title: '48h',
+    stat: '48h',
     label: 'Entrega',
     body: 'Envíos a cualquier estado del país con tracking incluido.',
   },
   {
-    title: 'Oficial',
+    stat: 'Oficial',
     label: 'Garantía',
     body: 'Respaldo directo del fabricante en todos los productos.',
   },
   {
-    title: 'Directa',
+    stat: 'Directa',
     label: 'Asesoría',
     body: 'Por WhatsApp, siempre disponibles para ayudarte.',
   },
 ]
 
 export default function WhyUs() {
-  return (
-    <section className="section-pad" style={{ position: 'relative', background: '#040e0f', paddingTop: 96, paddingBottom: 96, overflow: 'hidden' }}>
-      {/* Glow de fondo */}
-      <div style={{
-        position: 'absolute', top: '50%', left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 900, height: 500,
-        background: 'radial-gradient(ellipse at center, rgba(14,167,183,0.18) 0%, rgba(7,83,86,0.08) 50%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
+  const isMobile = useBreakpoint(768)
 
-      <div style={{ position: 'relative', maxWidth: 1280, margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: 56 }}>
-          <p style={{ fontSize: 11, color: '#3dc8d6', fontWeight: 500, letterSpacing: 3, textTransform: 'uppercase', marginBottom: 14 }}>
-            ¿Por qué Nexo Pro?
-          </p>
-          <h2 style={{ fontSize: 'clamp(30px, 4vw, 52px)', fontWeight: 400, color: '#fff', letterSpacing: -1.5, lineHeight: 1.1 }}>
-            Tecnología con respaldo real.
-          </h2>
+  return (
+    <section className="section-pad" style={{
+      background: '#fff',
+      paddingTop: isMobile ? 48 : 72,
+      paddingBottom: isMobile ? 48 : 72,
+      borderTop: '1px solid #e8e8e6',
+    }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+
+        {/* Header */}
+        <div style={{
+          display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
+          alignItems: isMobile ? 'flex-start' : 'flex-end',
+          justifyContent: 'space-between',
+          gap: isMobile ? 12 : 24,
+          marginBottom: isMobile ? 40 : 56,
+        }}>
+          <div>
+            <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: 2.5, textTransform: 'uppercase', marginBottom: 10, color: '#0ea7b7' }}>
+              ¿Por qué Nexo Pro?
+            </p>
+            <h2 style={{
+              fontSize: isMobile ? 'clamp(22px, 6vw, 32px)' : 'clamp(28px, 4vw, 52px)',
+              fontWeight: 400, letterSpacing: -1.5,
+              color: '#1a1a1a', margin: 0, lineHeight: 1.1,
+            }}>
+              Tecnología con respaldo real.
+            </h2>
+          </div>
         </div>
 
-        <AppleGlassStack
-          items={items}
-          direction="horizontal"
-          gap={20}
-          config={{
-            backgroundColor: 'rgba(255,255,255,0.04)',
-            backgroundBlur: 24,
-            borderRadius: 24,
-            padding: 44,
-            boxHeight: 260,
-            hoverLift: 14,
-            strokeSize: 1,
-            strokeColor: 'rgba(255,255,255,0.1)',
-            shineColor: 'rgba(255,255,255,0.15)',
-          }}
-        />
+        {/* Stats */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
+          gap: isMobile ? '32px 24px' : '0',
+        }}>
+          {items.map((item, i) => (
+            <div key={i} style={{
+              paddingRight: isMobile ? 0 : 40,
+              borderRight: isMobile ? 'none' : (i < items.length - 1 ? '1px solid #e8e8e6' : 'none'),
+              paddingLeft: isMobile ? 0 : (i > 0 ? 40 : 0),
+            }}>
+              <p style={{
+                fontSize: isMobile ? 44 : 52,
+                fontWeight: 300,
+                letterSpacing: -2,
+                color: '#1a1a1a',
+                margin: '0 0 4px',
+                lineHeight: 1,
+              }}>
+                {item.stat}
+              </p>
+              <p style={{
+                fontSize: 11, fontWeight: 600,
+                letterSpacing: 2, textTransform: 'uppercase',
+                color: '#0ea7b7', margin: '0 0 12px',
+              }}>
+                {item.label}
+              </p>
+              <p style={{
+                fontSize: 14, lineHeight: 1.65,
+                color: 'rgba(0,0,0,0.45)', margin: 0,
+              }}>
+                {item.body}
+              </p>
+            </div>
+          ))}
+        </div>
+
       </div>
     </section>
   )

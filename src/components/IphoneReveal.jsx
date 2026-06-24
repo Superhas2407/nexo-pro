@@ -138,7 +138,7 @@ export default function IphoneReveal() {
               </svg>
             </a>
             <a
-              href="https://wa.me/"
+              href="https://wa.me/584223194044?text=Hola!%20Me%20interesa%20el%20iPhone%2017%20Pro.%20%C2%BFDisponibilidad%3F"
               style={{
                 display: 'inline-flex', alignItems: 'center',
                 justifyContent: 'center', gap: 8,

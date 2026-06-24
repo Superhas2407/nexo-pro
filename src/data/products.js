@@ -198,12 +198,31 @@ export const products = [
     id: 'oakley-meta-hstn',
     brand: 'Oakley', category: 'oakley',
     name: 'Oakley Meta HSTN',
-    tag: null, bgText: null,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/banner-oakley.jpg', hoverImage: null,
-      storage: [{ label: null, price: 299 }],
-    }],
+    tag: 'Nuevo', bgText: null,
+    colorVariants: [
+      {
+        color: 'Black', hex: '#1a1a1a',
+        image: '/oakley-hstn-black-shop.jpg',
+        hoverImage: '/oakley-hstn-black-hand.jpg',
+        storage: [{ label: null, price: 299 }],
+      },
+      {
+        color: 'Prizm Red', hex: '#8B2020',
+        image: '/oakley-hstn-red-shop.jpg',
+        hoverImage: '/oakley-hstn-red-hand.jpg',
+        storage: [{ label: null, price: 299 }],
+      },
+    ],
+    specs: [
+      { label: 'Cámara',        value: '12MP · video 3K · foto y video manos libres' },
+      { label: 'Audio',         value: 'Altavoces direccionales · micrófono dual' },
+      { label: 'Asistente',     value: 'Meta AI integrado · comandos de voz' },
+      { label: 'Batería',       value: 'Hasta 4 hrs · estuche con carga' },
+      { label: 'Conectividad',  value: 'Bluetooth 5.3 · Wi-Fi · app Meta View' },
+      { label: 'Lentes',        value: 'Oakley Prizm · intercambiables' },
+      { label: 'Resistencia',   value: 'IPX4 · resistente a salpicaduras' },
+      { label: 'Peso',          value: '49 g' },
+    ],
   },
 
   // ── Oakley Meta Vanguard ──────────────────────────────────
@@ -212,11 +231,30 @@ export const products = [
     brand: 'Oakley', category: 'oakley',
     name: 'Oakley Meta Vanguard',
     tag: 'Exclusivo', bgText: null,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/banner-oakley.jpg', hoverImage: null,
-      storage: [{ label: null, price: 449 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Prizm 24K', hex: '#C8952A',
+        image: '/oakley-vanguard-gold-shop.jpg',
+        hoverImage: '/oakley-vanguard-gold-hand.jpg',
+        storage: [{ label: null, price: 449 }],
+      },
+      {
+        color: 'Prizm Ruby', hex: '#7B1F2E',
+        image: '/oakley-vanguard-ruby-shop.jpg',
+        hoverImage: '/oakley-vanguard-ruby-hand.jpg',
+        storage: [{ label: null, price: 449 }],
+      },
+    ],
+    specs: [
+      { label: 'Cámara',        value: '12MP · video 3K · foto y video manos libres' },
+      { label: 'Audio',         value: 'Altavoces direccionales · micrófono dual' },
+      { label: 'Asistente',     value: 'Meta AI integrado · comandos de voz' },
+      { label: 'Batería',       value: 'Hasta 4 hrs · estuche con carga' },
+      { label: 'Conectividad',  value: 'Bluetooth 5.3 · Wi-Fi · app Meta View' },
+      { label: 'Lentes',        value: 'Oakley Prizm shield · deporte' },
+      { label: 'Resistencia',   value: 'IPX4 · resistente a salpicaduras' },
+      { label: 'Peso',          value: '52 g' },
+    ],
   },
 
   // ── Shokz OpenRun Pro 2 ───────────────────────────────────
