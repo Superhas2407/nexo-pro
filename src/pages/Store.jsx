@@ -226,7 +226,17 @@ export default function Store() {
 
         {filtered.length > 0 ? (
           <div className="store-grid">
-            {filtered.map(p => <ProductCard key={p.id} product={p} onClick={() => setSelectedProduct(p)} />)}
+            {filtered.map(p => (
+              <ProductCard
+                key={p.id}
+                product={p}
+                onClick={(colorIdx = 0) => {
+                  setModalColorIdx(colorIdx)
+                  setModalSkipSpread(true)
+                  setSelectedProduct(p)
+                }}
+              />
+            ))}
           </div>
         ) : (
           <div style={{ textAlign: 'center', padding: '80px 0', color: '#aaa' }}>

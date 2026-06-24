@@ -101,13 +101,14 @@ BrandBanners → WhyUs → Brands → Footer → WhatsAppFab
 
 - **Precios**: formato `REF X,XXX` — sin $, sin MXN, sin Bs
 - **Tipografía**: texto < 13px → `fontWeight: 600` para legibilidad con monospace
-- **PNG sin fondo**: `objectFit: 'contain'` en cards y slideshow
-- **JPEG lifestyle**: `objectFit: 'cover'` (en hover de cards)
+- **Imágenes**: todas en `.webp`. Catálogo (sin fondo) llevan `-shop.` en el nombre → `objectFit: 'contain'`. Lifestyle llevan `-hand.` → `objectFit: 'cover'`. Detección por nombre, NO por extensión: `image.includes('-shop.')`
 - **overflow-x**: usar `clip` en `#root`, NO `hidden` (rompe `position: sticky`)
 - **Navbar**: `top: 0`, height = 68px
 - **Filter bar (tienda)**: `top: 68px`
 - **Altura**: usar `100svh` (no `100vh`)
 - **WhatsApp**: número `584223194044`
+- **Touch targets**: mínimo 44×44px. Color dots usan hit area de 44px con margen negativo para solapamiento — dot visual 16px centrado
+- **Nuevas imágenes**: subir como `.webp`. Nombrar `producto-shop.webp` (catálogo) o `producto-hand.webp` (lifestyle)
 
 ## Navbar.jsx
 
@@ -184,24 +185,36 @@ Props:
 - `initialColorIdx` (default 0)
 - `skipSpread` (bool) — omite el spread, va directo a detalle del color
 
+Spread (selección de color):
+- Layout split-screen: cada color ocupa una mitad con fondo teñido `color-mix(in srgb, hex 10%, white)`
+- `whileHover={{ flex: 1.18 }}` expande la mitad al hacer hover
+- bgText posicionado en `top: 16%` de cada mitad, `overflow: hidden` clipea el texto al panel
+- Tap hint animado (`y: [0,-4,0]`) solo en mobile
+- Cerrar con Escape, botón ×, o browser back (History API `pushState` + `popstate`)
+
 Galería en modal: solo muestra thumbnails si `colorVariant.images?.length > 1`
 
-## Store.jsx — Deep link
+## Store.jsx — Deep link y selección
 
 `?producto=iphone-17-pro&color=Silver` → abre ProductModal directo al color con `skipSpread=true`
+
+Desde cards en tienda: siempre abre con `skipSpread=true` y `colorIdx` del color seleccionado en la card.
 
 ## FeaturedProducts.jsx
 
 - Usa `products.js` real (no datos hardcoded)
 - Tabs: "Más populares" y "Nuevos" — cada tab define un array de product IDs
 - Cards linkean a `/tienda?producto=<id>`
-- Hover swap: PNG catálogo → JPEG lifestyle
+- Hover swap: catálogo → lifestyle
 
 ## ProductCard.jsx (tienda)
 
-- PNG → `objectFit: 'contain'` + `padding: 12px`
-- JPEG → `objectFit: 'cover'`
-- Detectado automáticamente por extensión de archivo
+Layout Nomad-style:
+- Nombre bold + subtítulo `Brand · Color`
+- Precio actualizado al storage seleccionado
+- **Color dots interactivos** al fondo: hit area 44px mobile / 26px desktop con solapamiento por `marginRight: -overlap` — dot visual 16px / 13px. Seleccionado muestra `outline: 2px solid #111`
+- **Storage pills** (solo si hay múltiples): pills con `minHeight: 44px` en mobile, se ponen negras al seleccionar
+- Al hacer click en la card: abre modal con el color/storage seleccionado, `skipSpread=true`
 
 ## Dev server
 ```bash

@@ -296,72 +296,121 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, scale: 0.97 }}
               transition={{ duration: 0.22 }}
-              style={{
-                position: 'absolute', inset: 0,
-                display: 'flex', flexDirection: 'column',
-                alignItems: 'center', justifyContent: 'center',
-                padding: isMobile ? '60px 12px 24px' : '0',
-                overflowY: isMobile ? 'auto' : 'visible',
-              }}
+              style={{ position: 'absolute', inset: 0, display: 'flex', overflow: 'hidden' }}
             >
-              <p style={{
-                position: 'absolute', top: 28,
-                fontSize: 9, fontWeight: 700, letterSpacing: 3,
-                textTransform: 'uppercase', color: '#ccc',
-                margin: 0, pointerEvents: 'none',
-              }}>
-                Elige un color
-              </p>
+              {/* Tap hint — solo mobile, centrado abajo */}
+              {isMobile && (
+                <motion.div
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.4 }}
+                  style={{
+                    position: 'absolute', bottom: 28, left: 0, right: 0,
+                    display: 'flex', justifyContent: 'center', zIndex: 10,
+                    pointerEvents: 'none',
+                  }}
+                >
+                  <motion.div
+                    animate={{ y: [0, -4, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: 6,
+                      background: 'rgba(0,0,0,0.06)', borderRadius: 99,
+                      padding: '6px 14px',
+                    }}
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.4)" strokeWidth="2" strokeLinecap="round">
+                      <path d="M9 11V6a3 3 0 016 0v5m-9 4v-4a6 6 0 0112 0v4a6 6 0 01-12 0z"/>
+                    </svg>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: 'rgba(0,0,0,0.4)', letterSpacing: 0.2 }}>
+                      Toca para elegir
+                    </span>
+                  </motion.div>
+                </motion.div>
+              )}
 
-              <div style={{ position: 'relative', width: '100%', maxWidth: isMobile ? '100%' : 900 }}>
-                {product.bgText && (
-                  <span style={{
-                    position: 'absolute', top: '50%', left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    fontSize: isMobile ? 'clamp(60px, 18vw, 100px)' : 'clamp(90px, 14vw, 180px)',
-                    fontWeight: 800, letterSpacing: -6,
-                    color: '#f0f0f0',
-                    userSelect: 'none', pointerEvents: 'none',
-                    whiteSpace: 'nowrap', lineHeight: 1,
+              {product.colorVariants.map((cv, i) => (
+                <motion.div
+                  key={cv.color || i}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: i * 0.08, duration: 0.3 }}
+                  whileHover={{ flex: 1.18 }}
+                  onClick={() => { selectColor(i); setShowSpread(false) }}
+                  style={{
+                    flex: 1,
+                    display: 'flex', flexDirection: 'column',
+                    alignItems: 'center', justifyContent: 'center',
+                    cursor: 'pointer', position: 'relative',
+                    background: cv.hex
+                      ? `color-mix(in srgb, ${cv.hex} 10%, white)`
+                      : '#fafafa',
+                    transition: 'flex 0.35s cubic-bezier(.22,1,.36,1)',
+                    overflow: 'hidden',
+                    borderRight: i < product.colorVariants.length - 1
+                      ? '1px solid rgba(0,0,0,0.06)' : 'none',
+                    padding: isMobile ? '32px 16px 64px' : '80px 32px 48px',
+                    gap: isMobile ? 16 : 28,
+                  }}
+                >
+                  {/* bgText — parte superior de la mitad */}
+                  {product.bgText && (
+                    <span style={{
+                      position: 'absolute',
+                      top: isMobile ? '16%' : '18%',
+                      left: '50%', transform: 'translateX(-50%)',
+                      fontSize: isMobile ? 'clamp(20px, 6.5vw, 36px)' : 'clamp(40px, 6vw, 80px)',
+                      fontWeight: 800, letterSpacing: -2,
+                      color: cv.hex
+                        ? `color-mix(in srgb, ${cv.hex} 45%, #c8c8c8)`
+                        : '#d8d8d8',
+                      userSelect: 'none', pointerEvents: 'none',
+                      whiteSpace: 'nowrap', lineHeight: 1,
+                    }}>
+                      {product.bgText}
+                    </span>
+                  )}
+
+                  {/* Imagen */}
+                  <motion.img
+                    src={cv.image}
+                    alt={cv.color}
+                    initial={{ y: 16, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: i * 0.1 + 0.1, type: 'spring', stiffness: 260, damping: 24 }}
+                    style={{
+                      height: isMobile ? '38vh' : '52vh',
+                      maxHeight: isMobile ? 280 : 440,
+                      objectFit: 'contain', display: 'block',
+                      position: 'relative', zIndex: 1,
+                      filter: 'drop-shadow(0 12px 32px rgba(0,0,0,0.13))',
+                    }}
+                  />
+
+                  {/* Label abajo */}
+                  <div style={{
+                    position: 'relative', zIndex: 1,
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
                   }}>
-                    {product.bgText}
-                  </span>
-                )}
-
-                <div style={{
-                  position: 'relative', zIndex: 1,
-                  display: 'flex', alignItems: 'flex-end',
-                  justifyContent: 'center',
-                  gap: isMobile ? 16 : 48,
-                  padding: isMobile ? '20px 0' : '40px 0',
-                  flexWrap: isMobile ? 'wrap' : 'nowrap',
-                }}>
-                  {product.colorVariants.map((cv, i) => cv.image && (
-                    <motion.div
-                      key={cv.color || i}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.08, type: 'spring', stiffness: 280, damping: 24 }}
-                      whileHover={{ y: -10 }}
-                      onClick={() => { selectColor(i); setShowSpread(false) }}
-                      style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}
-                    >
-                      <img
-                        src={cv.image}
-                        alt={cv.color}
-                        style={{ height: isMobile ? 220 : 420, objectFit: 'contain', display: 'block' }}
-                      />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
                       {cv.hex && (
                         <div style={{
-                          width: 10, height: 10, borderRadius: '50%',
-                          background: cv.hex, border: '1.5px solid rgba(0,0,0,0.12)',
-                          boxShadow: '0 0 0 3px #fff, 0 0 0 4px rgba(0,0,0,0.1)',
+                          width: 11, height: 11, borderRadius: '50%',
+                          background: cv.hex, border: '1.5px solid rgba(0,0,0,0.14)',
+                          flexShrink: 0,
                         }} />
                       )}
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+                      <span style={{ fontSize: isMobile ? 13 : 15, fontWeight: 600, color: '#111' }}>
+                        {cv.color || product.name}
+                      </span>
+                    </div>
+                    <span style={{ fontSize: isMobile ? 12 : 13, fontWeight: 700, color: '#0ea7b7' }}>
+                      {fmt(cv.storage[0].price)}
+                    </span>
+                  </div>
+
+                </motion.div>
+              ))}
             </motion.div>
           )}
 

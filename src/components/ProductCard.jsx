@@ -1,23 +1,28 @@
 import { useState } from 'react'
-import { basePrice } from '../data/products'
 import { useShop } from '../context/ShopContext'
+import { useBreakpoint } from '../hooks/useBreakpoint'
 
 export default function ProductCard({ product, onClick }) {
-  const [hovered, setHovered] = useState(false)
-  const [imgError, setImgError] = useState(false)
+  const [hovered, setHovered]                   = useState(false)
+  const [imgError, setImgError]                 = useState(false)
+  const [selectedColorIdx, setSelectedColorIdx] = useState(0)
+  const [selectedStorageIdx, setSelectedStorageIdx] = useState(0)
+
   const { isInWishlist, toggleWishlist } = useShop()
-  const firstVariant = product.colorVariants[0]
-  const inWish = isInWishlist(product.id, firstVariant.color)
+  const isMobile = useBreakpoint(768)
 
-  const mainImage = firstVariant.image
-  const hoverImage = firstVariant.hoverImage
+  const selectedVariant = product.colorVariants[selectedColorIdx]
+  const storageOptions  = selectedVariant.storage.filter(s => s.label)
+  const selectedStorage = storageOptions[selectedStorageIdx] ?? selectedVariant.storage[0]
+  const hasMultiStorage = storageOptions.length > 1
+  const colorDots       = product.colorVariants.filter(cv => cv.hex)
+  const hasColors       = colorDots.length > 1
+  const inWish          = isInWishlist(product.id, selectedVariant.color)
 
-  const minPrice = basePrice(product)
-  const allStorage = product.colorVariants.flatMap(cv => cv.storage.filter(s => s.label))
-  const multi = allStorage.length > 1
-  const fmt = (n) => (multi ? 'Desde REF ' : 'REF ') + n.toLocaleString('en-US')
+  const mainImage  = selectedVariant.image
+  const hoverImage = selectedVariant.hoverImage
 
-  const colorDots = product.colorVariants.filter(cv => cv.hex)
+  const fmtPrice = (n) => (hasMultiStorage ? 'Desde REF ' : 'REF ') + n.toLocaleString('en-US')
 
   const tagColors = {
     'Pro':       { bg: '#111', color: '#fff' },
@@ -26,18 +31,26 @@ export default function ProductCard({ product, onClick }) {
     'Exclusivo': { bg: '#5c3d1e', color: '#fff' },
   }
 
+  const handleColorClick = (e, idx) => {
+    e.stopPropagation()
+    setSelectedColorIdx(idx)
+    setSelectedStorageIdx(0)
+  }
+
+  const handleStorageClick = (e, idx) => {
+    e.stopPropagation()
+    setSelectedStorageIdx(idx)
+  }
+
   return (
     <div
-      onClick={onClick}
+      onClick={() => onClick(selectedColorIdx)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: '#fff',
-        borderRadius: 12,
-        overflow: 'hidden',
-        cursor: 'pointer',
-        display: 'flex',
-        flexDirection: 'column',
+        background: '#fff', borderRadius: 12,
+        overflow: 'hidden', cursor: 'pointer',
+        display: 'flex', flexDirection: 'column',
         transition: 'transform 0.2s ease, box-shadow 0.2s ease',
         transform: hovered ? 'translateY(-2px)' : 'none',
         boxShadow: hovered
@@ -45,14 +58,8 @@ export default function ProductCard({ product, onClick }) {
           : '0 1px 3px rgba(0,0,0,0.06)',
       }}
     >
-      {/* Área de imagen */}
-      <div style={{
-        position: 'relative',
-        aspectRatio: '3/4',
-        background: '#efefed',
-        overflow: 'hidden',
-      }}>
-        {/* Imagen base */}
+      {/* Imagen */}
+      <div style={{ position: 'relative', aspectRatio: '3/4', background: '#efefed', overflow: 'hidden' }}>
         {!imgError && mainImage ? (
           <img
             src={mainImage}
@@ -69,19 +76,14 @@ export default function ProductCard({ product, onClick }) {
             }}
           />
         ) : (
-          <div style={{
-            position: 'absolute', inset: 0,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
+          <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ccc" strokeWidth="1.2">
               <rect x="3" y="3" width="18" height="18" rx="2"/>
-              <path d="M3 9l4-4 4 4 4-6 4 6"/>
-              <circle cx="7.5" cy="7.5" r="1.5"/>
+              <path d="M3 9l4-4 4 4 4-6 4 6"/><circle cx="7.5" cy="7.5" r="1.5"/>
             </svg>
           </div>
         )}
 
-        {/* Imagen hover (lifestyle) */}
         {hoverImage && (
           <img
             src={hoverImage}
@@ -96,15 +98,14 @@ export default function ProductCard({ product, onClick }) {
           />
         )}
 
-        {/* Wishlist button */}
+        {/* Wishlist */}
         <button
-          onClick={e => { e.stopPropagation(); toggleWishlist(product, firstVariant) }}
+          onClick={e => { e.stopPropagation(); toggleWishlist(product, selectedVariant) }}
           style={{
             position: 'absolute', top: 8, right: 8, zIndex: 2,
             width: 32, height: 32, borderRadius: '50%',
             border: 'none', background: 'rgba(255,255,255,0.9)',
-            cursor: 'pointer', display: 'flex',
-            alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
             color: inWish ? '#e53935' : '#bbb',
             boxShadow: '0 1px 4px rgba(0,0,0,0.1)',
             transition: 'color 0.2s, transform 0.15s',
@@ -119,15 +120,13 @@ export default function ProductCard({ product, onClick }) {
           </svg>
         </button>
 
-        {/* Tag badge */}
+        {/* Tag */}
         {product.tag && tagColors[product.tag] && (
           <span style={{
             position: 'absolute', top: 10, left: 10,
-            background: tagColors[product.tag].bg,
-            color: tagColors[product.tag].color,
+            background: tagColors[product.tag].bg, color: tagColors[product.tag].color,
             fontSize: 10, fontWeight: 600, letterSpacing: 0.5,
-            padding: '3px 8px', borderRadius: 4,
-            textTransform: 'uppercase',
+            padding: '3px 8px', borderRadius: 4, textTransform: 'uppercase',
           }}>
             {product.tag}
           </span>
@@ -135,37 +134,84 @@ export default function ProductCard({ product, onClick }) {
       </div>
 
       {/* Info */}
-      <div style={{ padding: '12px 14px 16px', display: 'flex', flexDirection: 'column', gap: 4 }}>
-        {/* Brand + color dots */}
-        <div style={{
-          display: 'flex', alignItems: 'center',
-          justifyContent: 'space-between', marginBottom: 2,
-        }}>
-          <span style={{
-            fontSize: 10, fontWeight: 600, letterSpacing: 1.5,
-            textTransform: 'uppercase', color: '#0ea7b7',
-          }}>
-            {product.brand}
-          </span>
-          {colorDots.length > 0 && (
-            <div style={{ display: 'flex', gap: 3 }}>
-              {colorDots.slice(0, 5).map((cv, i) => (
-                <div key={i} style={{
-                  width: 10, height: 10, borderRadius: '50%',
-                  background: cv.hex, border: '1.5px solid rgba(0,0,0,0.12)',
-                }} />
-              ))}
-            </div>
-          )}
-        </div>
+      <div style={{ padding: '12px 14px 14px', display: 'flex', flexDirection: 'column', gap: 2, flex: 1 }}>
 
-        <h3 style={{ fontSize: 14, fontWeight: 500, color: '#111', margin: 0, lineHeight: 1.3 }}>
+        <h3 style={{ fontSize: 15, fontWeight: 700, color: '#111', margin: 0, lineHeight: 1.3 }}>
           {product.name}
         </h3>
 
-        <p style={{ fontSize: 15, fontWeight: 600, color: '#111', margin: '6px 0 0' }}>
-          {fmt(minPrice)}
+        <p style={{ fontSize: 12, color: '#888', margin: '2px 0 0', lineHeight: 1.4 }}>
+          {product.brand}
+          {selectedVariant.color ? ` · ${selectedVariant.color}` : ''}
         </p>
+
+        <p style={{ fontSize: 14, fontWeight: 600, color: '#111', margin: '8px 0 0' }}>
+          {fmtPrice(selectedStorage.price)}
+        </p>
+
+        {/* Storage pills */}
+        {hasMultiStorage && (
+          <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', marginTop: 8 }}>
+            {storageOptions.map((s, i) => (
+              <button
+                key={i}
+                onClick={e => handleStorageClick(e, i)}
+                style={{
+                  padding: isMobile ? '10px 12px' : '3px 9px',
+                  minHeight: isMobile ? 44 : 'auto',
+                  borderRadius: 99, fontSize: 11, fontWeight: 500,
+                  border: i === selectedStorageIdx ? '1.5px solid #111' : '1.5px solid rgba(0,0,0,0.14)',
+                  background: i === selectedStorageIdx ? '#111' : 'transparent',
+                  color: i === selectedStorageIdx ? '#fff' : '#555',
+                  cursor: 'pointer', fontFamily: 'inherit',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Color dots — al fondo */}
+        {hasColors && (() => {
+          const hitSize  = isMobile ? 44 : 26
+          const dotSize  = isMobile ? 16 : 13
+          const visGap   = 5
+          const overlap  = hitSize - dotSize - visGap   // solapamiento entre hit areas
+          const edgePad  = (hitSize - dotSize) / 2      // compensación del borde izquierdo
+          return (
+            <div style={{ display: 'flex', gap: 0, marginTop: 8, marginLeft: -edgePad, overflow: 'visible' }}>
+              {colorDots.slice(0, 8).map((cv, i) => {
+                const realIdx    = product.colorVariants.indexOf(cv)
+                const isSelected = realIdx === selectedColorIdx
+                return (
+                  <div
+                    key={i}
+                    onClick={e => handleColorClick(e, realIdx)}
+                    title={cv.color}
+                    style={{
+                      width: hitSize, height: hitSize, flexShrink: 0,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      cursor: 'pointer',
+                      marginRight: -overlap,
+                    }}
+                  >
+                    <div style={{
+                      width: dotSize, height: dotSize, borderRadius: '50%',
+                      background: cv.hex,
+                      border: isSelected ? '2px solid transparent' : '1.5px solid rgba(0,0,0,0.12)',
+                      outline: isSelected ? '2px solid #111' : 'none',
+                      outlineOffset: isSelected ? '2px' : '0',
+                      transition: 'outline 0.15s, transform 0.15s',
+                      transform: isSelected ? 'scale(1.15)' : 'scale(1)',
+                    }} />
+                  </div>
+                )
+              })}
+            </div>
+          )
+        })()}
       </div>
     </div>
   )
