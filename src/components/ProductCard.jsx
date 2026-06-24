@@ -7,6 +7,7 @@ export default function ProductCard({ product, onClick }) {
   const [imgError, setImgError]                 = useState(false)
   const [selectedColorIdx, setSelectedColorIdx] = useState(0)
   const [selectedStorageIdx, setSelectedStorageIdx] = useState(0)
+  const [colorPicked, setColorPicked]           = useState(false)
 
   const { isInWishlist, toggleWishlist } = useShop()
   const isMobile = useBreakpoint(768)
@@ -35,6 +36,7 @@ export default function ProductCard({ product, onClick }) {
     e.stopPropagation()
     setSelectedColorIdx(idx)
     setSelectedStorageIdx(0)
+    setColorPicked(true)
   }
 
   const handleStorageClick = (e, idx) => {
@@ -44,7 +46,7 @@ export default function ProductCard({ product, onClick }) {
 
   return (
     <div
-      onClick={() => onClick(selectedColorIdx)}
+      onClick={() => onClick(selectedColorIdx, colorPicked)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{

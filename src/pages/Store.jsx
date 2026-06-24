@@ -230,9 +230,9 @@ export default function Store() {
               <ProductCard
                 key={p.id}
                 product={p}
-                onClick={(colorIdx = 0) => {
+                onClick={(colorIdx = 0, colorPicked = false) => {
                   setModalColorIdx(colorIdx)
-                  setModalSkipSpread(true)
+                  setModalSkipSpread(colorPicked)
                   setSelectedProduct(p)
                 }}
               />
