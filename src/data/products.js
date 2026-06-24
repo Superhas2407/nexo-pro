@@ -89,8 +89,8 @@ export const products = [
     colorVariants: [
       {
         color: null, hex: '#f5f5f0',
-        image: '/airpods-shop-1.png', hoverImage: '/airpods-hand.webp',
-        images: ['/airpods-shop-1.png', '/airpods-shop-2.png', '/airpods-hand.webp'],
+        image: '/airpods-shop-1.webp', hoverImage: '/airpods-hand.webp',
+        images: ['/airpods-shop-1.webp', '/airpods-shop-2.webp', '/airpods-hand.webp'],
         storage: [{ label: null, price: 270 }],
         specs: [
           { label: 'Chip',              value: 'H2 · cancelación activa de ruido' },

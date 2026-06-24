@@ -428,8 +428,8 @@ function MegaMenu({ label, items, categoryHref }) {
                             alt={item.name}
                             style={{
                               width: '100%', height: '100%',
-                              objectFit: item.image.endsWith('.png') ? 'contain' : 'cover',
-                              padding: item.image.endsWith('.png') ? 14 : 0,
+                              objectFit: item.image.includes('-shop.') ? 'contain' : 'cover',
+                              padding: item.image.includes('-shop.') ? 14 : 0,
                             }}
                           />
                         </div>
@@ -822,7 +822,7 @@ export default function Navbar() {
                       {/* Imagen */}
                       <div style={{ width: 64, height: 64, flexShrink: 0, background: '#f5f5f5', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                         {item.image
-                          ? <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: item.image.endsWith('.png') ? 'contain' : 'cover', padding: item.image.endsWith('.png') ? 6 : 0 }} />
+                          ? <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: item.image.includes('-shop.') ? 'contain' : 'cover', padding: item.image.includes('-shop.') ? 6 : 0 }} />
                           : <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ccc" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
                         }
                       </div>
@@ -900,7 +900,7 @@ export default function Navbar() {
                   <div key={item.key} style={{ display: 'flex', gap: 12, padding: '14px 20px', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
                     <div style={{ width: 52, height: 64, flexShrink: 0, background: '#f5f5f5', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                       {item.image
-                        ? <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: item.image.endsWith('.png') ? 'contain' : 'cover', padding: item.image.endsWith('.png') ? 4 : 0 }} />
+                        ? <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: item.image.includes('-shop.') ? 'contain' : 'cover', padding: item.image.includes('-shop.') ? 4 : 0 }} />
                         : <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ccc" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
                       }
                     </div>
