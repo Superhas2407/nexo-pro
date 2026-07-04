@@ -215,13 +215,13 @@ export const products = [
         color: 'Black', hex: '#1a1a1a',
         image: '/oakley-hstn-black-shop.webp',
         hoverImage: '/oakley-hstn-black-hand.webp',
-        storage: [{ label: null, price: 299 }],
+        storage: [{ label: null, price: 450 }],
       },
       {
         color: 'Prizm Red', hex: '#8B2020',
         image: '/oakley-hstn-red-shop.webp',
         hoverImage: '/oakley-hstn-red-hand.webp',
-        storage: [{ label: null, price: 299 }],
+        storage: [{ label: null, price: 450 }],
       },
     ],
     specs: [
@@ -247,13 +247,13 @@ export const products = [
         color: 'Prizm 24K', hex: '#C8952A',
         image: '/oakley-vanguard-gold-shop.webp',
         hoverImage: '/oakley-vanguard-gold-hand.webp',
-        storage: [{ label: null, price: 449 }],
+        storage: [{ label: null, price: 650 }],
       },
       {
         color: 'Prizm Ruby', hex: '#7B1F2E',
         image: '/oakley-vanguard-ruby-shop.webp',
         hoverImage: '/oakley-vanguard-ruby-hand.webp',
-        storage: [{ label: null, price: 449 }],
+        storage: [{ label: null, price: 650 }],
       },
     ],
     specs: [
