@@ -45,8 +45,8 @@ export default function WhyUs() {
           marginBottom: isMobile ? 40 : 56,
         }}>
           <div>
-            <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: 2.5, textTransform: 'uppercase', marginBottom: 10, color: '#0ea7b7' }}>
-              ¿Por qué Nexo Pro?
+            <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: 2.5, textTransform: 'uppercase', marginBottom: 10, color: '#0057FF' }}>
+              ¿Por qué PULSE?
             </p>
             <h2 style={{
               fontSize: isMobile ? 'clamp(22px, 6vw, 32px)' : 'clamp(28px, 4vw, 52px)',
@@ -83,7 +83,7 @@ export default function WhyUs() {
               <p style={{
                 fontSize: 11, fontWeight: 600,
                 letterSpacing: 2, textTransform: 'uppercase',
-                color: '#0ea7b7', margin: '0 0 12px',
+                color: '#0057FF', margin: '0 0 12px',
               }}>
                 {item.label}
               </p>
@@ -101,3 +101,4 @@ export default function WhyUs() {
     </section>
   )
 }
+

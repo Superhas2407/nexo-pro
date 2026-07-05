@@ -45,7 +45,7 @@ export default function OakleyLines() {
             marginBottom: isMobile ? 32 : 48,
           }}>
             <div>
-              <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: 2.5, textTransform: 'uppercase', marginBottom: 10, color: '#0ea7b7' }}>
+              <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: 2.5, textTransform: 'uppercase', marginBottom: 10, color: '#0057FF' }}>
                 Oakley Meta
               </p>
               <h2 style={{
@@ -90,3 +90,4 @@ export default function OakleyLines() {
     </section>
   )
 }
+

@@ -138,8 +138,8 @@ export default function CategoryBanners() {
               </span>
               <span style={{
                 display: 'inline-block', padding: '9px 20px',
-                border: isHovered ? '1.5px solid #0ea7b7' : '1.5px solid rgba(255,255,255,0.45)',
-                background: isHovered ? '#0ea7b7' : 'rgba(0,0,0,0.25)',
+                border: isHovered ? '1.5px solid #0057FF' : '1.5px solid rgba(255,255,255,0.45)',
+                background: isHovered ? '#0057FF' : 'rgba(0,0,0,0.25)',
                 backdropFilter: 'blur(8px)',
                 color: '#fff', fontSize: 10, fontWeight: 500,
                 letterSpacing: 2.5, textTransform: 'uppercase', whiteSpace: 'nowrap',
@@ -168,3 +168,4 @@ export default function CategoryBanners() {
     </section>
   )
 }
+

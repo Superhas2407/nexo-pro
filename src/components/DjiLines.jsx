@@ -56,7 +56,7 @@ export default function DjiLines() {
             marginBottom: isMobile ? 32 : 48,
           }}>
             <div>
-              <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: 2.5, textTransform: 'uppercase', marginBottom: 10, color: '#0ea7b7' }}>
+              <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: 2.5, textTransform: 'uppercase', marginBottom: 10, color: '#0057FF' }}>
                 {line.label}
               </p>
               <h2 style={{
@@ -102,3 +102,4 @@ export default function DjiLines() {
     </section>
   )
 }
+

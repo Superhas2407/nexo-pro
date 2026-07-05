@@ -66,14 +66,14 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
 
   const hasMultipleColors = product.colorVariants.length > 1
 
-  /* ─── Info panel — reutilizado en desktop y mobile ─── */
+  /* —?—?—? Info panel ×" reutilizado en desktop y mobile —?—?—? */
   const InfoPanel = () => (
     <div style={{
       display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
       padding: isMobile ? '24px 20px 28px' : '60px 48px',
       gap: 16,
     }}>
-      <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#0ea7b7' }}>
+      <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#0057FF' }}>
         {product.brand}
       </span>
 
@@ -174,7 +174,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
           }}
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
-            background: cartAdded ? '#0ea7b7' : '#111', color: '#fff',
+            background: cartAdded ? '#0057FF' : '#111', color: '#fff',
             padding: '12px 20px', borderRadius: 8,
             fontSize: 11, fontWeight: 600, border: 'none',
             cursor: 'pointer', fontFamily: 'inherit',
@@ -249,7 +249,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
           onMouseEnter={e => e.currentTarget.style.color = '#555'}
           onMouseLeave={e => e.currentTarget.style.color = '#bbb'}
         >
-          ← Ver todos los colores
+          × Ver todos los colores
         </button>
       )}
     </div>
@@ -288,7 +288,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
 
         <AnimatePresence mode="wait">
 
-          {/* ══════ SPREAD ══════ */}
+          {/* ─── SPREAD ─── */}
           {showSpread && (
             <motion.div
               key="spread"
@@ -298,7 +298,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
               transition={{ duration: 0.22 }}
               style={{ position: 'absolute', inset: 0, display: 'flex', overflow: 'hidden' }}
             >
-              {/* Tap hint — solo mobile, centrado abajo */}
+              {/* Tap hint ×" solo mobile, centrado abajo */}
               {isMobile && (
                 <motion.div
                   initial={{ opacity: 0, y: 6 }}
@@ -353,7 +353,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                     gap: isMobile ? 16 : 28,
                   }}
                 >
-                  {/* bgText — parte superior de la mitad */}
+                  {/* bgText ×" parte superior de la mitad */}
                   {product.bgText && (
                     <span style={{
                       position: 'absolute',
@@ -404,7 +404,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                         {cv.color || product.name}
                       </span>
                     </div>
-                    <span style={{ fontSize: isMobile ? 12 : 13, fontWeight: 700, color: '#0ea7b7' }}>
+                    <span style={{ fontSize: isMobile ? 12 : 13, fontWeight: 700, color: '#0057FF' }}>
                       {fmt(cv.storage[0].price)}
                     </span>
                   </div>
@@ -414,7 +414,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
             </motion.div>
           )}
 
-          {/* ══════ DETALLE ══════ */}
+          {/* ─── DETALLE ─── */}
           {!showSpread && (
             <motion.div
               key="detail"
@@ -425,7 +425,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
               style={{ position: 'absolute', inset: 0, overflowY: 'auto' }}
             >
               {isMobile ? (
-                /* ── MOBILE: columna única ── */
+                /* —?—? MOBILE: columna única —?—? */
                 <div>
                   {/* Imagen arriba */}
                   <div style={{
@@ -475,7 +475,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                   <InfoPanel />
                 </div>
               ) : (
-                /* ── DESKTOP: 3 columnas ── */
+                /* —?—? DESKTOP: 3 columnas —?—? */
                 <div>
                   <div style={{ height: '100vh', display: 'flex', position: 'relative' }}>
                     {/* Izquierda */}
@@ -576,7 +576,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                 </div>
               )}
 
-              {/* Specs — tanto mobile como desktop */}
+              {/* Specs ×" tanto mobile como desktop */}
               {product.specs && (
                 <div style={{
                   minHeight: isMobile ? 'auto' : '100vh',
@@ -585,7 +585,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                   borderTop: '1px solid rgba(0,0,0,0.06)',
                 }}>
                   <div style={{ maxWidth: 900, margin: '0 auto 40px' }}>
-                    <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#0ea7b7', marginBottom: 10 }}>
+                    <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#0057FF', marginBottom: 10 }}>
                       {product.brand}
                     </p>
                     <h2 style={{
@@ -632,3 +632,4 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
     </>
   )
 }
+

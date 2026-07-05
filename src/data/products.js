@@ -1,4 +1,4 @@
-export const products = [
+﻿export const products = [
   // ── iPhone 17 Pro — un solo producto, 2 colores ──────────
   {
     id: 'iphone-17-pro',

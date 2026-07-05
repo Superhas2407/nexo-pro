@@ -120,7 +120,7 @@ export default function Preloader({ onDone }) {
               marginBottom: 18,
             }}>
               <CharStagger text="NEXO" />
-              <span style={{ color: '#0ea7b7' }}> </span>
+              <span style={{ color: '#0057FF' }}> </span>
               <CharStagger text="PRO" />
             </h1>
 
@@ -144,3 +144,4 @@ export default function Preloader({ onDone }) {
     </AnimatePresence>
   )
 }
+

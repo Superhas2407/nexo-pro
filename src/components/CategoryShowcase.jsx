@@ -142,11 +142,11 @@ export default function CategoryShowcase() {
           <h2 style={{ fontSize: 20, fontWeight: 500, letterSpacing: -0.8, color: '#111', margin: 0 }}>
             Explora la colección.
           </h2>
-          <a href="/tienda" style={{ fontSize: 13, color: '#0ea7b7', fontWeight: 500, textDecoration: 'none', whiteSpace: 'nowrap', padding: '8px 0 8px 12px' }}>
-            Ver todo →
+          <a href="/tienda" style={{ fontSize: 13, color: '#0057FF', fontWeight: 500, textDecoration: 'none', whiteSpace: 'nowrap', padding: '8px 0 8px 12px' }}>
+            Ver todo ×'
           </a>
         </div>
-        {/* Carrusel — inicia a 20px del borde izquierdo por el padding de la sección */}
+        {/* Carrusel ×" inicia a 20px del borde izquierdo por el padding de la sección */}
         <MobileCarousel />
       </section>
     )
@@ -159,8 +159,8 @@ export default function CategoryShowcase() {
           <h2 style={{ fontSize: 28, fontWeight: 500, letterSpacing: -0.8, color: '#111', margin: 0 }}>
             Explora la colección.
           </h2>
-          <a href="/tienda" style={{ fontSize: 13, color: '#0ea7b7', fontWeight: 500, textDecoration: 'none', whiteSpace: 'nowrap', padding: '8px 0 8px 12px' }}>
-            Ver todo →
+          <a href="/tienda" style={{ fontSize: 13, color: '#0057FF', fontWeight: 500, textDecoration: 'none', whiteSpace: 'nowrap', padding: '8px 0 8px 12px' }}>
+            Ver todo ×'
           </a>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
@@ -170,3 +170,4 @@ export default function CategoryShowcase() {
     </section>
   )
 }
+

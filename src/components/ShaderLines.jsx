@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+﻿﻿import { useEffect, useRef } from 'react'
 
 export function ShaderLines() {
   const containerRef = useRef(null)
@@ -33,9 +33,9 @@ export function ShaderLines() {
       `
 
       // Brand palette mapped to the 3 line color channels:
-      // channel 0 → #075356  (dark teal)
-      // channel 1 → #0ea7b7  (mid cyan)
-      // channel 2 → #3dc8d6  (light cyan)
+      // channel 0 â†’ #075356  (dark teal)
+      // channel 1 â†’ #0057FF  (mid cyan)
+      // channel 2 â†’ #337BFF  (light cyan)
       const fragmentShader = `
         precision highp float;
         uniform vec2 resolution;
@@ -66,8 +66,8 @@ export function ShaderLines() {
 
           // Remap channels to Nexo Pro brand colors
           vec3 col = vec3(0.027, 0.325, 0.337) * c[0]   // #075356
-                   + vec3(0.055, 0.655, 0.718) * c[1]   // #0ea7b7
-                   + vec3(0.239, 0.784, 0.839) * c[2];  // #3dc8d6
+                   + vec3(0.055, 0.655, 0.718) * c[1]   // #0057FF
+                   + vec3(0.239, 0.784, 0.839) * c[2];  // #337BFF
 
           gl_FragColor = vec4(col, 1.0);
         }
@@ -125,3 +125,5 @@ export function ShaderLines() {
     />
   )
 }
+
+

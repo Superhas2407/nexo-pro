@@ -8,7 +8,7 @@ const WA_BASE = 'https://wa.me/584223194044'
 
 const navItems = [
   { label: 'Tienda',       to: '/tienda' },
-  { label: 'Nosotros',     to: WA_BASE + '?text=' + encodeURIComponent('Hola! Quiero saber más sobre Nexo Pro.') },
+  { label: 'Nosotros',     to: WA_BASE + '?text=' + encodeURIComponent('Hola! Quiero saber más sobre PULSE.') },
   { label: 'Contáctanos',  to: WA_BASE + '?text=' + encodeURIComponent('Hola! Me gustaría hacer una consulta.') },
 ]
 
@@ -36,7 +36,7 @@ const dropdownMenus = {
   Oakley: buildDropdown(['oakley']),
 }
 
-/* ── Search overlay ─────────────────────────────────────── */
+/* —?—? Search overlay —?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—? */
 function SearchOverlay({ onClose }) {
   const [query, setQuery] = useState('')
   const inputRef = useRef(null)
@@ -125,7 +125,7 @@ function SearchOverlay({ onClose }) {
                 </div>
                 <div style={{ flex: 1 }}>
                   <p style={{ margin: 0, fontSize: 14, fontWeight: 500 }}>{p.name}</p>
-                  <p style={{ margin: 0, fontSize: 12, color: '#0ea7b7', fontWeight: 600 }}>
+                  <p style={{ margin: 0, fontSize: 12, color: '#0057FF', fontWeight: 600 }}>
                     {'REF ' + basePrice(p).toLocaleString()}
                   </p>
                 </div>
@@ -171,7 +171,7 @@ function SearchOverlay({ onClose }) {
   )
 }
 
-/* ── Cart recommendations ────────────────────────────────── */
+/* —?—? Cart recommendations —?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—? */
 const CART_RECS = [
   { label: 'iPhone 17 Pro', image: '/iphone-orange-hand.webp', href: '/tienda?categoria=iphone' },
   { label: 'DJI Osmo',      image: '/dji-osmo7p-hand.webp',    href: '/tienda?categoria=dji-estab' },
@@ -262,7 +262,7 @@ function CartRecs({ onClose }) {
         {CART_RECS.map((_, i) => (
           <div key={i} onClick={() => scrollTo(i)} style={{
             width: i === active ? 18 : 6, height: 6, borderRadius: 99,
-            background: i === active ? '#0ea7b7' : '#e0e0e0',
+            background: i === active ? '#0057FF' : '#e0e0e0',
             cursor: 'pointer', transition: 'all 0.25s ease',
           }} />
         ))}
@@ -271,7 +271,7 @@ function CartRecs({ onClose }) {
   )
 }
 
-/* ── Panel lateral (carrito / favoritos) ─────────────────── */
+/* —?—? Panel lateral (carrito / favoritos) —?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—? */
 function SidePanel({ title, icon, children, onClose, panelTop = 8 }) {
   useEffect(() => {
     const onKey = e => { if (e.key === 'Escape') onClose() }
@@ -328,7 +328,7 @@ function SidePanel({ title, icon, children, onClose, panelTop = 8 }) {
   )
 }
 
-/* ── Mega menu dropdown ──────────────────────────────────── */
+/* —?—? Mega menu dropdown —?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—? */
 function MegaMenu({ label, items, categoryHref }) {
   const [open, setOpen] = useState(false)
   const closeTimer = useRef(null)
@@ -341,7 +341,7 @@ function MegaMenu({ label, items, categoryHref }) {
       <button style={{
         display: 'flex', alignItems: 'center', gap: 4,
         padding: '6px 14px', fontSize: 15, fontWeight: 600,
-        color: open ? '#0ea7b7' : '#111',
+        color: open ? '#0057FF' : '#111',
         background: 'none', border: 'none', cursor: 'pointer',
         fontFamily: 'inherit', whiteSpace: 'nowrap',
         transition: 'color 0.15s',
@@ -375,7 +375,7 @@ function MegaMenu({ label, items, categoryHref }) {
           >
             <div style={{ display: 'flex' }}>
 
-              {/* Columna izquierda — info estilo ProductLines */}
+              {/* Columna izquierda ×" info estilo ProductLines */}
               <div style={{
                 width: 200, flexShrink: 0,
                 background: '#f8f8f8',
@@ -385,7 +385,7 @@ function MegaMenu({ label, items, categoryHref }) {
                 borderRight: '1px solid #f0f0f0',
               }}>
                 <div>
-                  <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: 2.5, textTransform: 'uppercase', color: '#0ea7b7', margin: '0 0 10px' }}>
+                  <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: 2.5, textTransform: 'uppercase', color: '#0057FF', margin: '0 0 10px' }}>
                     {label}
                   </p>
                   <h3 style={{ fontSize: 22, fontWeight: 400, letterSpacing: -0.8, color: '#1a1a1a', margin: 0, lineHeight: 1.2 }}>
@@ -398,7 +398,7 @@ function MegaMenu({ label, items, categoryHref }) {
                   textDecoration: 'none', marginTop: 24,
                   transition: 'color 0.15s',
                 }}
-                  onMouseEnter={e => e.currentTarget.style.color = '#0ea7b7'}
+                  onMouseEnter={e => e.currentTarget.style.color = '#0057FF'}
                   onMouseLeave={e => e.currentTarget.style.color = '#111'}
                 >
                   Ver todos
@@ -436,7 +436,7 @@ function MegaMenu({ label, items, categoryHref }) {
                         {/* Info */}
                         <p style={{ fontSize: 13, fontWeight: 500, color: '#111', margin: '0 0 2px', lineHeight: 1.3 }}>{item.name}</p>
                         {item.color && <p style={{ fontSize: 11, color: '#aaa', margin: '0 0 4px' }}>{item.color}</p>}
-                        <p style={{ fontSize: 13, fontWeight: 600, color: '#0ea7b7', margin: 0 }}>REF {item.price.toLocaleString()}</p>
+                        <p style={{ fontSize: 13, fontWeight: 600, color: '#0057FF', margin: 0 }}>REF {item.price.toLocaleString()}</p>
                       </div>
                     </a>
                   ))}
@@ -450,7 +450,7 @@ function MegaMenu({ label, items, categoryHref }) {
   )
 }
 
-/* ── Nav links ──────────────────────────────────────────── */
+/* —?—? Nav links —?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—? */
 function NavLinks() {
   const [position, setPosition] = useState({ left: 0, width: 0, opacity: 0 })
   const refs = useRef([])
@@ -492,7 +492,7 @@ function NavLinks() {
               display: 'block', padding: '6px 14px',
               fontSize: 15,
               fontWeight: pathname === item.to ? 700 : 600,
-              color: pathname === item.to ? '#0ea7b7' : '#111',
+              color: pathname === item.to ? '#0057FF' : '#111',
               whiteSpace: 'nowrap', textDecoration: 'none',
               userSelect: 'none',
             }}
@@ -509,7 +509,7 @@ const Badge = ({ count }) => (
   <span style={{
     position: 'absolute', top: 2, right: 2,
     minWidth: 16, height: 16, borderRadius: 99,
-    background: '#0ea7b7', color: '#fff',
+    background: '#0057FF', color: '#fff',
     fontSize: 9, fontWeight: 700,
     display: 'flex', alignItems: 'center', justifyContent: 'center',
     padding: '0 4px', pointerEvents: 'none',
@@ -531,7 +531,7 @@ const WaIcon = () => (
   </svg>
 )
 
-/* ── Navbar principal ───────────────────────────────────── */
+/* —?—? Navbar principal —?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—? */
 export default function Navbar() {
   const [mobileOpen, setMobileOpen]   = useState(false)
   const [searchOpen, setSearchOpen]   = useState(false)
@@ -557,7 +557,7 @@ export default function Navbar() {
     }
   }, [mobileOpen])
 
-  /* mide desde el pill (no el header) — ignora el announcement bar */
+  /* mide desde el pill (no el header) ×" ignora el announcement bar */
   const getPillBottom = () =>
     pillRef.current ? pillRef.current.getBoundingClientRect().bottom + 8 : 86
 
@@ -574,7 +574,7 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top page fade — contraste sobre el hero oscuro, desaparece al hacer scroll */}
+      {/* Top page fade ×" contraste sobre el hero oscuro, desaparece al hacer scroll */}
       <div style={{
         position: 'fixed', top: 0, left: 0, right: 0,
         height: 110, pointerEvents: 'none', zIndex: 99,
@@ -607,7 +607,7 @@ export default function Navbar() {
           {/* Spacer mobile */}
           <div className="nav-spacer-mobile" style={{ flex: 1 }} />
 
-          {/* Íconos derecha — desktop */}
+          {/* Íconos derecha ×" desktop */}
           <div className="nav-right-desktop" style={{ flex: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
             <button onClick={() => setSearchOpen(true)} style={iconBtn} title="Buscar">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
@@ -717,7 +717,7 @@ export default function Navbar() {
                   background: '#fff', borderRadius: 14,
                   padding: '15px 16px', marginBottom: 8,
                   fontSize: 15, fontWeight: 500,
-                  color: window.location.pathname === item.to ? '#0ea7b7' : '#111',
+                  color: window.location.pathname === item.to ? '#0057FF' : '#111',
                   textDecoration: 'none',
                   boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
                 }}>
@@ -801,7 +801,7 @@ export default function Navbar() {
                     borderRadius: 99, fontSize: 14, fontWeight: 600,
                     textDecoration: 'none', width: '100%', boxSizing: 'border-box',
                   }}>
-                    Explorar colección →
+                    Explorar colección ×'
                   </a>
                   <p style={{ fontSize: 11, color: '#bbb', textAlign: 'center', margin: '10px 0 0' }}>
                     Entrega inmediata · Garantía oficial
@@ -908,8 +908,8 @@ export default function Navbar() {
                       <p style={{ fontSize: 13, fontWeight: 500, color: '#111', margin: '0 0 2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.name}</p>
                       {item.color && <p style={{ fontSize: 11, color: '#999', margin: '0 0 8px' }}>{item.color}</p>}
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <span style={{ fontSize: 13, fontWeight: 600, color: '#0ea7b7' }}>REF {item.price.toLocaleString()}</span>
-                        <a href={item.link} onClick={() => setWishOpen(false)} style={{ fontSize: 11, color: '#555', textDecoration: 'none', fontWeight: 500 }}>Ver →</a>
+                        <span style={{ fontSize: 13, fontWeight: 600, color: '#0057FF' }}>REF {item.price.toLocaleString()}</span>
+                        <a href={item.link} onClick={() => setWishOpen(false)} style={{ fontSize: 11, color: '#555', textDecoration: 'none', fontWeight: 500 }}>Ver ×'</a>
                       </div>
                     </div>
                     <button onClick={() => removeFromWishlist(item.key)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ccc', fontSize: 18, lineHeight: 1, alignSelf: 'flex-start', padding: 0, transition: 'color 0.15s' }}
@@ -934,3 +934,4 @@ const iconBtn = {
   alignItems: 'center', justifyContent: 'center',
   color: '#444',
 }
+

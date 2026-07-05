@@ -1,4 +1,4 @@
-// Adapted from Framer ProductSlideshow — all framer-specific APIs removed
+// Adapted from Framer ProductSlideshow ×" all framer-specific APIs removed
 import { useState, startTransition, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -74,13 +74,13 @@ function MobilePeekCarousel({ items, dark = false }) {
           <div key={i} style={{
             width: activeIndex === i ? 18 : 6,
             height: 6, borderRadius: 99,
-            background: activeIndex === i ? '#0ea7b7' : dark ? 'rgba(255,255,255,0.18)' : 'rgba(0,0,0,0.15)',
+            background: activeIndex === i ? '#0057FF' : dark ? 'rgba(255,255,255,0.18)' : 'rgba(0,0,0,0.15)',
             transition: 'all 0.3s',
           }} />
         ))}
       </div>
 
-      {/* Info — se actualiza con el scroll */}
+      {/* Info ×" se actualiza con el scroll */}
       <AnimatePresence mode="wait">
         <motion.div
           key={activeIndex}
@@ -96,14 +96,14 @@ function MobilePeekCarousel({ items, dark = false }) {
           <p style={{ fontSize: 12, fontWeight: 600, color: dark ? 'rgba(255,255,255,0.45)' : 'rgba(0,0,0,0.4)', margin: '0 0 10px' }}>
             {item.description}
           </p>
-          <p style={{ fontSize: 18, fontWeight: 500, color: '#0ea7b7', margin: '0 0 20px' }}>
+          <p style={{ fontSize: 18, fontWeight: 500, color: '#0057FF', margin: '0 0 20px' }}>
             {item.price}
           </p>
           <a
             href="/tienda"
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: '#0ea7b7', color: '#fff',
+              background: '#0057FF', color: '#fff',
               padding: '12px 28px', borderRadius: 99,
               fontSize: 13, fontWeight: 500,
             }}
@@ -231,7 +231,7 @@ export default function ProductSlideshow({
   const scaledW = baseSize.width * (scaleUp.maxScale / 100)
   const scaledH = baseSize.height * (scaleUp.maxScale / 100)
 
-  // ── Mobile peek carousel (landing context only) ──────────────
+  // —?—? Mobile peek carousel (landing context only) —?—?—?—?—?—?—?—?—?—?—?—?—?—?
   if (lightBg && isMobile) {
     return <MobilePeekCarousel items={displayItems} dark={darkTheme} />
   }
@@ -257,7 +257,7 @@ export default function ProductSlideshow({
               fontSize: 12, cursor: 'pointer', backdropFilter: 'blur(8px)',
             }}
           >
-            ✕ Cerrar
+            × Cerrar
           </motion.button>
         )}
       </AnimatePresence>
@@ -363,7 +363,7 @@ export default function ProductSlideshow({
                       onClick={e => { e.stopPropagation(); startTransition(() => { const n = [...activeSubImageIndex]; n[index] = si; setActiveSubImageIndex(n) }) }}
                       style={{
                         width: 36, height: 36, borderRadius: 6, overflow: 'hidden',
-                        cursor: 'pointer', border: currentSub === si ? '2px solid #0ea7b7' : '2px solid rgba(255,255,255,0.2)',
+                        cursor: 'pointer', border: currentSub === si ? '2px solid #0057FF' : '2px solid rgba(255,255,255,0.2)',
                         opacity: currentSub === si ? 1 : 0.55,
                         transition: 'all 0.2s',
                       }}
@@ -409,18 +409,18 @@ export default function ProductSlideshow({
                   </p>
                 )}
                 {displayItems[selectedIndex]?.price && (
-                  <p style={{ margin: '0 0 20px', fontSize: 20, fontWeight: 500, color: '#0ea7b7' }}>
+                  <p style={{ margin: '0 0 20px', fontSize: 20, fontWeight: 500, color: '#0057FF' }}>
                     {displayItems[selectedIndex].price}
                   </p>
                 )}
                 {displayItems[selectedIndex]?.link && (
                   <a
                     href={displayItems[selectedIndex].link}
-                    onMouseEnter={e => { e.currentTarget.style.background = '#3dc8d6' }}
-                    onMouseLeave={e => { e.currentTarget.style.background = '#0ea7b7' }}
+                    onMouseEnter={e => { e.currentTarget.style.background = '#337BFF' }}
+                    onMouseLeave={e => { e.currentTarget.style.background = '#0057FF' }}
                     style={{
                       display: 'inline-flex', alignItems: 'center', gap: 8,
-                      background: '#0ea7b7', color: '#fff',
+                      background: '#0057FF', color: '#fff',
                       padding: '11px 24px', borderRadius: 99,
                       fontSize: 13, fontWeight: 500, transition: 'background 0.2s',
                     }}
@@ -474,3 +474,5 @@ export default function ProductSlideshow({
     </div>
   )
 }
+
+

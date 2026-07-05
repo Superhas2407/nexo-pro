@@ -10,7 +10,7 @@ const tabs = [
 ]
 
 const tagColors = {
-  'Nuevo':    { bg: '#0ea7b7', color: '#fff' },
+  'Nuevo':    { bg: '#0057FF', color: '#fff' },
   'Pro':      { bg: '#111',    color: '#fff' },
   'Popular':  { bg: '#f0c000', color: '#111' },
   'Exclusivo':{ bg: '#111',    color: '#fff' },
@@ -85,7 +85,7 @@ function FeatCard({ product }) {
 
         {/* Texto */}
         <div style={{ paddingTop: 14 }}>
-          <p style={{ fontSize: 11, fontWeight: 600, color: '#0ea7b7', letterSpacing: 1, textTransform: 'uppercase', margin: '0 0 4px' }}>
+          <p style={{ fontSize: 11, fontWeight: 600, color: '#0057FF', letterSpacing: 1, textTransform: 'uppercase', margin: '0 0 4px' }}>
             {product.brand}
           </p>
           <h3 style={{ fontSize: 15, fontWeight: 500, color: '#1a1a1a', margin: '0 0 6px', lineHeight: 1.3 }}>
@@ -127,7 +127,7 @@ export default function FeaturedProducts() {
           marginBottom: isMobile ? 32 : 48,
         }}>
           <div>
-            <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: 2.5, textTransform: 'uppercase', marginBottom: 10, color: '#0ea7b7' }}>
+            <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: 2.5, textTransform: 'uppercase', marginBottom: 10, color: '#0057FF' }}>
               Lo más vendido
             </p>
             <h2 style={{
@@ -143,7 +143,7 @@ export default function FeaturedProducts() {
             {tabs.map((tab, i) => (
               <button key={tab.label} onClick={() => setActiveTab(i)} style={{
                 padding: '8px 18px', background: 'none', border: 'none',
-                borderBottom: activeTab === i ? '2px solid #0ea7b7' : '2px solid transparent',
+                borderBottom: activeTab === i ? '2px solid #0057FF' : '2px solid transparent',
                 color: activeTab === i ? '#075356' : '#aaa',
                 fontWeight: activeTab === i ? 600 : 400,
                 fontSize: 13, cursor: 'pointer', fontFamily: 'inherit',
@@ -153,12 +153,12 @@ export default function FeaturedProducts() {
               </button>
             ))}
             <a href="/tienda" style={{
-              marginLeft: 20, fontSize: 13, color: '#0ea7b7',
+              marginLeft: 20, fontSize: 13, color: '#0057FF',
               fontWeight: 500, textDecoration: 'none',
               display: 'inline-flex', alignItems: 'center', gap: 4,
               padding: '8px 4px',
             }}>
-              Ver todo →
+              Ver todo ×'
             </a>
           </div>
         </div>
@@ -176,3 +176,4 @@ export default function FeaturedProducts() {
     </section>
   )
 }
+

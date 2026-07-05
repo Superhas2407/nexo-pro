@@ -55,8 +55,8 @@ export default function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  style={{ width: 44, height: 44, background: 'rgba(255,255,255,0.06)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0ea7b7', transition: 'background 0.18s' }}
-                  onMouseEnter={e => e.currentTarget.style.background = '#0ea7b7'}
+                  style={{ width: 44, height: 44, background: 'rgba(255,255,255,0.06)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0057FF', transition: 'background 0.18s' }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#0057FF'}
                   onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.06)'}
                 >
                   <Icon />
@@ -76,7 +76,7 @@ export default function Footer() {
                   key={label}
                   href={href}
                   style={linkStyle}
-                  onMouseEnter={e => e.currentTarget.style.color = '#0ea7b7'}
+                  onMouseEnter={e => e.currentTarget.style.color = '#0057FF'}
                   onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.38)'}
                 >
                   {label}
@@ -93,14 +93,14 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
               {social.map(({ Icon, label, value, href }) => (
                 <div key={label} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                  <span style={{ color: '#0ea7b7', marginTop: 1, flexShrink: 0 }}><Icon /></span>
+                  <span style={{ color: '#0057FF', marginTop: 1, flexShrink: 0 }}><Icon /></span>
                   <div>
                     <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', margin: '0 0 3px' }}>{label}</p>
                     <a
                       href={href}
-                      style={{ fontSize: 14, color: '#0ea7b7', textDecoration: 'none' }}
-                      onMouseEnter={e => e.currentTarget.style.color = '#3dc8d6'}
-                      onMouseLeave={e => e.currentTarget.style.color = '#0ea7b7'}
+                      style={{ fontSize: 14, color: '#0057FF', textDecoration: 'none' }}
+                      onMouseEnter={e => e.currentTarget.style.color = '#337BFF'}
+                      onMouseLeave={e => e.currentTarget.style.color = '#0057FF'}
                     >
                       {value}
                     </a>
@@ -113,10 +113,12 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.2)' }}>© 2026 Nexo Pro. Todos los derechos reservados.</p>
+          <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.2)' }}>© 2026 PULSE. Todos los derechos reservados.</p>
           <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.2)' }}>Hecho con cuidado en Venezuela 🇻🇪</p>
         </div>
       </div>
     </footer>
   )
 }
+
+

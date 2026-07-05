@@ -1,4 +1,4 @@
-import { useState, startTransition } from 'react'
+﻿import { useState, startTransition } from 'react'
 import { motion } from 'framer-motion'
 
 function GlassBox({ item, config }) {
@@ -94,7 +94,7 @@ function GlassBox({ item, config }) {
           textAlign: 'left', minHeight: boxHeight, gap: 0,
         }}>
           {/* Accent line */}
-          <div style={{ width: 28, height: 2, background: '#0ea7b7', borderRadius: 2, marginBottom: 24 }} />
+          <div style={{ width: 28, height: 2, background: '#0057FF', borderRadius: 2, marginBottom: 24 }} />
 
           {/* Stat */}
           <h3 style={{
@@ -111,7 +111,7 @@ function GlassBox({ item, config }) {
           {/* Label */}
           <p style={{
             margin: '0 0 20px', fontSize: 11, fontWeight: 500,
-            color: '#0ea7b7', textTransform: 'uppercase', letterSpacing: 2,
+            color: '#0057FF', textTransform: 'uppercase', letterSpacing: 2,
           }}>
             {item.label}
           </p>
@@ -146,3 +146,4 @@ export default function AppleGlassStack({
     </div>
   )
 }
+

@@ -36,14 +36,14 @@ a { text-decoration: none; color: inherit; }
 button { font-family: inherit; cursor: pointer; }
 p, h1, h2, h3 { text-wrap: pretty; }
 
-/* Focus visible — a11y */
+/* Focus visible �?" a11y */
 :focus-visible {
-  outline: 2px solid #0ea7b7;
+  outline: 2px solid #0057FF;
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* ─── Navbar ─────────────────────────────────────── */
+/* �"?�"?�"? Navbar �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
 .navbar {
   padding-left: 48px;
   padding-right: 48px;
@@ -54,7 +54,7 @@ p, h1, h2, h3 { text-wrap: pretty; }
 .nav-spacer-mobile { display: none; }
 .nav-right-mobile  { display: none; }
 
-/* ─── Subnav scroll wrapper ──────────────────────── */
+/* �"?�"?�"? Subnav scroll wrapper �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
 .subnav-scroll-wrap {
   padding: 0 48px;
   overflow-x: auto;
@@ -62,13 +62,13 @@ p, h1, h2, h3 { text-wrap: pretty; }
 }
 .subnav-scroll-wrap::-webkit-scrollbar { display: none; }
 
-/* ─── Section horizontal padding ─────────────────── */
+/* �"?�"?�"? Section horizontal padding �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
 .section-pad {
   padding-left: 48px;
   padding-right: 48px;
 }
 
-/* ─── Hero ───────────────────────────────────────── */
+/* �"?�"?�"? Hero �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
 .hero-inner {
   max-width: 1280px;
   margin: 0 auto;
@@ -90,7 +90,7 @@ p, h1, h2, h3 { text-wrap: pretty; }
   min-width: 280px;
 }
 
-/* ─── Brand banners ──────────────────────────────── */
+/* �"?�"?�"? Brand banners �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
 .banner-inner {
   max-width: 1280px;
   margin: 0 auto;
@@ -104,28 +104,28 @@ p, h1, h2, h3 { text-wrap: pretty; }
   flex: none;
 }
 
-/* ─── Products grid ──────────────────────────────── */
+/* �"?�"?�"? Products grid �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
 
-/* ─── Store grid ─────────────────────────────────── */
+/* �"?�"?�"? Store grid �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
 .store-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 
-/* ─── Categories grid ────────────────────────────── */
+/* �"?�"?�"? Categories grid �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
 .categories-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 
-/* ─── WhyUs stats bar ────────────────────────────── */
+/* �"?�"?�"? WhyUs stats bar �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
 .whyus-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -136,7 +136,7 @@ p, h1, h2, h3 { text-wrap: pretty; }
   padding-left: 40px;
 }
 
-/* ─── Footer grid ────────────────────────────────── */
+/* �"?�"?�"? Footer grid �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1.5fr;
@@ -152,15 +152,15 @@ p, h1, h2, h3 { text-wrap: pretty; }
   justify-content: space-between;
 }
 
-/* ─── Announcement bar ───────────────────────────── */
+/* �"?�"?�"? Announcement bar �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
 .ann-sep  { display: inline; }
 .ann-item { display: inline; }
 
-/* ─── Hide scrollbar utility ─────────────────────── */
+/* �"?�"?�"? Hide scrollbar utility �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* ─── Responsive: tablet ─────────────────────────── */
+/* �"?�"?�"? Responsive: tablet �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
 @media (max-width: 768px) {
 
   /* Navbar */
@@ -180,7 +180,7 @@ p, h1, h2, h3 { text-wrap: pretty; }
   .subnav-scroll-wrap { padding: 0 12px !important; }
   .subnav-icons { padding-left: 8px !important; }
 
-  /* Announcement bar — solo 1 ítem en tablet/mobile */
+  /* Announcement bar �?" solo 1 ítem en tablet/mobile */
   .ann-sep  { display: none; }
   .ann-item { display: none; }
 
@@ -239,7 +239,7 @@ p, h1, h2, h3 { text-wrap: pretty; }
     padding-left: 0 !important;
   }
 
-  /* Glass cards — 2 columnas en tablet/mobile */
+  /* Glass cards �?" 2 columnas en tablet/mobile */
   .glass-stack { gap: 12px !important; }
   .glass-box {
     flex: 0 0 calc(50% - 6px) !important;
@@ -262,7 +262,7 @@ p, h1, h2, h3 { text-wrap: pretty; }
   }
 }
 
-/* ─── Responsive: mobile pequeño ────────────────── */
+/* �"?�"?�"? Responsive: mobile pequeño �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
 @media (max-width: 480px) {
   .products-grid {
     grid-template-columns: 1fr 1fr;
@@ -279,7 +279,7 @@ p, h1, h2, h3 { text-wrap: pretty; }
     gap: 28px;
   }
 
-  /* Glass cards — 1 columna en móvil pequeño */
+  /* Glass cards �?" 1 columna en móvil pequeño */
   .glass-box {
     flex: 0 0 100% !important;
     min-width: 100% !important;
@@ -290,3 +290,4 @@ p, h1, h2, h3 { text-wrap: pretty; }
   0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.35); }
   50%       { box-shadow: 0 4px 32px rgba(37,211,102,0.65); }
 }
+

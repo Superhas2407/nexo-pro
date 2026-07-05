@@ -53,14 +53,14 @@ export default function OakleyReveal() {
           />
         </motion.div>
 
-        {/* Overlay fijo — oscurece el bottom para legibilidad */}
+        {/* Overlay fijo ×" oscurece el bottom para legibilidad */}
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to bottom, rgba(0,0,0,0) 35%, rgba(0,0,0,0.82) 100%)',
           pointerEvents: 'none',
         }} />
 
-        {/* Overlay animado — efecto cinético en scroll */}
+        {/* Overlay animado ×" efecto cinético en scroll */}
         <motion.div style={{
           position: 'absolute', inset: 0,
           background: 'rgba(0,0,0,0.18)',
@@ -82,10 +82,10 @@ export default function OakleyReveal() {
               fontSize: isMobile ? 11 : 12,
               fontWeight: 600, letterSpacing: 4,
               textTransform: 'uppercase',
-              color: '#0ea7b7',
+              color: '#0057FF',
               margin: '0 0 10px', lineHeight: 1,
             }}>
-              Oakley × Meta
+              Oakley · Meta
             </motion.p>
             <motion.h2 style={{
               opacity: titleOp, y: titleY,
@@ -128,14 +128,14 @@ export default function OakleyReveal() {
               style={{
                 display: 'inline-flex', alignItems: 'center',
                 justifyContent: 'center', gap: 8,
-                background: '#0ea7b7', color: '#fff',
+                background: '#0057FF', color: '#fff',
                 padding: '13px 32px', borderRadius: 99,
                 fontSize: 13, fontWeight: 500,
                 width: isMobile ? '100%' : 'auto',
                 transition: 'background 0.2s',
               }}
-              onMouseEnter={e => e.currentTarget.style.background = '#3dc8d6'}
-              onMouseLeave={e => e.currentTarget.style.background = '#0ea7b7'}
+              onMouseEnter={e => e.currentTarget.style.background = '#337BFF'}
+              onMouseLeave={e => e.currentTarget.style.background = '#0057FF'}
             >
               Ver lentes
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -185,3 +185,5 @@ export default function OakleyReveal() {
     </div>
   )
 }
+
+

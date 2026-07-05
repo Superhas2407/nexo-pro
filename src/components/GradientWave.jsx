@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+﻿import { useEffect, useRef } from 'react'
 
 function normalizeColor(hexCode) {
   return [
@@ -385,7 +385,7 @@ void main(){
 }
 
 export function GradientWave({
-  colors = ['#040e0f','#075356','#0ea7b7','#3dc8d6','#07626a'],
+  colors = ['#040e0f','#075356','#0057FF','#337BFF','#07626a'],
   isPlaying = true,
   shadowPower = 4,
   darkenTop = false,
@@ -428,3 +428,5 @@ export function GradientWave({
     />
   )
 }
+
+

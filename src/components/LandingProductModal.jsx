@@ -164,7 +164,7 @@ export default function LandingProductModal({ product, onClose }) {
                   transition={{ delay: 0.25, duration: 0.3 }}
                   style={{
                     fontSize: 22, fontWeight: 500,
-                    color: '#0ea7b7', margin: '0 0 28px',
+                    color: '#0057FF', margin: '0 0 28px',
                     letterSpacing: -0.5,
                   }}
                 >
@@ -187,14 +187,14 @@ export default function LandingProductModal({ product, onClose }) {
                   href="/tienda"
                   style={{
                     display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                    background: '#0ea7b7', color: '#fff',
+                    background: '#0057FF', color: '#fff',
                     padding: '13px 28px', borderRadius: 99,
                     fontSize: 13, fontWeight: 500,
                     width: isMobile ? '100%' : 'auto',
                     transition: 'background 0.2s',
                   }}
-                  onMouseEnter={e => e.currentTarget.style.background = '#3dc8d6'}
-                  onMouseLeave={e => e.currentTarget.style.background = '#0ea7b7'}
+                  onMouseEnter={e => e.currentTarget.style.background = '#337BFF'}
+                  onMouseLeave={e => e.currentTarget.style.background = '#0057FF'}
                 >
                   Ver en tienda
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -224,3 +224,5 @@ export default function LandingProductModal({ product, onClose }) {
     </AnimatePresence>
   )
 }
+
+

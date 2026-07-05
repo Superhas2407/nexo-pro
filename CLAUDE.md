@@ -1,4 +1,4 @@
-# Nexo Pro — Claude Context
+# PULSE — Claude Context
 
 ## Stack
 - React 19 + Vite 8, **JSX only** (sin TypeScript, sin Tailwind)
@@ -222,11 +222,20 @@ cd nexo-app && npm run dev
 ```
 Puerto: http://localhost:5173
 
-## Paleta de colores
-- Fondo oscuro: `#040e0f`
-- Cian primario: `#0ea7b7`
-- Cian oscuro: `#07626a` / `#075356`
+## Paleta de colores (PULSE brand)
+- Pulse Blue: `#0057FF` (acento principal — reemplaza el antiguo cyan)
+- Pulse Blue hover: `#337BFF`
+- Ink: `#0A0A0A` (texto oscuro en logo)
+- Paper: `#FFFFFF`
 - Texto principal: `#111`
+- Fondo oscuro: `#040e0f`
 - Fondo tienda: `#f5f5f3`
 - Fondo iPhone section: `#f5f5f7`
 - Fondo DJI section: `#0d0d0f`
+
+## Logos PULSE (en public/)
+- `logo-horizontal-primary.svg` — PULSE wordmark oscuro + punto azul (fondos claros)
+- `logo-horizontal-dark.svg` — PULSE wordmark blanco + punto azul (fondos oscuros)
+- `favicon-32.svg` — favicon
+- `icon-mark-blue-on-transparent.svg` — solo el marcador azul
+- Logo.jsx usa SVG inline con prop `variant`: `'color'` (oscuro) o `'white'` (blanco)

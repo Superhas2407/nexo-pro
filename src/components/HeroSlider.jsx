@@ -13,7 +13,7 @@ export default function HeroSlider() {
       marginTop: -68,
       zIndex: 0,
     }}>
-      {/* Imagen de fondo — mobile vs desktop */}
+      {/* Imagen de fondo ×" mobile vs desktop */}
       <img
         src={isMobile ? '/dji-mic-hero-mobile.webp' : '/dji-mic-hero.webp'}
         alt=""
@@ -76,15 +76,15 @@ export default function HeroSlider() {
         }}>
           <a href="/tienda" style={{
             display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-            background: '#0ea7b7', color: '#fff',
+            background: '#0057FF', color: '#fff',
             fontSize: 14, fontWeight: 500,
             padding: isMobile ? '15px 32px' : '14px 32px',
             borderRadius: 99,
             width: isMobile ? '100%' : 'auto',
             transition: 'background 0.2s',
           }}
-            onMouseEnter={e => e.currentTarget.style.background = '#3dc8d6'}
-            onMouseLeave={e => e.currentTarget.style.background = '#0ea7b7'}
+            onMouseEnter={e => e.currentTarget.style.background = '#337BFF'}
+            onMouseLeave={e => e.currentTarget.style.background = '#0057FF'}
           >
             Ver productos
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -110,3 +110,5 @@ export default function HeroSlider() {
     </div>
   )
 }
+
+
