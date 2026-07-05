@@ -24,7 +24,7 @@ const navLinks = [
 
 const social = [
   { Icon: WaIcon,  label: 'WhatsApp',  value: '0422-319 4044',    href: 'https://wa.me/584223194044' },
-  { Icon: IgIcon,  label: 'Instagram', value: '@nexopro.ccs',     href: 'https://www.instagram.com/nexopro.ccs/' },
+  { Icon: IgIcon,  label: 'Instagram', value: '@pulse.ccs',        href: 'https://www.instagram.com/pulse.ccs/' },
 ]
 
 export default function Footer() {
