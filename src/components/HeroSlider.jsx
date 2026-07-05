@@ -1,4 +1,3 @@
-import Logo from './Logo'
 import { useBreakpoint } from '../hooks/useBreakpoint'
 
 export default function HeroSlider() {
@@ -8,100 +7,94 @@ export default function HeroSlider() {
     <div style={{
       position: 'relative',
       height: '100svh',
-      minHeight: isMobile ? 580 : 600,
+      minHeight: isMobile ? 600 : 640,
       overflow: 'hidden',
       marginTop: -68,
-      zIndex: 0,
+      background: '#080808',
     }}>
-      {/* Imagen de fondo ×" mobile vs desktop */}
+      {/* Imagen — anclada a la derecha para mostrar productos */}
       <img
-        src={isMobile ? '/dji-mic-hero-mobile.webp' : '/dji-mic-hero.webp'}
+        src="/hero-pulse.png"
         alt=""
         aria-hidden="true"
         style={{
-          position: 'absolute', inset: 0,
-          width: '100%', height: '100%',
+          position: 'absolute',
+          right: 0,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          height: '100%',
+          width: 'auto',
+          maxWidth: 'none',
           objectFit: 'cover',
-          objectPosition: isMobile ? 'center 30%' : 'center',
         }}
       />
 
-      {/* Overlay */}
+      {/* Gradiente izquierda — tapa el texto/botones de la imagen */}
       <div style={{
         position: 'absolute', inset: 0,
         background: isMobile
-          ? 'linear-gradient(to bottom, rgba(4,14,20,0.55) 0%, rgba(4,14,20,0.72) 60%, rgba(4,14,20,0.92) 100%)'
-          : 'rgba(4,14,20,0.68)',
+          ? 'linear-gradient(to top, #080808 40%, rgba(8,8,8,0.75) 70%, rgba(8,8,8,0.5) 100%)'
+          : 'linear-gradient(to right, #080808 38%, rgba(8,8,8,0.85) 50%, rgba(8,8,8,0.3) 62%, transparent 75%)',
       }} />
 
-      {/* Contenido */}
+      {/* Contenido real */}
       <div style={{
-        position: 'relative', zIndex: 1,
-        height: '100%', display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: isMobile ? 'flex-end' : 'center',
-        textAlign: 'center',
-        padding: isMobile ? '0 24px 56px' : '68px 24px 0',
+        position: 'absolute', inset: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: isMobile ? 'flex-end' : 'center',
+        padding: isMobile
+          ? '0 24px 56px'
+          : `${68 / 2}px 0 0 64px`,
+        maxWidth: isMobile ? '100%' : '48%',
       }}>
-        <div style={{ marginBottom: 20 }}>
-          <Logo variant="white" height={isMobile ? 36 : 44} />
-        </div>
-
         <h1 style={{
-          fontSize: isMobile ? 'clamp(36px, 10vw, 52px)' : 'clamp(44px, 7vw, 96px)',
-          fontWeight: 400,
-          lineHeight: 1.05,
-          letterSpacing: isMobile ? -1.5 : -2,
+          fontSize: isMobile ? 'clamp(36px, 10vw, 52px)' : 'clamp(44px, 4.5vw, 72px)',
+          fontWeight: 700,
+          lineHeight: 1.02,
+          letterSpacing: isMobile ? -1.5 : -2.5,
           color: '#fff',
-          marginBottom: 16,
+          margin: '0 0 14px',
           whiteSpace: 'pre-line',
         }}>
           {'Tecnología\naspiracional.'}
         </h1>
 
         <p style={{
-          fontSize: isMobile ? 13 : 15,
-          color: 'rgba(255,255,255,0.6)',
-          lineHeight: 1.7,
-          maxWidth: isMobile ? 320 : 460,
-          marginBottom: 32,
+          fontSize: isMobile ? 14 : 16,
+          color: 'rgba(255,255,255,0.65)',
+          lineHeight: 1.6,
+          margin: '0 0 32px',
+          maxWidth: 380,
         }}>
-          Apple, DJI y Oakley Meta — los productos que defines con tu estilo de vida. Entrega inmediata y garantía oficial.
+          Apple, DJI y Oakley originales.<br />
+          Entrega inmediata y garantía oficial.
         </p>
 
-        <div style={{
-          display: 'flex', gap: 10,
-          flexDirection: isMobile ? 'column' : 'row',
-          alignItems: 'center',
-          width: isMobile ? '100%' : 'auto',
-        }}>
+        <div style={{ display: 'flex', gap: 12, flexDirection: isMobile ? 'column' : 'row' }}>
           <a href="/tienda" style={{
-            display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
             background: '#0057FF', color: '#fff',
-            fontSize: 14, fontWeight: 500,
-            padding: isMobile ? '15px 32px' : '14px 32px',
-            borderRadius: 99,
-            width: isMobile ? '100%' : 'auto',
+            fontSize: 15, fontWeight: 600,
+            padding: isMobile ? '15px 28px' : '15px 32px',
+            borderRadius: 99, textDecoration: 'none',
             transition: 'background 0.2s',
           }}
             onMouseEnter={e => e.currentTarget.style.background = '#337BFF'}
             onMouseLeave={e => e.currentTarget.style.background = '#0057FF'}
           >
             Ver productos
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
           </a>
-          <a href="https://wa.me/584223194044?text=Hola!%20Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20productos%20de%20Nexo%20Pro." style={{
-            display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-            border: '1.5px solid rgba(255,255,255,0.35)', color: '#fff',
-            fontSize: 14, fontWeight: 500,
-            padding: isMobile ? '15px 32px' : '14px 32px',
-            borderRadius: 99,
-            width: isMobile ? '100%' : 'auto',
+          <a href="https://wa.me/584223194044?text=Hola!%20Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20PULSE." style={{
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            border: '1.5px solid rgba(255,255,255,0.45)', color: '#fff',
+            fontSize: 15, fontWeight: 600,
+            padding: isMobile ? '15px 28px' : '15px 32px',
+            borderRadius: 99, textDecoration: 'none',
             transition: 'border-color 0.2s, background 0.2s',
           }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = '#fff'; e.currentTarget.style.background = 'rgba(255,255,255,0.07)' }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)'; e.currentTarget.style.background = 'transparent' }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = '#fff'; e.currentTarget.style.background = 'rgba(255,255,255,0.08)' }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.45)'; e.currentTarget.style.background = 'transparent' }}
           >
             WhatsApp
           </a>
@@ -110,5 +103,3 @@ export default function HeroSlider() {
     </div>
   )
 }
-
-
