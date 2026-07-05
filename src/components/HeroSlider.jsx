@@ -14,7 +14,7 @@ export default function HeroSlider() {
     }}>
       {/* Imagen — anclada a la derecha para mostrar productos */}
       <img
-        src="/hero-pulse.png"
+        src="/hero-pulse.webp"
         alt=""
         aria-hidden="true"
         style={{
