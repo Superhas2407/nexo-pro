@@ -209,7 +209,7 @@
     id: 'oakley-meta-hstn',
     brand: 'Oakley', category: 'oakley',
     name: 'Oakley Meta HSTN',
-    tag: 'Nuevo', bgText: null,
+    tag: 'Nuevo', bgText: 'HSTN',
     colorVariants: [
       {
         color: 'Black', hex: '#1a1a1a',
@@ -241,7 +241,7 @@
     id: 'oakley-meta-vanguard',
     brand: 'Oakley', category: 'oakley',
     name: 'Oakley Meta Vanguard',
-    tag: 'Exclusivo', bgText: null,
+    tag: 'Exclusivo', bgText: 'VANGUARD',
     colorVariants: [
       {
         color: 'Prizm 24K', hex: '#C8952A',

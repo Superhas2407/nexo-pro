@@ -36,7 +36,7 @@ export default function Store() {
           ? Math.max(0, found.colorVariants.findIndex(v => v.color === color))
           : 0
         setModalColorIdx(colorIdx)
-        setModalSkipSpread(!!color)
+        setModalSkipSpread(!!color && found.category !== 'oakley')
         setSelectedProduct(found)
       }
     }
