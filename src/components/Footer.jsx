@@ -22,6 +22,11 @@ const navLinks = [
   { label: 'Oakley Meta',         href: '/tienda?categoria=oakley' },
 ]
 
+const legalLinks = [
+  { label: 'Términos y Condiciones', href: '/terminos' },
+  { label: 'Política de Cookies',    href: '/terminos#cookies' },
+]
+
 const social = [
   { Icon: WaIcon,  label: 'WhatsApp',  value: '0422-319 4044',    href: 'https://wa.me/584223194044' },
   { Icon: IgIcon,  label: 'Instagram', value: '@pulse.ccs',        href: 'https://www.instagram.com/pulse.ccs/' },
@@ -106,6 +111,26 @@ export default function Footer() {
                     </a>
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h4 style={{ fontSize: 11, fontWeight: 500, color: 'rgba(255,255,255,0.55)', letterSpacing: 2, marginBottom: 20, textTransform: 'uppercase' }}>
+              Legal
+            </h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {legalLinks.map(({ label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  style={linkStyle}
+                  onMouseEnter={e => e.currentTarget.style.color = '#0057FF'}
+                  onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.38)'}
+                >
+                  {label}
+                </a>
               ))}
             </div>
           </div>
