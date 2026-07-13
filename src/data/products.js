@@ -118,7 +118,7 @@
       color: null, hex: '#2a2a2a',
       image: '/dji-osmo7-shop.webp',
       hoverImage: '/dji-osmo7-hand.webp',
-      storage: [{ label: null, price: 120 }],
+      storage: [{ label: null, price: 105 }],
     }],
     specs: [
       { label: 'Estabilización',  value: '3 ejes · ±0.01° precisión' },
@@ -142,7 +142,7 @@
       color: null, hex: '#2a2a2a',
       image: '/dji-osmo7p-shop.webp',
       hoverImage: '/dji-osmo7p-hand.webp',
-      storage: [{ label: null, price: 180 }],
+      storage: [{ label: null, price: 150 }],
     }],
     specs: [
       { label: 'Estabilización',  value: '3 ejes · ±0.01° precisión' },
@@ -215,13 +215,13 @@
         color: 'Black', hex: '#1a1a1a',
         image: '/oakley-hstn-black-shop.webp',
         hoverImage: '/oakley-hstn-black-hand.webp',
-        storage: [{ label: null, price: 450 }],
+        storage: [{ label: null, price: 500 }],
       },
       {
         color: 'Prizm Red', hex: '#8B2020',
         image: '/oakley-hstn-red-shop.webp',
         hoverImage: '/oakley-hstn-red-hand.webp',
-        storage: [{ label: null, price: 450 }],
+        storage: [{ label: null, price: 500 }],
       },
     ],
     specs: [
@@ -301,7 +301,7 @@
       color: null, hex: '#1a1a1a',
       image: '/boya-wm3-shop.webp',
       hoverImage: '/boya-wm3-hand.webp',
-      storage: [{ label: null, price: 89 }],
+      storage: [{ label: null, price: 60 }],
     }],
     specs: [
       { label: 'Transmisores',  value: '2 transmisores clip-on inalámbricos' },
