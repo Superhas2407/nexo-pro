@@ -51,7 +51,7 @@
         color: 'Silver Blue', hex: '#A8C4D4',
         image: '/iphone-deepblue-shop.webp',
         hoverImage: '/iphone-deepblue-hand.webp',
-        storage: [{ label: '256 GB', price: 1290 }],
+        storage: [{ label: '256 GB', price: 1330 }],
       },
       {
         color: 'Silver', hex: '#E3E3E3',
@@ -59,7 +59,7 @@
         hoverImage: '/iphone-silver-hand.webp',
         storage: [
           { label: '512 GB', price: 1590 },
-          { label: '1 TB',   price: 1790 },
+          { label: '1 TB',   price: 1820 },
         ],
       },
     ],
