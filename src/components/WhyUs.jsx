@@ -27,11 +27,12 @@ export default function WhyUs() {
   const isMobile = useBreakpoint(768)
 
   return (
-    <section className="section-pad" style={{
+    <section id="nosotros" className="section-pad" style={{
       background: '#fff',
       paddingTop: isMobile ? 48 : 72,
       paddingBottom: isMobile ? 48 : 72,
       borderTop: '1px solid #e8e8e6',
+      scrollMarginTop: 68,
     }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
 
