@@ -12,12 +12,19 @@ export default function HeroSlider() {
       marginTop: -68,
       background: '#080808',
     }}>
-      {/* Imagen — anclada a la derecha para mostrar productos */}
+      {/* Imagen — desktop: anclada a la derecha. Mobile: crop vertical dedicado */}
       <img
-        src="/hero-pulse-v2.webp"
+        src={isMobile ? '/hero-pulse-v2-mobile.webp' : '/hero-pulse-v2.webp'}
         alt=""
         aria-hidden="true"
-        style={{
+        style={isMobile ? {
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center',
+        } : {
           position: 'absolute',
           right: 0,
           top: '50%',
