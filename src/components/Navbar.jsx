@@ -546,48 +546,25 @@ export default function Navbar() {
   const [sendingOrder, setSendingOrder] = useState(false)
   const [orderToast, setOrderToast]     = useState(false)
 
-  const handleWhatsAppOrder = async () => {
-    if (!cart.length || sendingOrder) return
-    setSendingOrder(true)
+  // Detección sincrónica (sin await) de si el navegador puede compartir archivos —
+  // así podemos decidir YA, dentro del click, si vamos por share nativo o por el
+  // link normal a WhatsApp.
+  const supportsFileShare = () => {
+    try {
+      const dummy = new File([], 'pedido-pulse.png', { type: 'image/png' })
+      return !!(navigator.canShare && navigator.share && navigator.canShare({ files: [dummy] }))
+    } catch {
+      return false
+    }
+  }
 
-    // Abrimos la pestaña YA, antes de cualquier await — si se abre después de
-    // generar la imagen, el navegador ya no lo considera un click directo del
-    // usuario y bloquea el popup en silencio. La redirigimos más abajo.
-    const waWindow = window.open('', '_blank')
-
-    let file = null
+  // Genera la factura y la descarga en segundo plano, sin bloquear ni depender
+  // de la navegación a WhatsApp (que ya la maneja el <a> de forma nativa).
+  const downloadInvoiceInBackground = async () => {
     try {
       const blob = await generateInvoiceImage(cart, cartTotal)
-      if (blob) file = new File([blob], 'pedido-pulse.png', { type: 'image/png' })
-    } catch {
-      file = null
-    }
-
-    // Mobile con Web Share API: adjunta la imagen directo al elegir WhatsApp
-    if (file && navigator.canShare?.({ files: [file] })) {
-      try {
-        await navigator.share({
-          files: [file],
-          title: 'Pedido PULSE',
-          text: decodeURIComponent(cartWaText()),
-        })
-        waWindow?.close() // no hizo falta la pestaña, se compartió directo
-        setSendingOrder(false)
-        setCartOpen(false)
-        return
-      } catch (err) {
-        setSendingOrder(false)
-        if (err?.name === 'AbortError') { waWindow?.close(); return }
-        // cualquier otro error: seguimos al fallback de abajo con waWindow aún abierta
-      }
-    } else {
-      setSendingOrder(false)
-    }
-
-    // Fallback (desktop / sin soporte de share con archivos): descarga la
-    // imagen y abre el chat de WhatsApp con el texto del pedido
-    if (file) {
-      const url = URL.createObjectURL(file)
+      if (!blob) return
+      const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url
       a.download = 'pedido-pulse.png'
@@ -597,11 +574,43 @@ export default function Navbar() {
       URL.revokeObjectURL(url)
       setOrderToast(true)
       setTimeout(() => setOrderToast(false), 4500)
+    } catch {
+      // si falla la generación de la imagen no pasa nada — el link a WhatsApp ya navegó
     }
+  }
 
+  // Mobile con Web Share API: genera la factura y la comparte directo con WhatsApp
+  const shareInvoiceOrder = async () => {
+    setSendingOrder(true)
     const waUrl = `${WA_BASE}?text=${cartWaText()}`
-    if (waWindow) waWindow.location.href = waUrl
-    else window.open(waUrl, '_blank') // por si el navegador igual bloqueó la pestaña en blanco
+    try {
+      const blob = await generateInvoiceImage(cart, cartTotal)
+      const file = blob ? new File([blob], 'pedido-pulse.png', { type: 'image/png' }) : null
+      if (file && navigator.canShare?.({ files: [file] })) {
+        await navigator.share({ files: [file], title: 'Pedido PULSE', text: decodeURIComponent(cartWaText()) })
+      } else {
+        window.location.href = waUrl // sin popup: navega la pestaña actual, siempre funciona
+      }
+    } catch (err) {
+      if (err?.name !== 'AbortError') window.location.href = waUrl
+    } finally {
+      setSendingOrder(false)
+    }
+  }
+
+  // Click en "Cotizar por WhatsApp": si el navegador soporta compartir archivos
+  // (mobile), interceptamos y compartimos la factura directo. Si no (desktop/
+  // Safari sin soporte), dejamos que el <a> navegue nativo a WhatsApp — es la
+  // única forma 100% confiable de abrir la pestaña sin que la bloqueen — y
+  // generamos la imagen aparte para descargarla.
+  const handleWhatsAppOrder = (e) => {
+    if (!cart.length) { e.preventDefault(); return }
+    if (supportsFileShare()) {
+      e.preventDefault()
+      shareInvoiceOrder()
+    } else {
+      downloadInvoiceInBackground()
+    }
     setCartOpen(false)
   }
 
@@ -922,10 +931,11 @@ export default function Navbar() {
                     <span style={{ fontSize: 15, fontWeight: 700, color: '#111' }}>Subtotal</span>
                     <span style={{ fontSize: 15, fontWeight: 700, color: '#111' }}>REF {cartTotal.toLocaleString()}</span>
                   </div>
-                  <button
-                    type="button"
+                  <a
+                    href={`${WA_BASE}?text=${cartWaText()}`}
+                    target="_blank" rel="noopener noreferrer"
                     onClick={handleWhatsAppOrder}
-                    disabled={sendingOrder}
+                    aria-disabled={sendingOrder}
                     style={{
                       display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                       background: '#111', color: '#fff', padding: '14px 20px', borderRadius: 99,
@@ -936,7 +946,7 @@ export default function Navbar() {
                     }}
                   >
                     {sendingOrder ? 'Generando pedido…' : (<><WaIcon /> Cotizar por WhatsApp</>)}
-                  </button>
+                  </a>
                   <p style={{ fontSize: 11, color: '#aaa', textAlign: 'center', margin: '10px 0 0' }}>Entrega inmediata · Garantía oficial</p>
                 </div>
               </div>
