@@ -2,7 +2,8 @@ import { useState, useRef, useLayoutEffect, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useBreakpoint } from '../hooks/useBreakpoint'
 import { useShop } from '../context/ShopContext'
-import { groupSpecs, SpecIcon } from '../utils/specGroups.jsx'
+import { groupSpecs } from '../utils/specGroups'
+import { SpecIcon } from '../utils/SpecIcon.jsx'
 
 const fmt = (n) => 'REF ' + n.toLocaleString('en-US')
 

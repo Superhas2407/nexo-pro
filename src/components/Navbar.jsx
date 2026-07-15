@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Logo from './Logo'
 import { products, basePrice } from '../data/products'
 import { useShop } from '../context/ShopContext'
+import { generateInvoiceImage } from '../utils/invoiceImage'
 
 const WA_BASE = 'https://wa.me/584223194044'
 
@@ -542,6 +543,57 @@ export default function Navbar() {
   const headerRef                      = useRef(null)
   const pillRef                        = useRef(null)
   const { cart, wishlist, removeFromCart, updateQty, removeFromWishlist, cartTotal, cartWaText } = useShop()
+  const [sendingOrder, setSendingOrder] = useState(false)
+  const [orderToast, setOrderToast]     = useState(false)
+
+  const handleWhatsAppOrder = async () => {
+    if (!cart.length || sendingOrder) return
+    setSendingOrder(true)
+
+    let file = null
+    try {
+      const blob = await generateInvoiceImage(cart, cartTotal)
+      if (blob) file = new File([blob], 'pedido-pulse.png', { type: 'image/png' })
+    } catch {
+      file = null
+    }
+
+    // Mobile con Web Share API: adjunta la imagen directo al elegir WhatsApp
+    if (file && navigator.canShare?.({ files: [file] })) {
+      try {
+        await navigator.share({
+          files: [file],
+          title: 'Pedido PULSE',
+          text: decodeURIComponent(cartWaText()),
+        })
+        setSendingOrder(false)
+        setCartOpen(false)
+        return
+      } catch (err) {
+        setSendingOrder(false)
+        if (err?.name === 'AbortError') return
+      }
+    } else {
+      setSendingOrder(false)
+    }
+
+    // Fallback (desktop / sin soporte de share con archivos): descarga la
+    // imagen y abre el chat de WhatsApp con el texto del pedido
+    if (file) {
+      const url = URL.createObjectURL(file)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'pedido-pulse.png'
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      URL.revokeObjectURL(url)
+      setOrderToast(true)
+      setTimeout(() => setOrderToast(false), 4500)
+    }
+    window.open(`${WA_BASE}?text=${cartWaText()}`, '_blank')
+    setCartOpen(false)
+  }
 
   useEffect(() => {
     const onScroll = () => setAtTop(window.scrollY < window.innerHeight - 100)
@@ -860,15 +912,21 @@ export default function Navbar() {
                     <span style={{ fontSize: 15, fontWeight: 700, color: '#111' }}>Subtotal</span>
                     <span style={{ fontSize: 15, fontWeight: 700, color: '#111' }}>REF {cartTotal.toLocaleString()}</span>
                   </div>
-                  <a
-                    href={`${WA_BASE}?text=${cartWaText()}`}
-                    target="_blank" rel="noopener noreferrer"
-                    onClick={() => setCartOpen(false)}
-                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: '#111', color: '#fff', padding: '14px 20px', borderRadius: 99, fontSize: 13, fontWeight: 600, textDecoration: 'none', width: '100%', boxSizing: 'border-box' }}
+                  <button
+                    type="button"
+                    onClick={handleWhatsAppOrder}
+                    disabled={sendingOrder}
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                      background: '#111', color: '#fff', padding: '14px 20px', borderRadius: 99,
+                      fontSize: 13, fontWeight: 600, textDecoration: 'none', width: '100%',
+                      boxSizing: 'border-box', border: 'none',
+                      opacity: sendingOrder ? 0.7 : 1,
+                      cursor: sendingOrder ? 'default' : 'pointer',
+                    }}
                   >
-                    <WaIcon />
-                    Cotizar por WhatsApp
-                  </a>
+                    {sendingOrder ? 'Generando pedido…' : (<><WaIcon /> Cotizar por WhatsApp</>)}
+                  </button>
                   <p style={{ fontSize: 11, color: '#aaa', textAlign: 'center', margin: '10px 0 0' }}>Entrega inmediata · Garantía oficial</p>
                 </div>
               </div>
@@ -921,6 +979,27 @@ export default function Navbar() {
               </div>
             )}
           </SidePanel>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {orderToast && (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            transition={{ duration: 0.2 }}
+            style={{
+              position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)',
+              zIndex: 400, background: '#111', color: '#fff',
+              padding: '12px 20px', borderRadius: 99,
+              fontSize: 12, fontWeight: 500, textAlign: 'center',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
+              maxWidth: 'calc(100vw - 32px)',
+            }}
+          >
+            Imagen del pedido descargada — adjúntala en el chat de WhatsApp
+          </motion.div>
         )}
       </AnimatePresence>
     </>
