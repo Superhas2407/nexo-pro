@@ -546,25 +546,28 @@ export default function Navbar() {
   const [sendingOrder, setSendingOrder] = useState(false)
   const [orderToast, setOrderToast]     = useState(false)
 
-  // Detección sincrónica (sin await) de si el navegador puede compartir archivos —
-  // así podemos decidir YA, dentro del click, si vamos por share nativo o por el
-  // link normal a WhatsApp.
-  const supportsFileShare = () => {
-    try {
-      const dummy = new File([], 'pedido-pulse.png', { type: 'image/png' })
-      return !!(navigator.canShare && navigator.share && navigator.canShare({ files: [dummy] }))
-    } catch {
-      return false
-    }
-  }
-
-  // Genera la factura y la descarga en segundo plano, sin bloquear ni depender
-  // de la navegación a WhatsApp (que ya la maneja el <a> de forma nativa).
-  const downloadInvoiceInBackground = async () => {
+  // Botón "Descargar/compartir factura" — 100% independiente del botón de
+  // WhatsApp, en su propio gesto de click, para que nada pueda interferir con
+  // la navegación a WhatsApp (eso fue lo que fallaba en Safari).
+  const handleInvoiceImage = async () => {
+    if (!cart.length || sendingOrder) return
+    setSendingOrder(true)
     try {
       const blob = await generateInvoiceImage(cart, cartTotal)
       if (!blob) return
-      const url = URL.createObjectURL(blob)
+      const file = new File([blob], 'pedido-pulse.png', { type: 'image/png' })
+
+      if (navigator.canShare?.({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file], title: 'Pedido PULSE', text: decodeURIComponent(cartWaText()) })
+          return
+        } catch (err) {
+          if (err?.name === 'AbortError') return
+          // si falla el share nativo, caemos a la descarga de abajo
+        }
+      }
+
+      const url = URL.createObjectURL(file)
       const a = document.createElement('a')
       a.href = url
       a.download = 'pedido-pulse.png'
@@ -574,44 +577,9 @@ export default function Navbar() {
       URL.revokeObjectURL(url)
       setOrderToast(true)
       setTimeout(() => setOrderToast(false), 4500)
-    } catch {
-      // si falla la generación de la imagen no pasa nada — el link a WhatsApp ya navegó
-    }
-  }
-
-  // Mobile con Web Share API: genera la factura y la comparte directo con WhatsApp
-  const shareInvoiceOrder = async () => {
-    setSendingOrder(true)
-    const waUrl = `${WA_BASE}?text=${cartWaText()}`
-    try {
-      const blob = await generateInvoiceImage(cart, cartTotal)
-      const file = blob ? new File([blob], 'pedido-pulse.png', { type: 'image/png' }) : null
-      if (file && navigator.canShare?.({ files: [file] })) {
-        await navigator.share({ files: [file], title: 'Pedido PULSE', text: decodeURIComponent(cartWaText()) })
-      } else {
-        window.location.href = waUrl // sin popup: navega la pestaña actual, siempre funciona
-      }
-    } catch (err) {
-      if (err?.name !== 'AbortError') window.location.href = waUrl
     } finally {
       setSendingOrder(false)
     }
-  }
-
-  // Click en "Cotizar por WhatsApp": si el navegador soporta compartir archivos
-  // (mobile), interceptamos y compartimos la factura directo. Si no (desktop/
-  // Safari sin soporte), dejamos que el <a> navegue nativo a WhatsApp — es la
-  // única forma 100% confiable de abrir la pestaña sin que la bloqueen — y
-  // generamos la imagen aparte para descargarla.
-  const handleWhatsAppOrder = (e) => {
-    if (!cart.length) { e.preventDefault(); return }
-    if (supportsFileShare()) {
-      e.preventDefault()
-      shareInvoiceOrder()
-    } else {
-      downloadInvoiceInBackground()
-    }
-    setCartOpen(false)
   }
 
   useEffect(() => {
@@ -934,20 +902,34 @@ export default function Navbar() {
                   <a
                     href={`${WA_BASE}?text=${cartWaText()}`}
                     target="_blank" rel="noopener noreferrer"
-                    onClick={handleWhatsAppOrder}
-                    aria-disabled={sendingOrder}
+                    onClick={() => setCartOpen(false)}
                     style={{
                       display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                       background: '#111', color: '#fff', padding: '14px 20px', borderRadius: 99,
                       fontSize: 13, fontWeight: 600, textDecoration: 'none', width: '100%',
                       boxSizing: 'border-box', border: 'none',
-                      opacity: sendingOrder ? 0.7 : 1,
-                      cursor: sendingOrder ? 'default' : 'pointer',
                     }}
                   >
-                    {sendingOrder ? 'Generando pedido…' : (<><WaIcon /> Cotizar por WhatsApp</>)}
+                    <WaIcon /> Cotizar por WhatsApp
                   </a>
-                  <p style={{ fontSize: 11, color: '#aaa', textAlign: 'center', margin: '10px 0 0' }}>Entrega inmediata · Garantía oficial</p>
+                  <button
+                    type="button"
+                    onClick={handleInvoiceImage}
+                    disabled={sendingOrder}
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                      background: 'none', border: 'none', width: '100%',
+                      padding: '10px 0 0', fontSize: 11, fontWeight: 500,
+                      color: '#999', cursor: sendingOrder ? 'default' : 'pointer',
+                      fontFamily: 'inherit',
+                    }}
+                  >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    {sendingOrder ? 'Generando imagen…' : 'Descargar imagen del pedido'}
+                  </button>
+                  <p style={{ fontSize: 11, color: '#aaa', textAlign: 'center', margin: '8px 0 0' }}>Entrega inmediata · Garantía oficial</p>
                 </div>
               </div>
             )}
