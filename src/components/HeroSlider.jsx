@@ -12,30 +12,35 @@ export default function HeroSlider() {
       marginTop: -68,
       background: '#080808',
     }}>
-      {/* Imagen — anclada a la derecha para mostrar productos */}
-      <img
-        src="/hero-pulse.webp"
-        alt=""
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          right: 0,
-          top: '50%',
-          transform: 'translateY(-50%)',
-          height: '100%',
-          width: 'auto',
-          maxWidth: 'none',
-          objectFit: 'cover',
-        }}
-      />
-
-      {/* Gradiente izquierda — tapa el texto/botones de la imagen */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: isMobile
-          ? 'linear-gradient(to top, #080808 40%, rgba(8,8,8,0.75) 70%, rgba(8,8,8,0.5) 100%)'
-          : 'linear-gradient(to right, #080808 38%, rgba(8,8,8,0.85) 50%, rgba(8,8,8,0.3) 62%, transparent 75%)',
-      }} />
+      {/* Imagen — sin texto/botones quemados (hero v2), no necesita overlay */}
+      {isMobile ? (
+        <img
+          src="/hero-pulse-v2-mobile.webp"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: 'absolute', inset: 0,
+            width: '100%', height: '100%',
+            objectFit: 'cover', objectPosition: 'center',
+          }}
+        />
+      ) : (
+        <img
+          src="/hero-pulse-v2.webp"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            right: 0,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            height: '100%',
+            width: 'auto',
+            maxWidth: 'none',
+            objectFit: 'cover',
+          }}
+        />
+      )}
 
       {/* Contenido real */}
       <div style={{
