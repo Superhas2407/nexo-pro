@@ -147,6 +147,15 @@ export default function ProductCard({ product, onClick }) {
           {selectedVariant.color ? ` · ${selectedVariant.color}` : ''}
         </p>
 
+        {product.specs?.[0] && (
+          <p style={{
+            fontSize: 11, fontWeight: 500, color: '#aaa', margin: '4px 0 0',
+            whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+          }}>
+            {product.specs[0].value}
+          </p>
+        )}
+
         <p style={{ fontSize: 14, fontWeight: 600, color: '#111', margin: '8px 0 0' }}>
           {fmtPrice(selectedStorage.price)}
         </p>

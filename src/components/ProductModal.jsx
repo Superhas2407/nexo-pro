@@ -2,6 +2,7 @@ import { useState, useRef, useLayoutEffect, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useBreakpoint } from '../hooks/useBreakpoint'
 import { useShop } from '../context/ShopContext'
+import { groupSpecs, SpecIcon } from '../utils/specGroups.jsx'
 
 const fmt = (n) => 'REF ' + n.toLocaleString('en-US')
 
@@ -65,6 +66,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
   )
 
   const hasMultipleColors = product.colorVariants.length > 1
+  const specGroups = groupSpecs(product.specs)
 
   /* —?—?—? Info panel ×" reutilizado en desktop y mobile —?—?—? */
   const InfoPanel = () => (
@@ -556,7 +558,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                       </div>
                     )}
 
-                    {product.specs && (
+                    {specGroups.length > 0 && (
                       <motion.div
                         animate={{ y: [0, 7, 0] }}
                         transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
@@ -577,7 +579,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
               )}
 
               {/* Specs ×" tanto mobile como desktop */}
-              {product.specs && (
+              {specGroups.length > 0 && (
                 <div style={{
                   minHeight: isMobile ? 'auto' : '100vh',
                   background: '#fafafa',
@@ -597,29 +599,50 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                     </h2>
                   </div>
 
-                  <div style={{
-                    maxWidth: 900, margin: '0 auto',
-                    display: 'grid',
-                    gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
-                    gap: 0,
-                  }}>
-                    {product.specs.map((spec, i) => (
-                      <div
-                        key={i}
-                        style={{
-                          padding: '18px 0',
-                          borderTop: '1px solid rgba(0,0,0,0.07)',
-                          paddingRight: !isMobile && i % 2 === 0 ? 40 : 0,
-                          paddingLeft: !isMobile && i % 2 === 1 ? 40 : 0,
-                          borderLeft: !isMobile && i % 2 === 1 ? '1px solid rgba(0,0,0,0.07)' : 'none',
-                        }}
-                      >
-                        <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase', color: '#aaa', margin: '0 0 6px' }}>
-                          {spec.label}
-                        </p>
-                        <p style={{ fontSize: 15, fontWeight: 400, color: '#111', margin: 0, lineHeight: 1.5 }}>
-                          {spec.value}
-                        </p>
+                  <div style={{ maxWidth: 900, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: isMobile ? 32 : 44 }}>
+                    {specGroups.map(group => (
+                      <div key={group.key}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+                          <div style={{
+                            width: 28, height: 28, borderRadius: 8, flexShrink: 0,
+                            background: 'color-mix(in srgb, #0057FF 10%, white)',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          }}>
+                            <SpecIcon category={group.key} size={14} />
+                          </div>
+                          <h3 style={{
+                            fontSize: 12, fontWeight: 700, letterSpacing: 1.5,
+                            textTransform: 'uppercase', color: '#111', margin: 0,
+                          }}>
+                            {group.title}
+                          </h3>
+                        </div>
+
+                        <div style={{
+                          display: 'grid',
+                          gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
+                          gap: 0,
+                        }}>
+                          {group.items.map((spec, i) => (
+                            <div
+                              key={i}
+                              style={{
+                                padding: '16px 0',
+                                borderTop: '1px solid rgba(0,0,0,0.07)',
+                                paddingRight: !isMobile && i % 2 === 0 ? 40 : 0,
+                                paddingLeft: !isMobile && i % 2 === 1 ? 40 : 0,
+                                borderLeft: !isMobile && i % 2 === 1 ? '1px solid rgba(0,0,0,0.07)' : 'none',
+                              }}
+                            >
+                              <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase', color: '#aaa', margin: '0 0 6px' }}>
+                                {spec.label}
+                              </p>
+                              <p style={{ fontSize: 15, fontWeight: 400, color: '#111', margin: 0, lineHeight: 1.5 }}>
+                                {spec.value}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     ))}
                   </div>
