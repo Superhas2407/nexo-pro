@@ -550,6 +550,11 @@ export default function Navbar() {
     if (!cart.length || sendingOrder) return
     setSendingOrder(true)
 
+    // Abrimos la pestaña YA, antes de cualquier await — si se abre después de
+    // generar la imagen, el navegador ya no lo considera un click directo del
+    // usuario y bloquea el popup en silencio. La redirigimos más abajo.
+    const waWindow = window.open('', '_blank')
+
     let file = null
     try {
       const blob = await generateInvoiceImage(cart, cartTotal)
@@ -566,12 +571,14 @@ export default function Navbar() {
           title: 'Pedido PULSE',
           text: decodeURIComponent(cartWaText()),
         })
+        waWindow?.close() // no hizo falta la pestaña, se compartió directo
         setSendingOrder(false)
         setCartOpen(false)
         return
       } catch (err) {
         setSendingOrder(false)
-        if (err?.name === 'AbortError') return
+        if (err?.name === 'AbortError') { waWindow?.close(); return }
+        // cualquier otro error: seguimos al fallback de abajo con waWindow aún abierta
       }
     } else {
       setSendingOrder(false)
@@ -591,7 +598,10 @@ export default function Navbar() {
       setOrderToast(true)
       setTimeout(() => setOrderToast(false), 4500)
     }
-    window.open(`${WA_BASE}?text=${cartWaText()}`, '_blank')
+
+    const waUrl = `${WA_BASE}?text=${cartWaText()}`
+    if (waWindow) waWindow.location.href = waUrl
+    else window.open(waUrl, '_blank') // por si el navegador igual bloqueó la pestaña en blanco
     setCartOpen(false)
   }
 
