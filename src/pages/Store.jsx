@@ -1,5 +1,5 @@
-import { useState, useMemo, useEffect } from 'react'
-import { AnimatePresence } from 'framer-motion'
+import { useState, useMemo, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { products, categories, brands, basePrice } from '../data/products'
 import ProductCard from '../components/ProductCard'
 import ProductModal from '../components/ProductModal'
@@ -24,6 +24,30 @@ export default function Store() {
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [modalColorIdx, setModalColorIdx] = useState(0)
   const [modalSkipSpread, setModalSkipSpread] = useState(false)
+  const [categoryOpen, setCategoryOpen] = useState(false)
+  const [categoryPos, setCategoryPos] = useState({ top: 0, left: 0 })
+  const categoryBtnRef = useRef(null)
+  const categoryPanelRef = useRef(null)
+
+  const toggleCategoryMenu = () => {
+    if (!categoryOpen) {
+      const rect = categoryBtnRef.current.getBoundingClientRect()
+      setCategoryPos({ top: rect.bottom + 8, left: rect.left })
+    }
+    setCategoryOpen(o => !o)
+  }
+
+  useEffect(() => {
+    if (!categoryOpen) return
+    const onClick = (e) => {
+      if (
+        categoryBtnRef.current && !categoryBtnRef.current.contains(e.target) &&
+        categoryPanelRef.current && !categoryPanelRef.current.contains(e.target)
+      ) setCategoryOpen(false)
+    }
+    document.addEventListener('mousedown', onClick)
+    return () => document.removeEventListener('mousedown', onClick)
+  }, [categoryOpen])
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -85,33 +109,71 @@ export default function Store() {
           overflow: 'auto',
           scrollbarWidth: 'none',
         }}>
-          {/* Category pills */}
-          <div style={{ display: 'flex', gap: 6, flex: 1, alignItems: 'center' }}>
-            {categories.map(cat => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
+          {/* Categoría — dropdown compacto */}
+          <div style={{ flex: 1 }}>
+            <button
+              ref={categoryBtnRef}
+              onClick={toggleCategoryMenu}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 8,
+                padding: '10px 16px',
+                borderRadius: 99,
+                border: categoryOpen ? '1.5px solid #111' : '1.5px solid rgba(0,0,0,0.12)',
+                background: categoryOpen ? '#111' : 'transparent',
+                color: categoryOpen ? '#fff' : '#333',
+                fontSize: 12, fontWeight: 600,
+                cursor: 'pointer', fontFamily: 'inherit',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.15s ease',
+                letterSpacing: 0.2,
+              }}
+            >
+              {categories.find(c => c.id === activeCategory)?.label}
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"
+                style={{ transform: categoryOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+
+          </div>
+
+          <AnimatePresence>
+            {categoryOpen && (
+              <motion.div
+                ref={categoryPanelRef}
+                initial={{ opacity: 0, y: 6, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 4, scale: 0.98 }}
+                transition={{ duration: 0.15, ease: [0.22, 1, 0.36, 1] }}
                 style={{
-                  padding: '10px 16px',
-                  borderRadius: 99,
-                  border: activeCategory === cat.id
-                    ? '1.5px solid #111'
-                    : '1.5px solid rgba(0,0,0,0.12)',
-                  background: activeCategory === cat.id ? '#111' : 'transparent',
-                  color: activeCategory === cat.id ? '#fff' : '#555',
-                  fontSize: 12,
-                  fontWeight: activeCategory === cat.id ? 600 : 400,
-                  cursor: 'pointer',
-                  fontFamily: 'inherit',
-                  whiteSpace: 'nowrap',
-                  transition: 'all 0.15s ease',
-                  letterSpacing: 0.2,
+                  position: 'fixed', top: categoryPos.top, left: categoryPos.left,
+                  minWidth: 200, background: '#fff', borderRadius: 12,
+                  boxShadow: '0 10px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)',
+                  padding: 6, zIndex: 200,
                 }}
               >
-                {cat.label}
-              </button>
-            ))}
-          </div>
+                {categories.map(cat => (
+                  <button
+                    key={cat.id}
+                    onClick={() => { setActiveCategory(cat.id); setCategoryOpen(false) }}
+                    style={{
+                      display: 'block', width: '100%', textAlign: 'left',
+                      padding: '9px 12px', borderRadius: 8,
+                      border: 'none', cursor: 'pointer', fontFamily: 'inherit',
+                      background: activeCategory === cat.id ? '#111' : 'transparent',
+                      color: activeCategory === cat.id ? '#fff' : '#444',
+                      fontSize: 13, fontWeight: activeCategory === cat.id ? 600 : 400,
+                      transition: 'background 0.12s',
+                    }}
+                    onMouseEnter={e => { if (activeCategory !== cat.id) e.currentTarget.style.background = '#f5f5f3' }}
+                    onMouseLeave={e => { if (activeCategory !== cat.id) e.currentTarget.style.background = 'transparent' }}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Search */}
           <div style={{ position: 'relative', flexShrink: 0 }}>
