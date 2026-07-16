@@ -5,6 +5,9 @@ import { useShop } from '../context/ShopContext'
 
 const fmt = (n) => 'REF ' + n.toLocaleString('en-US')
 
+const DEPOSIT_THRESHOLD = 100
+const DEPOSIT_RATE = 0.3
+
 export default function ProductModal({ product, onClose, initialColorIdx = 0, skipSpread = false }) {
   const isMobile = useBreakpoint(768)
   const { addToCart, isInWishlist, toggleWishlist } = useShop()
@@ -60,9 +63,12 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
     }
   }, [onClose])
 
+  const requiresDeposit = product.byOrder && selectedStorage.price >= DEPOSIT_THRESHOLD
+  const depositAmount = Math.round(selectedStorage.price * DEPOSIT_RATE)
+
   const waText = encodeURIComponent(
     product.byOrder
-      ? `Hola! Quiero hacer un pedido bajo encargo del ${product.name}${selectedStorage.label ? ' ' + selectedStorage.label : ''}${selectedColor.color ? ' · ' + selectedColor.color : ''}. ¿Me pueden dar más info?`
+      ? `Hola! Quiero hacer un pedido bajo encargo del ${product.name}${selectedStorage.label ? ' ' + selectedStorage.label : ''}${selectedColor.color ? ' · ' + selectedColor.color : ''}. ¿Me pueden dar más info?${requiresDeposit ? ` (Vi que el anticipo es de REF ${depositAmount}, 30%)` : ''}`
       : `Hola! Me interesa el ${product.name}${selectedStorage.label ? ' ' + selectedStorage.label : ''}${selectedColor.color ? ' · ' + selectedColor.color : ''}. ¿Está disponible?`
   )
 
@@ -111,6 +117,18 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
           {fmt(selectedStorage.price)}
         </motion.p>
       </AnimatePresence>
+
+      {requiresDeposit && (
+        <p style={{
+          display: 'flex', alignItems: 'flex-start', gap: 6,
+          fontSize: 11, fontWeight: 600, color: '#0057FF', margin: 0, lineHeight: 1.4,
+        }}>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 2 }}>
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+          </svg>
+          <span>Anticipo 30% (REF {depositAmount}) para reservar · resto contra entrega</span>
+        </p>
+      )}
 
       {storageOptions.length > 1 && (
         <div style={{ position: 'relative', display: 'flex', gap: 6, flexWrap: 'wrap' }}>
