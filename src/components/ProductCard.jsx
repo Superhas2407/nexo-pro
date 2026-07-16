@@ -151,6 +151,17 @@ export default function ProductCard({ product, onClick }) {
           {fmtPrice(selectedStorage.price)}
         </p>
 
+        {product.byOrder && (
+          <span style={{
+            display: 'inline-flex', alignSelf: 'flex-start',
+            marginTop: 6, padding: '3px 8px', borderRadius: 4,
+            border: '1px solid #0057FF', fontSize: 10, fontWeight: 600,
+            letterSpacing: 0.3, color: '#0057FF', textTransform: 'uppercase',
+          }}>
+            Bajo pedido
+          </span>
+        )}
+
         {/* Storage pills */}
         {hasMultiStorage && (
           <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', marginTop: 8 }}>

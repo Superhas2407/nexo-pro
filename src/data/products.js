@@ -313,6 +313,51 @@
     ],
   },
 
+  // ── BAJO PEDIDO — catálogo por encargo ─────────────────────
+  // Productos sin stock fijo: se piden por WhatsApp bajo encargo.
+  // Marca `byOrder: true` para que el modal muestre CTA de WhatsApp
+  // en vez de "Agregar al carrito", y la card muestre el badge
+  // "Bajo pedido". Reemplazar las imágenes -shop/-hand.svg de abajo
+  // por fotos reales -shop.webp / -hand.webp cuando estén disponibles.
+
+  {
+    id: 'funda-protectora-universal',
+    brand: 'PULSE', category: 'fundas',
+    name: 'Funda Protectora Universal',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [{
+      color: null, hex: '#1a1a1a',
+      image: '/funda-protectora-shop.svg',
+      hoverImage: '/funda-protectora-hand.svg',
+      storage: [{ label: null, price: 35 }],
+    }],
+    specs: [
+      { label: 'Protección',    value: 'Bordes reforzados anti-impacto' },
+      { label: 'Compatibilidad',value: 'Especificar modelo de equipo al pedir' },
+      { label: 'Entrega',       value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'mando-gaming-inalambrico',
+    brand: 'PULSE', category: 'gaming',
+    name: 'Mando Gaming Inalámbrico',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [{
+      color: null, hex: '#1a1a1a',
+      image: '/mando-gaming-shop.svg',
+      hoverImage: '/mando-gaming-hand.svg',
+      storage: [{ label: null, price: 65 }],
+    }],
+    specs: [
+      { label: 'Conectividad',  value: 'Bluetooth · compatible multiplataforma' },
+      { label: 'Batería',       value: 'Recargable USB-C' },
+      { label: 'Entrega',       value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
 ]
 
 export const categories = [
@@ -322,9 +367,13 @@ export const categories = [
   { id: 'dji-audio', label: 'DJI Audio' },
   { id: 'oakley',    label: 'Oakley Meta' },
   { id: 'audio',     label: 'Audio' },
+  { id: 'fundas',    label: 'Fundas y Protección' },
+  { id: 'telefonos', label: 'Teléfonos' },
+  { id: 'gaming',    label: 'Gaming' },
+  { id: 'cargadores',label: 'Cargadores' },
 ]
 
-export const brands = ['Apple', 'DJI', 'Oakley', 'Shokz', 'BOYA']
+export const brands = ['Apple', 'DJI', 'Oakley', 'Shokz', 'BOYA', 'PULSE']
 
 // Precio mínimo entre todos los colorVariants y storage
 export const basePrice = (p) =>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+  <rect width="800" height="1000" fill="#f0f0ed"/>
+  <rect x="24" y="24" width="752" height="952" rx="16" fill="none" stroke="#cfcfca" stroke-width="3" stroke-dasharray="10 8"/>
+  <g stroke="#b9b9b2" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M280 480 q0-70 70-70 h200 q70 0 70 70 v60 q0 90-60 90 q-30 0-40-30 l-10-24 q-6-14-20-14 h-40 q-14 0-20 14 l-10 24 q-10 30-40 30 q-60 0-60-90z"/>
+    <circle cx="560" cy="470" r="12"/>
+    <circle cx="600" cy="510" r="12"/>
+    <path d="M330 470h40M350 450v40" stroke-width="8"/>
+  </g>
+  <text x="400" y="740" text-anchor="middle" font-family="monospace" font-size="26" font-weight="700" fill="#8a8a83">MANDO GAMING</text>
+  <text x="400" y="780" text-anchor="middle" font-family="monospace" font-size="18" fill="#aaa">Foto pendiente</text>
+</svg>
