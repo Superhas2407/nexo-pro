@@ -5,7 +5,6 @@ import { useShop } from '../context/ShopContext'
 
 const fmt = (n) => 'REF ' + n.toLocaleString('en-US')
 
-const DEPOSIT_THRESHOLD = 100
 const DEPOSIT_RATE = 0.3
 
 export default function ProductModal({ product, onClose, initialColorIdx = 0, skipSpread = false }) {
@@ -63,7 +62,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
     }
   }, [onClose])
 
-  const requiresDeposit = product.byOrder && selectedStorage.price >= DEPOSIT_THRESHOLD
+  const requiresDeposit = product.byOrder
   const depositAmount = Math.round(selectedStorage.price * DEPOSIT_RATE)
 
   const waText = encodeURIComponent(
