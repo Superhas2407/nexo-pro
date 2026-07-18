@@ -12,36 +12,34 @@ export default function HeroSlider() {
       marginTop: -68,
       background: '#080808',
     }}>
-      {/* Imagen — desktop: anclada a la derecha. Mobile: crop vertical dedicado */}
-      <img
-        src={isMobile ? '/hero-pulse-v2-mobile.webp' : '/hero-pulse-v2.webp'}
-        alt=""
-        aria-hidden="true"
-        style={isMobile ? {
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center',
-        } : {
-          position: 'absolute',
-          right: 0,
-          top: '50%',
-          transform: 'translateY(-50%)',
-          height: '100%',
-          width: 'auto',
-          maxWidth: 'none',
-          objectFit: 'cover',
-        }}
-      />
-
-      {/* Gradiente inferior — solo mobile, da legibilidad al texto sobre la imagen */}
-      {isMobile && (
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: 'linear-gradient(to top, #080808 25%, rgba(8,8,8,0.7) 45%, transparent 65%)',
-        }} />
+      {/* Imagen — sin texto/botones quemados (hero v2), no necesita overlay */}
+      {isMobile ? (
+        <img
+          src="/hero-pulse-v2-mobile.webp"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: 'absolute', inset: 0,
+            width: '100%', height: '100%',
+            objectFit: 'cover', objectPosition: 'center',
+          }}
+        />
+      ) : (
+        <img
+          src="/hero-pulse-v2.webp"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            right: 0,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            height: '100%',
+            width: 'auto',
+            maxWidth: 'none',
+            objectFit: 'cover',
+          }}
+        />
       )}
 
       {/* Contenido real */}

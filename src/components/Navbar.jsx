@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Logo from './Logo'
 import { products, basePrice } from '../data/products'
 import { useShop } from '../context/ShopContext'
+import { generateInvoiceImage } from '../utils/invoiceImage'
 
 const WA_BASE = 'https://wa.me/584223194044'
 
@@ -542,6 +543,44 @@ export default function Navbar() {
   const headerRef                      = useRef(null)
   const pillRef                        = useRef(null)
   const { cart, wishlist, removeFromCart, updateQty, removeFromWishlist, cartTotal, cartWaText } = useShop()
+  const [sendingOrder, setSendingOrder] = useState(false)
+  const [orderToast, setOrderToast]     = useState(false)
+
+  // Botón "Descargar/compartir factura" — 100% independiente del botón de
+  // WhatsApp, en su propio gesto de click, para que nada pueda interferir con
+  // la navegación a WhatsApp (eso fue lo que fallaba en Safari).
+  const handleInvoiceImage = async () => {
+    if (!cart.length || sendingOrder) return
+    setSendingOrder(true)
+    try {
+      const blob = await generateInvoiceImage(cart, cartTotal)
+      if (!blob) return
+      const file = new File([blob], 'pedido-pulse.png', { type: 'image/png' })
+
+      if (navigator.canShare?.({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file], title: 'Pedido PULSE', text: decodeURIComponent(cartWaText()) })
+          return
+        } catch (err) {
+          if (err?.name === 'AbortError') return
+          // si falla el share nativo, caemos a la descarga de abajo
+        }
+      }
+
+      const url = URL.createObjectURL(file)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'pedido-pulse.png'
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      URL.revokeObjectURL(url)
+      setOrderToast(true)
+      setTimeout(() => setOrderToast(false), 4500)
+    } finally {
+      setSendingOrder(false)
+    }
+  }
 
   useEffect(() => {
     const onScroll = () => setAtTop(window.scrollY < window.innerHeight - 100)
@@ -864,12 +903,33 @@ export default function Navbar() {
                     href={`${WA_BASE}?text=${cartWaText()}`}
                     target="_blank" rel="noopener noreferrer"
                     onClick={() => setCartOpen(false)}
-                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: '#111', color: '#fff', padding: '14px 20px', borderRadius: 99, fontSize: 13, fontWeight: 600, textDecoration: 'none', width: '100%', boxSizing: 'border-box' }}
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                      background: '#111', color: '#fff', padding: '14px 20px', borderRadius: 99,
+                      fontSize: 13, fontWeight: 600, textDecoration: 'none', width: '100%',
+                      boxSizing: 'border-box', border: 'none',
+                    }}
                   >
-                    <WaIcon />
-                    Cotizar por WhatsApp
+                    <WaIcon /> Cotizar por WhatsApp
                   </a>
-                  <p style={{ fontSize: 11, color: '#aaa', textAlign: 'center', margin: '10px 0 0' }}>Entrega inmediata · Garantía oficial</p>
+                  <button
+                    type="button"
+                    onClick={handleInvoiceImage}
+                    disabled={sendingOrder}
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                      background: 'none', border: 'none', width: '100%',
+                      padding: '10px 0 0', fontSize: 11, fontWeight: 500,
+                      color: '#999', cursor: sendingOrder ? 'default' : 'pointer',
+                      fontFamily: 'inherit',
+                    }}
+                  >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    {sendingOrder ? 'Generando imagen…' : 'Descargar imagen del pedido'}
+                  </button>
+                  <p style={{ fontSize: 11, color: '#aaa', textAlign: 'center', margin: '8px 0 0' }}>Entrega inmediata · Garantía oficial</p>
                 </div>
               </div>
             )}
@@ -921,6 +981,27 @@ export default function Navbar() {
               </div>
             )}
           </SidePanel>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {orderToast && (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            transition={{ duration: 0.2 }}
+            style={{
+              position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)',
+              zIndex: 400, background: '#111', color: '#fff',
+              padding: '12px 20px', borderRadius: 99,
+              fontSize: 12, fontWeight: 500, textAlign: 'center',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
+              maxWidth: 'calc(100vw - 32px)',
+            }}
+          >
+            Imagen del pedido descargada — adjúntala en el chat de WhatsApp
+          </motion.div>
         )}
       </AnimatePresence>
     </>

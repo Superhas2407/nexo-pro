@@ -2,6 +2,8 @@ import { useState, useRef, useLayoutEffect, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useBreakpoint } from '../hooks/useBreakpoint'
 import { useShop } from '../context/ShopContext'
+import { groupSpecs } from '../utils/specGroups'
+import { SpecIcon } from '../utils/SpecIcon.jsx'
 
 const fmt = (n) => 'REF ' + n.toLocaleString('en-US')
 
@@ -72,6 +74,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
   )
 
   const hasMultipleColors = product.colorVariants.length > 1
+  const specGroups = groupSpecs(product.specs)
 
   /* —?—?—? Info panel ×" reutilizado en desktop y mobile —?—?—? */
   const InfoPanel = () => (
@@ -612,7 +615,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                       </div>
                     )}
 
-                    {product.specs && (
+                    {specGroups.length > 0 && (
                       <motion.div
                         animate={{ y: [0, 7, 0] }}
                         transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
@@ -633,14 +636,14 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
               )}
 
               {/* Specs ×" tanto mobile como desktop */}
-              {product.specs && (
+              {specGroups.length > 0 && (
                 <div style={{
                   minHeight: isMobile ? 'auto' : '100vh',
                   background: '#fafafa',
-                  padding: isMobile ? '40px 20px 60px' : '80px 80px 100px',
+                  padding: isMobile ? '40px 16px 60px' : '80px 40px 100px',
                   borderTop: '1px solid rgba(0,0,0,0.06)',
                 }}>
-                  <div style={{ maxWidth: 900, margin: '0 auto 40px' }}>
+                  <div style={{ maxWidth: 900, margin: '0 auto 40px', padding: isMobile ? '0 4px' : 0 }}>
                     <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#0057FF', marginBottom: 10 }}>
                       {product.brand}
                     </p>
@@ -653,31 +656,109 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                     </h2>
                   </div>
 
+                  {/* Ticket / factura */}
                   <div style={{
-                    maxWidth: 900, margin: '0 auto',
-                    display: 'grid',
-                    gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
-                    gap: 0,
+                    maxWidth: 640, margin: '0 auto',
+                    background: '#fff', borderRadius: 10,
+                    border: '1px solid rgba(0,0,0,0.08)',
+                    boxShadow: '0 2px 16px rgba(0,0,0,0.04)',
+                    padding: isMobile ? '24px 20px' : '40px 48px',
                   }}>
-                    {product.specs.map((spec, i) => (
+                    {/* Encabezado de factura */}
+                    <div style={{
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+                      paddingBottom: 14, marginBottom: 4,
+                      borderBottom: '2px solid #111',
+                    }}>
+                      <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#111' }}>
+                        Ficha técnica
+                      </span>
+                      <span style={{ fontSize: 11, fontWeight: 600, color: '#999' }}>
+                        REF {product.id.toUpperCase()}
+                      </span>
+                    </div>
+
+                    {specGroups.map((group, gi) => (
                       <div
-                        key={i}
+                        key={group.key}
                         style={{
-                          padding: '18px 0',
-                          borderTop: '1px solid rgba(0,0,0,0.07)',
-                          paddingRight: !isMobile && i % 2 === 0 ? 40 : 0,
-                          paddingLeft: !isMobile && i % 2 === 1 ? 40 : 0,
-                          borderLeft: !isMobile && i % 2 === 1 ? '1px solid rgba(0,0,0,0.07)' : 'none',
+                          paddingTop: 18, paddingBottom: 4,
+                          borderTop: gi > 0 ? '1px dashed rgba(0,0,0,0.16)' : 'none',
+                          marginTop: gi > 0 ? 14 : 0,
                         }}
                       >
-                        <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase', color: '#aaa', margin: '0 0 6px' }}>
-                          {spec.label}
-                        </p>
-                        <p style={{ fontSize: 15, fontWeight: 400, color: '#111', margin: 0, lineHeight: 1.5 }}>
-                          {spec.value}
-                        </p>
+                        <div style={{
+                          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                          paddingBottom: 8, marginBottom: 4,
+                          borderBottom: '1px solid rgba(0,0,0,0.1)',
+                        }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+                            <SpecIcon category={group.key} size={13} color="#111" />
+                            <h3 style={{
+                              fontSize: 11, fontWeight: 700, letterSpacing: 1.5,
+                              textTransform: 'uppercase', color: '#111', margin: 0,
+                            }}>
+                              {group.title}
+                            </h3>
+                          </div>
+                          <span style={{ fontSize: 10, color: '#bbb', fontWeight: 500 }}>
+                            {group.items.length} {group.items.length === 1 ? 'ítem' : 'ítems'}
+                          </span>
+                        </div>
+
+                        {group.items.map((spec, i) => (
+                          isMobile || spec.value.length > 42 ? (
+                            <div key={i} style={{
+                              padding: '10px 0',
+                              borderBottom: i < group.items.length - 1 ? '1px dotted rgba(0,0,0,0.18)' : 'none',
+                            }}>
+                              <div style={{ fontSize: 11, fontWeight: 600, color: '#555', marginBottom: 4 }}>
+                                {spec.label}
+                              </div>
+                              <div style={{ fontSize: 13, fontWeight: 600, color: '#111', textAlign: isMobile ? 'right' : 'left', lineHeight: 1.4 }}>
+                                {spec.value}
+                              </div>
+                            </div>
+                          ) : (
+                            <div key={i} style={{
+                              display: 'flex', alignItems: 'flex-end', gap: 6,
+                              padding: '9px 0',
+                            }}>
+                              <span style={{
+                                fontSize: 12, fontWeight: 600, color: '#555',
+                                whiteSpace: 'nowrap', flexShrink: 0,
+                              }}>
+                                {spec.label}
+                              </span>
+                              <span style={{
+                                flex: 1, minWidth: 12, marginBottom: 3,
+                                borderBottom: '1.5px dotted rgba(0,0,0,0.22)',
+                              }} />
+                              <span style={{
+                                fontSize: 13, fontWeight: 600, color: '#111',
+                                textAlign: 'right', lineHeight: 1.4,
+                              }}>
+                                {spec.value}
+                              </span>
+                            </div>
+                          )
+                        ))}
                       </div>
                     ))}
+
+                    {/* Pie de factura */}
+                    <div style={{
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+                      paddingTop: 14, marginTop: 14,
+                      borderTop: '2px solid #111',
+                    }}>
+                      <span style={{ fontSize: 10, fontWeight: 600, color: '#999', letterSpacing: 0.5 }}>
+                        PULSE · {product.brand}
+                      </span>
+                      <span style={{ fontSize: 10, fontWeight: 600, color: '#999', letterSpacing: 0.5 }}>
+                        {product.specs.length} especificaciones
+                      </span>
+                    </div>
                   </div>
                 </div>
               )}

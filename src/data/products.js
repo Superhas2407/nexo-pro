@@ -36,6 +36,8 @@
       { label: 'Resistencia',       value: 'IP68 · 6 metros · 30 minutos' },
       { label: 'Seguridad',         value: 'Face ID' },
       { label: 'Apple Intelligence',value: 'Incluido' },
+      { label: 'Contenido',         value: 'iPhone · cable USB-C a USB-C (sin adaptador de corriente)' },
+      { label: 'Garantía',          value: '1 año de garantía limitada Apple' },
     ],
   },
 
@@ -76,6 +78,8 @@
       { label: 'Resistencia',       value: 'IP68 · 6 metros · 30 minutos' },
       { label: 'Seguridad',         value: 'Face ID' },
       { label: 'Apple Intelligence',value: 'Incluido' },
+      { label: 'Contenido',         value: 'iPhone · cable USB-C a USB-C (sin adaptador de corriente)' },
+      { label: 'Garantía',          value: '1 año de garantía limitada Apple' },
     ],
   },
 
@@ -92,19 +96,21 @@
         image: '/airpods-shop-1.webp', hoverImage: '/airpods-hand.webp',
         images: ['/airpods-shop-1.webp', '/airpods-shop-2.webp', '/airpods-hand.webp'],
         storage: [{ label: null, price: 270 }],
-        specs: [
-          { label: 'Chip',              value: 'H2 · cancelación activa de ruido' },
-          { label: 'Transparencia',     value: 'Modo Transparencia Adaptativo' },
-          { label: 'Audio espacial',    value: 'Dinámico con seguimiento de cabeza' },
-          { label: 'Batería',           value: 'Hasta 6 hrs (ANC activado)' },
-          { label: 'Con estuche',       value: 'Hasta 30 hrs en total' },
-          { label: 'Carga',             value: 'USB-C · MagSafe · Qi2 · Apple Watch' },
-          { label: 'Resistencia',       value: 'IP54 audífonos y estuche' },
-          { label: 'Conectividad',      value: 'Bluetooth 5.3 · iCloud pairing' },
-          { label: 'Controles',         value: 'Stem presionable · deslizar volumen' },
-          { label: 'Detección',         value: 'Sensor de piel · detección en oreja' },
-        ],
       },
+    ],
+    specs: [
+      { label: 'Chip',              value: 'H2 · cancelación activa de ruido' },
+      { label: 'Transparencia',     value: 'Modo Transparencia Adaptativo' },
+      { label: 'Audio espacial',    value: 'Dinámico con seguimiento de cabeza' },
+      { label: 'Batería',           value: 'Hasta 6 hrs (ANC activado)' },
+      { label: 'Con estuche',       value: 'Hasta 30 hrs en total' },
+      { label: 'Carga',             value: 'USB-C · MagSafe · Qi2 · Apple Watch' },
+      { label: 'Resistencia',       value: 'IP54 audífonos y estuche' },
+      { label: 'Conectividad',      value: 'Bluetooth 5.3 · iCloud pairing' },
+      { label: 'Controles',         value: 'Stem presionable · deslizar volumen' },
+      { label: 'Detección',         value: 'Sensor de piel · detección en oreja' },
+      { label: 'Contenido',         value: 'Audífonos · estuche de carga · 3 pares de puntas de silicona · cable USB-C' },
+      { label: 'Garantía',          value: '1 año de garantía limitada Apple' },
     ],
   },
 
@@ -129,6 +135,8 @@
       { label: 'App',             value: 'DJI Mimo · iOS y Android' },
       { label: 'Plegado',         value: 'Compacto · cabe en bolsillo' },
       { label: 'Conectividad',    value: 'Bluetooth 5.1' },
+      { label: 'Contenido',       value: 'Estabilizador · funda protectora · cable USB-C' },
+      { label: 'Garantía',        value: 'Garantía oficial del fabricante DJI' },
     ],
   },
 
@@ -153,6 +161,8 @@
       { label: 'Modos',           value: 'Panorama · Timelapse · Hyperlapse' },
       { label: 'App',             value: 'DJI Mimo · iOS y Android' },
       { label: 'Conectividad',    value: 'Bluetooth 5.1' },
+      { label: 'Contenido',       value: 'Estabilizador · funda protectora · cable USB-C' },
+      { label: 'Garantía',        value: 'Garantía oficial del fabricante DJI' },
     ],
   },
 
@@ -177,6 +187,8 @@
       { label: 'Modos',           value: 'Panorama · Timelapse · Hyperlapse · SpinShot' },
       { label: 'App',             value: 'DJI Mimo · iOS y Android' },
       { label: 'Conectividad',    value: 'Bluetooth 5.2' },
+      { label: 'Contenido',       value: 'Estabilizador · funda protectora · cable USB-C' },
+      { label: 'Garantía',        value: 'Garantía oficial del fabricante DJI' },
     ],
   },
 
@@ -201,6 +213,8 @@
       { label: 'Pantalla',      value: 'OLED en receptor' },
       { label: 'Conectividad',  value: '2.4 GHz · salida de 3.5 mm y USB-C' },
       { label: 'Memoria',       value: '8 GB interna por transmisor' },
+      { label: 'Contenido',     value: '2 transmisores · 1 receptor · estuche de carga · cables USB-C' },
+      { label: 'Garantía',      value: 'Garantía oficial del fabricante DJI' },
     ],
   },
 
@@ -233,6 +247,8 @@
       { label: 'Lentes',        value: 'Oakley Prizm · intercambiables' },
       { label: 'Resistencia',   value: 'IPX4 · resistente a salpicaduras' },
       { label: 'Peso',          value: '49 g' },
+      { label: 'Contenido',     value: 'Lentes · estuche de carga · paño de limpieza · cable USB-C' },
+      { label: 'Garantía',      value: 'Garantía oficial del fabricante' },
     ],
   },
 
@@ -265,6 +281,8 @@
       { label: 'Lentes',        value: 'Oakley Prizm shield · deporte' },
       { label: 'Resistencia',   value: 'IPX4 · resistente a salpicaduras' },
       { label: 'Peso',          value: '52 g' },
+      { label: 'Contenido',     value: 'Lentes · estuche de carga · paño de limpieza · cable USB-C' },
+      { label: 'Garantía',      value: 'Garantía oficial del fabricante' },
     ],
   },
 
@@ -288,6 +306,8 @@
       { label: 'Micrófono',     value: 'Dual con cancelación de ruido AI' },
       { label: 'Conectividad',  value: 'Bluetooth 5.3 · multipoint 2 dispositivos' },
       { label: 'Carga',         value: 'Magnética propietaria' },
+      { label: 'Contenido',     value: 'Audífonos · cable de carga magnético · estuche de viaje' },
+      { label: 'Garantía',      value: 'Garantía oficial del fabricante Shokz' },
     ],
   },
 
@@ -310,6 +330,8 @@
       { label: 'Batería',       value: '5 hrs transmisor · 10 hrs con estuche' },
       { label: 'Compatibilidad',value: 'iPhone USB-C · Android · iPad · cámara' },
       { label: 'Estuche',       value: 'Carga portátil incluida' },
+      { label: 'Contenido',     value: '2 transmisores · 1 receptor · estuche de carga · cable USB-C' },
+      { label: 'Garantía',      value: 'Garantía oficial del fabricante BOYA' },
     ],
   },
 
