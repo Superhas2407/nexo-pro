@@ -8,7 +8,7 @@ const WA_BASE = 'https://wa.me/584223194044'
 
 const navItems = [
   { label: 'Tienda',       to: '/tienda' },
-  { label: 'Nosotros',     to: WA_BASE + '?text=' + encodeURIComponent('Hola! Quiero saber más sobre PULSE.') },
+  { label: 'Nosotros',     to: '/#nosotros' },
   { label: 'Contáctanos',  to: WA_BASE + '?text=' + encodeURIComponent('Hola! Me gustaría hacer una consulta.') },
 ]
 

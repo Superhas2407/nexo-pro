@@ -12,12 +12,19 @@ export default function HeroSlider() {
       marginTop: -68,
       background: '#080808',
     }}>
-      {/* Imagen — anclada a la derecha para mostrar productos */}
+      {/* Imagen — desktop: anclada a la derecha. Mobile: crop vertical dedicado */}
       <img
-        src="/hero-pulse.webp"
+        src={isMobile ? '/hero-pulse-v2-mobile.webp' : '/hero-pulse-v2.webp'}
         alt=""
         aria-hidden="true"
-        style={{
+        style={isMobile ? {
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center',
+        } : {
           position: 'absolute',
           right: 0,
           top: '50%',
@@ -29,13 +36,13 @@ export default function HeroSlider() {
         }}
       />
 
-      {/* Gradiente izquierda — tapa el texto/botones de la imagen */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: isMobile
-          ? 'linear-gradient(to top, #080808 40%, rgba(8,8,8,0.75) 70%, rgba(8,8,8,0.5) 100%)'
-          : 'linear-gradient(to right, #080808 38%, rgba(8,8,8,0.85) 50%, rgba(8,8,8,0.3) 62%, transparent 75%)',
-      }} />
+      {/* Gradiente inferior — solo mobile, da legibilidad al texto sobre la imagen */}
+      {isMobile && (
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(to top, #080808 25%, rgba(8,8,8,0.7) 45%, transparent 65%)',
+        }} />
+      )}
 
       {/* Contenido real */}
       <div style={{

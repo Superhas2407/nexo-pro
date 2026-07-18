@@ -1,22 +1,27 @@
+import { motion } from 'framer-motion'
 import { useBreakpoint } from '../hooks/useBreakpoint'
 
 const items = [
   {
+    icon: '/whyus-icon-originales.webp',
     stat: '100%',
     label: 'Originales',
     body: 'Distribuidores autorizados de todas las marcas que ofrecemos.',
   },
   {
+    icon: '/whyus-icon-entrega.webp',
     stat: '48h',
     label: 'Entrega',
     body: 'Envíos a cualquier estado del país con tracking incluido.',
   },
   {
+    icon: '/whyus-icon-garantia.webp',
     stat: 'Oficial',
     label: 'Garantía',
     body: 'Respaldo directo del fabricante en todos los productos.',
   },
   {
+    icon: '/whyus-icon-asesoria.webp',
     stat: 'Directa',
     label: 'Asesoría',
     body: 'Por WhatsApp, siempre disponibles para ayudarte.',
@@ -27,11 +32,12 @@ export default function WhyUs() {
   const isMobile = useBreakpoint(768)
 
   return (
-    <section className="section-pad" style={{
+    <section id="nosotros" className="section-pad" style={{
       background: '#fff',
       paddingTop: isMobile ? 48 : 72,
       paddingBottom: isMobile ? 48 : 72,
       borderTop: '1px solid #e8e8e6',
+      scrollMarginTop: 68,
     }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
 
@@ -65,11 +71,22 @@ export default function WhyUs() {
           gap: isMobile ? '32px 24px' : '0',
         }}>
           {items.map((item, i) => (
-            <div key={i} style={{
-              paddingRight: isMobile ? 0 : 40,
-              borderRight: isMobile ? 'none' : (i < items.length - 1 ? '1px solid #e8e8e6' : 'none'),
-              paddingLeft: isMobile ? 0 : (i > 0 ? 40 : 0),
-            }}>
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.5, delay: i * 0.08, ease: 'easeOut' }}
+              style={{
+                paddingRight: isMobile ? 0 : 40,
+                borderRight: isMobile ? 'none' : (i < items.length - 1 ? '1px solid #e8e8e6' : 'none'),
+                paddingLeft: isMobile ? 0 : (i > 0 ? 40 : 0),
+              }}>
+              <img src={item.icon} alt="" aria-hidden="true" style={{
+                height: isMobile ? 36 : 44,
+                width: 'auto',
+                marginBottom: isMobile ? 16 : 20,
+              }} />
               <p style={{
                 fontSize: isMobile ? 44 : 52,
                 fontWeight: 300,
@@ -93,7 +110,7 @@ export default function WhyUs() {
               }}>
                 {item.body}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
 

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import AnnouncementBar from '../components/AnnouncementBar'
 import Navbar from '../components/Navbar'
 import HeroSlider from '../components/HeroSlider'
@@ -14,6 +15,12 @@ import Footer from '../components/Footer'
 import WhatsAppFab from '../components/WhatsAppFab'
 
 export default function Landing() {
+  useEffect(() => {
+    if (window.location.hash) {
+      document.querySelector(window.location.hash)?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [])
+
   return (
     <>
       <AnnouncementBar />

@@ -152,9 +152,36 @@ p, h1, h2, h3 { text-wrap: pretty; }
   justify-content: space-between;
 }
 
-/* �"?�"?�"? Announcement bar �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
-.ann-sep  { display: inline; }
-.ann-item { display: inline; }
+/* --- Announcement bar (marquee) --- */
+.ann-marquee {
+  display: flex;
+  width: max-content;
+  animation: ann-scroll 22s linear infinite;
+}
+
+.ann-track {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ann-track-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding-right: 20px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ann-sep { opacity: 0.4; }
+
+@keyframes ann-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 
 /* �"?�"?�"? Hide scrollbar utility �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
 .hide-scrollbar::-webkit-scrollbar { display: none; }
@@ -179,10 +206,6 @@ p, h1, h2, h3 { text-wrap: pretty; }
   .subnav-inner { padding: 0 !important; }
   .subnav-scroll-wrap { padding: 0 12px !important; }
   .subnav-icons { padding-left: 8px !important; }
-
-  /* Announcement bar �?" solo 1 ítem en tablet/mobile */
-  .ann-sep  { display: none; }
-  .ann-item { display: none; }
 
   /* Sections */
   .section-pad {
