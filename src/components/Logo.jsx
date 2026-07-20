@@ -1,6 +1,6 @@
-export default function Logo({ variant = 'color', height = 28 }) {
+export default function Logo({ variant = 'color', height = 28, accent = '#0057FF' }) {
   const textFill = variant === 'white' ? '#FFFFFF' : '#0A0A0A'
-  const dotFill  = '#0057FF'
+  const dotFill  = accent
 
   return (
     <svg

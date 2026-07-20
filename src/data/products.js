@@ -350,12 +350,38 @@
     name: 'Spigen Liquid Air Mag',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 20 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Abyss Green', hex: '#285241',
+        image: '/spigen-liquid-air-abyss-green-shop.webp',
+        images: ['/spigen-liquid-air-abyss-green-shop.webp', '/spigen-liquid-air-abyss-green-shop-2.webp'],
+        storage: [{ label: null, price: 20 }],
+      },
+      {
+        color: 'Matte Black', hex: '#262626',
+        image: '/spigen-liquid-air-matte-black-shop.webp',
+        images: ['/spigen-liquid-air-matte-black-shop.webp', '/spigen-liquid-air-matte-black-shop-2.webp'],
+        storage: [{ label: null, price: 20 }],
+      },
+      {
+        color: 'Natural Titanium', hex: '#e1d9d0',
+        image: '/spigen-liquid-air-natural-titanium-shop.webp',
+        images: ['/spigen-liquid-air-natural-titanium-shop.webp', '/spigen-liquid-air-natural-titanium-shop-2.webp'],
+        storage: [{ label: null, price: 20 }],
+      },
+      {
+        color: 'Navy Blue', hex: '#22365d',
+        image: '/spigen-liquid-air-navy-blue-shop.webp',
+        images: ['/spigen-liquid-air-navy-blue-shop.webp', '/spigen-liquid-air-navy-blue-shop-2.webp'],
+        storage: [{ label: null, price: 20 }],
+      },
+      {
+        color: 'Rose Titanium', hex: '#ddae9d',
+        image: '/spigen-liquid-air-rose-titanium-shop.webp',
+        images: ['/spigen-liquid-air-rose-titanium-shop.webp', '/spigen-liquid-air-rose-titanium-shop-2.webp'],
+        storage: [{ label: null, price: 20 }],
+      },
+    ],
     specs: [
       { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
       { label: 'Por qué', value: 'MagSafe/Qi2 integrado, el estándar 2026 en casi todo el catálogo relevante' },
@@ -369,12 +395,20 @@
     name: 'Spigen Tough Armor',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 28 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Black', hex: '#262626',
+        image: '/spigen-tough-armor-black-shop.webp',
+        images: ['/spigen-tough-armor-black-shop.webp', '/spigen-tough-armor-black-shop-2.webp'],
+        storage: [{ label: null, price: 28 }],
+      },
+      {
+        color: 'Gunmetal', hex: '#5e666e',
+        image: '/spigen-tough-armor-gunmetal-shop.webp',
+        images: ['/spigen-tough-armor-gunmetal-shop.webp', '/spigen-tough-armor-gunmetal-shop-2.webp'],
+        storage: [{ label: null, price: 28 }],
+      },
+    ],
     specs: [
       { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
       { label: 'Por qué', value: 'Doble capa, caída certificada — el modelo de valor más citado en rankings' },
@@ -388,12 +422,20 @@
     name: 'Spigen Ultra Hybrid',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 22 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Crystal Clear', hex: '#b8dcef',
+        image: '/spigen-ultra-hybrid-crystal-clear-shop.webp',
+        images: ['/spigen-ultra-hybrid-crystal-clear-shop.webp', '/spigen-ultra-hybrid-crystal-clear-shop-2.webp'],
+        storage: [{ label: null, price: 22 }],
+      },
+      {
+        color: 'Matte Black', hex: '#262626',
+        image: '/spigen-ultra-hybrid-matte-black-shop.webp',
+        images: ['/spigen-ultra-hybrid-matte-black-shop.webp', '/spigen-ultra-hybrid-matte-black-shop-2.webp'],
+        storage: [{ label: null, price: 22 }],
+      },
+    ],
     specs: [
       { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
       { label: 'Por qué', value: 'Transparente + refuerzo en esquinas, alto volumen de venta' },
@@ -407,12 +449,26 @@
     name: 'Spigen Thin Fit',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 18 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Abyss Green', hex: '#285241',
+        image: '/spigen-thin-fit-abyss-green-shop.webp',
+        images: ['/spigen-thin-fit-abyss-green-shop.webp', '/spigen-thin-fit-abyss-green-shop-2.webp'],
+        storage: [{ label: null, price: 18 }],
+      },
+      {
+        color: 'Black', hex: '#262626',
+        image: '/spigen-thin-fit-black-shop.webp',
+        images: ['/spigen-thin-fit-black-shop.webp', '/spigen-thin-fit-black-shop-2.webp'],
+        storage: [{ label: null, price: 18 }],
+      },
+      {
+        color: 'Gunmetal', hex: '#5e666e',
+        image: '/spigen-thin-fit-gunmetal-shop.webp',
+        images: ['/spigen-thin-fit-gunmetal-shop.webp', '/spigen-thin-fit-gunmetal-shop-2.webp'],
+        storage: [{ label: null, price: 18 }],
+      },
+    ],
     specs: [
       { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
       { label: 'Por qué', value: 'Perfil delgado para quien no quiere bulto extra' },
@@ -426,12 +482,26 @@
     name: 'Ringke Onyx',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 14 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Black', hex: '#262626',
+        image: '/ringke-onyx-black-shop.webp',
+        images: ['/ringke-onyx-black-shop.webp', '/ringke-onyx-black-shop-2.webp'],
+        storage: [{ label: null, price: 14 }],
+      },
+      {
+        color: 'Camo Black', hex: '#3a3a3a',
+        image: '/ringke-onyx-camo-black-shop.webp',
+        images: ['/ringke-onyx-camo-black-shop.webp', '/ringke-onyx-camo-black-shop-2.webp'],
+        storage: [{ label: null, price: 14 }],
+      },
+      {
+        color: 'Dark Green', hex: '#274932',
+        image: '/ringke-onyx-dark-green-shop.webp',
+        images: ['/ringke-onyx-dark-green-shop.webp', '/ringke-onyx-dark-green-shop-2.webp'],
+        storage: [{ label: null, price: 14 }],
+      },
+    ],
     specs: [
       { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
       { label: 'Por qué', value: 'Ajuste sin holgura, calidad-precio citada como \'sensacional\' en reviews' },
@@ -446,9 +516,9 @@
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
+      color: 'Clear', hex: '#b8dcef',
+      image: '/ringke-fusion-clear-shop.webp',
+      images: ['/ringke-fusion-clear-shop.webp', '/ringke-fusion-clear-shop-2.webp'],
       storage: [{ label: null, price: 16 }],
     }],
     specs: [
@@ -464,72 +534,23 @@
     name: 'Ringke Air',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 13 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Clear', hex: '#b8dcef',
+        image: '/ringke-air-clear-shop.webp',
+        images: ['/ringke-air-clear-shop.webp', '/ringke-air-clear-shop-2.webp'],
+        storage: [{ label: null, price: 13 }],
+      },
+      {
+        color: 'Glitter Clear', hex: '#ecdfb8',
+        image: '/ringke-air-glitter-clear-shop.webp',
+        images: ['/ringke-air-glitter-clear-shop.webp', '/ringke-air-glitter-clear-shop-2.webp'],
+        storage: [{ label: null, price: 13 }],
+      },
+    ],
     specs: [
       { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
       { label: 'Por qué', value: 'Ultra ligera, opción de entrada más económica de la marca' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'esr-cloud-soft-magnetic',
-    brand: 'ESR', category: 'fundas',
-    name: 'ESR Cloud Soft Magnetic',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 20 }],
-    }],
-    specs: [
-      { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
-      { label: 'Por qué', value: 'Referente en retención magnética MagSafe/Qi2 según pruebas 2026' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'esr-classic-hybrid',
-    brand: 'ESR', category: 'fundas',
-    name: 'ESR Classic Hybrid',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 16 }],
-    }],
-    specs: [
-      { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
-      { label: 'Por qué', value: 'Marca de mayor crecimiento reciente en el segmento medio' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'esr-metro-kickstand',
-    brand: 'ESR', category: 'fundas',
-    name: 'ESR Metro Kickstand',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 22 }],
-    }],
-    specs: [
-      { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
-      { label: 'Por qué', value: 'Kickstand integrado, alta demanda para contenido/streaming móvil' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
@@ -540,12 +561,38 @@
     name: 'OtterBox Commuter Series',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 40 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Black', hex: '#2b2b2b',
+        image: '/otterbox-commuter-black-shop.webp',
+        images: ['/otterbox-commuter-black-shop.webp', '/otterbox-commuter-black-shop-2.webp'],
+        storage: [{ label: null, price: 40 }],
+      },
+      {
+        color: 'Blue Sentiment', hex: '#374562',
+        image: '/otterbox-commuter-blue-sentiment-shop.webp',
+        images: ['/otterbox-commuter-blue-sentiment-shop.webp', '/otterbox-commuter-blue-sentiment-shop-2.webp'],
+        storage: [{ label: null, price: 40 }],
+      },
+      {
+        color: 'Grey Comfort Beige', hex: '#968373',
+        image: '/otterbox-commuter-grey-comfort-beige-shop.webp',
+        images: ['/otterbox-commuter-grey-comfort-beige-shop.webp', '/otterbox-commuter-grey-comfort-beige-shop-2.webp'],
+        storage: [{ label: null, price: 40 }],
+      },
+      {
+        color: 'Purple Mystery', hex: '#60394a',
+        image: '/otterbox-commuter-purple-mystery-shop.webp',
+        images: ['/otterbox-commuter-purple-mystery-shop.webp', '/otterbox-commuter-purple-mystery-shop-2.webp'],
+        storage: [{ label: null, price: 40 }],
+      },
+      {
+        color: 'Sagebrush Green', hex: '#406462',
+        image: '/otterbox-commuter-sagebrush-green-shop.webp',
+        images: ['/otterbox-commuter-sagebrush-green-shop.webp', '/otterbox-commuter-sagebrush-green-shop-2.webp'],
+        storage: [{ label: null, price: 40 }],
+      },
+    ],
     specs: [
       { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
       { label: 'Por qué', value: '\'Mejor funda de iPhone\' varios años seguidos según TechGearLab' },
@@ -559,12 +606,32 @@
     name: 'OtterBox Defender Series',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 55 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Black', hex: '#292929',
+        image: '/otterbox-defender-black-shop.webp',
+        images: ['/otterbox-defender-black-shop.webp', '/otterbox-defender-black-shop-2.webp'],
+        storage: [{ label: null, price: 55 }],
+      },
+      {
+        color: 'Blue Sentiment', hex: '#35415a',
+        image: '/otterbox-defender-blue-sentiment-shop.webp',
+        images: ['/otterbox-defender-blue-sentiment-shop.webp', '/otterbox-defender-blue-sentiment-shop-2.webp'],
+        storage: [{ label: null, price: 55 }],
+      },
+      {
+        color: 'Green Intrigue', hex: '#25463b', hex2: '#7a553b',
+        image: '/otterbox-defender-green-intrigue-shop.webp',
+        images: ['/otterbox-defender-green-intrigue-shop.webp', '/otterbox-defender-green-intrigue-shop-2.webp'],
+        storage: [{ label: null, price: 55 }],
+      },
+      {
+        color: 'Purple Mystery', hex: '#6c3d50',
+        image: '/otterbox-defender-purple-mystery-shop.webp',
+        images: ['/otterbox-defender-purple-mystery-shop.webp', '/otterbox-defender-purple-mystery-shop-2.webp'],
+        storage: [{ label: null, price: 55 }],
+      },
+    ],
     specs: [
       { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
       { label: 'Por qué', value: 'Protección extrema multicapa, estándar en entornos de trabajo rudo' },
@@ -578,12 +645,72 @@
     name: 'OtterBox Symmetry',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 45 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Clear', hex: '#b8dcef',
+        image: '/otterbox-symmetry-clear-shop.webp',
+        images: ['/otterbox-symmetry-clear-shop.webp', '/otterbox-symmetry-clear-shop-2.webp'],
+        storage: [{ label: null, price: 45 }],
+      },
+      {
+        color: 'Stardust 4.0 Clear', hex: '#dbe2e6',
+        image: '/otterbox-symmetry-stardust-shop.webp',
+        images: ['/otterbox-symmetry-stardust-shop.webp', '/otterbox-symmetry-stardust-shop-2.webp'],
+        storage: [{ label: null, price: 45 }],
+      },
+      {
+        color: 'Black', hex: '#333333',
+        image: '/otterbox-symmetry-black-shop.webp',
+        images: ['/otterbox-symmetry-black-shop.webp', '/otterbox-symmetry-black-shop-2.webp'],
+        storage: [{ label: null, price: 45 }],
+      },
+      {
+        color: 'Black Mist', hex: '#34322f',
+        image: '/otterbox-symmetry-black-mist-shop.webp',
+        images: ['/otterbox-symmetry-black-mist-shop.webp', '/otterbox-symmetry-black-mist-shop-2.webp'],
+        storage: [{ label: null, price: 45 }],
+      },
+      {
+        color: 'Opal Prism', hex: '#a9c8e0',
+        swatchImage: '/otterbox-symmetry-opal-prism-swatch.webp',
+        image: '/otterbox-symmetry-opal-prism-shop.webp',
+        images: ['/otterbox-symmetry-opal-prism-shop.webp', '/otterbox-symmetry-opal-prism-shop-2.webp'],
+        storage: [{ label: null, price: 45 }],
+      },
+      {
+        color: 'Leopard Shift', hex: '#8a5d6e',
+        swatchImage: '/otterbox-symmetry-leopard-shift-swatch.webp',
+        image: '/otterbox-symmetry-leopard-shift-shop.webp',
+        images: ['/otterbox-symmetry-leopard-shift-shop.webp', '/otterbox-symmetry-leopard-shift-shop-2.webp'],
+        storage: [{ label: null, price: 45 }],
+      },
+      {
+        color: 'Floral Romance', hex: '#243350',
+        swatchImage: '/otterbox-symmetry-floral-romance-swatch.webp',
+        image: '/otterbox-symmetry-floral-romance-shop.webp',
+        images: ['/otterbox-symmetry-floral-romance-shop.webp', '/otterbox-symmetry-floral-romance-shop-2.webp'],
+        storage: [{ label: null, price: 45 }],
+      },
+      {
+        color: 'Golden Bloom', hex: '#1f3d33',
+        swatchImage: '/otterbox-symmetry-golden-bloom-swatch.webp',
+        image: '/otterbox-symmetry-golden-bloom-shop.webp',
+        images: ['/otterbox-symmetry-golden-bloom-shop.webp', '/otterbox-symmetry-golden-bloom-shop-2.webp'],
+        storage: [{ label: null, price: 45 }],
+      },
+      {
+        color: 'Purple Mystery', hex: '#885d70',
+        image: '/otterbox-symmetry-purple-mystery-shop.webp',
+        images: ['/otterbox-symmetry-purple-mystery-shop.webp', '/otterbox-symmetry-purple-mystery-shop-2.webp'],
+        storage: [{ label: null, price: 45 }],
+      },
+      {
+        color: 'Blue Bliss', hex: '#acbed6',
+        image: '/otterbox-symmetry-blue-bliss-shop.webp',
+        images: ['/otterbox-symmetry-blue-bliss-shop.webp', '/otterbox-symmetry-blue-bliss-shop-2.webp'],
+        storage: [{ label: null, price: 45 }],
+      },
+    ],
     specs: [
       { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
       { label: 'Por qué', value: 'Balance entre protección y perfil delgado' },
@@ -597,12 +724,33 @@
     name: 'UAG Monarch',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 50 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Crimson', hex: '#ad2525',
+        image: '/uag-monarch-crimson-shop.webp',
+        storage: [{ label: null, price: 50 }],
+      },
+      {
+        color: 'Titanium', hex: '#a7a49e',
+        image: '/uag-monarch-titanium-shop.webp',
+        storage: [{ label: null, price: 50 }],
+      },
+      {
+        color: 'Carbon Fiber', hex: '#2f2f2f',
+        image: '/uag-monarch-carbon-fiber-shop.webp',
+        storage: [{ label: null, price: 50 }],
+      },
+      {
+        color: 'Carbon Fiber Black/Red', hex: '#2f2f2f', hex2: '#912124',
+        image: '/uag-monarch-carbon-fiber-black-red-shop.webp',
+        storage: [{ label: null, price: 50 }],
+      },
+      {
+        color: 'Carbon Fiber Mallard/Red', hex: '#25333e', hex2: '#912124',
+        image: '/uag-monarch-carbon-fiber-mallard-red-shop.webp',
+        storage: [{ label: null, price: 50 }],
+      },
+    ],
     specs: [
       { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
       { label: 'Por qué', value: 'Certificación de caída 1.5–3m con estética premium' },
@@ -613,15 +761,41 @@
   {
     id: 'uag-plasma',
     brand: 'UAG', category: 'fundas',
-    name: 'UAG Plasma',
+    name: 'UAG Plasma XTE',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 35 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Black/Orange', hex: '#262626', hex2: '#df5732',
+        image: '/uag-plasma-xte-black-orange-shop.webp',
+        storage: [{ label: null, price: 35 }],
+      },
+      {
+        color: 'Clear/Titanium', hex: '#b8dcef', hex2: '#ab9b8a',
+        image: '/uag-plasma-xte-clear-titanium-shop.webp',
+        storage: [{ label: null, price: 35 }],
+      },
+      {
+        color: 'Cloud Blue', hex: '#8c9eb6',
+        image: '/uag-plasma-xte-cloud-blue-shop.webp',
+        storage: [{ label: null, price: 35 }],
+      },
+      {
+        color: 'Ash/Titanium', hex: '#c1c1c1', hex2: '#ab9b8a',
+        image: '/uag-plasma-xte-ash-titanium-shop.webp',
+        storage: [{ label: null, price: 35 }],
+      },
+      {
+        color: 'Black/Clear', hex: '#262626', hex2: '#c1c1c1',
+        image: '/uag-plasma-xte-black-clear-shop.webp',
+        storage: [{ label: null, price: 35 }],
+      },
+      {
+        color: 'Black/Silver', hex: '#262626', hex2: '#797979',
+        image: '/uag-plasma-xte-black-silver-shop.webp',
+        storage: [{ label: null, price: 35 }],
+      },
+    ],
     specs: [
       { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
       { label: 'Por qué', value: 'Resistencia UAG a precio de entrada' },
@@ -635,12 +809,33 @@
     name: 'UAG Pathfinder',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 38 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Heritage Yellow', hex: '#d69423',
+        image: '/uag-pathfinder-heritage-yellow-shop.webp',
+        storage: [{ label: null, price: 38 }],
+      },
+      {
+        color: 'Black', hex: '#2c2c2c',
+        image: '/uag-pathfinder-black-shop.webp',
+        storage: [{ label: null, price: 38 }],
+      },
+      {
+        color: 'Cloud Blue', hex: '#4c5b63',
+        image: '/uag-pathfinder-cloud-blue-shop.webp',
+        storage: [{ label: null, price: 38 }],
+      },
+      {
+        color: 'White', hex: '#eceae8',
+        image: '/uag-pathfinder-white-shop.webp',
+        storage: [{ label: null, price: 38 }],
+      },
+      {
+        color: 'Olive', hex: '#525843',
+        image: '/uag-pathfinder-olive-shop.webp',
+        storage: [{ label: null, price: 38 }],
+      },
+    ],
     specs: [
       { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
       { label: 'Por qué', value: 'Textura outdoor, muy citada en guías de protección 2026' },
@@ -654,12 +849,23 @@
     name: 'UAG Civilian',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 42 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Olive/Orange', hex: '#515642', hex2: '#ea814e',
+        image: '/uag-civilian-olive-orange-shop.webp',
+        storage: [{ label: null, price: 42 }],
+      },
+      {
+        color: 'Mallard', hex: '#283748',
+        image: '/uag-civilian-mallard-shop.webp',
+        storage: [{ label: null, price: 42 }],
+      },
+      {
+        color: 'Black', hex: '#292929',
+        image: '/uag-civilian-black-shop.webp',
+        storage: [{ label: null, price: 42 }],
+      },
+    ],
     specs: [
       { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
       { label: 'Por qué', value: 'Diseño más urbano dentro de la línea resistente' },
@@ -673,12 +879,23 @@
     name: 'Nomad Modern Leather Case',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 55 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Black', hex: '#1b1b1b',
+        image: '/nomad-modern-black-shop.webp',
+        storage: [{ label: null, price: 55 }],
+      },
+      {
+        color: 'Rustic Brown', hex: '#462a1e',
+        image: '/nomad-modern-rustic-brown-shop.webp',
+        storage: [{ label: null, price: 55 }],
+      },
+      {
+        color: 'English Tan', hex: '#8d5830',
+        image: '/nomad-modern-english-tan-shop.webp',
+        storage: [{ label: null, price: 55 }],
+      },
+    ],
     specs: [
       { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
       { label: 'Por qué', value: '+17,000 reseñas 5 estrellas y garantía de 2 años, líder en cuero premium' },
@@ -692,53 +909,26 @@
     name: 'Nomad Leather Folio',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 65 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Black', hex: '#191919',
+        image: '/nomad-folio-black-shop.webp',
+        storage: [{ label: null, price: 65 }],
+      },
+      {
+        color: 'Brown', hex: '#422519',
+        image: '/nomad-folio-brown-shop.webp',
+        storage: [{ label: null, price: 65 }],
+      },
+      {
+        color: 'English Tan', hex: '#88542d',
+        image: '/nomad-folio-english-tan-shop.webp',
+        storage: [{ label: null, price: 65 }],
+      },
+    ],
     specs: [
       { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
       { label: 'Por qué', value: 'Folio con slots de tarjeta, alta demanda como reemplazo de billetera' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'casetify-impact-case',
-    brand: 'Casetify', category: 'fundas',
-    name: 'Casetify Impact Case',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 48 }],
-    }],
-    specs: [
-      { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
-      { label: 'Por qué', value: 'Líder en personalización — colabs de artistas, muy fuerte en redes' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'casetify-mirror-case',
-    brand: 'Casetify', category: 'fundas',
-    name: 'Casetify Mirror Case',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 58 }],
-    }],
-    specs: [
-      { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
-      { label: 'Por qué', value: 'Formato espejo, uno de los diseños más compartidos en TikTok 2026' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
@@ -749,12 +939,33 @@
     name: 'Peak Design Everyday Case',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 50 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Charcoal', hex: '#272727',
+        image: '/peakdesign-everyday-charcoal-shop.webp',
+        storage: [{ label: null, price: 50 }],
+      },
+      {
+        color: 'Sage', hex: '#465548',
+        image: '/peakdesign-everyday-sage-shop.webp',
+        storage: [{ label: null, price: 50 }],
+      },
+      {
+        color: 'Black', hex: '#242424',
+        image: '/peakdesign-everyday-black-shop.webp',
+        storage: [{ label: null, price: 50 }],
+      },
+      {
+        color: 'Tan', hex: '#92673f',
+        image: '/peakdesign-everyday-tan-shop.webp',
+        storage: [{ label: null, price: 50 }],
+      },
+      {
+        color: 'Cirrus', hex: '#acb7b1',
+        image: '/peakdesign-everyday-cirrus-shop.webp',
+        storage: [{ label: null, price: 50 }],
+      },
+    ],
     specs: [
       { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
       { label: 'Por qué', value: 'Retención magnética entre las más fuertes probadas en 2026' },
@@ -762,158 +973,502 @@
     ],
   },
 
+  // ── Bajo pedido — fundas otros teléfonos ──────────────
+
   {
-    id: 'pitaka-magez-case-4',
-    brand: 'Pitaka', category: 'fundas',
-    name: 'Pitaka MagEZ Case 4',
+    id: 'spigen-liquid-air-s26-plus',
+    brand: 'Spigen', category: 'fundas',
+    name: 'Spigen Liquid Air MagFit (Galaxy S26+)',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 60 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Matte Black', hex: '#1f1f1f',
+        image: '/spigen-liquid-air-s26plus-matte-black-shop.webp',
+        storage: [{ label: null, price: 32 }],
+      },
+      {
+        color: 'Marble Gray', hex: '#4a4849',
+        image: '/spigen-liquid-air-s26plus-marble-gray-shop.webp',
+        storage: [{ label: null, price: 32 }],
+      },
+      {
+        color: 'Abyss Green', hex: '#285241',
+        image: '/spigen-liquid-air-s26plus-abyss-green-shop.webp',
+        storage: [{ label: null, price: 32 }],
+      },
+    ],
     specs: [
-      { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
-      { label: 'Por qué', value: 'Fibra de aramida tejida, favorito de la comunidad tech/unboxing' },
+      { label: 'Modelo compatible', value: 'Samsung Galaxy S26+' },
+      { label: 'Por qué', value: 'Air Cushion Technology, anillo MagFit integrado' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
   {
-    id: 'mous-limitless-5',
-    brand: 'Mous', category: 'fundas',
-    name: 'Mous Limitless 5',
+    id: 'spigen-liquid-air-s26',
+    brand: 'Spigen', category: 'fundas',
+    name: 'Spigen Liquid Air MagFit (Galaxy S26)',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 55 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Matte Black', hex: '#1f1f1f',
+        image: '/spigen-liquid-air-s26-matte-black-shop.webp',
+        storage: [{ label: null, price: 30 }],
+      },
+      {
+        color: 'Marble Gray', hex: '#4a4849',
+        image: '/spigen-liquid-air-s26-marble-gray-shop.webp',
+        storage: [{ label: null, price: 30 }],
+      },
+    ],
     specs: [
-      { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
-      { label: 'Por qué', value: 'Referente en protección extrema junto a OtterBox y UAG' },
+      { label: 'Modelo compatible', value: 'Samsung Galaxy S26' },
+      { label: 'Por qué', value: 'Air Cushion Technology, anillo MagFit integrado' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
   {
-    id: 'mous-contour',
-    brand: 'Mous', category: 'fundas',
-    name: 'Mous Contour',
+    id: 'spigen-tough-armor-s26-plus',
+    brand: 'Spigen', category: 'fundas',
+    name: 'Spigen Tough Armor MagFit (Galaxy S26+)',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 50 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Black', hex: '#2a2a2a',
+        image: '/spigen-tough-armor-s26plus-black-shop.webp',
+        storage: [{ label: null, price: 38 }],
+      },
+      {
+        color: 'Gunmetal', hex: '#6b6866',
+        image: '/spigen-tough-armor-s26plus-gunmetal-shop.webp',
+        storage: [{ label: null, price: 38 }],
+      },
+      {
+        color: 'Abyss Green', hex: '#285241',
+        image: '/spigen-tough-armor-s26plus-green-shop.webp',
+        storage: [{ label: null, price: 38 }],
+      },
+      {
+        color: 'Ash Violet', hex: '#5c5490',
+        image: '/spigen-tough-armor-s26plus-violet-shop.webp',
+        storage: [{ label: null, price: 38 }],
+      },
+    ],
     specs: [
-      { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
-      { label: 'Por qué', value: 'Versión más delgada de la línea insignia de la marca' },
+      { label: 'Modelo compatible', value: 'Samsung Galaxy S26+' },
+      { label: 'Por qué', value: 'Doble capa, caída certificada, kickstand integrado' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
   {
-    id: 'tech21-evo-check',
-    brand: 'Tech21', category: 'fundas',
-    name: 'Tech21 Evo Check',
+    id: 'spigen-tough-armor-s26',
+    brand: 'Spigen', category: 'fundas',
+    name: 'Spigen Tough Armor MagFit (Galaxy S26)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [
+      {
+        color: 'Black', hex: '#2a2a2a',
+        image: '/spigen-tough-armor-s26-black-shop.webp',
+        storage: [{ label: null, price: 36 }],
+      },
+      {
+        color: 'Gunmetal', hex: '#6b6866',
+        image: '/spigen-tough-armor-s26-gunmetal-shop.webp',
+        storage: [{ label: null, price: 36 }],
+      },
+      {
+        color: 'Abyss Green', hex: '#285241',
+        image: '/spigen-tough-armor-s26-green-shop.webp',
+        storage: [{ label: null, price: 36 }],
+      },
+      {
+        color: 'Ash Violet', hex: '#5c5490',
+        image: '/spigen-tough-armor-s26-violet-shop.webp',
+        storage: [{ label: null, price: 36 }],
+      },
+    ],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy S26' },
+      { label: 'Por qué', value: 'Doble capa, caída certificada, kickstand integrado' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'spigen-ultra-hybrid-s26-plus',
+    brand: 'Spigen', category: 'fundas',
+    name: 'Spigen Ultra Hybrid (Galaxy S26+)',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
+      color: 'Crystal Clear', hex: '#b8dcef',
+      image: '/spigen-ultra-hybrid-s26plus-clear-shop.webp',
+      storage: [{ label: null, price: 26 }],
+    }],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy S26+' },
+      { label: 'Por qué', value: 'Transparente + refuerzo en esquinas, alto volumen de venta' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'spigen-ultra-hybrid-s26',
+    brand: 'Spigen', category: 'fundas',
+    name: 'Spigen Ultra Hybrid (Galaxy S26)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [{
+      color: 'Crystal Clear', hex: '#b8dcef',
+      image: '/spigen-ultra-hybrid-s26-clear-shop.webp',
+      storage: [{ label: null, price: 24 }],
+    }],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy S26' },
+      { label: 'Por qué', value: 'Transparente + refuerzo en esquinas, alto volumen de venta' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'spigen-thin-fit-s26-plus',
+    brand: 'Spigen', category: 'fundas',
+    name: 'Spigen Thin Fit MagFit (Galaxy S26+)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [{
+      color: 'Black', hex: '#1f1f1f',
+      image: '/spigen-thin-fit-s26plus-black-shop.webp',
+      storage: [{ label: null, price: 28 }],
+    }],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy S26+' },
+      { label: 'Por qué', value: 'Perfil delgado para quien no quiere bulto extra' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'spigen-thin-fit-s26',
+    brand: 'Spigen', category: 'fundas',
+    name: 'Spigen Thin Fit MagFit (Galaxy S26)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [{
+      color: 'Black', hex: '#1f1f1f',
+      image: '/spigen-thin-fit-s26-black-shop.webp',
+      storage: [{ label: null, price: 26 }],
+    }],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy S26' },
+      { label: 'Por qué', value: 'Perfil delgado para quien no quiere bulto extra' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'spigen-slim-armor-s25fe',
+    brand: 'Spigen', category: 'fundas',
+    name: 'Spigen Slim Armor MagFit (Galaxy S25 FE)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [
+      {
+        color: 'Metal Slate', hex: '#3c444b',
+        image: '/spigen-slim-armor-s25fe-slate-shop.webp',
+        storage: [{ label: null, price: 34 }],
+      },
+      {
+        color: 'Gunmetal', hex: '#6b6866',
+        image: '/spigen-slim-armor-s25fe-gunmetal-shop.webp',
+        storage: [{ label: null, price: 34 }],
+      },
+    ],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy S25 FE' },
+      { label: 'Por qué', value: 'Kickstand metálico integrado, la línea premium de Spigen' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'spigen-tough-armor-s25fe',
+    brand: 'Spigen', category: 'fundas',
+    name: 'Spigen Tough Armor MagFit (Galaxy S25 FE)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [
+      {
+        color: 'Black', hex: '#2a2a2a',
+        image: '/spigen-tough-armor-s25fe-black-shop.webp',
+        storage: [{ label: null, price: 32 }],
+      },
+      {
+        color: 'Gunmetal', hex: '#6b6866',
+        image: '/spigen-tough-armor-s25fe-gunmetal-shop.webp',
+        storage: [{ label: null, price: 32 }],
+      },
+    ],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy S25 FE' },
+      { label: 'Por qué', value: 'Doble capa, caída certificada, kickstand integrado' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'spigen-ultra-hybrid-s25fe',
+    brand: 'Spigen', category: 'fundas',
+    name: 'Spigen Ultra Hybrid MagFit (Galaxy S25 FE)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [
+      {
+        color: 'Clear White', hex: '#dcdfe8',
+        image: '/spigen-ultra-hybrid-s25fe-white-shop.webp',
+        storage: [{ label: null, price: 26 }],
+      },
+      {
+        color: 'Frost Black', hex: '#3a3a3c',
+        image: '/spigen-ultra-hybrid-s25fe-black-shop.webp',
+        storage: [{ label: null, price: 26 }],
+      },
+    ],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy S25 FE' },
+      { label: 'Por qué', value: 'Transparente + refuerzo en esquinas, alto volumen de venta' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'spigen-rugged-armor-s25fe',
+    brand: 'Spigen', category: 'fundas',
+    name: 'Spigen Rugged Armor (Galaxy S25 FE)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [{
+      color: 'Matte Black', hex: '#353535',
+      image: '/spigen-rugged-armor-s25fe-black-shop.webp',
+      storage: [{ label: null, price: 20 }],
+    }],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy S25 FE' },
+      { label: 'Por qué', value: 'Doble capa, caída certificada — el modelo de valor más citado en rankings' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'spigen-tough-armor-a57',
+    brand: 'Spigen', category: 'fundas',
+    name: 'Spigen Tough Armor (Galaxy A57)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [
+      {
+        color: 'Black', hex: '#2a2a2a',
+        image: '/spigen-tough-armor-a57-black-shop.webp',
+        storage: [{ label: null, price: 26 }],
+      },
+      {
+        color: 'Metal Slate', hex: '#3c444b',
+        image: '/spigen-tough-armor-a57-slate-shop.webp',
+        storage: [{ label: null, price: 26 }],
+      },
+    ],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy A57' },
+      { label: 'Por qué', value: 'Doble capa, caída certificada — el modelo de valor más citado en rankings' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'spigen-ultra-hybrid-a57',
+    brand: 'Spigen', category: 'fundas',
+    name: 'Spigen Ultra Hybrid (Galaxy A57)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [
+      {
+        color: 'Crystal Clear', hex: '#b8dcef',
+        image: '/spigen-ultra-hybrid-a57-clear-shop.webp',
+        storage: [{ label: null, price: 20 }],
+      },
+      {
+        color: 'Space Crystal', hex: '#c9d1cb',
+        image: '/spigen-ultra-hybrid-a57-space-shop.webp',
+        storage: [{ label: null, price: 20 }],
+      },
+    ],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy A57' },
+      { label: 'Por qué', value: 'Transparente + refuerzo en esquinas, alto volumen de venta' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'spigen-tough-armor-pro-zflip7fe',
+    brand: 'Spigen', category: 'fundas',
+    name: 'Spigen Tough Armor Pro (Z Flip7 FE)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [
+      {
+        color: 'Sierra Blue', hex: '#6d85a8',
+        image: '/spigen-tough-armor-pro-zflip7fe-sierra-shop.webp',
+        storage: [{ label: null, price: 36 }],
+      },
+      {
+        color: 'Metal Slate', hex: '#3c444b',
+        image: '/spigen-tough-armor-pro-zflip7fe-slate-shop.webp',
+        storage: [{ label: null, price: 36 }],
+      },
+      {
+        color: 'Black', hex: '#2a2a2a',
+        image: '/spigen-tough-armor-pro-zflip7fe-black-shop.webp',
+        storage: [{ label: null, price: 36 }],
+      },
+      {
+        color: 'Gunmetal', hex: '#6b6866',
+        image: '/spigen-tough-armor-pro-zflip7fe-gunmetal-shop.webp',
+        storage: [{ label: null, price: 36 }],
+      },
+    ],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy Z Flip7 FE' },
+      { label: 'Por qué', value: 'Bisagra protectora que se convierte en kickstand, máxima defensa para plegables' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'spigen-ultra-hybrid-pro-zflip7fe',
+    brand: 'Spigen', category: 'fundas',
+    name: 'Spigen Ultra Hybrid Pro (Z Flip7 FE)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [
+      {
+        color: 'Frost Gray', hex: '#8a8f92',
+        image: '/spigen-ultra-hybrid-pro-zflip7fe-gray-shop.webp',
+        storage: [{ label: null, price: 26 }],
+      },
+      {
+        color: 'Frost Navy Blue', hex: '#2f3f5c',
+        image: '/spigen-ultra-hybrid-pro-zflip7fe-navy-shop.webp',
+        storage: [{ label: null, price: 26 }],
+      },
+      {
+        color: 'Crystal Clear', hex: '#b8dcef',
+        image: '/spigen-ultra-hybrid-pro-zflip7fe-clear-shop.webp',
+        storage: [{ label: null, price: 26 }],
+      },
+    ],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy Z Flip7 FE' },
+      { label: 'Por qué', value: 'Transparente + protección de bisagra, diseño premium para plegables' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'uag-pathfinder-s26-plus',
+    brand: 'UAG', category: 'fundas',
+    name: 'UAG Pathfinder (Galaxy S26+)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [{
+      color: 'Olive Drab', hex: '#5c6647',
+      image: '/uag-pathfinder-s26plus-olive-shop.webp',
+      storage: [{ label: null, price: 42 }],
+    }],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy S26+' },
+      { label: 'Por qué', value: 'Certificación militar MIL-STD 810G-516.6, carga magnética integrada' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'uag-pathfinder-clear-s26',
+    brand: 'UAG', category: 'fundas',
+    name: 'UAG Pathfinder Clear (Galaxy S26)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [{
+      color: 'Ash/Black', hex: '#4a4d51',
+      image: '/uag-pathfinder-s26-clear-shop.webp',
+      storage: [{ label: null, price: 34 }],
+    }],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy S26' },
+      { label: 'Por qué', value: 'Transparente + certificación militar, carga magnética integrada' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'uag-pathfinder-clear-s25fe',
+    brand: 'UAG', category: 'fundas',
+    name: 'UAG Pathfinder Clear (Galaxy S25 FE)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [{
+      color: 'Ice Silver', hex: '#d4d6d8',
+      image: '/uag-pathfinder-s25fe-clear-shop.webp',
+      storage: [{ label: null, price: 32 }],
+    }],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy S25 FE' },
+      { label: 'Por qué', value: 'Transparente + certificación militar, carga magnética integrada' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'uag-scout-a57',
+    brand: 'UAG', category: 'fundas',
+    name: 'UAG Scout (Galaxy A57)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [{
+      color: 'Black', hex: '#1a1a1a',
+      image: '/uag-scout-a57-black-shop.webp',
+      storage: [{ label: null, price: 24 }],
+    }],
+    specs: [
+      { label: 'Modelo compatible', value: 'Samsung Galaxy A57' },
+      { label: 'Por qué', value: 'Ligera y resistente, certificación militar en un cuerpo delgado' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'uag-plyo-zflip7fe',
+    brand: 'UAG', category: 'fundas',
+    name: 'UAG Plyo (Z Flip7 FE)',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [{
+      color: 'Ice', hex: '#c9d1cb',
+      image: '/uag-plyo-zflip7fe-ice-shop.webp',
       storage: [{ label: null, price: 30 }],
     }],
     specs: [
-      { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
-      { label: 'Por qué', value: 'Patrón a cuadros reconocible, opción de protección visible sin ser rugged' },
+      { label: 'Modelo compatible', value: 'Samsung Galaxy Z Flip7 FE' },
+      { label: 'Por qué', value: 'Diseño open-hinge transparente, resistente a amarilleo' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
-
-  {
-    id: 'speck-presidio2-grip',
-    brand: 'Speck', category: 'fundas',
-    name: 'Speck Presidio2 Grip',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 35 }],
-    }],
-    specs: [
-      { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
-      { label: 'Por qué', value: 'Grip texturizado, recurrente en comparativas de caída' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'zagg-denali-case',
-    brand: 'ZAGG', category: 'fundas',
-    name: 'ZAGG Denali Case',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 45 }],
-    }],
-    specs: [
-      { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
-      { label: 'Por qué', value: 'Rugged con certificación de caída, tienda oficial fuerte en Amazon' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'catalyst-influence-series',
-    brand: 'Catalyst', category: 'fundas',
-    name: 'Catalyst Influence Series',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 50 }],
-    }],
-    specs: [
-      { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
-      { label: 'Por qué', value: 'Resistente al agua, marca nativa de Amazon con reseñas muy altas' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'encased-slim-case',
-    brand: 'Encased', category: 'fundas',
-    name: 'Encased Slim Case',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/funda-protectora-shop.svg',
-      hoverImage: '/funda-protectora-hand.svg',
-      storage: [{ label: null, price: 15 }],
-    }],
-    specs: [
-      { label: 'Modelo compatible', value: 'iPhone 17 Pro · Pro Max' },
-      { label: 'Por qué', value: 'Marca nacida y vendida casi exclusivamente en Amazon — sin fricción de envío' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
 
   // ── Bajo pedido — audio (estudio de mercado) ──────────────
 
@@ -1062,24 +1617,6 @@
   },
 
   {
-    id: 'samsung-galaxy-buds-3-fe',
-    brand: 'Samsung', category: 'audio',
-    name: 'Samsung Galaxy Buds 3 FE',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/audio-generico-shop.svg',
-      hoverImage: '/audio-generico-hand.svg',
-      storage: [{ label: null, price: 150 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'La mayoría de features del Buds3 Pro a precio más accesible' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
     id: 'samsung-galaxy-buds-4-pro',
     brand: 'Samsung', category: 'audio',
     name: 'Samsung Galaxy Buds 4 Pro',
@@ -1093,6 +1630,24 @@
     }],
     specs: [
       { label: 'Por qué', value: 'Mejor opción para el ecosistema Samsung según reviews 2026' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'samsung-galaxy-buds-3-fe',
+    brand: 'Samsung', category: 'audio',
+    name: 'Samsung Galaxy Buds 3 FE',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [{
+      color: null, hex: '#1a1a1a',
+      image: '/audio-generico-shop.svg',
+      hoverImage: '/audio-generico-hand.svg',
+      storage: [{ label: null, price: 150 }],
+    }],
+    specs: [
+      { label: 'Por qué', value: 'La mayoría de features del Buds3 Pro a precio más accesible' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
@@ -1170,6 +1725,24 @@
   },
 
   {
+    id: 'jbl-tour-pro-3',
+    brand: 'JBL', category: 'audio',
+    name: 'JBL Tour Pro 3',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [{
+      color: null, hex: '#1a1a1a',
+      image: '/audio-generico-shop.svg',
+      hoverImage: '/audio-generico-hand.svg',
+      storage: [{ label: null, price: 250 }],
+    }],
+    specs: [
+      { label: 'Por qué', value: 'Estuche con pantalla táctil, diferenciador único en el segmento' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
     id: 'jbl-live-770nc',
     brand: 'JBL', category: 'audio',
     name: 'JBL Live 770NC',
@@ -1201,24 +1774,6 @@
     }],
     specs: [
       { label: 'Por qué', value: 'Versión más accesible con ANC de la línea Live' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'jbl-tour-pro-3',
-    brand: 'JBL', category: 'audio',
-    name: 'JBL Tour Pro 3',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/audio-generico-shop.svg',
-      hoverImage: '/audio-generico-hand.svg',
-      storage: [{ label: null, price: 250 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Estuche con pantalla táctil, diferenciador único en el segmento' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
@@ -1461,109 +2016,45 @@
   // ── Bajo pedido — telefonos (estudio de mercado) ──────────────
 
   {
-    id: 'google-pixel-10-pro',
-    brand: 'Google', category: 'telefonos',
-    name: 'Google Pixel 10 Pro',
+    id: 'samsung-galaxy-s26-plus',
+    brand: 'Samsung', category: 'telefonos',
+    name: 'Samsung Galaxy S26+',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 949 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: '\'El mejor Android que puedes comprar ahora\' — cámara y software líderes' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    colorVariants: [
+      {
+        color: 'Black', hex: '#282c2f',
+        image: '/s26plus-black-shop.webp',
+        storage: [{ label: null, price: 999 }],
+      },
+      {
+        color: 'Cobalt Violet', hex: '#42425c',
+        image: '/s26plus-cobaltviolet-shop.webp',
+        storage: [{ label: null, price: 999 }],
+      },
+      {
+        color: 'Pink Gold', hex: '#e9d9cc',
+        image: '/s26plus-pinkgold-shop.webp',
+        storage: [{ label: null, price: 999 }],
+      },
+      {
+        color: 'Silver Shadow', hex: '#86888a',
+        image: '/s26plus-silvershadow-shop.webp',
+        storage: [{ label: null, price: 999 }],
+      },
+      {
+        color: 'Sky Blue', hex: '#cbdeea',
+        image: '/s26plus-skyblue-shop.webp',
+        storage: [{ label: null, price: 999 }],
+      },
+      {
+        color: 'White', hex: '#eceef0',
+        image: '/s26plus-white-shop.webp',
+        storage: [{ label: null, price: 999 }],
+      },
     ],
-  },
-
-  {
-    id: 'google-pixel-10',
-    brand: 'Google', category: 'telefonos',
-    name: 'Google Pixel 10',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 799 }],
-    }],
     specs: [
-      { label: 'Por qué', value: 'Tensor G5 + 7 años de actualizaciones, gran relación precio-soporte' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'google-pixel-10a',
-    brand: 'Google', category: 'telefonos',
-    name: 'Google Pixel 10a',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 499 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Experiencia Pixel completa manteniendo precio de entrada' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'google-pixel-9a',
-    brand: 'Google', category: 'telefonos',
-    name: 'Google Pixel 9a',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 499 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Cámara y confiabilidad a largo plazo muy citadas en 2026' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'google-pixel-9',
-    brand: 'Google', category: 'telefonos',
-    name: 'Google Pixel 9',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 599 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Generación anterior con precio ya ajustado, sigue vendiéndose bien' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'google-pixel-9-pro',
-    brand: 'Google', category: 'telefonos',
-    name: 'Google Pixel 9 Pro',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 799 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Versión Pro de generación anterior a precio de gama media-alta' },
+      { label: 'Por qué', value: 'Pantalla más grande del S26 justo en el límite de presupuesto' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
@@ -1574,32 +2065,40 @@
     name: 'Samsung Galaxy S26',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 799 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Black', hex: '#292d30',
+        image: '/s26-black-shop.webp',
+        storage: [{ label: null, price: 799 }],
+      },
+      {
+        color: 'Pink Gold', hex: '#e9d9cc',
+        image: '/s26-pinkgold-shop.webp',
+        storage: [{ label: null, price: 799 }],
+      },
+      {
+        color: 'Silver Shadow', hex: '#888a8b',
+        image: '/s26-silvershadow-shop.webp',
+        storage: [{ label: null, price: 799 }],
+      },
+      {
+        color: 'Sky Blue', hex: '#c7d9e5',
+        image: '/s26-skyblue-shop.webp',
+        storage: [{ label: null, price: 799 }],
+      },
+      {
+        color: 'Violet', hex: '#43435c',
+        image: '/s26-violet-shop.webp',
+        storage: [{ label: null, price: 799 }],
+      },
+      {
+        color: 'White', hex: '#eceef0',
+        image: '/s26-white-shop.webp',
+        storage: [{ label: null, price: 799 }],
+      },
+    ],
     specs: [
       { label: 'Por qué', value: 'Snapdragon 8 Elite Gen 5 — el flagship estándar de Samsung bajo el tope' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'samsung-galaxy-s26-samsung',
-    brand: 'Samsung', category: 'telefonos',
-    name: 'Samsung Galaxy S26+',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 999 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Pantalla más grande del S26 justo en el límite de presupuesto' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
@@ -1610,12 +2109,23 @@
     name: 'Samsung Galaxy S25 FE',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 650 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Icy Blue', hex: '#dddcef',
+        image: '/s25fe-icyblue-shop.webp',
+        storage: [{ label: null, price: 650 }],
+      },
+      {
+        color: 'Jet Black', hex: '#2c2d33',
+        image: '/s25fe-jetblack-shop.webp',
+        storage: [{ label: null, price: 650 }],
+      },
+      {
+        color: 'Navy', hex: '#303c5f',
+        image: '/s25fe-navy-shop.webp',
+        storage: [{ label: null, price: 650 }],
+      },
+    ],
     specs: [
       { label: 'Por qué', value: 'La mayoría del rendimiento del S25 a precio inferior' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
@@ -1628,68 +2138,25 @@
     name: 'Samsung Galaxy A57',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 550 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Awesome Gray', hex: '#5f5b63',
+        image: '/a57-gray-shop.webp',
+        storage: [{ label: null, price: 550 }],
+      },
+      {
+        color: 'Awesome Icy Blue', hex: '#cfd6df',
+        image: '/a57-icyblue-shop.webp',
+        storage: [{ label: null, price: 550 }],
+      },
+      {
+        color: 'Awesome Navy', hex: '#151a24',
+        image: '/a57-navy-shop.webp',
+        storage: [{ label: null, price: 550 }],
+      },
+    ],
     specs: [
       { label: 'Por qué', value: '6.9mm de grosor récord — diseño como diferenciador principal' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'samsung-galaxy-a56',
-    brand: 'Samsung', category: 'telefonos',
-    name: 'Samsung Galaxy A56',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 450 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Gama media estable, alto volumen de venta histórico' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'samsung-galaxy-a36',
-    brand: 'Samsung', category: 'telefonos',
-    name: 'Samsung Galaxy A36',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 350 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Punto de entrada Samsung con buena cámara para su precio' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'samsung-galaxy-a26',
-    brand: 'Samsung', category: 'telefonos',
-    name: 'Samsung Galaxy A26',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 250 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'La opción más económica de la línea A con soporte oficial' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
@@ -1700,302 +2167,22 @@
     name: 'Samsung Galaxy Z Flip7 FE',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 899 }],
-    }],
+    colorVariants: [
+      {
+        color: 'Black', hex: '#1d1d1d',
+        image: '/zflip7fe-black-shop.webp',
+        hoverImage: '/zflip7fe-folded-black-shop.webp',
+        storage: [{ label: null, price: 899 }],
+      },
+      {
+        color: 'White', hex: '#ececec',
+        image: '/zflip7fe-white-shop.webp',
+        hoverImage: '/zflip7fe-folded-white-shop.webp',
+        storage: [{ label: null, price: 899 }],
+      },
+    ],
     specs: [
       { label: 'Por qué', value: 'Plegable de entrada — categoría en crecimiento fuerte en 2026' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'samsung-galaxy-xcover7',
-    brand: 'Samsung', category: 'telefonos',
-    name: 'Samsung Galaxy XCover7',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 500 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Resistente/rugged, nicho pero con demanda constante' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'oneplus-15',
-    brand: 'OnePlus', category: 'telefonos',
-    name: 'OnePlus 15',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 899 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: '\'Mejor Android en relación precio-rendimiento\' según Android Central' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'oneplus-13',
-    brand: 'OnePlus', category: 'telefonos',
-    name: 'OnePlus 13',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 699 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Generación anterior, sigue entre los más recomendados 2026' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'oneplus-13r',
-    brand: 'OnePlus', category: 'telefonos',
-    name: 'OnePlus 13R',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 599 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Versión recortada del flagship a precio medio' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'oneplus-nord-5',
-    brand: 'OnePlus', category: 'telefonos',
-    name: 'OnePlus Nord 5',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 499 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Gama media OnePlus con carga rápida como diferenciador' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'oneplus-nord-ce-5',
-    brand: 'OnePlus', category: 'telefonos',
-    name: 'OnePlus Nord CE 5',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 349 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Punto de entrada de la marca, buen volumen de venta' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'nothing-phone-3',
-    brand: 'Nothing', category: 'telefonos',
-    name: 'Nothing Phone 3',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 799 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Glyph Matrix y triple cámara — el diseño más distintivo del mercado' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'nothing-phone-3a',
-    brand: 'Nothing', category: 'telefonos',
-    name: 'Nothing Phone 3a',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 379 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Mismo lenguaje de diseño Nothing a precio de entrada' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'nothing-phone-3a-pro',
-    brand: 'Nothing', category: 'telefonos',
-    name: 'Nothing Phone 3a Pro',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 459 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Cámara mejorada sobre el 3a manteniendo precio accesible' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'nothing-phone-2a',
-    brand: 'Nothing', category: 'telefonos',
-    name: 'Nothing Phone 2a',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 349 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Generación anterior con precio ya reducido, sigue disponible' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'motorola-edge-60-pro',
-    brand: 'Motorola', category: 'telefonos',
-    name: 'Motorola Edge 60 Pro',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 599 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Buen equilibrio construcción/precio dentro de la gama Edge' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'motorola-edge-60',
-    brand: 'Motorola', category: 'telefonos',
-    name: 'Motorola Edge 60',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 449 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Versión estándar de la línea Edge, buena relación precio-pantalla' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'motorola-razr-2025',
-    brand: 'Motorola', category: 'telefonos',
-    name: 'Motorola Razr 2025',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 699 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Plegable flip más accesible del mercado, tracción fuerte en Amazon' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'motorola-razr-2025-motorola',
-    brand: 'Motorola', category: 'telefonos',
-    name: 'Motorola Razr+ 2025',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 999 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Versión Plus del flip, justo en el límite de presupuesto' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'motorola-moto-g-power-2026',
-    brand: 'Motorola', category: 'telefonos',
-    name: 'Motorola Moto G Power (2026)',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 250 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Mejor Motorola económico — IP y batería sólidas' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'asus-rog-phone-9-pro',
-    brand: 'ASUS', category: 'telefonos',
-    name: 'ASUS ROG Phone 9 Pro',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/telefono-generico-shop.svg',
-      hoverImage: '/telefono-generico-hand.svg',
-      storage: [{ label: null, price: 999 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'El más cercano a un \'laptop gaming\' en formato teléfono' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
@@ -2009,12 +2196,12 @@
     name: 'Xbox Wireless Controller',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
-      storage: [{ label: null, price: 60 }],
-    }],
+    colorVariants: [
+      { color: 'Carbon Black', hex: '#1a1a1a', image: '/xbox-wireless-controller-black-shop.webp', storage: [{ label: null, price: 60 }] },
+      { color: 'Robot White', hex: '#f2f2f2', image: '/xbox-wireless-controller-robotwhite-shop.webp', storage: [{ label: null, price: 60 }] },
+      { color: 'Shock Blue', hex: '#0f4fd1', image: '/xbox-wireless-controller-shockblue-shop.webp', storage: [{ label: null, price: 60 }] },
+      { color: 'Velocity Green', hex: '#3fbf3f', image: '/xbox-wireless-controller-velocitygreen-shop.webp', storage: [{ label: null, price: 60 }] },
+    ],
     specs: [
       { label: 'Por qué', value: 'Mejor mando 2026 por versatilidad multiplataforma y precio justo' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
@@ -2027,12 +2214,10 @@
     name: 'Sony DualSense (PS5)',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
-      storage: [{ label: null, price: 70 }],
-    }],
+    colorVariants: [
+      { color: 'White', hex: '#eceef0', image: '/sony-dualsense-ps5-white-shop.webp', storage: [{ label: null, price: 70 }] },
+      { color: 'Midnight Black', hex: '#1a1a1a', image: '/sony-dualsense-ps5-black-shop.webp', storage: [{ label: null, price: 70 }] },
+    ],
     specs: [
       { label: 'Por qué', value: 'Gatillos adaptativos y háptica — estándar de la experiencia PS5' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
@@ -2045,12 +2230,10 @@
     name: 'Sony DualSense Edge',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
-      storage: [{ label: null, price: 200 }],
-    }],
+    colorVariants: [
+      { color: 'White', hex: '#eceef0', image: '/sony-dualsense-edge-white-shop.webp', storage: [{ label: null, price: 200 }] },
+      { color: 'Midnight Black', hex: '#1a1a1a', image: '/sony-dualsense-edge-black-shop.webp', storage: [{ label: null, price: 200 }] },
+    ],
     specs: [
       { label: 'Por qué', value: 'Versión pro con sticks intercambiables para jugador competitivo' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
@@ -2065,8 +2248,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/nintendo-switch-pro-controller-black-shop.webp',
       storage: [{ label: null, price: 70 }],
     }],
     specs: [
@@ -2083,8 +2265,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/xbox-elite-series-2-core-black-shop.webp',
       storage: [{ label: null, price: 130 }],
     }],
     specs: [
@@ -2101,8 +2282,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/razer-wolverine-v3-pro-black-shop.webp',
       storage: [{ label: null, price: 170 }],
     }],
     specs: [
@@ -2119,8 +2299,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/gamesir-g7-pro-8k-black-shop.webp',
       storage: [{ label: null, price: 90 }],
     }],
     specs: [
@@ -2137,8 +2316,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/gamesir-nova-lite-2-gray-shop.webp',
       storage: [{ label: null, price: 40 }],
     }],
     specs: [
@@ -2155,8 +2333,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/8bitdo-ultimate-2-wireless-black-shop.webp',
       storage: [{ label: null, price: 65 }],
     }],
     specs: [
@@ -2171,12 +2348,11 @@
     name: '8BitDo Ultimate 2C',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
-      storage: [{ label: null, price: 35 }],
-    }],
+    colorVariants: [
+      { color: 'Black', hex: '#1a1a1a', image: '/8bitdo-ultimate-2c-black-shop.webp', storage: [{ label: null, price: 35 }] },
+      { color: 'Mint', hex: '#c3e8dc', image: '/8bitdo-ultimate-2c-mint-shop.webp', storage: [{ label: null, price: 35 }] },
+      { color: 'Purple', hex: '#c7b4e8', image: '/8bitdo-ultimate-2c-purple-shop.webp', storage: [{ label: null, price: 35 }] },
+    ],
     specs: [
       { label: 'Por qué', value: 'Ligero y ergonómico, 1000Hz de polling' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
@@ -2191,8 +2367,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/8bitdo-pro-2-wired-black-shop.webp',
       storage: [{ label: null, price: 30 }],
     }],
     specs: [
@@ -2209,8 +2384,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/backbone-one-black-shop.webp',
       storage: [{ label: null, price: 100 }],
     }],
     specs: [
@@ -2227,8 +2401,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/turtle-beach-recon-cloud-black-shop.webp',
       storage: [{ label: null, price: 80 }],
     }],
     specs: [
@@ -2245,8 +2418,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/powera-fusion-pro-3-black-shop.webp',
       storage: [{ label: null, price: 65 }],
     }],
     specs: [
@@ -2263,8 +2435,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/8bitdo-charging-dock-black-shop.webp',
       storage: [{ label: null, price: 20 }],
     }],
     specs: [
@@ -2281,8 +2452,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/powera-xbox-charging-dock-black-shop.webp',
       storage: [{ label: null, price: 25 }],
     }],
     specs: [
@@ -2299,8 +2469,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/anker-steam-deck-docking-station-gray-shop.webp',
       storage: [{ label: null, price: 60 }],
     }],
     specs: [
@@ -2317,8 +2486,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/razer-handheld-dock-chroma-black-shop.webp',
       storage: [{ label: null, price: 100 }],
     }],
     specs: [
@@ -2335,8 +2503,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/jsaux-hb0603-dock-black-shop.webp',
       storage: [{ label: null, price: 70 }],
     }],
     specs: [
@@ -2353,8 +2520,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/ugreen-9-in-1-dock-gray-shop.webp',
       storage: [{ label: null, price: 90 }],
     }],
     specs: [
@@ -2371,8 +2537,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/nexigo-enhanced-charging-dock-white-shop.webp',
       storage: [{ label: null, price: 45 }],
     }],
     specs: [
@@ -2389,8 +2554,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/amvr-rgb-charging-dock-white-shop.webp',
       storage: [{ label: null, price: 35 }],
     }],
     specs: [
@@ -2407,8 +2571,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/anker-647-charging-station-black-shop.webp',
       storage: [{ label: null, price: 130 }],
     }],
     specs: [
@@ -2425,8 +2588,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/thrustmaster-t-flight-hotas-x-black-shop.webp',
       storage: [{ label: null, price: 100 }],
     }],
     specs: [
@@ -2443,8 +2605,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/logitech-extreme-3d-pro-black-shop.webp',
       storage: [{ label: null, price: 50 }],
     }],
     specs: [
@@ -2461,8 +2622,7 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/turtle-beach-velocityone-flightstick-black-shop.webp',
       storage: [{ label: null, price: 200 }],
     }],
     specs: [
@@ -2479,30 +2639,11 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/moza-r3-racing-wheel-black-shop.webp',
       storage: [{ label: null, price: 280 }],
     }],
     specs: [
       { label: 'Por qué', value: 'Kit volante+base+pedales de entrada a direct drive' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'monoprice-dark-matter-pro-racing-wheel',
-    brand: 'Monoprice', category: 'gaming',
-    name: 'Monoprice Dark Matter Pro Racing Wheel',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
-      storage: [{ label: null, price: 200 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Kit todo incluido con palanca de cambios realista' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
@@ -2515,30 +2656,11 @@
     byOrder: true,
     colorVariants: [{
       color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
+      image: '/victrix-pro-fs12-white-shop.webp',
       storage: [{ label: null, price: 250 }],
     }],
     specs: [
       { label: 'Por qué', value: 'El fight stick de referencia para competencia según reviews 2026' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'dark-matter-arcade-fighting-stick',
-    brand: 'Monoprice', category: 'gaming',
-    name: 'Dark Matter Arcade Fighting Stick',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/mando-gaming-shop.svg',
-      hoverImage: '/mando-gaming-hand.svg',
-      storage: [{ label: null, price: 100 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Componentes Sanwa Denshi a precio accesible' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
@@ -3091,7 +3213,6 @@
 
 export const categories = [
   { id: 'all',        label: 'Todo' },
-  { id: 'iphone',    label: 'iPhone' },
   { id: 'dji-estab', label: 'DJI Estabilizadores' },
   { id: 'dji-audio', label: 'DJI Audio' },
   { id: 'oakley',    label: 'Oakley Meta' },
@@ -3102,8 +3223,75 @@ export const categories = [
   { id: 'cargadores',label: 'Cargadores' },
 ]
 
-export const brands = ['Apple', 'DJI', 'Oakley', 'Shokz', 'BOYA']
+// "Teléfonos" en el filtro engloba tanto la categoría 'iphone' (landing/navbar)
+// como 'telefonos' (Android bajo pedido) — mismo tab en la tienda.
+export const PHONE_FILTER_CATEGORIES = ['telefonos', 'iphone']
+
+export const brands = [...new Set(products.map(p => p.brand))].sort((a, b) => a.localeCompare(b))
 
 // Precio mínimo entre todos los colorVariants y storage
 export const basePrice = (p) =>
   Math.min(...p.colorVariants.flatMap(cv => cv.storage.map(s => s.price)))
+
+// "Modelo compatible" — solo tiene sentido para fundas/accesorios (specs.label === 'Modelo compatible')
+export const compatibleDevice = (p) =>
+  p.specs?.find(s => s.label === 'Modelo compatible')?.value ?? null
+
+// Lista de dispositivos únicos entre los productos con "Modelo compatible" (fundas)
+export const devices = [...new Set(
+  products.map(compatibleDevice).filter(Boolean)
+)].sort((a, b) => a.localeCompare(b))
+
+// Colores únicos (nombre + hex representativo) entre todos los colorVariants
+export const colorSwatches = (() => {
+  const map = new Map()
+  for (const p of products) {
+    for (const cv of p.colorVariants) {
+      if (!cv.color || !cv.hex) continue
+      if (!map.has(cv.color)) map.set(cv.color, cv.hex)
+    }
+  }
+  return [...map.entries()].map(([color, hex]) => ({ color, hex }))
+})()
+
+// "Tipo" de funda (línea del modelo) — se deriva del nombre quitando la marca
+// y el sufijo "(Modelo compatible)", luego se normaliza a un bucket canónico
+// para que variantes como "Liquid Air Mag" / "Liquid Air MagFit" / "Liquid Air"
+// caigan todas bajo el mismo filtro.
+const CASE_TYPE_PATTERNS = [
+  [/^Liquid Air/i, 'Liquid Air'],
+  [/^Tough Armor Pro/i, 'Tough Armor Pro'],
+  [/^Tough Armor/i, 'Tough Armor'],
+  [/^Ultra Hybrid Pro/i, 'Ultra Hybrid Pro'],
+  [/^Ultra Hybrid/i, 'Ultra Hybrid'],
+  [/^Thin Fit/i, 'Thin Fit'],
+  [/^Rugged Armor/i, 'Rugged Armor'],
+  [/^Slim Armor/i, 'Slim Armor'],
+  [/^Onyx/i, 'Onyx'],
+  [/^Fusion/i, 'Fusion'],
+  [/^Air$/i, 'Air'],
+  [/^Commuter/i, 'Commuter Series'],
+  [/^Defender/i, 'Defender Series'],
+  [/^Symmetry/i, 'Symmetry'],
+  [/^Monarch/i, 'Monarch'],
+  [/^Plasma/i, 'Plasma XTE'],
+  [/^Pathfinder/i, 'Pathfinder'],
+  [/^Civilian/i, 'Civilian'],
+  [/^Modern Leather/i, 'Modern Leather Case'],
+  [/^Leather Folio/i, 'Leather Folio'],
+  [/^Everyday/i, 'Everyday Case'],
+  [/^Sand Blast/i, 'Sand Blast'],
+]
+
+export const caseType = (p) => {
+  if (p.category !== 'fundas') return null
+  const withoutBrand = p.name.replace(new RegExp('^' + p.brand + '\\s+'), '')
+  const withoutDevice = withoutBrand.replace(/\s*\([^)]*\)\s*$/, '').trim()
+  const match = CASE_TYPE_PATTERNS.find(([re]) => re.test(withoutDevice))
+  return match ? match[1] : withoutDevice
+}
+
+// Lista de tipos de funda únicos, para el filtro "Tipo"
+export const caseTypes = [...new Set(
+  products.map(caseType).filter(Boolean)
+)].sort((a, b) => a.localeCompare(b))

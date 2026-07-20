@@ -2,6 +2,10 @@
 import { useShop } from '../context/ShopContext'
 import { useBreakpoint } from '../hooks/useBreakpoint'
 
+const swatchStyle = (cv) => cv.swatchImage
+  ? { backgroundImage: `url(${cv.swatchImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+  : { background: cv.hex2 ? `linear-gradient(135deg, ${cv.hex} 50%, ${cv.hex2} 50%)` : cv.hex }
+
 export default function ProductCard({ product, onClick }) {
   const [hovered, setHovered]                   = useState(false)
   const [imgError, setImgError]                 = useState(false)
@@ -221,7 +225,7 @@ export default function ProductCard({ product, onClick }) {
                   >
                     <div style={{
                       width: dotSize, height: dotSize, borderRadius: '50%',
-                      background: cv.hex,
+                      ...swatchStyle(cv),
                       border: isSelected ? '2px solid transparent' : '1.5px solid rgba(0,0,0,0.12)',
                       outline: isSelected ? '2px solid #111' : 'none',
                       outlineOffset: isSelected ? '2px' : '0',

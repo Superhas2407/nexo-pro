@@ -6,13 +6,24 @@ import { groupSpecs } from '../utils/specGroups'
 import { SpecIcon } from '../utils/SpecIcon.jsx'
 
 const fmt = (n) => 'REF ' + n.toLocaleString('en-US')
+const swatchStyle = (cv) => cv.swatchImage
+  ? { backgroundImage: `url(${cv.swatchImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+  : { background: cv.hex2 ? `linear-gradient(135deg, ${cv.hex} 50%, ${cv.hex2} 50%)` : (cv.hex || '#ccc') }
 
 const DEPOSIT_RATE = 0.3
+const MAX_SPREAD_ROW = 5 // más de esto en una fila se ve apretado — pasa a grilla de 2 filas
 
-export default function ProductModal({ product, onClose, initialColorIdx = 0, skipSpread = false }) {
+export default function ProductModal({ product, onClose, initialColorIdx = 0, skipSpread = false, theme = 'blue' }) {
   const isMobile = useBreakpoint(768)
   const { addToCart, isInWishlist, toggleWishlist } = useShop()
   const [cartAdded, setCartAdded] = useState(false)
+  const dark = theme === 'green'
+  const accentColor = dark ? '#1FD37A' : '#0057FF'
+
+  const hasMultipleColors = product.colorVariants.length > 1
+  const canSpread = hasMultipleColors
+  const isGridSpread = product.colorVariants.length > MAX_SPREAD_ROW
+  const gridCols = Math.ceil(product.colorVariants.length / 2)
 
   const [selectedColorIdx, setSelectedColorIdx] = useState(initialColorIdx)
   const selectedColor = product.colorVariants[selectedColorIdx]
@@ -23,9 +34,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
 
   const [selectedStorage, setSelectedStorage] = useState(selectedColor.storage[0])
   const [mainImg, setMainImg] = useState(selectedColor.image)
-  const [showSpread, setShowSpread] = useState(
-    !skipSpread && product.colorVariants.length > 1 && !!product.bgText
-  )
+  const [showSpread, setShowSpread] = useState(!skipSpread && !isMobile && canSpread)
 
   const storageOptions = selectedColor.storage.filter(s => s.label)
 
@@ -73,25 +82,24 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
       : `Hola! Me interesa el ${product.name}${selectedStorage.label ? ' ' + selectedStorage.label : ''}${selectedColor.color ? ' · ' + selectedColor.color : ''}. ¿Está disponible?`
   )
 
-  const hasMultipleColors = product.colorVariants.length > 1
   const specGroups = groupSpecs(product.specs)
 
   /* —?—?—? Info panel ×" reutilizado en desktop y mobile —?—?—? */
   const InfoPanel = () => (
     <div style={{
       display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
-      padding: isMobile ? '24px 20px 28px' : '60px 48px',
-      gap: 16,
+      padding: isMobile ? '24px 20px 28px' : '0 56px',
+      gap: isMobile ? 16 : 20,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-        <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#0057FF' }}>
+        <span style={{ fontSize: isMobile ? 9 : 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: accentColor }}>
           {product.brand}
         </span>
         {product.byOrder && (
           <span style={{
-            fontSize: 9, fontWeight: 700, letterSpacing: 1,
-            textTransform: 'uppercase', color: '#0057FF',
-            border: '1px solid #0057FF', borderRadius: 4,
+            fontSize: isMobile ? 9 : 10, fontWeight: 700, letterSpacing: 1,
+            textTransform: 'uppercase', color: accentColor,
+            border: `1px solid ${accentColor}`, borderRadius: 4,
             padding: '2px 6px',
           }}>
             Bajo pedido
@@ -100,8 +108,8 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
       </div>
 
       <h2 style={{
-        fontSize: isMobile ? 28 : 36, fontWeight: 300, letterSpacing: -1.5,
-        color: '#111', margin: 0, lineHeight: 1.05,
+        fontSize: isMobile ? 28 : 44, fontWeight: 300, letterSpacing: -1.5,
+        color: dark ? '#f5f5f5' : '#111', margin: 0, lineHeight: 1.05,
       }}>
         {product.name.split(' ').slice(0, -1).join(' ')}<br />
         <span style={{ fontWeight: 500 }}>{product.name.split(' ').slice(-1)[0]}</span>
@@ -114,7 +122,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -5 }}
           transition={{ duration: 0.15 }}
-          style={{ fontSize: 20, fontWeight: 600, color: '#111', margin: 0 }}
+          style={{ fontSize: isMobile ? 20 : 28, fontWeight: 600, color: dark ? '#f5f5f5' : '#111', margin: 0 }}
         >
           {fmt(selectedStorage.price)}
         </motion.p>
@@ -123,9 +131,9 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
       {requiresDeposit && (
         <p style={{
           display: 'flex', alignItems: 'flex-start', gap: 6,
-          fontSize: 11, fontWeight: 600, color: '#0057FF', margin: 0, lineHeight: 1.4,
+          fontSize: isMobile ? 11 : 13, fontWeight: 600, color: accentColor, margin: 0, lineHeight: 1.4,
         }}>
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 2 }}>
+          <svg width={isMobile ? 11 : 13} height={isMobile ? 11 : 13} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 2 }}>
             <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
           </svg>
           <span>Anticipo 30% (REF {depositAmount}) para reservar · resto contra entrega</span>
@@ -152,11 +160,11 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                 onClick={() => selectStorage(s, i)}
                 style={{
                   position: 'relative', zIndex: 1,
-                  padding: '7px 14px', borderRadius: 4,
+                  padding: isMobile ? '7px 14px' : '9px 18px', borderRadius: 4,
                   border: '1px solid rgba(0,0,0,0.15)',
                   background: 'transparent',
                   color: active ? '#fff' : '#666',
-                  fontSize: 11, fontWeight: 500,
+                  fontSize: isMobile ? 11 : 13, fontWeight: 500,
                   cursor: 'pointer', fontFamily: 'inherit',
                   transition: 'color 0.15s',
                 }}
@@ -170,20 +178,21 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
 
       {hasMultipleColors && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#bbb' }}>
-            Color
+          <span style={{ fontSize: isMobile ? 9 : 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#bbb' }}>
+            Color — {selectedColor.color}
           </span>
-          <div style={{ display: 'flex', gap: 8 }}>
+          <div style={{ display: 'flex', gap: isMobile ? 8 : 10, flexWrap: 'wrap' }}>
             {product.colorVariants.map((cv, i) => {
               const active = i === selectedColorIdx
+              const size = isMobile ? 22 : 32
               return (
                 <button
                   key={cv.color || i}
                   onClick={() => selectColor(i)}
                   title={cv.color}
                   style={{
-                    width: 22, height: 22, borderRadius: '50%',
-                    background: cv.hex || '#ccc', border: 'none',
+                    width: size, height: size, borderRadius: '50%',
+                    ...swatchStyle(cv), border: 'none',
                     cursor: 'pointer', padding: 0,
                     boxShadow: active
                       ? '0 0 0 2px #fff, 0 0 0 3.5px #111'
@@ -198,7 +207,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
       )}
 
       {/* Botones de acción */}
-      <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginTop: 4 }}>
+      <div style={{ display: 'flex', gap: isMobile ? 8 : 10, alignItems: 'center', flexWrap: 'wrap', marginTop: 4 }}>
         {product.byOrder ? (
           /* Bajo pedido: CTA directo a WhatsApp, sin carrito */
           <a
@@ -207,13 +216,13 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
             rel="noopener noreferrer"
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: '#111', color: '#fff',
-              padding: '12px 20px', borderRadius: 8,
-              fontSize: 11, fontWeight: 600, textDecoration: 'none',
+              background: dark ? accentColor : '#111', color: dark ? '#0a0a0a' : '#fff',
+              padding: isMobile ? '12px 20px' : '16px 28px', borderRadius: 8,
+              fontSize: isMobile ? 11 : 14, fontWeight: 600, textDecoration: 'none',
               transition: 'background 0.2s',
             }}
             onMouseEnter={e => e.currentTarget.style.background = '#25D366'}
-            onMouseLeave={e => e.currentTarget.style.background = '#111'}
+            onMouseLeave={e => e.currentTarget.style.background = dark ? accentColor : '#111'}
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -230,21 +239,21 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
             }}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: cartAdded ? '#0057FF' : '#111', color: '#fff',
-              padding: '12px 20px', borderRadius: 8,
-              fontSize: 11, fontWeight: 600, border: 'none',
+              background: cartAdded ? accentColor : (dark ? accentColor : '#111'), color: dark ? '#0a0a0a' : '#fff',
+              padding: isMobile ? '12px 20px' : '16px 28px', borderRadius: 8,
+              fontSize: isMobile ? 11 : 14, fontWeight: 600, border: 'none',
               cursor: 'pointer', fontFamily: 'inherit',
               transition: 'background 0.2s',
             }}
           >
             {cartAdded ? (
               <>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <svg width={isMobile ? 12 : 15} height={isMobile ? 12 : 15} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M20 6L9 17l-5-5"/></svg>
                 Agregado
               </>
             ) : (
               <>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                <svg width={isMobile ? 12 : 15} height={isMobile ? 12 : 15} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
                 Agregar al carrito
               </>
             )}
@@ -256,7 +265,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
           onClick={() => toggleWishlist(product, selectedColor)}
           title={isInWishlist(product.id, selectedColor.color) ? 'Quitar de favoritos' : 'Agregar a favoritos'}
           style={{
-            width: 42, height: 42, borderRadius: 8,
+            width: isMobile ? 42 : 52, height: isMobile ? 42 : 52, borderRadius: 8,
             border: '1.5px solid rgba(0,0,0,0.12)',
             background: 'transparent', cursor: 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -265,7 +274,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
             flexShrink: 0,
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24"
+          <svg width={isMobile ? 16 : 20} height={isMobile ? 16 : 20} viewBox="0 0 24 24"
             fill={isInWishlist(product.id, selectedColor.color) ? 'currentColor' : 'none'}
             stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
@@ -281,14 +290,14 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
               border: '1.5px solid rgba(0,0,0,0.12)', color: '#555',
-              padding: '11px 16px', borderRadius: 8,
-              fontSize: 11, fontWeight: 600, textDecoration: 'none',
+              padding: isMobile ? '11px 16px' : '15px 22px', borderRadius: 8,
+              fontSize: isMobile ? 11 : 14, fontWeight: 600, textDecoration: 'none',
               transition: 'border-color 0.2s, color 0.2s',
             }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = '#25D366'; e.currentTarget.style.color = '#25D366' }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.12)'; e.currentTarget.style.color = '#555' }}
           >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+            <svg width={isMobile ? 12 : 15} height={isMobile ? 12 : 15} viewBox="0 0 24 24" fill="currentColor">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
             Cotizar
@@ -296,17 +305,17 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
         )}
       </div>
 
-      {hasMultipleColors && (
+      {canSpread && !isMobile && (
         <button
           onClick={() => setShowSpread(true)}
           style={{
             background: 'none', border: 'none', padding: 0,
-            fontSize: 10, color: '#bbb', cursor: 'pointer',
+            fontSize: 12, color: '#999', cursor: 'pointer',
             textAlign: 'left', letterSpacing: 0.5, fontFamily: 'inherit',
             transition: 'color 0.15s',
           }}
           onMouseEnter={e => e.currentTarget.style.color = '#555'}
-          onMouseLeave={e => e.currentTarget.style.color = '#bbb'}
+          onMouseLeave={e => e.currentTarget.style.color = '#999'}
         >
           × Ver todos los colores
         </button>
@@ -330,7 +339,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
         onClick={e => e.stopPropagation()}
-        style={{ position: 'fixed', inset: 0, zIndex: 201, background: '#fff', overflow: 'hidden' }}
+        style={{ position: 'fixed', inset: 0, zIndex: 201, background: dark ? '#0a0a0a' : '#fff', overflow: 'hidden' }}
       >
         {/* Botón cerrar */}
         <button
@@ -338,10 +347,10 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
           style={{
             position: 'absolute', top: 14, right: 14, zIndex: 20,
             width: 34, height: 34, borderRadius: '50%',
-            border: 'none', background: 'rgba(0,0,0,0.07)',
+            border: 'none', background: dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.07)',
             cursor: 'pointer', display: 'flex',
             alignItems: 'center', justifyContent: 'center',
-            fontSize: 20, color: '#555',
+            fontSize: 20, color: dark ? '#eee' : '#555',
           }}
         >×</button>
 
@@ -355,10 +364,92 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, scale: 0.97 }}
               transition={{ duration: 0.22 }}
-              style={{ position: 'absolute', inset: 0, display: 'flex', overflow: 'hidden' }}
+              style={isGridSpread ? {
+                position: 'absolute', inset: 0, overflow: 'hidden',
+                display: 'flex', flexDirection: 'column',
+                background: dark ? '#141414' : '#f5f5f3',
+              } : { position: 'absolute', inset: 0, display: 'flex', overflow: 'hidden' }}
             >
+              {/* Header — solo en modo grilla, orienta al usuario */}
+              {isGridSpread && (
+                <div style={{
+                  padding: '28px 32px 16px',
+                  display: 'flex', flexDirection: 'column', gap: 3,
+                  flexShrink: 0,
+                }}>
+                  <h2 style={{ fontSize: 20, fontWeight: 600, color: dark ? '#f5f5f5' : '#111', margin: 0, letterSpacing: -0.3 }}>
+                    {product.name}
+                  </h2>
+                  <p style={{ fontSize: 13, color: '#888', margin: 0 }}>
+                    Elige un color — {product.colorVariants.length} disponibles
+                  </p>
+                </div>
+              )}
+
+              {isGridSpread && (
+                <div style={{
+                  flex: 1, overflow: 'hidden',
+                  display: 'grid',
+                  gridTemplateColumns: `repeat(${gridCols}, 1fr)`,
+                  gridTemplateRows: 'repeat(2, 1fr)',
+                  gap: 12, padding: '4px 24px 28px',
+                }}>
+                  {product.colorVariants.map((cv, i) => (
+                    <motion.div
+                      key={cv.color || i}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.05, duration: 0.25 }}
+                      whileHover={{ y: -4, boxShadow: '0 12px 28px rgba(0,0,0,0.14)' }}
+                      onClick={() => { selectColor(i); setShowSpread(false) }}
+                      style={{
+                        display: 'flex', flexDirection: 'column',
+                        alignItems: 'center', justifyContent: 'center',
+                        cursor: 'pointer', position: 'relative',
+                        borderRadius: 16,
+                        background: cv.hex
+                          ? `color-mix(in srgb, ${cv.hex} 12%, white)`
+                          : '#fafafa',
+                        boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+                        border: selectedColorIdx === i ? '2px solid #111' : '2px solid transparent',
+                        overflow: 'hidden',
+                        padding: '14px 8px',
+                        gap: 6,
+                      }}
+                    >
+                      <img
+                        src={cv.image}
+                        alt={cv.color}
+                        style={{
+                          height: '20vh', maxHeight: 160,
+                          objectFit: 'contain', display: 'block',
+                          filter: 'drop-shadow(0 6px 14px rgba(0,0,0,0.12))',
+                        }}
+                      />
+                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                          {cv.hex && (
+                            <div style={{
+                              width: 10, height: 10, borderRadius: '50%',
+                              ...swatchStyle(cv), border: '1.5px solid rgba(0,0,0,0.14)',
+                              flexShrink: 0,
+                            }} />
+                          )}
+                          <span style={{ fontSize: 12, fontWeight: 600, color: dark ? '#f5f5f5' : '#111', textAlign: 'center' }}>
+                            {cv.color || product.name}
+                          </span>
+                        </div>
+                        <span style={{ fontSize: 11, fontWeight: 700, color: accentColor }}>
+                          {fmt(cv.storage[0].price)}
+                        </span>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+
               {/* Tap hint ×" solo mobile, centrado abajo */}
-              {isMobile && (
+              {isMobile && !isGridSpread && (
                 <motion.div
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -388,7 +479,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                 </motion.div>
               )}
 
-              {product.colorVariants.map((cv, i) => (
+              {!isGridSpread && product.colorVariants.map((cv, i) => (
                 <motion.div
                   key={cv.color || i}
                   initial={{ opacity: 0 }}
@@ -455,15 +546,15 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                       {cv.hex && (
                         <div style={{
                           width: 11, height: 11, borderRadius: '50%',
-                          background: cv.hex, border: '1.5px solid rgba(0,0,0,0.14)',
+                          ...swatchStyle(cv), border: '1.5px solid rgba(0,0,0,0.14)',
                           flexShrink: 0,
                         }} />
                       )}
-                      <span style={{ fontSize: isMobile ? 13 : 15, fontWeight: 600, color: '#111' }}>
+                      <span style={{ fontSize: isMobile ? 13 : 15, fontWeight: 600, color: dark ? '#f5f5f5' : '#111', textAlign: 'center' }}>
                         {cv.color || product.name}
                       </span>
                     </div>
-                    <span style={{ fontSize: isMobile ? 12 : 13, fontWeight: 700, color: '#0057FF' }}>
+                    <span style={{ fontSize: isMobile ? 12 : 13, fontWeight: 700, color: accentColor }}>
                       {fmt(cv.storage[0].price)}
                     </span>
                   </div>
@@ -491,7 +582,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                     height: '50vh', minHeight: 280,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     padding: '60px 20px 20px', position: 'relative',
-                    background: '#fafafa',
+                    background: dark ? '#141414' : '#fafafa',
                   }}>
                     <AnimatePresence mode="wait">
                       <motion.img
@@ -537,15 +628,24 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                 /* —?—? DESKTOP: 3 columnas —?—? */
                 <div>
                   <div style={{ height: '100vh', display: 'flex', position: 'relative' }}>
-                    {/* Izquierda */}
-                    <div style={{
-                      flex: '0 0 300px',
-                      display: 'flex', flexDirection: 'column',
-                      justifyContent: 'flex-end',
-                      position: 'relative', zIndex: 2,
-                    }}>
-                      <InfoPanel />
-                    </div>
+                    {/* Izquierda: ghost (peek de la siguiente imagen) */}
+                    {allImages.length > 1 && (
+                      <div
+                        onClick={() => setMainImg(allImages[(allImages.indexOf(mainImg) + 1) % allImages.length])}
+                        style={{
+                          flex: '0 0 180px', display: 'flex', alignItems: 'center',
+                          justifyContent: 'center', padding: '40px 16px', cursor: 'pointer',
+                        }}
+                      >
+                        <img
+                          src={allImages[(allImages.indexOf(mainImg) + 1) % allImages.length]}
+                          alt=""
+                          style={{ width: '100%', maxHeight: '70%', objectFit: 'contain', opacity: 0.35, transition: 'opacity 0.25s' }}
+                          onMouseEnter={e => e.currentTarget.style.opacity = 0.7}
+                          onMouseLeave={e => e.currentTarget.style.opacity = 0.35}
+                        />
+                      </div>
+                    )}
 
                     {/* Centro: imagen */}
                     <div style={{
@@ -566,7 +666,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                       </AnimatePresence>
 
                       {allImages.length > 1 && (
-                        <div style={{ position: 'absolute', bottom: 36, right: 36, display: 'flex', gap: 10 }}>
+                        <div style={{ position: 'absolute', bottom: 36, left: 40, display: 'flex', gap: 10 }}>
                           {allImages.map((img, i) => (
                             <button
                               key={i}
@@ -596,31 +696,25 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                       )}
                     </div>
 
-                    {/* Derecha: ghost */}
-                    {allImages.length > 1 && (
-                      <div
-                        onClick={() => setMainImg(allImages[(allImages.indexOf(mainImg) + 1) % allImages.length])}
-                        style={{
-                          flex: '0 0 180px', display: 'flex', alignItems: 'center',
-                          justifyContent: 'center', padding: '40px 16px', cursor: 'pointer',
-                        }}
-                      >
-                        <img
-                          src={allImages[(allImages.indexOf(mainImg) + 1) % allImages.length]}
-                          alt=""
-                          style={{ width: '100%', maxHeight: '70%', objectFit: 'contain', opacity: 0.35, transition: 'opacity 0.25s' }}
-                          onMouseEnter={e => e.currentTarget.style.opacity = 0.7}
-                          onMouseLeave={e => e.currentTarget.style.opacity = 0.35}
-                        />
-                      </div>
-                    )}
+                    {/* Derecha: info del producto */}
+                    <div style={{
+                      flex: '0 0 460px',
+                      display: 'flex', flexDirection: 'column',
+                      justifyContent: 'center',
+                      background: dark ? '#141414' : '#fafafa',
+                      borderLeft: '1px solid rgba(0,0,0,0.06)',
+                      position: 'relative', zIndex: 2,
+                    }}>
+                      <InfoPanel />
+                    </div>
 
                     {specGroups.length > 0 && (
                       <motion.div
                         animate={{ y: [0, 7, 0] }}
                         transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
                         style={{
-                          position: 'absolute', bottom: 28, left: '50%', transform: 'translateX(-50%)',
+                          position: 'absolute', bottom: 28, left: allImages.length > 1 ? 'calc(50% - 230px)' : '50%',
+                          transform: 'translateX(-50%)',
                           display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
                           pointerEvents: 'none',
                         }}
@@ -639,17 +733,17 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
               {specGroups.length > 0 && (
                 <div style={{
                   minHeight: isMobile ? 'auto' : '100vh',
-                  background: '#fafafa',
+                  background: dark ? '#141414' : '#fafafa',
                   padding: isMobile ? '40px 16px 60px' : '80px 40px 100px',
-                  borderTop: '1px solid rgba(0,0,0,0.06)',
+                  borderTop: dark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.06)',
                 }}>
                   <div style={{ maxWidth: 900, margin: '0 auto 40px', padding: isMobile ? '0 4px' : 0 }}>
-                    <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#0057FF', marginBottom: 10 }}>
+                    <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: accentColor, marginBottom: 10 }}>
                       {product.brand}
                     </p>
                     <h2 style={{
                       fontSize: isMobile ? 'clamp(22px, 6vw, 36px)' : 'clamp(28px, 4vw, 48px)',
-                      fontWeight: 300, letterSpacing: -1.5, color: '#111', margin: 0,
+                      fontWeight: 300, letterSpacing: -1.5, color: dark ? '#f5f5f5' : '#111', margin: 0,
                     }}>
                       {product.name}<br />
                       <span style={{ fontWeight: 500 }}>Especificaciones</span>
@@ -659,18 +753,18 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                   {/* Ticket / factura */}
                   <div style={{
                     maxWidth: 640, margin: '0 auto',
-                    background: '#fff', borderRadius: 10,
-                    border: '1px solid rgba(0,0,0,0.08)',
-                    boxShadow: '0 2px 16px rgba(0,0,0,0.04)',
+                    background: dark ? '#1a1a1a' : '#fff', borderRadius: 10,
+                    border: dark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.08)',
+                    boxShadow: dark ? '0 2px 16px rgba(0,0,0,0.3)' : '0 2px 16px rgba(0,0,0,0.04)',
                     padding: isMobile ? '24px 20px' : '40px 48px',
                   }}>
                     {/* Encabezado de factura */}
                     <div style={{
                       display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
                       paddingBottom: 14, marginBottom: 4,
-                      borderBottom: '2px solid #111',
+                      borderBottom: dark ? '2px solid #f5f5f5' : '2px solid #111',
                     }}>
-                      <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#111' }}>
+                      <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: dark ? '#f5f5f5' : '#111' }}>
                         Ficha técnica
                       </span>
                       <span style={{ fontSize: 11, fontWeight: 600, color: '#999' }}>
@@ -696,7 +790,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                             <SpecIcon category={group.key} size={13} color="#111" />
                             <h3 style={{
                               fontSize: 11, fontWeight: 700, letterSpacing: 1.5,
-                              textTransform: 'uppercase', color: '#111', margin: 0,
+                              textTransform: 'uppercase', color: dark ? '#f5f5f5' : '#111', margin: 0,
                             }}>
                               {group.title}
                             </h3>
@@ -715,7 +809,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                               <div style={{ fontSize: 11, fontWeight: 600, color: '#555', marginBottom: 4 }}>
                                 {spec.label}
                               </div>
-                              <div style={{ fontSize: 13, fontWeight: 600, color: '#111', textAlign: isMobile ? 'right' : 'left', lineHeight: 1.4 }}>
+                              <div style={{ fontSize: 13, fontWeight: 600, color: dark ? '#f5f5f5' : '#111', textAlign: isMobile ? 'right' : 'left', lineHeight: 1.4 }}>
                                 {spec.value}
                               </div>
                             </div>
@@ -735,7 +829,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                                 borderBottom: '1.5px dotted rgba(0,0,0,0.22)',
                               }} />
                               <span style={{
-                                fontSize: 13, fontWeight: 600, color: '#111',
+                                fontSize: 13, fontWeight: 600, color: dark ? '#f5f5f5' : '#111',
                                 textAlign: 'right', lineHeight: 1.4,
                               }}>
                                 {spec.value}

@@ -31,10 +31,31 @@ const buildDropdown = (categoryIds) =>
       arr.findIndex(x => x.image === item.image) === idx
     )
 
+// Tarjetas de "línea" — agrupan varios SKUs bajo una sola búsqueda (?buscar=)
+// en vez de una tarjeta por color/producto individual.
+const lineCard = (name, query, image) => ({
+  name, image, link: `/tienda?buscar=${encodeURIComponent(query)}`,
+})
+
 const dropdownMenus = {
-  iPhone: buildDropdown(['iphone']),
+  Telefono: [
+    lineCard('Línea iPhone 17', 'iPhone 17', '/iphone-silver-shop.webp'),
+    lineCard('Línea Samsung S26', 'Galaxy S26', '/s26-violet-shop.webp'),
+    lineCard('Samsung Galaxy S25 FE', 'S25 FE', '/s25fe-jetblack-shop.webp'),
+    lineCard('Samsung Galaxy A57', 'A57', '/a57-navy-shop.webp'),
+    lineCard('Samsung Galaxy Z Flip7 FE', 'Z Flip7', '/zflip7fe-black-shop.webp'),
+  ],
   DJI:    buildDropdown(['dji-estab', 'dji-audio']),
   Oakley: buildDropdown(['oakley']),
+  Accesorios: [
+    lineCard('Línea Liquid Air', 'Liquid Air', '/spigen-liquid-air-s26-marble-gray-shop.webp'),
+    lineCard('Línea Tough Armor', 'Tough Armor', '/spigen-tough-armor-s26-violet-shop.webp'),
+    lineCard('Línea Ultra Hybrid', 'Ultra Hybrid', '/spigen-ultra-hybrid-pixel9-clear-shop.webp'),
+    lineCard('Línea Symmetry', 'Symmetry', '/otterbox-symmetry-clear-shop.webp'),
+    lineCard('Línea Pathfinder', 'Pathfinder', '/uag-pathfinder-s26plus-olive-shop.webp'),
+    { name: 'Audio',      image: '/shokz-openrun2-hand.webp', link: '/tienda?categoria=audio' },
+    { name: 'Cargadores', image: '/cargador-generico-hand.svg', link: '/tienda?categoria=cargadores' },
+  ],
 }
 
 /* —?—? Search overlay —?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—? */
@@ -330,19 +351,27 @@ function SidePanel({ title, icon, children, onClose, panelTop = 8 }) {
 }
 
 /* —?—? Mega menu dropdown —?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—? */
-function MegaMenu({ label, items, categoryHref }) {
+function MegaMenu({ label, items, categoryHref, accent = '#0057FF', dark = false }) {
   const [open, setOpen] = useState(false)
   const closeTimer = useRef(null)
 
   const enter = () => { clearTimeout(closeTimer.current); setOpen(true) }
   const leave = () => { closeTimer.current = setTimeout(() => setOpen(false), 150) }
 
+  const panelBg   = dark ? '#111'   : '#fff'
+  const colBg     = dark ? '#161616' : '#f8f8f8'
+  const colBorder = dark ? '#232323' : '#f0f0f0'
+  const titleColor = dark ? '#fff'  : '#1a1a1a'
+  const linkColor  = dark ? '#ccc'  : '#111'
+  const itemNameColor = dark ? '#eee' : '#111'
+  const imgBg = dark ? '#1e1e1e' : '#f5f5f3'
+
   return (
     <div onMouseEnter={enter} onMouseLeave={leave}>
       <button style={{
         display: 'flex', alignItems: 'center', gap: 4,
         padding: '6px 14px', fontSize: 15, fontWeight: 600,
-        color: open ? '#0057FF' : '#111',
+        color: open ? accent : (dark ? '#eee' : '#111'),
         background: 'none', border: 'none', cursor: 'pointer',
         fontFamily: 'inherit', whiteSpace: 'nowrap',
         transition: 'color 0.15s',
@@ -365,11 +394,12 @@ function MegaMenu({ label, items, categoryHref }) {
               position: 'fixed', top: 78,
               left: '50%',
               width: 'min(1100px, 92vw)',
-              background: '#fff',
+              background: panelBg,
               borderRadius: 20,
-              boxShadow: '0 12px 48px rgba(0,0,0,0.11), 0 2px 8px rgba(0,0,0,0.06)',
+              boxShadow: dark ? '0 12px 48px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3)' : '0 12px 48px rgba(0,0,0,0.11), 0 2px 8px rgba(0,0,0,0.06)',
               zIndex: 200,
               overflow: 'hidden',
+              border: dark ? `1px solid ${colBorder}` : 'none',
             }}
             onMouseEnter={enter}
             onMouseLeave={leave}
@@ -379,28 +409,28 @@ function MegaMenu({ label, items, categoryHref }) {
               {/* Columna izquierda ×" info estilo ProductLines */}
               <div style={{
                 width: 200, flexShrink: 0,
-                background: '#f8f8f8',
+                background: colBg,
                 padding: '28px 24px',
                 display: 'flex', flexDirection: 'column',
                 justifyContent: 'space-between',
-                borderRight: '1px solid #f0f0f0',
+                borderRight: `1px solid ${colBorder}`,
               }}>
                 <div>
-                  <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: 2.5, textTransform: 'uppercase', color: '#0057FF', margin: '0 0 10px' }}>
+                  <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: 2.5, textTransform: 'uppercase', color: accent, margin: '0 0 10px' }}>
                     {label}
                   </p>
-                  <h3 style={{ fontSize: 22, fontWeight: 400, letterSpacing: -0.8, color: '#1a1a1a', margin: 0, lineHeight: 1.2 }}>
+                  <h3 style={{ fontSize: 22, fontWeight: 400, letterSpacing: -0.8, color: titleColor, margin: 0, lineHeight: 1.2 }}>
                     Toda la<br />línea.
                   </h3>
                 </div>
                 <a href={categoryHref} style={{
                   display: 'inline-flex', alignItems: 'center', gap: 6,
-                  fontSize: 12, fontWeight: 600, color: '#111',
+                  fontSize: 12, fontWeight: 600, color: linkColor,
                   textDecoration: 'none', marginTop: 24,
                   transition: 'color 0.15s',
                 }}
-                  onMouseEnter={e => e.currentTarget.style.color = '#0057FF'}
-                  onMouseLeave={e => e.currentTarget.style.color = '#111'}
+                  onMouseEnter={e => e.currentTarget.style.color = accent}
+                  onMouseLeave={e => e.currentTarget.style.color = linkColor}
                 >
                   Ver todos
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -419,7 +449,7 @@ function MegaMenu({ label, items, categoryHref }) {
                       >
                         {/* Imagen */}
                         <div style={{
-                          height: 140, background: '#f5f5f3',
+                          height: 140, background: imgBg,
                           borderRadius: 12, overflow: 'hidden',
                           display: 'flex', alignItems: 'center', justifyContent: 'center',
                           marginBottom: 10,
@@ -435,9 +465,9 @@ function MegaMenu({ label, items, categoryHref }) {
                           />
                         </div>
                         {/* Info */}
-                        <p style={{ fontSize: 13, fontWeight: 500, color: '#111', margin: '0 0 2px', lineHeight: 1.3 }}>{item.name}</p>
+                        <p style={{ fontSize: 13, fontWeight: 600, color: itemNameColor, margin: '0 0 2px', lineHeight: 1.3 }}>{item.name}</p>
                         {item.color && <p style={{ fontSize: 11, color: '#aaa', margin: '0 0 4px' }}>{item.color}</p>}
-                        <p style={{ fontSize: 13, fontWeight: 600, color: '#0057FF', margin: 0 }}>REF {item.price.toLocaleString()}</p>
+                        {item.price != null && <p style={{ fontSize: 13, fontWeight: 600, color: accent, margin: 0 }}>REF {item.price.toLocaleString()}</p>}
                       </div>
                     </a>
                   ))}
@@ -456,13 +486,28 @@ function NavLinks() {
   const [position, setPosition] = useState({ left: 0, width: 0, opacity: 0 })
   const refs = useRef([])
   const pathname = window.location.pathname
+  const isGamingZone = pathname === '/gaming'
+  const accent = isGamingZone ? '#1FD37A' : '#0057FF'
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
       {/* Dropdowns de categoría */}
-      <MegaMenu label="iPhone" items={dropdownMenus.iPhone} categoryHref="/tienda?categoria=iphone" />
-      <MegaMenu label="DJI"    items={dropdownMenus.DJI}    categoryHref="/tienda?categoria=dji-estab" />
-      <MegaMenu label="Oakley" items={dropdownMenus.Oakley} categoryHref="/tienda?categoria=oakley" />
+      <MegaMenu label="Teléfono"   items={dropdownMenus.Telefono}   categoryHref="/tienda?categoria=telefonos" accent={accent} dark={isGamingZone} />
+      <MegaMenu label="DJI"        items={dropdownMenus.DJI}        categoryHref="/tienda?categoria=dji-estab" accent={accent} dark={isGamingZone} />
+      <MegaMenu label="Oakley"     items={dropdownMenus.Oakley}     categoryHref="/tienda?categoria=oakley" accent={accent} dark={isGamingZone} />
+      <MegaMenu label="Accesorios" items={dropdownMenus.Accesorios} categoryHref="/tienda?categoria=fundas" accent={accent} dark={isGamingZone} />
+
+      {import.meta.env.DEV && (
+        <a href="/gaming" style={{
+          display: 'flex', alignItems: 'center', gap: 6,
+          padding: '6px 14px', fontSize: 15, fontWeight: 700,
+          color: isGamingZone ? '#1FD37A' : '#111',
+          textDecoration: 'none', whiteSpace: 'nowrap',
+        }}>
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1FD37A' }} />
+          Zona Gaming
+        </a>
+      )}
 
       {/* Links planos */}
       <div
@@ -493,7 +538,7 @@ function NavLinks() {
               display: 'block', padding: '6px 14px',
               fontSize: 15,
               fontWeight: pathname === item.to ? 700 : 600,
-              color: pathname === item.to ? '#0057FF' : '#111',
+              color: pathname === item.to ? accent : (isGamingZone ? '#ddd' : '#111'),
               whiteSpace: 'nowrap', textDecoration: 'none',
               userSelect: 'none',
             }}
@@ -506,11 +551,11 @@ function NavLinks() {
   )
 }
 
-const Badge = ({ count }) => (
+const Badge = ({ count, color = '#0057FF' }) => (
   <span style={{
     position: 'absolute', top: 2, right: 2,
     minWidth: 16, height: 16, borderRadius: 99,
-    background: '#0057FF', color: '#fff',
+    background: color, color: '#fff',
     fontSize: 9, fontWeight: 700,
     display: 'flex', alignItems: 'center', justifyContent: 'center',
     padding: '0 4px', pointerEvents: 'none',
@@ -534,6 +579,8 @@ const WaIcon = () => (
 
 /* —?—? Navbar principal —?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—? */
 export default function Navbar() {
+  const isGamingZone = window.location.pathname === '/gaming'
+  const logoAccent = isGamingZone ? '#1FD37A' : '#0057FF'
   const [mobileOpen, setMobileOpen]   = useState(false)
   const [searchOpen, setSearchOpen]   = useState(false)
   const [cartOpen, setCartOpen]       = useState(false)
@@ -625,17 +672,17 @@ export default function Navbar() {
         <div ref={pillRef} style={{
           display: 'flex', alignItems: 'center',
           height: 52, padding: '0 16px', gap: 12,
-          background: 'rgba(255,255,255,0.96)',
+          background: isGamingZone ? 'rgba(10,10,10,0.9)' : 'rgba(255,255,255,0.96)',
           backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
-          boxShadow: '0 2px 20px rgba(0,0,0,0.08), 0 1px 0 rgba(0,0,0,0.04)',
-          border: '1px solid rgba(0,0,0,0.07)',
+          boxShadow: isGamingZone ? '0 2px 20px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.04)' : '0 2px 20px rgba(0,0,0,0.08), 0 1px 0 rgba(0,0,0,0.04)',
+          border: isGamingZone ? '1px solid rgba(31,211,122,0.25)' : '1px solid rgba(0,0,0,0.07)',
           borderRadius: 999,
           pointerEvents: 'auto',
         }}>
 
           {/* Logo */}
           <a href="/" style={{ flex: 'none', display: 'flex', alignItems: 'center' }}>
-            <Logo variant="color" height={36} />
+            <Logo variant={isGamingZone ? 'white' : 'color'} height={36} accent={logoAccent} />
           </a>
 
           {/* Nav links desktop */}
@@ -648,33 +695,33 @@ export default function Navbar() {
 
           {/* Íconos derecha ×" desktop */}
           <div className="nav-right-desktop" style={{ flex: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
-            <button onClick={() => setSearchOpen(true)} style={iconBtn} title="Buscar">
+            <button onClick={() => setSearchOpen(true)} style={iconBtnStyle(isGamingZone)} title="Buscar">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
               </svg>
             </button>
 
-            <button onClick={() => openWish()} style={{ ...iconBtn, position: 'relative' }} title="Lista de deseos">
+            <button onClick={() => openWish()} style={{ ...iconBtnStyle(isGamingZone), position: 'relative' }} title="Lista de deseos">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
               </svg>
-              {wishlist.length > 0 && <Badge count={wishlist.length} />}
+              {wishlist.length > 0 && <Badge count={wishlist.length} color={logoAccent} />}
             </button>
 
-            <button onClick={() => openCart()} style={{ ...iconBtn, position: 'relative' }} title="Carrito">
+            <button onClick={() => openCart()} style={{ ...iconBtnStyle(isGamingZone), position: 'relative' }} title="Carrito">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
               </svg>
-              {cart.length > 0 && <Badge count={cart.reduce((s, i) => s + i.qty, 0)} />}
+              {cart.length > 0 && <Badge count={cart.reduce((s, i) => s + i.qty, 0)} color={logoAccent} />}
             </button>
 
-            <div style={{ width: 1, height: 20, background: '#e5e5e5', margin: '0 8px' }} />
+            <div style={{ width: 1, height: 20, background: isGamingZone ? 'rgba(255,255,255,0.15)' : '#e5e5e5', margin: '0 8px' }} />
 
             <a href={WA_BASE} target="_blank" rel="noopener noreferrer" style={{
               display: 'flex', alignItems: 'center', gap: 6,
-              background: '#111', color: '#fff',
+              background: isGamingZone ? logoAccent : '#111', color: isGamingZone ? '#0a0a0a' : '#fff',
               padding: '8px 18px', borderRadius: 99,
-              fontSize: 12, fontWeight: 500, textDecoration: 'none', whiteSpace: 'nowrap',
+              fontSize: 12, fontWeight: 600, textDecoration: 'none', whiteSpace: 'nowrap',
             }}>
               <WaIcon />
               Cotizar
@@ -683,18 +730,18 @@ export default function Navbar() {
 
           {/* Mobile: iconos + hamburger */}
           <div className="nav-right-mobile" style={{ alignItems: 'center', gap: 4 }}>
-            <button onClick={() => setSearchOpen(true)} style={iconBtn} title="Buscar">
+            <button onClick={() => setSearchOpen(true)} style={iconBtnStyle(isGamingZone)} title="Buscar">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
               </svg>
             </button>
-            <button onClick={() => openCart()} style={{ ...iconBtn, position: 'relative' }} title="Carrito">
+            <button onClick={() => openCart()} style={{ ...iconBtnStyle(isGamingZone), position: 'relative' }} title="Carrito">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
               </svg>
-              {cart.length > 0 && <Badge count={cart.reduce((s, i) => s + i.qty, 0)} />}
+              {cart.length > 0 && <Badge count={cart.reduce((s, i) => s + i.qty, 0)} color={logoAccent} />}
             </button>
-            <button onClick={() => setMobileOpen(o => !o)} style={iconBtn} aria-label="Menú">
+            <button onClick={() => setMobileOpen(o => !o)} style={iconBtnStyle(isGamingZone)} aria-label="Menú">
               {mobileOpen
                 ? <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
                 : <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
@@ -724,9 +771,10 @@ export default function Navbar() {
             <div style={{ padding: '12px 12px 12px' }}>
               {/* Categorías con imagen */}
               {[
-                { label: 'iPhone',      sub: 'iPhone 17 Pro & Pro Max', image: '/iphone-orange-hand.webp',    href: '/tienda?categoria=iphone' },
-                { label: 'DJI',         sub: 'Estabilizadores & Audio',  image: '/dji-osmo7p-hand.webp',      href: '/tienda?categoria=dji-estab' },
-                { label: 'Oakley Meta', sub: 'HSTN & Vanguard',          image: '/oakley-hstn-red-hand.webp', href: '/tienda?categoria=oakley' },
+                { label: 'Teléfono',    sub: 'iPhone 17 Pro & Samsung Galaxy', image: '/iphone-orange-hand.webp',    href: '/tienda?categoria=telefonos' },
+                { label: 'DJI',         sub: 'Estabilizadores & Audio',        image: '/dji-osmo7p-hand.webp',       href: '/tienda?categoria=dji-estab' },
+                { label: 'Oakley Meta', sub: 'HSTN & Vanguard',                image: '/oakley-hstn-red-hand.webp',  href: '/tienda?categoria=oakley' },
+                { label: 'Accesorios',  sub: 'Fundas, audio, cargadores',      image: '/otterbox-symmetry-clear-shop.webp', href: '/tienda?categoria=fundas' },
               ].map((item, i) => (
                 <a key={i} href={item.href} onClick={() => setMobileOpen(false)} style={{
                   display: 'flex', alignItems: 'center', gap: 14,
@@ -745,6 +793,32 @@ export default function Navbar() {
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ccc" strokeWidth="2" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
                 </a>
               ))}
+
+              {/* Zona Gaming — destacada, tema verde/negro */}
+              {import.meta.env.DEV && (
+                <a href="/gaming" onClick={() => setMobileOpen(false)} style={{
+                  display: 'flex', alignItems: 'center', gap: 14,
+                  background: '#0a0a0a', borderRadius: 14,
+                  padding: '12px 14px', marginBottom: 8,
+                  textDecoration: 'none',
+                  border: '1px solid rgba(31,211,122,0.35)',
+                }}>
+                  <div style={{
+                    width: 56, height: 56, borderRadius: 10, overflow: 'hidden', flexShrink: 0,
+                    background: '#161616', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    <img src="/mando-gaming-shop.svg" alt="Zona Gaming" style={{ width: '70%', height: '70%', objectFit: 'contain' }} />
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <p style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 15, fontWeight: 700, color: '#fff', margin: '0 0 2px' }}>
+                      <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1FD37A' }} />
+                      Zona Gaming
+                    </p>
+                    <p style={{ fontSize: 12, color: '#999', margin: 0 }}>Mandos, docks, volantes</p>
+                  </div>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1FD37A" strokeWidth="2" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
+                </a>
+              )}
 
               {/* Divider */}
               <div style={{ height: 1, background: '#e8e8e8', margin: '8px 0' }} />
@@ -1008,11 +1082,11 @@ export default function Navbar() {
   )
 }
 
-const iconBtn = {
+const iconBtnStyle = (dark = false) => ({
   width: 44, height: 44, borderRadius: 8,
   border: 'none', background: 'transparent',
   cursor: 'pointer', display: 'flex',
   alignItems: 'center', justifyContent: 'center',
-  color: '#444',
-}
+  color: dark ? '#ddd' : '#444',
+})
 
