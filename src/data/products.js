@@ -2201,6 +2201,10 @@
       { color: 'Robot White', hex: '#f2f2f2', image: '/xbox-wireless-controller-robotwhite-shop.webp', storage: [{ label: null, price: 60 }] },
       { color: 'Shock Blue', hex: '#0f4fd1', image: '/xbox-wireless-controller-shockblue-shop.webp', storage: [{ label: null, price: 60 }] },
       { color: 'Velocity Green', hex: '#3fbf3f', image: '/xbox-wireless-controller-velocitygreen-shop.webp', storage: [{ label: null, price: 60 }] },
+      { color: 'Pulse Red', hex: '#c21f2e', image: '/xbox-wireless-controller-pulsered-shop.webp', storage: [{ label: null, price: 60 }] },
+      { color: 'Astral Purple', hex: '#6b3fa0', image: '/xbox-wireless-controller-purple-shop.webp', storage: [{ label: null, price: 60 }] },
+      { color: 'Deep Pink', hex: '#e0509a', image: '/xbox-wireless-controller-pink-shop.webp', storage: [{ label: null, price: 60 }] },
+      { color: 'Electric Volt', hex: '#c4e021', image: '/xbox-wireless-controller-volt-shop.webp', storage: [{ label: null, price: 60 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'Mejor mando 2026 por versatilidad multiplataforma y precio justo' },
@@ -2215,8 +2219,13 @@
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'White', hex: '#eceef0', image: '/sony-dualsense-ps5-white-shop.webp', storage: [{ label: null, price: 70 }] },
-      { color: 'Midnight Black', hex: '#1a1a1a', image: '/sony-dualsense-ps5-black-shop.webp', storage: [{ label: null, price: 70 }] },
+      { color: 'Midnight Black', hex: '#1a1a1a', image: '/dualsense-midnightblack-shop.webp', storage: [{ label: null, price: 70 }] },
+      { color: 'White', hex: '#eceef0', image: '/dualsense-white-shop.webp', storage: [{ label: null, price: 70 }] },
+      { color: 'Galactic Purple', hex: '#7a6bb0', image: '/dualsense-galacticpurple-shop.webp', storage: [{ label: null, price: 70 }] },
+      { color: 'Remix Green', hex: '#7ac97a', image: '/dualsense-remixgreen-shop.webp', storage: [{ label: null, price: 70 }] },
+      { color: 'Rhythm Blue', hex: '#4a7fc9', image: '/dualsense-rhythmblue-shop.webp', storage: [{ label: null, price: 70 }] },
+      { color: 'Techno Red', hex: '#c9433f', image: '/dualsense-technored-shop.webp', storage: [{ label: null, price: 70 }] },
+      { color: 'Chroma Indigo', hex: '#3f4fae', image: '/dualsense-chromaindigo-shop.webp', storage: [{ label: null, price: 70 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'Gatillos adaptativos y háptica — estándar de la experiencia PS5' },
@@ -2231,8 +2240,7 @@
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'White', hex: '#eceef0', image: '/sony-dualsense-edge-white-shop.webp', storage: [{ label: null, price: 200 }] },
-      { color: 'Midnight Black', hex: '#1a1a1a', image: '/sony-dualsense-edge-black-shop.webp', storage: [{ label: null, price: 200 }] },
+      { color: 'White', hex: '#eceef0', image: '/dualsense-edge-white-shop.webp', storage: [{ label: null, price: 200 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'Versión pro con sticks intercambiables para jugador competitivo' },
@@ -2241,430 +2249,280 @@
   },
 
   {
-    id: 'nintendo-switch-pro-controller',
-    brand: 'Nintendo', category: 'gaming',
-    name: 'Nintendo Switch Pro Controller',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/nintendo-switch-pro-controller-black-shop.webp',
-      storage: [{ label: null, price: 70 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'El mando recomendado para Switch en todas las guías 2026' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'xbox-elite-series-2-core',
-    brand: 'Microsoft', category: 'gaming',
-    name: 'Xbox Elite Series 2 Core',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/xbox-elite-series-2-core-black-shop.webp',
-      storage: [{ label: null, price: 130 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Paletas traseras y tensión ajustable — el más personalizable' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'razer-wolverine-v3-pro',
-    brand: 'Razer', category: 'gaming',
-    name: 'Razer Wolverine V3 Pro',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/razer-wolverine-v3-pro-black-shop.webp',
-      storage: [{ label: null, price: 170 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Sticks Hall Effect, opción premium de terceros' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'gamesir-g7-pro-8k',
-    brand: 'GameSir', category: 'gaming',
-    name: 'GameSir G7 Pro 8K',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/gamesir-g7-pro-8k-black-shop.webp',
-      storage: [{ label: null, price: 90 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: '8,000Hz de polling — la mayor tasa disponible, mitad de precio del Elite 2' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'gamesir-nova-lite-2',
-    brand: 'GameSir', category: 'gaming',
-    name: 'GameSir Nova Lite 2',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/gamesir-nova-lite-2-gray-shop.webp',
-      storage: [{ label: null, price: 40 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Mejor opción general por sticks Hall Effect y compatibilidad amplia' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: '8bitdo-ultimate-2-wireless',
-    brand: '8BitDo', category: 'gaming',
-    name: '8BitDo Ultimate 2 Wireless',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/8bitdo-ultimate-2-wireless-black-shop.webp',
-      storage: [{ label: null, price: 65 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'TMR sticks + gatillos Hall Effect + dock incluido, top 2026' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: '8bitdo-ultimate-2c',
-    brand: '8BitDo', category: 'gaming',
-    name: '8BitDo Ultimate 2C',
+    id: 'dualsense-charging-station',
+    brand: 'Sony', category: 'gaming',
+    name: 'DualSense Charging Station',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'Black', hex: '#1a1a1a', image: '/8bitdo-ultimate-2c-black-shop.webp', storage: [{ label: null, price: 35 }] },
-      { color: 'Mint', hex: '#c3e8dc', image: '/8bitdo-ultimate-2c-mint-shop.webp', storage: [{ label: null, price: 35 }] },
-      { color: 'Purple', hex: '#c7b4e8', image: '/8bitdo-ultimate-2c-purple-shop.webp', storage: [{ label: null, price: 35 }] },
+      { color: 'White', hex: '#eceef0', image: '/dualsense-charging-station-shop.webp', storage: [{ label: null, price: 30 }] },
     ],
     specs: [
-      { label: 'Por qué', value: 'Ligero y ergonómico, 1000Hz de polling' },
+      { label: 'Por qué', value: 'Carga 2 mandos DualSense simultáneamente, licencia oficial PlayStation' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
   {
-    id: '8bitdo-pro-2-wired',
-    brand: '8BitDo', category: 'gaming',
-    name: '8BitDo Pro 2 Wired',
+    id: 'ninjutso-ten',
+    brand: 'Ninjutso', category: 'gaming',
+    name: 'Ninjutso Ten',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/8bitdo-pro-2-wired-black-shop.webp',
-      storage: [{ label: null, price: 30 }],
-    }],
+    colorVariants: [
+      { color: 'Black', hex: '#1a1a1a', image: '/ninjutso-ten-black-shop.webp', storage: [{ label: null, price: 90 }] },
+      { color: 'Air White', hex: '#f2f2f2', image: '/ninjutso-ten-airwhite-shop.webp', storage: [{ label: null, price: 90 }] },
+    ],
     specs: [
-      { label: 'Por qué', value: 'La opción budget más citada en rankings 2026' },
+      { label: 'Por qué', value: 'Ultra liviano (~48g), preferido por jugadores competitivos de FPS' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
   {
-    id: 'backbone-one',
-    brand: 'Backbone', category: 'gaming',
-    name: 'Backbone One',
+    id: 'pulsar-noctua-feinmann-fo1',
+    brand: 'Pulsar', category: 'gaming',
+    name: 'Pulsar Noctua Feinmann FO1',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/backbone-one-black-shop.webp',
-      storage: [{ label: null, price: 100 }],
-    }],
+    colorVariants: [
+      { color: 'Beige/Brown', hex: '#b89a76', image: '/pulsar-noctua-feinmann-fo1-beigebrown-shop.webp', storage: [{ label: null, price: 110 }] },
+    ],
     specs: [
-      { label: 'Por qué', value: 'Convierte el teléfono en consola — muy fuerte en mobile gaming' },
+      { label: 'Por qué', value: 'Colaboración Pulsar x Noctua, diseño simétrico premium en edición limitada' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
   {
-    id: 'turtle-beach-recon-cloud',
-    brand: 'Turtle Beach', category: 'gaming',
-    name: 'Turtle Beach Recon Cloud',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/turtle-beach-recon-cloud-black-shop.webp',
-      storage: [{ label: null, price: 80 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Mando enfocado en cloud gaming multiplataforma' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'powera-fusion-pro-3',
-    brand: 'PowerA', category: 'gaming',
-    name: 'PowerA Fusion Pro 3',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/powera-fusion-pro-3-black-shop.webp',
-      storage: [{ label: null, price: 65 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Alternativa con licencia oficial a precio competitivo' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: '8bitdo-charging-dock',
-    brand: '8BitDo', category: 'gaming',
-    name: '8BitDo Charging Dock',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/8bitdo-charging-dock-black-shop.webp',
-      storage: [{ label: null, price: 20 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Diseño minimalista con iluminación sutil, combo natural con sus mandos' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'powera-xbox-charging-dock',
-    brand: 'PowerA', category: 'gaming',
-    name: 'PowerA Xbox Charging Dock',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/powera-xbox-charging-dock-black-shop.webp',
-      storage: [{ label: null, price: 25 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Licencia oficial Xbox + 2 años de garantía' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'anker-steam-deck-docking-station',
-    brand: 'Anker', category: 'gaming',
-    name: 'Anker Steam Deck Docking Station',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/anker-steam-deck-docking-station-gray-shop.webp',
-      storage: [{ label: null, price: 60 }],
-    }],
-    specs: [
-      { label: 'Por qué', value: 'Hub 6-en-1 con HDMI 4K@60Hz y Ethernet — muy recomendado 2026' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
-    id: 'razer-handheld-dock-chroma',
+    id: 'razer-basilisk-v3-pro',
     brand: 'Razer', category: 'gaming',
-    name: 'Razer Handheld Dock Chroma',
+    name: 'Razer Basilisk V3 Pro',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/razer-handheld-dock-chroma-black-shop.webp',
-      storage: [{ label: null, price: 100 }],
-    }],
+    colorVariants: [
+      { color: 'Classic Black', hex: '#1a1a1a', image: '/razer-basilisk-v3-pro-black-shop.webp', storage: [{ label: null, price: 160 }] },
+      { color: 'White', hex: '#f2f2f2', image: '/razer-basilisk-v3-pro-white-shop.webp', storage: [{ label: null, price: 160 }] },
+    ],
     specs: [
-      { label: 'Por qué', value: '100W passthrough, compatible Steam Deck/ROG Ally/iPhone' },
+      { label: 'Por qué', value: '11 botones programables, rueda HyperScroll y RGB Chroma — el ergonómico tope de gama' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
   {
-    id: 'jsaux-hb0603-dock',
-    brand: 'JSAUX', category: 'gaming',
-    name: 'JSAUX HB0603 Dock',
+    id: 'razer-viper-v3-pro',
+    brand: 'Razer', category: 'gaming',
+    name: 'Razer Viper V3 Pro',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/jsaux-hb0603-dock-black-shop.webp',
-      storage: [{ label: null, price: 70 }],
-    }],
+    colorVariants: [
+      { color: 'Black', hex: '#1a1a1a', image: '/razer-viper-v3-pro-black-shop.webp', storage: [{ label: null, price: 160 }] },
+      { color: 'White', hex: '#f2f2f2', image: '/razer-viper-v3-pro-white-shop.webp', storage: [{ label: null, price: 160 }] },
+      { color: 'Faker Edition', hex: '#c9a13b', image: '/razer-viper-v3-pro-faker-shop.webp', storage: [{ label: null, price: 180 }] },
+    ],
     specs: [
-      { label: 'Por qué', value: 'Puerto Ethernet Gigabit, fuerte en setups competitivos' },
+      { label: 'Por qué', value: 'El mouse esports por excelencia — 8000Hz, sensor 35K DPI, 54g' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
   {
-    id: 'ugreen-9-in-1-dock',
-    brand: 'UGREEN', category: 'gaming',
-    name: 'UGREEN 9-in-1 Dock',
+    id: 'scyrox-v8',
+    brand: 'Scyrox', category: 'gaming',
+    name: 'Scyrox V8',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/ugreen-9-in-1-dock-gray-shop.webp',
-      storage: [{ label: null, price: 90 }],
-    }],
+    colorVariants: [
+      { color: 'Black', hex: '#1a1a1a', image: '/scyrox-v8-black-shop.webp', storage: [{ label: null, price: 40 }] },
+      { color: 'White', hex: '#f2f2f2', image: '/scyrox-v8-white-shop.webp', storage: [{ label: null, price: 40 }] },
+      { color: 'Yellow', hex: '#e8c93a', image: '/scyrox-v8-yellow-shop.webp', storage: [{ label: null, price: 40 }] },
+    ],
     specs: [
-      { label: 'Por qué', value: 'Diseño plegable, alto rendimiento sostenido para escritorio' },
+      { label: 'Por qué', value: 'Buena relación precio-rendimiento, sensor óptico preciso y diseño simétrico' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
   {
-    id: 'nexigo-enhanced-charging-dock',
-    brand: 'NexiGo', category: 'gaming',
-    name: 'NexiGo Enhanced Charging Dock',
+    id: 'teevolution-terra-pro',
+    brand: 'Teevolution', category: 'gaming',
+    name: 'Teevolution Terra Pro',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/nexigo-enhanced-charging-dock-white-shop.webp',
-      storage: [{ label: null, price: 45 }],
-    }],
+    colorVariants: [
+      { color: 'Black', hex: '#1a1a1a', image: '/teevolution-terra-pro-black-shop.webp', storage: [{ label: null, price: 45 }] },
+      { color: 'White', hex: '#f2f2f2', image: '/teevolution-terra-pro-white-shop.webp', storage: [{ label: null, price: 45 }] },
+      { color: 'Emerald Green', hex: '#2f9e6b', image: '/teevolution-terra-pro-emeraldgreen-shop.webp', storage: [{ label: null, price: 45 }] },
+      { color: 'Inferno Orange', hex: '#e0642f', image: '/teevolution-terra-pro-infernoorange-shop.webp', storage: [{ label: null, price: 45 }] },
+    ],
     specs: [
-      { label: 'Por qué', value: 'Mejor dock para Meta Quest 3 según VRGearGuide' },
+      { label: 'Por qué', value: 'Mouse ligero de entrada con variedad de colores, buen valor por precio' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
   {
-    id: 'amvr-rgb-charging-dock',
-    brand: 'AMVR', category: 'gaming',
-    name: 'AMVR RGB Charging Dock',
+    id: 'vxe-dragonfly-r1-pro',
+    brand: 'VXE', category: 'gaming',
+    name: 'VXE Dragonfly R1 Pro',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/amvr-rgb-charging-dock-white-shop.webp',
-      storage: [{ label: null, price: 35 }],
-    }],
+    colorVariants: [
+      { color: 'Black', hex: '#1a1a1a', image: '/vxe-dragonfly-r1-pro-black-shop.webp', storage: [{ label: null, price: 45 }] },
+      { color: 'White', hex: '#f2f2f2', image: '/vxe-dragonfly-r1-pro-white-shop.webp', storage: [{ label: null, price: 45 }] },
+    ],
     specs: [
-      { label: 'Por qué', value: 'Carga headset + controles en un par de horas, iluminación RGB' },
+      { label: 'Por qué', value: 'Ultraliviano y económico, muy recomendado en la comunidad de mouse esports' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
   {
-    id: 'anker-647-charging-station',
-    brand: 'Anker', category: 'gaming',
-    name: 'Anker 647 Charging Station',
+    id: 'xlite-crazylight-mini',
+    brand: 'XLITE', category: 'gaming',
+    name: 'XLITE Crazylight Mini',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/anker-647-charging-station-black-shop.webp',
-      storage: [{ label: null, price: 130 }],
-    }],
+    colorVariants: [
+      { color: 'Jet Black', hex: '#1a1a1a', image: '/xlite-crazylight-mini-jetblack-shop.webp', storage: [{ label: null, price: 35 }] },
+      { color: 'Uyuni White', hex: '#f2f2f2', image: '/xlite-crazylight-mini-uyuniwhite-shop.webp', storage: [{ label: null, price: 35 }] },
+      { color: 'Rock', hex: '#8a8580', image: '/xlite-crazylight-mini-rock-shop.webp', storage: [{ label: null, price: 35 }] },
+    ],
     specs: [
-      { label: 'Por qué', value: 'Estación 10-en-1 con ActiveShield 2.0 para setups multi-dispositivo' },
+      { label: 'Por qué', value: 'Compacto y ultraliviano, ideal para agarre claw o fingertip' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
   {
-    id: 'thrustmaster-t-flight-hotas-x',
-    brand: 'Thrustmaster', category: 'gaming',
-    name: 'Thrustmaster T-Flight Hotas X',
+    id: 'zygen-np01s',
+    brand: 'Zygen', category: 'gaming',
+    name: 'Zygen NP-01S',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/thrustmaster-t-flight-hotas-x-black-shop.webp',
-      storage: [{ label: null, price: 100 }],
-    }],
+    colorVariants: [
+      { color: 'Obsydian Black', hex: '#1a1a1a', image: '/zygen-np01s-obsydianblack-shop.webp', storage: [{ label: null, price: 50 }] },
+      { color: 'White', hex: '#f2f2f2', image: '/zygen-np01s-white-shop.webp', storage: [{ label: null, price: 50 }] },
+      { color: 'Brown', hex: '#7a5a3f', image: '/zygen-np01s-brown-shop.webp', storage: [{ label: null, price: 50 }] },
+      { color: 'Lake Green', hex: '#3f8a7a', image: '/zygen-np01s-lakegreen-shop.webp', storage: [{ label: null, price: 50 }] },
+      { color: 'Fluorescent Green', hex: '#9fd63a', image: '/zygen-np01s-fluorescentgreen-shop.webp', storage: [{ label: null, price: 50 }] },
+    ],
     specs: [
-      { label: 'Por qué', value: 'Mejor joystick general para PC según PC Gamer' },
+      { label: 'Por qué', value: 'Forma simétrica clásica, muy popular en la escena de mice mods' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
   {
-    id: 'logitech-extreme-3d-pro',
-    brand: 'Logitech', category: 'gaming',
-    name: 'Logitech Extreme 3D Pro',
+    id: 'ajazz-ak820-pro',
+    brand: 'Ajazz', category: 'gaming',
+    name: 'Ajazz AK820 Pro',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/logitech-extreme-3d-pro-black-shop.webp',
-      storage: [{ label: null, price: 50 }],
-    }],
+    colorVariants: [
+      { color: 'Grey', hex: '#8a8a8a', image: '/ajazz-ak820-pro-grey-shop.webp', storage: [{ label: null, price: 55 }] },
+    ],
     specs: [
-      { label: 'Por qué', value: 'Joystick de entrada más recomendado para simuladores' },
+      { label: 'Por qué', value: 'Pantalla LCD y perilla multifunción, hot-swap y sonido thocky' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
   {
-    id: 'turtle-beach-velocityone-flightstick',
-    brand: 'Turtle Beach', category: 'gaming',
-    name: 'Turtle Beach VelocityOne Flightstick',
+    id: 'attack-shark-r82-he',
+    brand: 'Attack Shark', category: 'gaming',
+    name: 'Attack Shark R82 HE Rapid Trigger',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/turtle-beach-velocityone-flightstick-black-shop.webp',
-      storage: [{ label: null, price: 200 }],
-    }],
+    colorVariants: [
+      { color: 'Black', hex: '#1a1a1a', image: '/attack-shark-r82-he-black-shop.webp', storage: [{ label: null, price: 70 }] },
+      { color: 'Black Gradient', hex: '#3a3a3a', image: '/attack-shark-r82-he-blackgradient-shop.webp', storage: [{ label: null, price: 70 }] },
+      { color: 'White', hex: '#f2f2f2', image: '/attack-shark-r82-he-white-shop.webp', storage: [{ label: null, price: 70 }] },
+      { color: 'Pink Contours', hex: '#e8508f', image: '/attack-shark-r82-he-pinkcontours-shop.webp', storage: [{ label: null, price: 70 }] },
+    ],
     specs: [
-      { label: 'Por qué', value: 'Pantalla OLED integrada, muy valorado por configurabilidad' },
+      { label: 'Por qué', value: 'Interruptores magnéticos Hall Effect con rapid trigger — ventaja competitiva real' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
   {
-    id: 'moza-r3-racing-wheel',
-    brand: 'MOZA', category: 'gaming',
-    name: 'MOZA R3 Racing Wheel',
+    id: 'aula-hero84-he',
+    brand: 'Aula', category: 'gaming',
+    name: 'Aula Hero84 HE',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/moza-r3-racing-wheel-black-shop.webp',
-      storage: [{ label: null, price: 280 }],
-    }],
+    colorVariants: [
+      { color: 'White Purple', hex: '#8a6bd6', image: '/aula-hero84-he-whitepurple-shop.webp', storage: [{ label: null, price: 60 }] },
+    ],
     specs: [
-      { label: 'Por qué', value: 'Kit volante+base+pedales de entrada a direct drive' },
+      { label: 'Por qué', value: 'Hall Effect accesible con barra RGB perimetral, 75% compacto' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
   {
-    id: 'victrix-pro-fs-12-arcade-stick',
-    brand: 'Victrix', category: 'gaming',
-    name: 'Victrix Pro FS-12 Arcade Stick',
+    id: 'aula-win60he',
+    brand: 'Aula', category: 'gaming',
+    name: 'Aula Win60 HE',
     tag: null, bgText: null,
     byOrder: true,
-    colorVariants: [{
-      color: null, hex: '#1a1a1a',
-      image: '/victrix-pro-fs12-white-shop.webp',
-      storage: [{ label: null, price: 250 }],
-    }],
+    colorVariants: [
+      { color: 'Black/Red', hex: '#a11c1c', image: '/aula-win60he-blackred-shop.webp', storage: [{ label: null, price: 50 }] },
+      { color: 'Grey/Yellow', hex: '#c9b23a', image: '/aula-win60he-greyyellow-shop.webp', storage: [{ label: null, price: 50 }] },
+      { color: 'White/Blue', hex: '#4a8fd1', image: '/aula-win60he-whiteblue-shop.webp', storage: [{ label: null, price: 50 }] },
+    ],
     specs: [
-      { label: 'Por qué', value: 'El fight stick de referencia para competencia según reviews 2026' },
+      { label: 'Por qué', value: '60% Hall Effect con keycaps de diseño, la opción más compacta de la línea' },
       { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
     ],
   },
 
+  {
+    id: 'hyperx-alloy-origins-core',
+    brand: 'HyperX', category: 'gaming',
+    name: 'HyperX Alloy Origins Core',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [
+      { color: 'Black', hex: '#1a1a1a', image: '/hyperx-alloy-origins-core-shop.webp', storage: [{ label: null, price: 90 }] },
+    ],
+    specs: [
+      { label: 'Por qué', value: 'Chasis de aluminio full-size, switches propietarios HyperX ultra durables' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'mojo68-plastic',
+    brand: 'Mojo', category: 'gaming',
+    name: 'Mojo68 Plastic',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [
+      { color: 'White', hex: '#e8f0e4', image: '/mojo68-plastic-white-shop.webp', storage: [{ label: null, price: 55 }] },
+    ],
+    specs: [
+      { label: 'Por qué', value: 'Diseño transparente distintivo, comunidad de mods muy activa' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
+
+  {
+    id: 'redragon-kumara-k552',
+    brand: 'Redragon', category: 'gaming',
+    name: 'Redragon Kumara K552',
+    tag: null, bgText: null,
+    byOrder: true,
+    colorVariants: [
+      { color: 'Black', hex: '#1a1a1a', image: '/redragon-kumara-k552-shop.webp', storage: [{ label: null, price: 32 }] },
+    ],
+    specs: [
+      { label: 'Por qué', value: 'El teclado mecánico económico más recomendado — TKL con switches Outemu' },
+      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
+    ],
+  },
 
   // ── Bajo pedido — cargadores (estudio de mercado) ──────────────
 

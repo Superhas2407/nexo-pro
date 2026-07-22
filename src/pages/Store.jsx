@@ -657,6 +657,7 @@ export default function Store() {
             onClose={() => { setSelectedProduct(null); setModalSkipSpread(false); setModalColorIdx(0) }}
             initialColorIdx={modalColorIdx}
             skipSpread={modalSkipSpread}
+            theme={selectedProduct.category === 'gaming' ? 'green' : 'blue'}
           />
         )}
       </AnimatePresence>

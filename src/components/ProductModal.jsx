@@ -408,10 +408,10 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                         cursor: 'pointer', position: 'relative',
                         borderRadius: 16,
                         background: cv.hex
-                          ? `color-mix(in srgb, ${cv.hex} 12%, white)`
-                          : '#fafafa',
-                        boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
-                        border: selectedColorIdx === i ? '2px solid #111' : '2px solid transparent',
+                          ? (dark ? `color-mix(in srgb, ${cv.hex} 20%, #141414)` : `color-mix(in srgb, ${cv.hex} 12%, white)`)
+                          : (dark ? '#141414' : '#fafafa'),
+                        boxShadow: dark ? '0 1px 3px rgba(0,0,0,0.4)' : '0 1px 3px rgba(0,0,0,0.08)',
+                        border: selectedColorIdx === i ? `2px solid ${dark ? '#f5f5f5' : '#111'}` : '2px solid transparent',
                         overflow: 'hidden',
                         padding: '14px 8px',
                         gap: 6,
@@ -431,7 +431,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                           {cv.hex && (
                             <div style={{
                               width: 10, height: 10, borderRadius: '50%',
-                              ...swatchStyle(cv), border: '1.5px solid rgba(0,0,0,0.14)',
+                              ...swatchStyle(cv), border: dark ? '1.5px solid rgba(255,255,255,0.25)' : '1.5px solid rgba(0,0,0,0.14)',
                               flexShrink: 0,
                             }} />
                           )}
@@ -493,12 +493,12 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                     alignItems: 'center', justifyContent: 'center',
                     cursor: 'pointer', position: 'relative',
                     background: cv.hex
-                      ? `color-mix(in srgb, ${cv.hex} 10%, white)`
-                      : '#fafafa',
+                      ? (dark ? `color-mix(in srgb, ${cv.hex} 18%, #141414)` : `color-mix(in srgb, ${cv.hex} 10%, white)`)
+                      : (dark ? '#141414' : '#fafafa'),
                     transition: 'flex 0.35s cubic-bezier(.22,1,.36,1)',
                     overflow: 'hidden',
                     borderRight: i < product.colorVariants.length - 1
-                      ? '1px solid rgba(0,0,0,0.06)' : 'none',
+                      ? (dark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.06)') : 'none',
                     padding: isMobile ? '32px 16px 64px' : '80px 32px 48px',
                     gap: isMobile ? 16 : 28,
                   }}
@@ -529,8 +529,9 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: i * 0.1 + 0.1, type: 'spring', stiffness: 260, damping: 24 }}
                     style={{
-                      height: isMobile ? '38vh' : '52vh',
-                      maxHeight: isMobile ? 280 : 440,
+                      height: 'auto', width: 'auto',
+                      maxHeight: isMobile ? 'min(280px, 38vh)' : 'min(440px, 52vh)',
+                      maxWidth: '100%',
                       objectFit: 'contain', display: 'block',
                       position: 'relative', zIndex: 1,
                       filter: 'drop-shadow(0 12px 32px rgba(0,0,0,0.13))',
@@ -546,7 +547,7 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                       {cv.hex && (
                         <div style={{
                           width: 11, height: 11, borderRadius: '50%',
-                          ...swatchStyle(cv), border: '1.5px solid rgba(0,0,0,0.14)',
+                          ...swatchStyle(cv), border: dark ? '1.5px solid rgba(255,255,255,0.25)' : '1.5px solid rgba(0,0,0,0.14)',
                           flexShrink: 0,
                         }} />
                       )}

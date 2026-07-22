@@ -9,6 +9,8 @@ import DjiReveal from '../components/DjiReveal'
 import DjiLines from '../components/DjiLines'
 import OakleyReveal from '../components/OakleyReveal'
 import OakleyLines from '../components/OakleyLines'
+import FundasReveal from '../components/FundasReveal'
+import FundasLines from '../components/FundasLines'
 import FeaturedProducts from '../components/FeaturedProducts'
 import WhyUs from '../components/WhyUs'
 import Footer from '../components/Footer'
@@ -33,6 +35,8 @@ export default function Landing() {
       <DjiLines />
       <OakleyReveal />
       <OakleyLines />
+      <FundasReveal />
+      <FundasLines />
       <FeaturedProducts />
       <WhyUs />
       <Footer />

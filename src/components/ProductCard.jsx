@@ -6,12 +6,20 @@ const swatchStyle = (cv) => cv.swatchImage
   ? { backgroundImage: `url(${cv.swatchImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }
   : { background: cv.hex2 ? `linear-gradient(135deg, ${cv.hex} 50%, ${cv.hex2} 50%)` : cv.hex }
 
-export default function ProductCard({ product, onClick }) {
+export default function ProductCard({ product, onClick, theme = 'light' }) {
   const [hovered, setHovered]                   = useState(false)
   const [imgError, setImgError]                 = useState(false)
   const [selectedColorIdx, setSelectedColorIdx] = useState(0)
   const [selectedStorageIdx, setSelectedStorageIdx] = useState(0)
   const [colorPicked, setColorPicked]           = useState(false)
+
+  const dark = theme === 'dark' || theme === 'green'
+  const accent = theme === 'green' ? '#1FD37A' : '#0057FF'
+  const cardBg = dark ? '#141414' : '#fff'
+  const imgBg = dark ? '#1e1e1e' : '#efefed'
+  const textColor = dark ? '#f5f5f5' : '#111'
+  const mutedColor = dark ? '#999' : '#888'
+  const faintColor = dark ? '#666' : '#aaa'
 
   const { isInWishlist, toggleWishlist } = useShop()
   const isMobile = useBreakpoint(768)
@@ -54,18 +62,18 @@ export default function ProductCard({ product, onClick }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: '#fff', borderRadius: 12,
+        background: cardBg, borderRadius: 12,
         overflow: 'hidden', cursor: 'pointer',
         display: 'flex', flexDirection: 'column',
         transition: 'transform 0.2s ease, box-shadow 0.2s ease',
         transform: hovered ? 'translateY(-2px)' : 'none',
         boxShadow: hovered
-          ? '0 8px 24px rgba(0,0,0,0.09)'
-          : '0 1px 3px rgba(0,0,0,0.06)',
+          ? (dark ? '0 8px 24px rgba(0,0,0,0.5)' : '0 8px 24px rgba(0,0,0,0.09)')
+          : (dark ? '0 1px 3px rgba(0,0,0,0.4)' : '0 1px 3px rgba(0,0,0,0.06)'),
       }}
     >
       {/* Imagen */}
-      <div style={{ position: 'relative', aspectRatio: '3/4', background: '#efefed', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', aspectRatio: '3/4', background: imgBg, overflow: 'hidden' }}>
         {!imgError && mainImage ? (
           <img
             src={mainImage}
@@ -142,25 +150,25 @@ export default function ProductCard({ product, onClick }) {
       {/* Info */}
       <div style={{ padding: '12px 14px 14px', display: 'flex', flexDirection: 'column', gap: 2, flex: 1 }}>
 
-        <h3 style={{ fontSize: 15, fontWeight: 700, color: '#111', margin: 0, lineHeight: 1.3 }}>
+        <h3 style={{ fontSize: 15, fontWeight: 700, color: textColor, margin: 0, lineHeight: 1.3 }}>
           {product.name}
         </h3>
 
-        <p style={{ fontSize: 12, color: '#888', margin: '2px 0 0', lineHeight: 1.4 }}>
+        <p style={{ fontSize: 12, color: mutedColor, margin: '2px 0 0', lineHeight: 1.4 }}>
           {product.brand}
           {selectedVariant.color ? ` · ${selectedVariant.color}` : ''}
         </p>
 
         {product.specs?.[0] && (
           <p style={{
-            fontSize: 11, fontWeight: 500, color: '#aaa', margin: '4px 0 0',
+            fontSize: 11, fontWeight: 500, color: faintColor, margin: '4px 0 0',
             whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
           }}>
             {product.specs[0].value}
           </p>
         )}
 
-        <p style={{ fontSize: 14, fontWeight: 600, color: '#111', margin: '8px 0 0' }}>
+        <p style={{ fontSize: 14, fontWeight: 600, color: textColor, margin: '8px 0 0' }}>
           {fmtPrice(selectedStorage.price)}
         </p>
 
@@ -168,8 +176,8 @@ export default function ProductCard({ product, onClick }) {
           <span style={{
             display: 'inline-flex', alignSelf: 'flex-start',
             marginTop: 6, padding: '3px 8px', borderRadius: 4,
-            border: '1px solid #0057FF', fontSize: 10, fontWeight: 600,
-            letterSpacing: 0.3, color: '#0057FF', textTransform: 'uppercase',
+            border: `1px solid ${accent}`, fontSize: 10, fontWeight: 600,
+            letterSpacing: 0.3, color: accent, textTransform: 'uppercase',
           }}>
             Bajo pedido
           </span>
@@ -186,9 +194,9 @@ export default function ProductCard({ product, onClick }) {
                   padding: isMobile ? '10px 12px' : '3px 9px',
                   minHeight: isMobile ? 44 : 'auto',
                   borderRadius: 99, fontSize: 11, fontWeight: 500,
-                  border: i === selectedStorageIdx ? '1.5px solid #111' : '1.5px solid rgba(0,0,0,0.14)',
-                  background: i === selectedStorageIdx ? '#111' : 'transparent',
-                  color: i === selectedStorageIdx ? '#fff' : '#555',
+                  border: i === selectedStorageIdx ? `1.5px solid ${textColor}` : `1.5px solid ${dark ? 'rgba(255,255,255,0.18)' : 'rgba(0,0,0,0.14)'}`,
+                  background: i === selectedStorageIdx ? textColor : 'transparent',
+                  color: i === selectedStorageIdx ? cardBg : mutedColor,
                   cursor: 'pointer', fontFamily: 'inherit',
                   transition: 'all 0.15s ease',
                 }}
@@ -226,8 +234,8 @@ export default function ProductCard({ product, onClick }) {
                     <div style={{
                       width: dotSize, height: dotSize, borderRadius: '50%',
                       ...swatchStyle(cv),
-                      border: isSelected ? '2px solid transparent' : '1.5px solid rgba(0,0,0,0.12)',
-                      outline: isSelected ? '2px solid #111' : 'none',
+                      border: isSelected ? '2px solid transparent' : `1.5px solid ${dark ? 'rgba(255,255,255,0.22)' : 'rgba(0,0,0,0.12)'}`,
+                      outline: isSelected ? `2px solid ${textColor}` : 'none',
                       outlineOffset: isSelected ? '2px' : '0',
                       transition: 'outline 0.15s, transform 0.15s',
                       transform: isSelected ? 'scale(1.15)' : 'scale(1)',
