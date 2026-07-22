@@ -497,17 +497,15 @@ function NavLinks() {
       <MegaMenu label="Oakley"     items={dropdownMenus.Oakley}     categoryHref="/tienda?categoria=oakley" accent={accent} dark={isGamingZone} />
       <MegaMenu label="Accesorios" items={dropdownMenus.Accesorios} categoryHref="/tienda?categoria=fundas" accent={accent} dark={isGamingZone} />
 
-      {import.meta.env.DEV && (
-        <a href="/gaming" style={{
-          display: 'flex', alignItems: 'center', gap: 6,
-          padding: '6px 14px', fontSize: 15, fontWeight: 700,
-          color: isGamingZone ? '#1FD37A' : '#111',
-          textDecoration: 'none', whiteSpace: 'nowrap',
-        }}>
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1FD37A' }} />
-          Zona Gaming
-        </a>
-      )}
+      <a href="/gaming" style={{
+        display: 'flex', alignItems: 'center', gap: 6,
+        padding: '6px 14px', fontSize: 15, fontWeight: 700,
+        color: isGamingZone ? '#1FD37A' : '#111',
+        textDecoration: 'none', whiteSpace: 'nowrap',
+      }}>
+        <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1FD37A' }} />
+        Zona Gaming
+      </a>
 
       {/* Links planos */}
       <div
@@ -795,30 +793,28 @@ export default function Navbar() {
               ))}
 
               {/* Zona Gaming — destacada, tema verde/negro */}
-              {import.meta.env.DEV && (
-                <a href="/gaming" onClick={() => setMobileOpen(false)} style={{
-                  display: 'flex', alignItems: 'center', gap: 14,
-                  background: '#0a0a0a', borderRadius: 14,
-                  padding: '12px 14px', marginBottom: 8,
-                  textDecoration: 'none',
-                  border: '1px solid rgba(31,211,122,0.35)',
+              <a href="/gaming" onClick={() => setMobileOpen(false)} style={{
+                display: 'flex', alignItems: 'center', gap: 14,
+                background: '#0a0a0a', borderRadius: 14,
+                padding: '12px 14px', marginBottom: 8,
+                textDecoration: 'none',
+                border: '1px solid rgba(31,211,122,0.35)',
+              }}>
+                <div style={{
+                  width: 56, height: 56, borderRadius: 10, overflow: 'hidden', flexShrink: 0,
+                  background: '#161616', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
-                  <div style={{
-                    width: 56, height: 56, borderRadius: 10, overflow: 'hidden', flexShrink: 0,
-                    background: '#161616', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}>
-                    <img src="/mando-gaming-shop.svg" alt="Zona Gaming" style={{ width: '70%', height: '70%', objectFit: 'contain' }} />
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <p style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 15, fontWeight: 700, color: '#fff', margin: '0 0 2px' }}>
-                      <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1FD37A' }} />
-                      Zona Gaming
-                    </p>
-                    <p style={{ fontSize: 12, color: '#999', margin: 0 }}>Mandos, docks, volantes</p>
-                  </div>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1FD37A" strokeWidth="2" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
-                </a>
-              )}
+                  <img src="/xbox-wireless-controller-velocitygreen-shop.webp" alt="Zona Gaming" style={{ width: '85%', height: '85%', objectFit: 'contain' }} />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <p style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 15, fontWeight: 700, color: '#fff', margin: '0 0 2px' }}>
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1FD37A' }} />
+                    Zona Gaming
+                  </p>
+                  <p style={{ fontSize: 12, color: '#999', margin: 0 }}>Mandos, teclados, mouse</p>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1FD37A" strokeWidth="2" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
+              </a>
 
               {/* Divider */}
               <div style={{ height: 1, background: '#e8e8e8', margin: '8px 0' }} />

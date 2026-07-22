@@ -14,7 +14,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/tienda" element={<Store />} />
-          {import.meta.env.DEV && <Route path="/gaming" element={<GamingZone />} />}
+          <Route path="/gaming" element={<GamingZone />} />
           <Route path="/terminos" element={<Terminos />} />
         </Routes>
         <CookieConsent />
