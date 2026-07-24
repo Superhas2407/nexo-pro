@@ -370,7 +370,7 @@ function MegaMenu({ label, items, categoryHref, accent = '#0057FF', dark = false
     <div onMouseEnter={enter} onMouseLeave={leave}>
       <button style={{
         display: 'flex', alignItems: 'center', gap: 4,
-        padding: '6px 14px', fontSize: 15, fontWeight: 600,
+        minHeight: 44, padding: '0 14px', fontSize: 15, fontWeight: 600,
         color: open ? accent : (dark ? '#eee' : '#111'),
         background: 'none', border: 'none', cursor: 'pointer',
         fontFamily: 'inherit', whiteSpace: 'nowrap',
@@ -499,7 +499,7 @@ function NavLinks() {
 
       <a href="/gaming" style={{
         display: 'flex', alignItems: 'center', gap: 6,
-        padding: '6px 14px', fontSize: 15, fontWeight: 700,
+        minHeight: 44, padding: '0 14px', fontSize: 15, fontWeight: 700,
         color: isGamingZone ? '#1FD37A' : '#111',
         textDecoration: 'none', whiteSpace: 'nowrap',
       }}>
@@ -517,7 +517,7 @@ function NavLinks() {
           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
           style={{
             position: 'absolute', top: '50%', translateY: '-50%',
-            height: 32, borderRadius: 8, background: '#f0f0f0',
+            height: 44, borderRadius: 8, background: '#f0f0f0',
             pointerEvents: 'none', zIndex: 0,
           }}
         />
@@ -533,7 +533,7 @@ function NavLinks() {
             }}
             style={{
               position: 'relative', zIndex: 1,
-              display: 'block', padding: '6px 14px',
+              display: 'flex', alignItems: 'center', minHeight: 44, padding: '0 14px',
               fontSize: 15,
               fontWeight: pathname === item.to ? 700 : 600,
               color: pathname === item.to ? accent : (isGamingZone ? '#ddd' : '#111'),
@@ -718,7 +718,7 @@ export default function Navbar() {
             <a href={WA_BASE} target="_blank" rel="noopener noreferrer" style={{
               display: 'flex', alignItems: 'center', gap: 6,
               background: isGamingZone ? logoAccent : '#111', color: isGamingZone ? '#0a0a0a' : '#fff',
-              padding: '8px 18px', borderRadius: 99,
+              minHeight: 44, padding: '0 18px', borderRadius: 99,
               fontSize: 12, fontWeight: 600, textDecoration: 'none', whiteSpace: 'nowrap',
             }}>
               <WaIcon />
