@@ -1,6 +1,6 @@
 export default function WhatsAppFab() {
   return (
-    <a href="https://wa.me/584223194044?text=Hola!%20Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20productos%20de%20Nexo%20Pro." target="_blank" rel="noopener noreferrer" style={{
+    <a href="https://wa.me/584223194044?text=Hola!%20Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20productos%20de%20PULSE." target="_blank" rel="noopener noreferrer" style={{
       position: 'fixed', bottom: 32, right: 32,
       width: 54, height: 54, background: '#25d366', borderRadius: '50%',
       display: 'flex', alignItems: 'center', justifyContent: 'center',

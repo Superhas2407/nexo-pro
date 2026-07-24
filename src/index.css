@@ -54,6 +54,17 @@ p, h1, h2, h3 { text-wrap: pretty; }
 .nav-spacer-mobile { display: none; }
 .nav-right-mobile  { display: none; }
 
+/* El contenido del nav desktop (mega menus + iconos + Cotizar) es más ancho
+   que su contenedor entre ~769px y ~1350px de viewport — sin este breakpoint
+   el botón "Cotizar" y los íconos quedan cortados por #root { overflow-x: clip }.
+   Se colapsa al nav mobile (hamburguesa) antes de que eso ocurra. */
+@media (max-width: 1360px) {
+  .nav-links-desktop { display: none !important; }
+  .nav-right-desktop { display: none !important; }
+  .nav-spacer-mobile { display: flex !important; }
+  .nav-right-mobile  { display: flex !important; }
+}
+
 /* �"?�"?�"? Subnav scroll wrapper �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"? */
 .subnav-scroll-wrap {
   padding: 0 48px;
