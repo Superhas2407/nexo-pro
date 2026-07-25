@@ -1,6 +1,7 @@
 import { useState, useRef, useLayoutEffect, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useBreakpoint } from '../hooks/useBreakpoint'
+import { useBsRate, formatBs } from '../hooks/useBsRate'
 import { useShop } from '../context/ShopContext'
 import { groupSpecs } from '../utils/specGroups'
 import { SpecIcon } from '../utils/SpecIcon.jsx'
@@ -15,6 +16,7 @@ const MAX_SPREAD_ROW = 5 // más de esto en una fila se ve apretado — pasa a g
 
 export default function ProductModal({ product, onClose, initialColorIdx = 0, skipSpread = false, theme = 'blue' }) {
   const isMobile = useBreakpoint(768)
+  const bsRate = useBsRate()
   const { addToCart, isInWishlist, toggleWishlist } = useShop()
   const [cartAdded, setCartAdded] = useState(false)
   const dark = theme === 'green'
@@ -127,6 +129,15 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
           {fmt(selectedStorage.price)}
         </motion.p>
       </AnimatePresence>
+
+      {bsRate && (
+        <p style={{
+          fontSize: isMobile ? 11 : 12, color: dark ? 'rgba(245,245,245,0.45)' : '#999',
+          margin: 0, lineHeight: 1.4,
+        }}>
+          ≈ {formatBs(selectedStorage.price, bsRate)} · tasa paralelo hoy
+        </p>
+      )}
 
       {requiresDeposit && (
         <p style={{
