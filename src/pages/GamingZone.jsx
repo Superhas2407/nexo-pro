@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { products, basePrice } from '../data/products'
+import { products, basePrice, gamingTypes } from '../data/products'
 import Navbar from '../components/Navbar'
 import WhatsAppFab from '../components/WhatsAppFab'
 import ProductCard from '../components/ProductCard'
@@ -117,6 +117,8 @@ export default function GamingZone() {
   const [modalColorIdx, setModalColorIdx] = useState(0)
   const [modalSkipSpread, setModalSkipSpread] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [activeType, setActiveType] = useState('all')
+  const [activeBrands, setActiveBrands] = useState([])
   const heroRef = useRef(null)
   const canvasRef = useRef(null)
   const framesRef = useRef([])
@@ -201,9 +203,25 @@ export default function GamingZone() {
     }
   }, [isMobile])
 
-  const gaming = products
+  const allGaming = products
     .filter(p => p.category === 'gaming')
     .sort((a, b) => basePrice(a) - basePrice(b))
+
+  const availableBrands = [...new Set(
+    (activeType === 'all' ? allGaming : allGaming.filter(p => p.gamingType === activeType)).map(p => p.brand)
+  )].sort((a, b) => a.localeCompare(b))
+
+  const gaming = allGaming
+    .filter(p => activeType === 'all' || p.gamingType === activeType)
+    .filter(p => activeBrands.length === 0 || activeBrands.includes(p.brand))
+
+  const toggleBrand = (b) =>
+    setActiveBrands(prev => prev.includes(b) ? prev.filter(x => x !== b) : [...prev, b])
+
+  const changeType = (id) => {
+    setActiveType(id)
+    setActiveBrands([])
+  }
 
   return (
     <div style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: 'inherit' }}>
@@ -226,7 +244,7 @@ export default function GamingZone() {
             background: 'linear-gradient(180deg, rgba(10,10,10,0) 45%, rgba(10,10,10,0.9) 88%, #0a0a0a 100%)',
           }} />
           <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0 }}>
-            <HeroContent isMobile={isMobile} gamingCount={gaming.length} />
+            <HeroContent isMobile={isMobile} gamingCount={allGaming.length} />
           </div>
         </div>
       ) : (
@@ -245,14 +263,69 @@ export default function GamingZone() {
               background: 'linear-gradient(180deg, rgba(10,10,10,0) 45%, rgba(10,10,10,0.88) 88%, #0a0a0a 100%)',
             }} />
             <div ref={heroContentRef} style={{ position: 'absolute', left: 0, right: 0, bottom: 0, opacity: 0, transition: 'opacity 0.15s linear' }}>
-              <HeroContent isMobile={isMobile} gamingCount={gaming.length} />
+              <HeroContent isMobile={isMobile} gamingCount={allGaming.length} />
             </div>
           </div>
         </div>
       )}
 
+      {/* Filtros */}
+      <div id="gaming-grid" style={{ maxWidth: 1340, margin: '0 auto', padding: isMobile ? '24px 16px 0' : '40px 32px 0' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
+          {gamingTypes.map(t => {
+            const active = activeType === t.id
+            return (
+              <button
+                key={t.id}
+                onClick={() => changeType(t.id)}
+                style={{
+                  padding: '9px 15px', borderRadius: 99,
+                  border: active ? `1.5px solid ${GREEN}` : '1.5px solid rgba(255,255,255,0.18)',
+                  background: active ? GREEN : 'transparent',
+                  color: active ? '#0a0a0a' : '#ccc',
+                  fontSize: 12.5, fontWeight: 700,
+                  cursor: 'pointer', fontFamily: 'inherit',
+                  transition: 'all 0.12s',
+                }}
+              >
+                {t.label}
+              </button>
+            )
+          })}
+        </div>
+
+        {availableBrands.length > 1 && (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
+            {availableBrands.map(b => {
+              const active = activeBrands.includes(b)
+              return (
+                <button
+                  key={b}
+                  onClick={() => toggleBrand(b)}
+                  style={{
+                    padding: '7px 13px', borderRadius: 99,
+                    border: active ? `1.5px solid ${GREEN}` : '1px solid rgba(255,255,255,0.12)',
+                    background: active ? 'rgba(31,211,122,0.12)' : 'transparent',
+                    color: active ? GREEN : '#999',
+                    fontSize: 11.5, fontWeight: 600,
+                    cursor: 'pointer', fontFamily: 'inherit',
+                    transition: 'all 0.12s',
+                  }}
+                >
+                  {b}
+                </button>
+              )
+            })}
+          </div>
+        )}
+
+        <p style={{ fontSize: 12, color: '#666', margin: '0 0 20px' }}>
+          {gaming.length} producto{gaming.length !== 1 ? 's' : ''}
+        </p>
+      </div>
+
       {/* Grid */}
-      <div id="gaming-grid" style={{ maxWidth: 1340, margin: '0 auto', padding: isMobile ? '32px 16px 100px' : '48px 32px 120px' }}>
+      <div style={{ maxWidth: 1340, margin: '0 auto', padding: isMobile ? '0 16px 100px' : '0 32px 120px' }}>
         <div className="store-grid">
           {gaming.map(p => (
             <ProductCard

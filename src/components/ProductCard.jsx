@@ -42,6 +42,7 @@ export default function ProductCard({ product, onClick, theme = 'light' }) {
     'Nuevo':     { bg: '#111', color: '#fff' },
     'Popular':   { bg: '#f0c000', color: '#111' },
     'Exclusivo': { bg: '#5c3d1e', color: '#fff' },
+    'Agotado':   { bg: '#999', color: '#fff' },
   }
 
   const handleColorClick = (e, idx) => {

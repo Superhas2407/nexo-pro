@@ -2025,32 +2025,50 @@
       {
         color: 'Black', hex: '#282c2f',
         image: '/s26plus-black-shop.webp',
-        storage: [{ label: null, price: 999 }],
+        storage: [
+          { label: '256 GB', price: 1400 },
+          { label: '512 GB', price: 1650 },
+        ],
       },
       {
         color: 'Cobalt Violet', hex: '#42425c',
         image: '/s26plus-cobaltviolet-shop.webp',
-        storage: [{ label: null, price: 999 }],
+        storage: [
+          { label: '256 GB', price: 1400 },
+          { label: '512 GB', price: 1650 },
+        ],
       },
       {
         color: 'Pink Gold', hex: '#e9d9cc',
         image: '/s26plus-pinkgold-shop.webp',
-        storage: [{ label: null, price: 999 }],
+        storage: [
+          { label: '256 GB', price: 1400 },
+          { label: '512 GB', price: 1650 },
+        ],
       },
       {
         color: 'Silver Shadow', hex: '#86888a',
         image: '/s26plus-silvershadow-shop.webp',
-        storage: [{ label: null, price: 999 }],
+        storage: [
+          { label: '256 GB', price: 1400 },
+          { label: '512 GB', price: 1650 },
+        ],
       },
       {
         color: 'Sky Blue', hex: '#cbdeea',
         image: '/s26plus-skyblue-shop.webp',
-        storage: [{ label: null, price: 999 }],
+        storage: [
+          { label: '256 GB', price: 1400 },
+          { label: '512 GB', price: 1650 },
+        ],
       },
       {
         color: 'White', hex: '#eceef0',
         image: '/s26plus-white-shop.webp',
-        storage: [{ label: null, price: 999 }],
+        storage: [
+          { label: '256 GB', price: 1400 },
+          { label: '512 GB', price: 1650 },
+        ],
       },
     ],
     specs: [
@@ -2192,19 +2210,18 @@
 
   {
     id: 'xbox-wireless-controller',
-    brand: 'Microsoft', category: 'gaming',
+    brand: 'Microsoft', category: 'gaming', gamingType: 'mandos',
     name: 'Xbox Wireless Controller',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'Carbon Black', hex: '#1a1a1a', image: '/xbox-wireless-controller-black-shop.webp', storage: [{ label: null, price: 60 }] },
-      { color: 'Robot White', hex: '#f2f2f2', image: '/xbox-wireless-controller-robotwhite-shop.webp', storage: [{ label: null, price: 60 }] },
-      { color: 'Shock Blue', hex: '#0f4fd1', image: '/xbox-wireless-controller-shockblue-shop.webp', storage: [{ label: null, price: 60 }] },
-      { color: 'Velocity Green', hex: '#3fbf3f', image: '/xbox-wireless-controller-velocitygreen-shop.webp', storage: [{ label: null, price: 60 }] },
-      { color: 'Pulse Red', hex: '#c21f2e', image: '/xbox-wireless-controller-pulsered-shop.webp', storage: [{ label: null, price: 60 }] },
-      { color: 'Astral Purple', hex: '#6b3fa0', image: '/xbox-wireless-controller-purple-shop.webp', storage: [{ label: null, price: 60 }] },
-      { color: 'Deep Pink', hex: '#e0509a', image: '/xbox-wireless-controller-pink-shop.webp', storage: [{ label: null, price: 60 }] },
-      { color: 'Electric Volt', hex: '#c4e021', image: '/xbox-wireless-controller-volt-shop.webp', storage: [{ label: null, price: 60 }] },
+      { color: 'Carbon Black', hex: '#1a1a1a', image: '/xbox-wireless-controller-black-shop.webp', storage: [{ label: null, price: 82 }] },
+      { color: 'Robot White', hex: '#f2f2f2', image: '/xbox-wireless-controller-robotwhite-shop.webp', storage: [{ label: null, price: 82 }] },
+      { color: 'Shock Blue', hex: '#0f4fd1', image: '/xbox-wireless-controller-shockblue-shop.webp', storage: [{ label: null, price: 82 }] },
+      { color: 'Velocity Green', hex: '#3fbf3f', image: '/xbox-wireless-controller-velocitygreen-shop.webp', storage: [{ label: null, price: 82 }] },
+      { color: 'Pulse Red', hex: '#c21f2e', image: '/xbox-wireless-controller-pulsered-shop.webp', storage: [{ label: null, price: 82 }] },
+      { color: 'Deep Pink', hex: '#e0509a', image: '/xbox-wireless-controller-pink-shop.webp', storage: [{ label: null, price: 82 }] },
+      { color: 'Electric Volt', hex: '#c4e021', image: '/xbox-wireless-controller-volt-shop.webp', storage: [{ label: null, price: 82 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'Mejor mando 2026 por versatilidad multiplataforma y precio justo' },
@@ -2214,18 +2231,18 @@
 
   {
     id: 'sony-dualsense-ps5',
-    brand: 'Sony', category: 'gaming',
+    brand: 'Sony', category: 'gaming', gamingType: 'mandos',
     name: 'Sony DualSense (PS5)',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'Midnight Black', hex: '#1a1a1a', image: '/dualsense-midnightblack-shop.webp', storage: [{ label: null, price: 70 }] },
-      { color: 'White', hex: '#eceef0', image: '/dualsense-white-shop.webp', storage: [{ label: null, price: 70 }] },
-      { color: 'Galactic Purple', hex: '#7a6bb0', image: '/dualsense-galacticpurple-shop.webp', storage: [{ label: null, price: 70 }] },
-      { color: 'Remix Green', hex: '#7ac97a', image: '/dualsense-remixgreen-shop.webp', storage: [{ label: null, price: 70 }] },
-      { color: 'Rhythm Blue', hex: '#4a7fc9', image: '/dualsense-rhythmblue-shop.webp', storage: [{ label: null, price: 70 }] },
-      { color: 'Techno Red', hex: '#c9433f', image: '/dualsense-technored-shop.webp', storage: [{ label: null, price: 70 }] },
-      { color: 'Chroma Indigo', hex: '#3f4fae', image: '/dualsense-chromaindigo-shop.webp', storage: [{ label: null, price: 70 }] },
+      { color: 'Midnight Black', hex: '#1a1a1a', image: '/dualsense-midnightblack-shop.webp', storage: [{ label: null, price: 110 }] },
+      { color: 'White', hex: '#eceef0', image: '/dualsense-white-shop.webp', storage: [{ label: null, price: 110 }] },
+      { color: 'Galactic Purple', hex: '#7a6bb0', image: '/dualsense-galacticpurple-shop.webp', storage: [{ label: null, price: 110 }] },
+      { color: 'Remix Green', hex: '#7ac97a', image: '/dualsense-remixgreen-shop.webp', storage: [{ label: null, price: 123 }] },
+      { color: 'Rhythm Blue', hex: '#4a7fc9', image: '/dualsense-rhythmblue-shop.webp', storage: [{ label: null, price: 123 }] },
+      { color: 'Techno Red', hex: '#c9433f', image: '/dualsense-technored-shop.webp', storage: [{ label: null, price: 123 }] },
+      { color: 'Chroma Indigo', hex: '#3f4fae', image: '/dualsense-chromaindigo-shop.webp', storage: [{ label: null, price: 116 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'Gatillos adaptativos y háptica — estándar de la experiencia PS5' },
@@ -2235,12 +2252,12 @@
 
   {
     id: 'sony-dualsense-edge',
-    brand: 'Sony', category: 'gaming',
+    brand: 'Sony', category: 'gaming', gamingType: 'mandos',
     name: 'Sony DualSense Edge',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'White', hex: '#eceef0', image: '/dualsense-edge-white-shop.webp', storage: [{ label: null, price: 200 }] },
+      { color: 'White', hex: '#eceef0', image: '/dualsense-edge-white-shop.webp', storage: [{ label: null, price: 300 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'Versión pro con sticks intercambiables para jugador competitivo' },
@@ -2250,12 +2267,12 @@
 
   {
     id: 'dualsense-charging-station',
-    brand: 'Sony', category: 'gaming',
+    brand: 'Sony', category: 'gaming', gamingType: 'accesorios',
     name: 'DualSense Charging Station',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'White', hex: '#eceef0', image: '/dualsense-charging-station-shop.webp', storage: [{ label: null, price: 30 }] },
+      { color: 'White', hex: '#eceef0', image: '/dualsense-charging-station-shop.webp', storage: [{ label: null, price: 66 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'Carga 2 mandos DualSense simultáneamente, licencia oficial PlayStation' },
@@ -2265,13 +2282,13 @@
 
   {
     id: 'ninjutso-ten',
-    brand: 'Ninjutso', category: 'gaming',
+    brand: 'Ninjutso', category: 'gaming', gamingType: 'mouse',
     name: 'Ninjutso Ten',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'Black', hex: '#1a1a1a', image: '/ninjutso-ten-black-shop.webp', storage: [{ label: null, price: 90 }] },
-      { color: 'Air White', hex: '#f2f2f2', image: '/ninjutso-ten-airwhite-shop.webp', storage: [{ label: null, price: 90 }] },
+      { color: 'Black', hex: '#1a1a1a', image: '/ninjutso-ten-black-shop.webp', storage: [{ label: null, price: 157 }] },
+      { color: 'Air White', hex: '#f2f2f2', image: '/ninjutso-ten-airwhite-shop.webp', storage: [{ label: null, price: 171 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'Ultra liviano (~48g), preferido por jugadores competitivos de FPS' },
@@ -2281,9 +2298,9 @@
 
   {
     id: 'pulsar-noctua-feinmann-fo1',
-    brand: 'Pulsar', category: 'gaming',
+    brand: 'Pulsar', category: 'gaming', gamingType: 'mouse',
     name: 'Pulsar Noctua Feinmann FO1',
-    tag: null, bgText: null,
+    tag: 'Agotado', bgText: null,
     byOrder: true,
     colorVariants: [
       { color: 'Beige/Brown', hex: '#b89a76', image: '/pulsar-noctua-feinmann-fo1-beigebrown-shop.webp', storage: [{ label: null, price: 110 }] },
@@ -2296,13 +2313,13 @@
 
   {
     id: 'razer-basilisk-v3-pro',
-    brand: 'Razer', category: 'gaming',
+    brand: 'Razer', category: 'gaming', gamingType: 'mouse',
     name: 'Razer Basilisk V3 Pro',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'Classic Black', hex: '#1a1a1a', image: '/razer-basilisk-v3-pro-black-shop.webp', storage: [{ label: null, price: 160 }] },
-      { color: 'White', hex: '#f2f2f2', image: '/razer-basilisk-v3-pro-white-shop.webp', storage: [{ label: null, price: 160 }] },
+      { color: 'Classic Black', hex: '#1a1a1a', image: '/razer-basilisk-v3-pro-black-shop.webp', storage: [{ label: null, price: 139 }] },
+      { color: 'White', hex: '#f2f2f2', image: '/razer-basilisk-v3-pro-white-shop.webp', storage: [{ label: null, price: 151 }] },
     ],
     specs: [
       { label: 'Por qué', value: '11 botones programables, rueda HyperScroll y RGB Chroma — el ergonómico tope de gama' },
@@ -2312,14 +2329,14 @@
 
   {
     id: 'razer-viper-v3-pro',
-    brand: 'Razer', category: 'gaming',
+    brand: 'Razer', category: 'gaming', gamingType: 'mouse',
     name: 'Razer Viper V3 Pro',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'Black', hex: '#1a1a1a', image: '/razer-viper-v3-pro-black-shop.webp', storage: [{ label: null, price: 160 }] },
-      { color: 'White', hex: '#f2f2f2', image: '/razer-viper-v3-pro-white-shop.webp', storage: [{ label: null, price: 160 }] },
-      { color: 'Faker Edition', hex: '#c9a13b', image: '/razer-viper-v3-pro-faker-shop.webp', storage: [{ label: null, price: 180 }] },
+      { color: 'Black', hex: '#1a1a1a', image: '/razer-viper-v3-pro-black-shop.webp', storage: [{ label: null, price: 152 }] },
+      { color: 'White', hex: '#f2f2f2', image: '/razer-viper-v3-pro-white-shop.webp', storage: [{ label: null, price: 152 }] },
+      { color: 'Faker Edition', hex: '#c9a13b', image: '/razer-viper-v3-pro-faker-shop.webp', storage: [{ label: null, price: 192 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'El mouse esports por excelencia — 8000Hz, sensor 35K DPI, 54g' },
@@ -2329,14 +2346,14 @@
 
   {
     id: 'scyrox-v8',
-    brand: 'Scyrox', category: 'gaming',
+    brand: 'Scyrox', category: 'gaming', gamingType: 'mouse',
     name: 'Scyrox V8',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'Black', hex: '#1a1a1a', image: '/scyrox-v8-black-shop.webp', storage: [{ label: null, price: 40 }] },
-      { color: 'White', hex: '#f2f2f2', image: '/scyrox-v8-white-shop.webp', storage: [{ label: null, price: 40 }] },
-      { color: 'Yellow', hex: '#e8c93a', image: '/scyrox-v8-yellow-shop.webp', storage: [{ label: null, price: 40 }] },
+      { color: 'Black', hex: '#1a1a1a', image: '/scyrox-v8-black-shop.webp', storage: [{ label: null, price: 120 }] },
+      { color: 'White', hex: '#f2f2f2', image: '/scyrox-v8-white-shop.webp', storage: [{ label: null, price: 120 }] },
+      { color: 'Yellow', hex: '#e8c93a', image: '/scyrox-v8-yellow-shop.webp', storage: [{ label: null, price: 120 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'Buena relación precio-rendimiento, sensor óptico preciso y diseño simétrico' },
@@ -2346,15 +2363,15 @@
 
   {
     id: 'teevolution-terra-pro',
-    brand: 'Teevolution', category: 'gaming',
+    brand: 'Teevolution', category: 'gaming', gamingType: 'mouse',
     name: 'Teevolution Terra Pro',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'Black', hex: '#1a1a1a', image: '/teevolution-terra-pro-black-shop.webp', storage: [{ label: null, price: 45 }] },
-      { color: 'White', hex: '#f2f2f2', image: '/teevolution-terra-pro-white-shop.webp', storage: [{ label: null, price: 45 }] },
-      { color: 'Emerald Green', hex: '#2f9e6b', image: '/teevolution-terra-pro-emeraldgreen-shop.webp', storage: [{ label: null, price: 45 }] },
-      { color: 'Inferno Orange', hex: '#e0642f', image: '/teevolution-terra-pro-infernoorange-shop.webp', storage: [{ label: null, price: 45 }] },
+      { color: 'Black', hex: '#1a1a1a', image: '/teevolution-terra-pro-black-shop.webp', storage: [{ label: null, price: 182 }] },
+      { color: 'White', hex: '#f2f2f2', image: '/teevolution-terra-pro-white-shop.webp', storage: [{ label: null, price: 182 }] },
+      { color: 'Emerald Green', hex: '#2f9e6b', image: '/teevolution-terra-pro-emeraldgreen-shop.webp', storage: [{ label: null, price: 182 }] },
+      { color: 'Inferno Orange', hex: '#e0642f', image: '/teevolution-terra-pro-infernoorange-shop.webp', storage: [{ label: null, price: 182 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'Mouse ligero de entrada con variedad de colores, buen valor por precio' },
@@ -2364,13 +2381,13 @@
 
   {
     id: 'vxe-dragonfly-r1-pro',
-    brand: 'VXE', category: 'gaming',
+    brand: 'VXE', category: 'gaming', gamingType: 'mouse',
     name: 'VXE Dragonfly R1 Pro',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'Black', hex: '#1a1a1a', image: '/vxe-dragonfly-r1-pro-black-shop.webp', storage: [{ label: null, price: 45 }] },
-      { color: 'White', hex: '#f2f2f2', image: '/vxe-dragonfly-r1-pro-white-shop.webp', storage: [{ label: null, price: 45 }] },
+      { color: 'Black', hex: '#1a1a1a', image: '/vxe-dragonfly-r1-pro-black-shop.webp', storage: [{ label: null, price: 90 }] },
+      { color: 'White', hex: '#f2f2f2', image: '/vxe-dragonfly-r1-pro-white-shop.webp', storage: [{ label: null, price: 90 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'Ultraliviano y económico, muy recomendado en la comunidad de mouse esports' },
@@ -2380,14 +2397,14 @@
 
   {
     id: 'xlite-crazylight-mini',
-    brand: 'XLITE', category: 'gaming',
+    brand: 'XLITE', category: 'gaming', gamingType: 'mouse',
     name: 'XLITE Crazylight Mini',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'Jet Black', hex: '#1a1a1a', image: '/xlite-crazylight-mini-jetblack-shop.webp', storage: [{ label: null, price: 35 }] },
-      { color: 'Uyuni White', hex: '#f2f2f2', image: '/xlite-crazylight-mini-uyuniwhite-shop.webp', storage: [{ label: null, price: 35 }] },
-      { color: 'Rock', hex: '#8a8580', image: '/xlite-crazylight-mini-rock-shop.webp', storage: [{ label: null, price: 35 }] },
+      { color: 'Jet Black', hex: '#1a1a1a', image: '/xlite-crazylight-mini-jetblack-shop.webp', storage: [{ label: null, price: 192 }] },
+      { color: 'Uyuni White', hex: '#f2f2f2', image: '/xlite-crazylight-mini-uyuniwhite-shop.webp', storage: [{ label: null, price: 192 }] },
+      { color: 'Rock', hex: '#8a8580', image: '/xlite-crazylight-mini-rock-shop.webp', storage: [{ label: null, price: 192 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'Compacto y ultraliviano, ideal para agarre claw o fingertip' },
@@ -2396,32 +2413,13 @@
   },
 
   {
-    id: 'zygen-np01s',
-    brand: 'Zygen', category: 'gaming',
-    name: 'Zygen NP-01S',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [
-      { color: 'Obsydian Black', hex: '#1a1a1a', image: '/zygen-np01s-obsydianblack-shop.webp', storage: [{ label: null, price: 50 }] },
-      { color: 'White', hex: '#f2f2f2', image: '/zygen-np01s-white-shop.webp', storage: [{ label: null, price: 50 }] },
-      { color: 'Brown', hex: '#7a5a3f', image: '/zygen-np01s-brown-shop.webp', storage: [{ label: null, price: 50 }] },
-      { color: 'Lake Green', hex: '#3f8a7a', image: '/zygen-np01s-lakegreen-shop.webp', storage: [{ label: null, price: 50 }] },
-      { color: 'Fluorescent Green', hex: '#9fd63a', image: '/zygen-np01s-fluorescentgreen-shop.webp', storage: [{ label: null, price: 50 }] },
-    ],
-    specs: [
-      { label: 'Por qué', value: 'Forma simétrica clásica, muy popular en la escena de mice mods' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
-
-  {
     id: 'ajazz-ak820-pro',
-    brand: 'Ajazz', category: 'gaming',
+    brand: 'Ajazz', category: 'gaming', gamingType: 'teclados',
     name: 'Ajazz AK820 Pro',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'Grey', hex: '#8a8a8a', image: '/ajazz-ak820-pro-grey-shop.webp', storage: [{ label: null, price: 55 }] },
+      { color: 'Grey', hex: '#8a8a8a', image: '/ajazz-ak820-pro-grey-shop.webp', storage: [{ label: null, price: 137 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'Pantalla LCD y perilla multifunción, hot-swap y sonido thocky' },
@@ -2431,15 +2429,15 @@
 
   {
     id: 'attack-shark-r82-he',
-    brand: 'Attack Shark', category: 'gaming',
+    brand: 'Attack Shark', category: 'gaming', gamingType: 'teclados',
     name: 'Attack Shark R82 HE Rapid Trigger',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'Black', hex: '#1a1a1a', image: '/attack-shark-r82-he-black-shop.webp', storage: [{ label: null, price: 70 }] },
-      { color: 'Black Gradient', hex: '#3a3a3a', image: '/attack-shark-r82-he-blackgradient-shop.webp', storage: [{ label: null, price: 70 }] },
-      { color: 'White', hex: '#f2f2f2', image: '/attack-shark-r82-he-white-shop.webp', storage: [{ label: null, price: 70 }] },
-      { color: 'Pink Contours', hex: '#e8508f', image: '/attack-shark-r82-he-pinkcontours-shop.webp', storage: [{ label: null, price: 70 }] },
+      { color: 'Black', hex: '#1a1a1a', image: '/attack-shark-r82-he-black-shop.webp', storage: [{ label: null, price: 135 }] },
+      { color: 'Black Gradient', hex: '#3a3a3a', image: '/attack-shark-r82-he-blackgradient-shop.webp', storage: [{ label: null, price: 138 }] },
+      { color: 'White', hex: '#f2f2f2', image: '/attack-shark-r82-he-white-shop.webp', storage: [{ label: null, price: 138 }] },
+      { color: 'Pink Contours', hex: '#e8508f', image: '/attack-shark-r82-he-pinkcontours-shop.webp', storage: [{ label: null, price: 138 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'Interruptores magnéticos Hall Effect con rapid trigger — ventaja competitiva real' },
@@ -2449,12 +2447,12 @@
 
   {
     id: 'aula-hero84-he',
-    brand: 'Aula', category: 'gaming',
+    brand: 'Aula', category: 'gaming', gamingType: 'teclados',
     name: 'Aula Hero84 HE',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'White Purple', hex: '#8a6bd6', image: '/aula-hero84-he-whitepurple-shop.webp', storage: [{ label: null, price: 60 }] },
+      { color: 'White Purple', hex: '#8a6bd6', image: '/aula-hero84-he-whitepurple-shop.webp', storage: [{ label: null, price: 131 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'Hall Effect accesible con barra RGB perimetral, 75% compacto' },
@@ -2464,14 +2462,14 @@
 
   {
     id: 'aula-win60he',
-    brand: 'Aula', category: 'gaming',
+    brand: 'Aula', category: 'gaming', gamingType: 'teclados',
     name: 'Aula Win60 HE',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'Black/Red', hex: '#a11c1c', image: '/aula-win60he-blackred-shop.webp', storage: [{ label: null, price: 50 }] },
-      { color: 'Grey/Yellow', hex: '#c9b23a', image: '/aula-win60he-greyyellow-shop.webp', storage: [{ label: null, price: 50 }] },
-      { color: 'White/Blue', hex: '#4a8fd1', image: '/aula-win60he-whiteblue-shop.webp', storage: [{ label: null, price: 50 }] },
+      { color: 'Black/Red', hex: '#a11c1c', image: '/aula-win60he-blackred-shop.webp', storage: [{ label: null, price: 139 }] },
+      { color: 'Grey/Yellow', hex: '#c9b23a', image: '/aula-win60he-greyyellow-shop.webp', storage: [{ label: null, price: 124 }] },
+      { color: 'White/Blue', hex: '#4a8fd1', image: '/aula-win60he-whiteblue-shop.webp', storage: [{ label: null, price: 124 }] },
     ],
     specs: [
       { label: 'Por qué', value: '60% Hall Effect con keycaps de diseño, la opción más compacta de la línea' },
@@ -2481,12 +2479,12 @@
 
   {
     id: 'hyperx-alloy-origins-core',
-    brand: 'HyperX', category: 'gaming',
+    brand: 'HyperX', category: 'gaming', gamingType: 'teclados',
     name: 'HyperX Alloy Origins Core',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'Black', hex: '#1a1a1a', image: '/hyperx-alloy-origins-core-shop.webp', storage: [{ label: null, price: 90 }] },
+      { color: 'Black', hex: '#1a1a1a', image: '/hyperx-alloy-origins-core-shop.webp', storage: [{ label: null, price: 176 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'Chasis de aluminio full-size, switches propietarios HyperX ultra durables' },
@@ -2494,29 +2492,15 @@
     ],
   },
 
-  {
-    id: 'mojo68-plastic',
-    brand: 'Mojo', category: 'gaming',
-    name: 'Mojo68 Plastic',
-    tag: null, bgText: null,
-    byOrder: true,
-    colorVariants: [
-      { color: 'White', hex: '#e8f0e4', image: '/mojo68-plastic-white-shop.webp', storage: [{ label: null, price: 55 }] },
-    ],
-    specs: [
-      { label: 'Por qué', value: 'Diseño transparente distintivo, comunidad de mods muy activa' },
-      { label: 'Entrega', value: 'Bajo pedido · tiempo de entrega según disponibilidad' },
-    ],
-  },
 
   {
     id: 'redragon-kumara-k552',
-    brand: 'Redragon', category: 'gaming',
+    brand: 'Redragon', category: 'gaming', gamingType: 'teclados',
     name: 'Redragon Kumara K552',
     tag: null, bgText: null,
     byOrder: true,
     colorVariants: [
-      { color: 'Black', hex: '#1a1a1a', image: '/redragon-kumara-k552-shop.webp', storage: [{ label: null, price: 32 }] },
+      { color: 'Black', hex: '#1a1a1a', image: '/redragon-kumara-k552-shop.webp', storage: [{ label: null, price: 91 }] },
     ],
     specs: [
       { label: 'Por qué', value: 'El teclado mecánico económico más recomendado — TKL con switches Outemu' },
@@ -3079,6 +3063,15 @@ export const categories = [
   { id: 'telefonos', label: 'Teléfonos' },
   { id: 'gaming',    label: 'Gaming' },
   { id: 'cargadores',label: 'Cargadores' },
+]
+
+// Sub-tipos dentro de Gaming (Zona Gaming) — mandos, mouse, teclados, accesorios
+export const gamingTypes = [
+  { id: 'all',        label: 'Todo' },
+  { id: 'mandos',     label: 'Mandos' },
+  { id: 'mouse',      label: 'Mouse' },
+  { id: 'teclados',   label: 'Teclados' },
+  { id: 'accesorios', label: 'Accesorios' },
 ]
 
 // "Teléfonos" en el filtro engloba tanto la categoría 'iphone' (landing/navbar)
