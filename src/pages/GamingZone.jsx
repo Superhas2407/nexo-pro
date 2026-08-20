@@ -11,6 +11,13 @@ import { useBreakpoint } from '../hooks/useBreakpoint'
 const GREEN = '#1FD37A'
 const HERO_FRAME_COUNT = 49
 
+const SORT_OPTIONS = [
+  { value: 'default',    label: 'Destacados' },
+  { value: 'price-asc',  label: 'Menor precio' },
+  { value: 'price-desc', label: 'Mayor precio' },
+  { value: 'name',       label: 'Nombre A-Z' },
+]
+
 function frameSrc(i) {
   return `/gaming-hero-frames/frame-${String(i + 1).padStart(3, '0')}.webp`
 }
@@ -76,7 +83,7 @@ function HeroContent({ isMobile, gamingCount }) {
         Mandos, docks y<br />volantes para jugar en serio.
       </h1>
       <p style={{ fontSize: 15, color: '#999', margin: '16px 0 0', maxWidth: 520 }}>
-        {gamingCount} productos bajo pedido — de mandos pro hasta estaciones de carga y controles de simulación.
+        {gamingCount} productos — de mandos pro hasta estaciones de carga y consolas.
       </p>
 
       <div style={{ display: 'flex', gap: 12, flexDirection: isMobile ? 'column' : 'row', marginTop: 32 }}>
@@ -119,6 +126,8 @@ export default function GamingZone() {
   const [loading, setLoading] = useState(true)
   const [activeType, setActiveType] = useState('all')
   const [activeBrands, setActiveBrands] = useState([])
+  const [filterPanelOpen, setFilterPanelOpen] = useState(false)
+  const [sort, setSort] = useState('default')
   const heroRef = useRef(null)
   const canvasRef = useRef(null)
   const framesRef = useRef([])
@@ -204,7 +213,7 @@ export default function GamingZone() {
   }, [isMobile])
 
   const allGaming = products
-    .filter(p => p.category === 'gaming')
+    .filter(p => p.category === 'gaming' || p.category === 'consolas')
     .sort((a, b) => basePrice(a) - basePrice(b))
 
   const availableBrands = [...new Set(
@@ -214,6 +223,11 @@ export default function GamingZone() {
   const gaming = allGaming
     .filter(p => activeType === 'all' || p.gamingType === activeType)
     .filter(p => activeBrands.length === 0 || activeBrands.includes(p.brand))
+    .sort((a, b) => {
+      if (sort === 'price-desc') return basePrice(b) - basePrice(a)
+      if (sort === 'name') return a.name.localeCompare(b.name)
+      return basePrice(a) - basePrice(b) // 'default' y 'price-asc'
+    })
 
   const toggleBrand = (b) =>
     setActiveBrands(prev => prev.includes(b) ? prev.filter(x => x !== b) : [...prev, b])
@@ -222,6 +236,71 @@ export default function GamingZone() {
     setActiveType(id)
     setActiveBrands([])
   }
+
+  const activeFilterCount = (activeType !== 'all' ? 1 : 0) + activeBrands.length
+  const hasActiveFilters = activeFilterCount > 0
+
+  const FilterSections = () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+      <div>
+        <span style={{ fontSize: 14, fontWeight: 800, letterSpacing: -0.3, color: '#f5f5f5' }}>
+          Tipo
+        </span>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 12 }}>
+          {gamingTypes.map(t => {
+            const active = activeType === t.id
+            return (
+              <button
+                key={t.id}
+                onClick={() => changeType(t.id)}
+                style={{
+                  padding: '9px 15px', borderRadius: 99,
+                  border: active ? `1.5px solid ${GREEN}` : '1.5px solid rgba(255,255,255,0.18)',
+                  background: active ? GREEN : 'transparent',
+                  color: active ? '#0a0a0a' : '#ccc',
+                  fontSize: 12.5, fontWeight: 700,
+                  cursor: 'pointer', fontFamily: 'inherit',
+                  transition: 'all 0.12s',
+                }}
+              >
+                {t.label}
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
+      {availableBrands.length > 1 && (
+        <div>
+          <span style={{ fontSize: 14, fontWeight: 800, letterSpacing: -0.3, color: '#f5f5f5' }}>
+            Marca
+          </span>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 12 }}>
+            {availableBrands.map(b => {
+              const active = activeBrands.includes(b)
+              return (
+                <button
+                  key={b}
+                  onClick={() => toggleBrand(b)}
+                  style={{
+                    padding: '8px 14px', borderRadius: 99,
+                    border: active ? `1.5px solid ${GREEN}` : '1px solid rgba(255,255,255,0.14)',
+                    background: active ? 'rgba(31,211,122,0.12)' : 'transparent',
+                    color: active ? GREEN : '#999',
+                    fontSize: 12, fontWeight: 600,
+                    cursor: 'pointer', fontFamily: 'inherit',
+                    transition: 'all 0.12s',
+                  }}
+                >
+                  {b}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  )
 
   return (
     <div style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: 'inherit' }}>
@@ -269,78 +348,141 @@ export default function GamingZone() {
         </div>
       )}
 
-      {/* Filtros */}
-      <div id="gaming-grid" style={{ maxWidth: 1340, margin: '0 auto', padding: isMobile ? '24px 16px 0' : '40px 32px 0' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
-          {gamingTypes.map(t => {
-            const active = activeType === t.id
-            return (
-              <button
-                key={t.id}
-                onClick={() => changeType(t.id)}
-                style={{
-                  padding: '9px 15px', borderRadius: 99,
-                  border: active ? `1.5px solid ${GREEN}` : '1.5px solid rgba(255,255,255,0.18)',
-                  background: active ? GREEN : 'transparent',
-                  color: active ? '#0a0a0a' : '#ccc',
-                  fontSize: 12.5, fontWeight: 700,
-                  cursor: 'pointer', fontFamily: 'inherit',
-                  transition: 'all 0.12s',
-                }}
-              >
-                {t.label}
-              </button>
-            )
-          })}
-        </div>
-
-        {availableBrands.length > 1 && (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
-            {availableBrands.map(b => {
-              const active = activeBrands.includes(b)
-              return (
-                <button
-                  key={b}
-                  onClick={() => toggleBrand(b)}
-                  style={{
-                    padding: '7px 13px', borderRadius: 99,
-                    border: active ? `1.5px solid ${GREEN}` : '1px solid rgba(255,255,255,0.12)',
-                    background: active ? 'rgba(31,211,122,0.12)' : 'transparent',
-                    color: active ? GREEN : '#999',
-                    fontSize: 11.5, fontWeight: 600,
-                    cursor: 'pointer', fontFamily: 'inherit',
-                    transition: 'all 0.12s',
-                  }}
-                >
-                  {b}
-                </button>
-              )
-            })}
-          </div>
+      {/* Filtros (sidebar desktop) + Grid */}
+      <div id="gaming-grid" style={{
+        maxWidth: 1340, margin: '0 auto',
+        padding: isMobile ? '24px 16px 100px' : '40px 32px 120px',
+        display: 'flex', gap: 40, alignItems: 'flex-start',
+      }}>
+        {!isMobile && (
+          <aside style={{
+            flex: '0 0 220px',
+            position: 'sticky', top: 88,
+            maxHeight: 'calc(100vh - 108px)', overflowY: 'auto',
+            overscrollBehavior: 'contain',
+            paddingRight: 4, paddingBottom: 20,
+          }}>
+            <FilterSections />
+          </aside>
         )}
 
-        <p style={{ fontSize: 12, color: '#666', margin: '0 0 20px' }}>
-          {gaming.length} producto{gaming.length !== 1 ? 's' : ''}
-        </p>
-      </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, marginBottom: 20 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+              {isMobile && (
+                <button
+                  onClick={() => setFilterPanelOpen(true)}
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: 6,
+                    padding: '9px 14px', borderRadius: 99,
+                    border: hasActiveFilters ? 'none' : '1.5px solid rgba(255,255,255,0.18)',
+                    background: hasActiveFilters ? GREEN : 'transparent',
+                    color: hasActiveFilters ? '#0a0a0a' : '#ccc',
+                    fontSize: 12.5, fontWeight: 700,
+                    cursor: 'pointer', fontFamily: 'inherit',
+                  }}
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/>
+                  </svg>
+                  Filtros{hasActiveFilters ? ` (${activeFilterCount})` : ''}
+                </button>
+              )}
+              <p style={{ fontSize: 12, color: '#666', margin: 0 }}>
+                {gaming.length} producto{gaming.length !== 1 ? 's' : ''}
+              </p>
+            </div>
 
-      {/* Grid */}
-      <div style={{ maxWidth: 1340, margin: '0 auto', padding: isMobile ? '0 16px 100px' : '0 32px 120px' }}>
-        <div className="store-grid">
-          {gaming.map(p => (
-            <ProductCard
-              key={p.id}
-              product={p}
-              theme="green"
-              onClick={(colorIdx = 0, colorPicked = false) => {
-                setModalColorIdx(colorIdx)
-                setModalSkipSpread(colorPicked)
-                setSelectedProduct(p)
-              }}
-            />
-          ))}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              {!isMobile && <span style={{ fontSize: 11, color: '#999', whiteSpace: 'nowrap' }}>Ordenar:</span>}
+              <select
+                value={sort}
+                onChange={e => setSort(e.target.value)}
+                style={{
+                  padding: isMobile ? '9px 10px' : '5px 10px',
+                  borderRadius: isMobile ? 99 : 8,
+                  border: '1.5px solid rgba(255,255,255,0.18)',
+                  background: 'transparent',
+                  fontSize: 12.5, fontWeight: 600,
+                  color: '#ccc',
+                  outline: 'none', cursor: 'pointer', fontFamily: 'inherit',
+                }}
+              >
+                {SORT_OPTIONS.map(o => (
+                  <option key={o.value} value={o.value} style={{ background: '#111', color: '#f5f5f5' }}>{o.label}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div className="store-grid">
+            {gaming.map(p => (
+              <ProductCard
+                key={p.id}
+                product={p}
+                theme="green"
+                onClick={(colorIdx = 0, colorPicked = false) => {
+                  setModalColorIdx(colorIdx)
+                  setModalSkipSpread(colorPicked)
+                  setSelectedProduct(p)
+                }}
+              />
+            ))}
+          </div>
         </div>
       </div>
+
+      {/* Panel de filtros mobile */}
+      <AnimatePresence>
+        {isMobile && filterPanelOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setFilterPanelOpen(false)}
+              style={{ position: 'fixed', inset: 0, zIndex: 300, background: 'rgba(0,0,0,0.5)' }}
+            />
+            <motion.div
+              initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
+              transition={{ type: 'spring', stiffness: 320, damping: 34 }}
+              style={{
+                position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 301,
+                background: '#111', borderRadius: '20px 20px 0 0',
+                maxHeight: '85vh', display: 'flex', flexDirection: 'column',
+              }}
+            >
+              <div style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                padding: '18px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)', flexShrink: 0,
+              }}>
+                <span style={{ fontSize: 15, fontWeight: 600, color: '#f5f5f5' }}>Filtros</span>
+                <button
+                  onClick={() => setFilterPanelOpen(false)}
+                  style={{
+                    width: 32, height: 32, borderRadius: '50%', border: 'none',
+                    background: 'rgba(255,255,255,0.08)', cursor: 'pointer',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, color: '#ccc',
+                  }}
+                >×</button>
+              </div>
+              <div style={{ padding: '20px', overflowY: 'auto', flex: 1, minHeight: 0, overscrollBehavior: 'contain' }}>
+                <FilterSections />
+              </div>
+              <div style={{ padding: '14px 20px', borderTop: '1px solid rgba(255,255,255,0.08)', flexShrink: 0 }}>
+                <button
+                  onClick={() => setFilterPanelOpen(false)}
+                  style={{
+                    width: '100%', background: GREEN, color: '#0a0a0a', border: 'none',
+                    borderRadius: 8, padding: '14px', fontSize: 13, fontWeight: 700,
+                    cursor: 'pointer', fontFamily: 'inherit',
+                  }}
+                >
+                  Ver {gaming.length} producto{gaming.length !== 1 ? 's' : ''}
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {selectedProduct && (

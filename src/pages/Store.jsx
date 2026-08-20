@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { products, categories, devices, colorSwatches, basePrice, compatibleDevice, caseType, caseTypes, PHONE_FILTER_CATEGORIES } from '../data/products'
+import { products, categories, devices, colorSwatches, basePrice, compatibleDevice, caseType, caseTypes, PHONE_FILTER_CATEGORIES, DJI_FILTER_CATEGORIES, GLASSES_FILTER_CATEGORIES, GAMING_FILTER_CATEGORIES } from '../data/products'
 import ProductCard from '../components/ProductCard'
 import ProductModal from '../components/ProductModal'
 import AnnouncementBar from '../components/AnnouncementBar'
@@ -75,6 +75,9 @@ export default function Store() {
   const byCategory = useMemo(() => {
     if (activeCategory === 'all') return products
     if (activeCategory === 'telefonos') return products.filter(p => PHONE_FILTER_CATEGORIES.includes(p.category))
+    if (activeCategory === 'dji-estab') return products.filter(p => DJI_FILTER_CATEGORIES.includes(p.category))
+    if (activeCategory === 'oakley') return products.filter(p => GLASSES_FILTER_CATEGORIES.includes(p.category))
+    if (activeCategory === 'gaming') return products.filter(p => GAMING_FILTER_CATEGORIES.includes(p.category))
     return products.filter(p => p.category === activeCategory)
   }, [activeCategory])
 
@@ -359,20 +362,31 @@ export default function Store() {
       <AnnouncementBar />
       <Navbar />
 
-      {/* Barra superior sticky: filtros (mobile), buscador, orden */}
-      <div style={{
-        position: 'sticky',
-        top: 68,
-        zIndex: 90,
-        background: '#fff',
-        borderBottom: '1px solid rgba(0,0,0,0.06)',
-      }}>
+      {/* Page title + buscador/orden — cápsulas flotantes, sin línea divisoria, junto al título (sin gap grande arriba) */}
+      <div style={{ maxWidth: 1340, margin: '0 auto', padding: isMobile ? '24px 16px 20px' : '32px 32px 20px' }}>
+        <h1 style={{
+          fontSize: 'clamp(26px, 3.5vw, 38px)',
+          fontWeight: 500,
+          letterSpacing: -1,
+          color: '#111',
+          margin: 0,
+        }}>
+          Tienda
+        </h1>
+        <p style={{ fontSize: 13, color: '#888', margin: '6px 0 0' }}>
+          {filtered.length} producto{filtered.length !== 1 ? 's' : ''}
+        </p>
+
         {isMobile ? (
-          <div style={{ padding: '10px 16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
             {/* Fila 1: buscador a todo lo ancho */}
-            <div style={{ position: 'relative' }}>
+            <div style={{
+              position: 'relative',
+              borderRadius: 99, background: '#fff',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+            }}>
               <svg
-                style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
+                style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
                 width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2" strokeLinecap="round"
               >
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -383,10 +397,10 @@ export default function Store() {
                 placeholder="Buscar productos..."
                 style={{
                   width: '100%', boxSizing: 'border-box',
-                  padding: '10px 14px 10px 34px',
+                  padding: '12px 16px 12px 36px',
                   borderRadius: 99,
-                  border: '1.5px solid rgba(0,0,0,0.1)',
-                  background: '#f5f5f3',
+                  border: 'none',
+                  background: 'transparent',
                   fontSize: 13,
                   color: '#111',
                   outline: 'none',
@@ -402,11 +416,12 @@ export default function Store() {
                 style={{
                   display: 'flex', alignItems: 'center', gap: 6,
                   padding: '9px 14px', borderRadius: 99,
-                  border: hasActiveFilters ? 'none' : '1.5px solid rgba(0,0,0,0.12)',
-                  background: hasActiveFilters ? '#0057FF' : 'transparent',
+                  border: 'none',
+                  background: hasActiveFilters ? '#0057FF' : '#fff',
                   color: hasActiveFilters ? '#fff' : '#333',
                   fontSize: 12.5, fontWeight: 700,
                   cursor: 'pointer', fontFamily: 'inherit', flexShrink: 0,
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
                 }}
               >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -421,8 +436,8 @@ export default function Store() {
                 style={{
                   padding: '9px 10px',
                   borderRadius: 99,
-                  border: '1.5px solid rgba(0,0,0,0.12)',
-                  background: '#f5f5f3',
+                  border: 'none',
+                  background: '#fff',
                   fontSize: 12.5,
                   fontWeight: 600,
                   color: '#111',
@@ -430,6 +445,7 @@ export default function Store() {
                   cursor: 'pointer',
                   fontFamily: 'inherit',
                   minWidth: 0,
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
                 }}
               >
                 {SORT_OPTIONS.map(o => (
@@ -439,60 +455,56 @@ export default function Store() {
             </div>
           </div>
         ) : (
-          <div style={{
-            maxWidth: 1340,
-            margin: '0 auto',
-            padding: '0 32px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 8,
-            height: 54,
-          }}>
-            <div style={{ flex: 1 }} />
+          // paddingLeft (220px sidebar + 40px gap) para alinear el ancho de la cápsula
+          // exactamente con el área del grid (desde la primera hasta la última tarjeta)
+          <div style={{ marginTop: 16, paddingLeft: 260 }}>
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: 10,
+              background: '#fff', borderRadius: 99,
+              padding: '6px 8px',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+            }}>
+              {/* Search */}
+              <div style={{ position: 'relative', flex: 1 }}>
+                <svg
+                  style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
+                  width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2" strokeLinecap="round"
+                >
+                  <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
+                  placeholder="Buscar..."
+                  style={{
+                    width: '100%', boxSizing: 'border-box',
+                    padding: '9px 14px 9px 32px',
+                    borderRadius: 99,
+                    border: 'none',
+                    background: '#f5f5f3',
+                    fontSize: 12.5,
+                    color: '#111',
+                    outline: 'none',
+                    fontFamily: 'inherit',
+                  }}
+                />
+              </div>
 
-            {/* Search */}
-            <div style={{ position: 'relative', flexShrink: 0 }}>
-              <svg
-                style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
-                width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2" strokeLinecap="round"
-              >
-                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-              </svg>
-              <input
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-                placeholder="Buscar..."
-                style={{
-                  padding: '6px 12px 6px 30px',
-                  borderRadius: 99,
-                  border: '1.5px solid rgba(0,0,0,0.12)',
-                  background: '#f5f5f3',
-                  fontSize: 12,
-                  color: '#111',
-                  outline: 'none',
-                  width: 160,
-                  fontFamily: 'inherit',
-                }}
-              />
-            </div>
-
-            <div style={{ width: 1, height: 20, background: 'rgba(0,0,0,0.1)', flexShrink: 0 }} />
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
-              <span style={{ fontSize: 11, color: '#999', whiteSpace: 'nowrap' }}>Ordenar:</span>
               <select
                 value={sort}
                 onChange={e => setSort(e.target.value)}
                 style={{
-                  padding: '5px 10px',
-                  borderRadius: 8,
-                  border: '1.5px solid rgba(0,0,0,0.12)',
+                  padding: '9px 14px',
+                  borderRadius: 99,
+                  border: 'none',
                   background: '#f5f5f3',
-                  fontSize: 12,
+                  fontSize: 12.5,
+                  fontWeight: 600,
                   color: '#111',
                   outline: 'none',
                   cursor: 'pointer',
                   fontFamily: 'inherit',
+                  flexShrink: 0,
                 }}
               >
                 {SORT_OPTIONS.map(o => (
@@ -502,22 +514,6 @@ export default function Store() {
             </div>
           </div>
         )}
-      </div>
-
-      {/* Page title */}
-      <div style={{ maxWidth: 1340, margin: '0 auto', padding: isMobile ? '28px 16px 20px' : '40px 32px 20px' }}>
-        <h1 style={{
-          fontSize: 'clamp(26px, 3.5vw, 38px)',
-          fontWeight: 500,
-          letterSpacing: -1,
-          color: '#111',
-          margin: 0,
-        }}>
-          Tienda
-        </h1>
-        <p style={{ fontSize: 13, color: '#888', margin: '6px 0 0' }}>
-          {filtered.length} producto{filtered.length !== 1 ? 's' : ''}
-        </p>
 
         {/* Chips de filtros activos */}
         {hasActiveFilters && (
@@ -560,8 +556,8 @@ export default function Store() {
         {!isMobile && (
           <aside style={{
             flex: '0 0 220px',
-            position: 'sticky', top: 138,
-            maxHeight: 'calc(100vh - 158px)', overflowY: 'auto',
+            position: 'sticky', top: 88,
+            maxHeight: 'calc(100vh - 108px)', overflowY: 'auto',
             overscrollBehavior: 'contain',
             paddingRight: 4, paddingBottom: 20,
           }}>

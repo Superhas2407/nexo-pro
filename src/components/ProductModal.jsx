@@ -4,7 +4,6 @@ import { useBreakpoint } from '../hooks/useBreakpoint'
 import { useBsRate, formatBs } from '../hooks/useBsRate'
 import { useShop } from '../context/ShopContext'
 import { groupSpecs } from '../utils/specGroups'
-import { SpecIcon } from '../utils/SpecIcon.jsx'
 
 const fmt = (n) => 'REF ' + n.toLocaleString('en-US')
 const swatchStyle = (cv) => cv.swatchImage
@@ -762,107 +761,74 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
                     </h2>
                   </div>
 
-                  {/* Ticket / factura */}
+                  {/* Ficha técnica */}
                   <div style={{
                     maxWidth: 640, margin: '0 auto',
-                    background: dark ? '#1a1a1a' : '#fff', borderRadius: 10,
+                    background: dark ? '#1a1a1a' : '#fff', borderRadius: 14,
                     border: dark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.08)',
                     boxShadow: dark ? '0 2px 16px rgba(0,0,0,0.3)' : '0 2px 16px rgba(0,0,0,0.04)',
-                    padding: isMobile ? '24px 20px' : '40px 48px',
+                    padding: isMobile ? '28px 20px' : '44px 48px',
                   }}>
-                    {/* Encabezado de factura */}
+                    {/* Encabezado */}
                     <div style={{
-                      display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
-                      paddingBottom: 14, marginBottom: 4,
-                      borderBottom: dark ? '2px solid #f5f5f5' : '2px solid #111',
+                      paddingBottom: 20, marginBottom: 24,
+                      borderBottom: `2px solid ${accentColor}`,
                     }}>
-                      <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: dark ? '#f5f5f5' : '#111' }}>
+                      <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: dark ? '#f5f5f5' : '#111' }}>
                         Ficha técnica
                       </span>
-                      <span style={{ fontSize: 11, fontWeight: 600, color: '#999' }}>
-                        REF {product.id.toUpperCase()}
+                      <span style={{ display: 'block', fontSize: 13, fontWeight: 600, color: accentColor, marginTop: 4 }}>
+                        {product.brand} · {product.name}
                       </span>
                     </div>
 
                     {specGroups.map((group, gi) => (
                       <div
                         key={group.key}
-                        style={{
-                          paddingTop: 18, paddingBottom: 4,
-                          borderTop: gi > 0 ? '1px dashed rgba(0,0,0,0.16)' : 'none',
-                          marginTop: gi > 0 ? 14 : 0,
-                        }}
+                        style={{ marginTop: gi > 0 ? 32 : 0 }}
                       >
-                        <div style={{
-                          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                          paddingBottom: 8, marginBottom: 4,
-                          borderBottom: '1px solid rgba(0,0,0,0.1)',
+                        <h3 style={{
+                          fontSize: 13, fontWeight: 700, letterSpacing: 1,
+                          textTransform: 'uppercase', color: dark ? '#f5f5f5' : '#111', margin: '0 0 14px',
                         }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-                            <SpecIcon category={group.key} size={13} color="#111" />
-                            <h3 style={{
-                              fontSize: 11, fontWeight: 700, letterSpacing: 1.5,
-                              textTransform: 'uppercase', color: dark ? '#f5f5f5' : '#111', margin: 0,
-                            }}>
-                              {group.title}
-                            </h3>
-                          </div>
-                          <span style={{ fontSize: 10, color: '#bbb', fontWeight: 500 }}>
-                            {group.items.length} {group.items.length === 1 ? 'ítem' : 'ítems'}
-                          </span>
-                        </div>
+                          {group.title}
+                        </h3>
 
                         {group.items.map((spec, i) => (
-                          isMobile || spec.value.length > 42 ? (
-                            <div key={i} style={{
-                              padding: '10px 0',
-                              borderBottom: i < group.items.length - 1 ? '1px dotted rgba(0,0,0,0.18)' : 'none',
+                          <div key={i} style={{
+                            display: 'flex', flexDirection: isMobile ? 'column' : 'row',
+                            justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'baseline',
+                            gap: isMobile ? 4 : 24,
+                            padding: '14px 0',
+                            borderBottom: i < group.items.length - 1
+                              ? (dark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.07)')
+                              : 'none',
+                          }}>
+                            <span style={{
+                              fontSize: 13, fontWeight: 600, color: dark ? 'rgba(245,245,245,0.5)' : '#767676',
+                              flexShrink: 0, lineHeight: 1.4,
                             }}>
-                              <div style={{ fontSize: 11, fontWeight: 600, color: '#555', marginBottom: 4 }}>
-                                {spec.label}
-                              </div>
-                              <div style={{ fontSize: 13, fontWeight: 600, color: dark ? '#f5f5f5' : '#111', textAlign: isMobile ? 'right' : 'left', lineHeight: 1.4 }}>
-                                {spec.value}
-                              </div>
-                            </div>
-                          ) : (
-                            <div key={i} style={{
-                              display: 'flex', alignItems: 'flex-end', gap: 6,
-                              padding: '9px 0',
+                              {spec.label}
+                            </span>
+                            <span style={{
+                              fontSize: 15, fontWeight: 600, color: dark ? '#f5f5f5' : '#111',
+                              textAlign: isMobile ? 'left' : 'right', lineHeight: 1.5,
                             }}>
-                              <span style={{
-                                fontSize: 12, fontWeight: 600, color: '#555',
-                                whiteSpace: 'nowrap', flexShrink: 0,
-                              }}>
-                                {spec.label}
-                              </span>
-                              <span style={{
-                                flex: 1, minWidth: 12, marginBottom: 3,
-                                borderBottom: '1.5px dotted rgba(0,0,0,0.22)',
-                              }} />
-                              <span style={{
-                                fontSize: 13, fontWeight: 600, color: dark ? '#f5f5f5' : '#111',
-                                textAlign: 'right', lineHeight: 1.4,
-                              }}>
-                                {spec.value}
-                              </span>
-                            </div>
-                          )
+                              {spec.value}
+                            </span>
+                          </div>
                         ))}
                       </div>
                     ))}
 
-                    {/* Pie de factura */}
+                    {/* Pie */}
                     <div style={{
-                      display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
-                      paddingTop: 14, marginTop: 14,
-                      borderTop: '2px solid #111',
+                      textAlign: 'center',
+                      paddingTop: 24, marginTop: 32,
+                      borderTop: `2px solid ${accentColor}`,
                     }}>
-                      <span style={{ fontSize: 10, fontWeight: 600, color: '#999', letterSpacing: 0.5 }}>
-                        PULSE · {product.brand}
-                      </span>
-                      <span style={{ fontSize: 10, fontWeight: 600, color: '#999', letterSpacing: 0.5 }}>
-                        {product.specs.length} especificaciones
+                      <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: accentColor }}>
+                        PULSE
                       </span>
                     </div>
                   </div>
