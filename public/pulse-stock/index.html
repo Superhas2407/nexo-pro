@@ -159,10 +159,55 @@
   nav.tabs button.active{ color:var(--text); background:var(--surface); box-shadow:var(--shadow); }
   nav.tabs button:hover:not(.active){ color:var(--text); background:rgba(127,127,127,.08); }
   @media (min-width:761px){ nav.tabs{ flex-wrap:wrap; } }
+
+  /* ---------- header "más opciones" (tasa, redondeo, salir) ---------- */
+  .header-menu-btn{
+    display:none; background:var(--surface); border:1px solid var(--border); color:var(--text-muted);
+    width:36px; height:36px; border-radius:10px; align-items:center; justify-content:center;
+    cursor:pointer; box-shadow:var(--shadow); flex:none;
+  }
+  #headerExtras{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+
+  /* ---------- mobile app shell: bottom tab bar + condensed header ---------- */
+  .tab-bar-mobile{ display:none; }
   @media (max-width:760px){
-    nav.tabs{ overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
-    nav.tabs::-webkit-scrollbar{ display:none; }
-    nav.tabs button{ padding:9px 13px; }
+    body{ padding-bottom:calc(64px + env(safe-area-inset-bottom)); }
+    .shell{ padding-left:14px; padding-right:14px; padding-bottom:24px; }
+
+    header.top{ padding:12px 0 14px; gap:10px; }
+    .brand-sub{ display:none; }
+    .header-menu-btn{ display:inline-flex; }
+
+    /* nav.tabs (pills) se reemplaza por la barra inferior en mobile */
+    nav.tabs{ display:none; }
+
+    /* headerExtras se convierte en una hoja que cae desde el header */
+    #headerExtras{
+      display:none; position:fixed; left:14px; right:14px; top:64px; z-index:60;
+      background:var(--surface); border:1px solid var(--border); border-radius:16px;
+      padding:16px; box-shadow:0 12px 32px -8px rgba(10,10,20,.28); flex-direction:column; align-items:stretch;
+    }
+    #headerExtras.open{ display:flex; }
+    #headerExtras .rate-widget{ width:100%; justify-content:space-between; }
+    #headerExtras .logout-btn{ justify-content:center; margin-top:2px; }
+
+    .tab-bar-mobile{
+      display:flex; position:fixed; left:0; right:0; bottom:0; z-index:50;
+      background:var(--surface); border-top:1px solid var(--border);
+      padding:8px 4px calc(8px + env(safe-area-inset-bottom));
+      box-shadow:0 -4px 16px -8px rgba(10,10,20,.15);
+    }
+    .tab-bar-mobile button{
+      flex:1; display:flex; align-items:center; justify-content:center;
+      background:none; border:none; padding:8px 2px; color:var(--text-muted); cursor:pointer;
+      border-radius:10px;
+    }
+    .tab-bar-mobile button.active{ color:var(--accent); background:var(--accent-soft); }
+  }
+  /* backdrop that closes the header sheet on tap-outside */
+  #headerExtrasBackdrop{ display:none; }
+  #headerExtrasBackdrop.open{
+    display:block; position:fixed; inset:0; z-index:55; background:rgba(10,10,20,.25);
   }
 
   /* ---------- low-stock header badge ---------- */
@@ -617,29 +662,37 @@
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
       <span id="lowStockBadgeText">0 con stock bajo</span>
     </button>
-    <div class="rate-widget round-widget">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      <label for="roundToInput">Redondear precios a $</label>
-      <input id="roundToInput" class="tabular" type="number" step="1" min="0" inputmode="numeric" lang="en" placeholder="0" />
-      <div class="round-presets">
-        <button type="button" class="round-preset-btn" data-round-preset="0" title="Sin redondeo">Off</button>
-        <button type="button" class="round-preset-btn" data-round-preset="5">5</button>
-        <button type="button" class="round-preset-btn" data-round-preset="10">10</button>
-        <button type="button" class="round-preset-btn" data-round-preset="25">25</button>
-      </div>
-    </div>
-    <div class="rate-widget">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 10h13M7 10l3-3M7 10l3 3M17 14H4M17 14l-3-3M17 14l-3 3"/></svg>
-      <label for="rateInput">Tasa ref.</label>
-      <span class="unit">Bs</span>
-      <input id="rateInput" class="tabular" type="number" step="0.01" inputmode="decimal" />
-      <span class="unit">/ USD · solo informativa</span>
-    </div>
-    <button class="logout-btn" id="logoutBtn" type="button" title="Cerrar sesión">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
-      Salir
+
+    <button class="header-menu-btn" id="headerMenuBtn" type="button" title="Más opciones">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
     </button>
+
+    <div id="headerExtras">
+      <div class="rate-widget round-widget">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        <label for="roundToInput">Redondear precios a $</label>
+        <input id="roundToInput" class="tabular" type="number" step="1" min="0" inputmode="numeric" lang="en" placeholder="0" />
+        <div class="round-presets">
+          <button type="button" class="round-preset-btn" data-round-preset="0" title="Sin redondeo">Off</button>
+          <button type="button" class="round-preset-btn" data-round-preset="5">5</button>
+          <button type="button" class="round-preset-btn" data-round-preset="10">10</button>
+          <button type="button" class="round-preset-btn" data-round-preset="25">25</button>
+        </div>
+      </div>
+      <div class="rate-widget">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 10h13M7 10l3-3M7 10l3 3M17 14H4M17 14l-3-3M17 14l-3 3"/></svg>
+        <label for="rateInput">Tasa ref.</label>
+        <span class="unit">Bs</span>
+        <input id="rateInput" class="tabular" type="number" step="0.01" inputmode="decimal" />
+        <span class="unit">/ USD · solo informativa</span>
+      </div>
+      <button class="logout-btn" id="logoutBtn" type="button" title="Cerrar sesión">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+        Salir
+      </button>
+    </div>
   </header>
+  <div id="headerExtrasBackdrop"></div>
 
   <nav class="tabs">
     <button class="active" data-tab="home">Inicio</button>
@@ -1235,6 +1288,30 @@
   </section>
 
 </div>
+
+<nav class="tab-bar-mobile">
+  <button class="active" data-tab="home" title="Inicio">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+  </button>
+  <button data-tab="inv" title="Inventario">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg>
+  </button>
+  <button data-tab="sell" title="Vender">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2.5 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L21 6H6"/></svg>
+  </button>
+  <button data-tab="clients" title="Clientes">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+  </button>
+  <button data-tab="rep" title="Reportes">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16v-4M12 16V8M17 16v-7"/></svg>
+  </button>
+  <button data-tab="scan" title="Escanear">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="10" rx="1"/><path d="M7 7v10M11 7v10M15 7v10"/></svg>
+  </button>
+  <button data-tab="ads" title="Publicidad">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-6v14L3 15v-4Z"/><path d="M7 15v4a2 2 0 0 0 2 2h1"/></svg>
+  </button>
+</nav>
 
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
@@ -3776,25 +3853,43 @@
     if (e.key === "Enter"){ e.preventDefault(); applyHistFilters(); }
   });
 
-  Array.prototype.forEach.call(document.querySelectorAll("nav.tabs button"), function(btn){
-    btn.addEventListener("click", function(){
-      state.tab = btn.getAttribute("data-tab");
-      Array.prototype.forEach.call(document.querySelectorAll("nav.tabs button"), function(b){ b.classList.toggle("active", b===btn); });
-      document.getElementById("tab-home").hidden = state.tab !== "home";
-      document.getElementById("tab-inv").hidden = state.tab !== "inv";
-      document.getElementById("tab-sell").hidden = state.tab !== "sell";
-      document.getElementById("tab-clients").hidden = state.tab !== "clients";
-      document.getElementById("tab-rep").hidden = state.tab !== "rep";
-      document.getElementById("tab-scan").hidden = state.tab !== "scan";
-      document.getElementById("tab-ads").hidden = state.tab !== "ads";
-      if (state.tab === "home") renderHome();
-      if (state.tab === "rep") renderReports();
-      if (state.tab === "sell") renderSellAll();
-      if (state.tab === "clients") renderClientsAll();
-      if (state.tab === "ads") renderAdsAll();
-      if (state.tab === "scan"){ clearScanUnknown(); showScanStatus("", ""); renderScanLog(); focusScanInput(); }
+  // Dos barras de navegación apuntan al mismo tab (los pills de escritorio
+  // y la barra inferior de mobile) — se mantienen sincronizadas entre sí.
+  function goToTab(tab){
+    state.tab = tab;
+    Array.prototype.forEach.call(document.querySelectorAll("[data-tab]"), function(b){
+      b.classList.toggle("active", b.getAttribute("data-tab") === tab);
     });
+    document.getElementById("tab-home").hidden = state.tab !== "home";
+    document.getElementById("tab-inv").hidden = state.tab !== "inv";
+    document.getElementById("tab-sell").hidden = state.tab !== "sell";
+    document.getElementById("tab-clients").hidden = state.tab !== "clients";
+    document.getElementById("tab-rep").hidden = state.tab !== "rep";
+    document.getElementById("tab-scan").hidden = state.tab !== "scan";
+    document.getElementById("tab-ads").hidden = state.tab !== "ads";
+    if (state.tab === "home") renderHome();
+    if (state.tab === "rep") renderReports();
+    if (state.tab === "sell") renderSellAll();
+    if (state.tab === "clients") renderClientsAll();
+    if (state.tab === "ads") renderAdsAll();
+    if (state.tab === "scan"){ clearScanUnknown(); showScanStatus("", ""); renderScanLog(); focusScanInput(); }
+    try{ window.scrollTo(0, 0); }catch(e){}
+    closeHeaderExtras();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-tab]"), function(btn){
+    btn.addEventListener("click", function(){ goToTab(btn.getAttribute("data-tab")); });
   });
+
+  // ---------------- header "más opciones" sheet (mobile) ----------------
+  function closeHeaderExtras(){
+    document.getElementById("headerExtras").classList.remove("open");
+    document.getElementById("headerExtrasBackdrop").classList.remove("open");
+  }
+  document.getElementById("headerMenuBtn").addEventListener("click", function(){
+    document.getElementById("headerExtras").classList.toggle("open");
+    document.getElementById("headerExtrasBackdrop").classList.toggle("open");
+  });
+  document.getElementById("headerExtrasBackdrop").addEventListener("click", closeHeaderExtras);
 
   document.getElementById("adAddToggle").addEventListener("click", function(){ toggleAdForm(true); });
   document.getElementById("adCancelBtn").addEventListener("click", function(){ toggleAdForm(false); });
