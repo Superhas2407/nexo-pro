@@ -124,7 +124,7 @@
       color: null, hex: '#2a2a2a',
       image: '/dji-osmo7-shop.webp',
       hoverImage: '/dji-osmo7-hand.webp',
-      storage: [{ label: null, price: 105 }],
+      storage: [{ label: null, price: 115 }],
     }],
     specs: [
       { label: 'Estabilización',  value: '3 ejes, ±0.01° precisión' },
@@ -150,7 +150,7 @@
       color: null, hex: '#2a2a2a',
       image: '/dji-osmo7p-shop.webp',
       hoverImage: '/dji-osmo7p-hand.webp',
-      storage: [{ label: null, price: 150 }],
+      storage: [{ label: null, price: 165 }],
     }],
     specs: [
       { label: 'Estabilización',  value: '3 ejes, ±0.01° precisión' },
