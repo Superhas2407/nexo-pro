@@ -2753,7 +2753,7 @@
     if (existing) existing.qty += qty;
     else sellCart.push({
       productId:product.id, sku:product.sku, name:product.name, priceType:priceType,
-      unitPriceUsd:unitPriceUsd, qty:qty, discountPct:0,
+      unitPriceUsd:unitPriceUsd, catalogPriceUsd:unitPriceUsd, qty:qty, discountPct:0,
       adId: adId || null, adLabel: ad ? ("Publicidad — " + adDisplayTitle(ad)) : null
     });
     renderSellCart();
@@ -2796,14 +2796,18 @@
     }
     el.innerHTML =
       '<table class="sell-cart-table"><thead><tr>' +
-        '<th>Producto</th><th class="c">Tipo</th><th class="c">P. unit.</th><th class="c">Desc. %</th><th class="c">Cant.</th><th class="c">Total</th><th></th>' +
+        '<th>Producto</th><th class="c">Tipo</th><th class="c">P. unit. (editable)</th><th class="c">Desc. %</th><th class="c">Cant.</th><th class="c">Total</th><th></th>' +
       '</tr></thead><tbody>' +
       sellCart.map(function(item, idx){
         var adTag = item.adId ? '<div class="item-sku" style="color:var(--accent);">📣 con publicidad</div>' : '';
+        var adjusted = item.catalogPriceUsd != null && Math.abs(item.unitPriceUsd - item.catalogPriceUsd) > 0.005;
+        var adjustedTag = adjusted
+          ? '<div class="item-sku" style="color:var(--warn);">precio ajustado — antes ' + fmtUsd(item.catalogPriceUsd) + '</div>'
+          : '';
         return '<tr>' +
-          '<td><div class="item-name">' + escapeAttr(item.name) + '</div><div class="item-sku">' + escapeAttr(item.sku) + '</div>' + adTag + '</td>' +
+          '<td><div class="item-name">' + escapeAttr(item.name) + '</div><div class="item-sku">' + escapeAttr(item.sku) + '</div>' + adTag + adjustedTag + '</td>' +
           '<td class="c">' + (item.priceType==="mayor"?"Mayor":"Detal") + '</td>' +
-          '<td class="c tabular">' + fmtUsd(item.unitPriceUsd) + '</td>' +
+          '<td class="c"><input class="sell-qty-input tabular" data-cart-price="' + idx + '" type="number" min="0" step="0.01" lang="en" value="' + fmtInputNum(item.unitPriceUsd) + '" style="' + (adjusted?"color:var(--warn);font-weight:700;":"") + '" /></td>' +
           '<td class="c"><input class="sell-qty-input tabular" data-cart-disc="' + idx + '" type="number" min="0" max="100" step="1" value="' + (item.discountPct||0) + '" /></td>' +
           '<td class="c"><input class="sell-qty-input tabular" data-cart-qty="' + idx + '" type="number" min="1" value="' + item.qty + '" /></td>' +
           '<td class="c tabular" style="font-weight:700;">' + fmtUsd(sellLineTotal(item)) + '</td>' +
@@ -2816,6 +2820,19 @@
         var idx = parseInt(input.getAttribute("data-cart-qty"), 10);
         var qty = parseInt(input.value, 10); if (!isFinite(qty) || qty <= 0) qty = 1;
         sellCart[idx].qty = qty;
+        renderSellCart();
+        renderSellTotals();
+      });
+    });
+    Array.prototype.forEach.call(el.querySelectorAll("[data-cart-price]"), function(input){
+      // El precio de la línea es editable directamente — así una venta
+      // negociada (más barata o más cara que el catálogo) no deja un
+      // "falta por pagar" o "vuelto" fantasma: el total ya refleja lo
+      // que de verdad se cobró, sin tener que jugar con descuentos.
+      input.addEventListener("change", function(){
+        var idx = parseInt(input.getAttribute("data-cart-price"), 10);
+        var v = parseFloat(input.value); if (!isFinite(v) || v < 0) v = sellCart[idx].unitPriceUsd;
+        sellCart[idx].unitPriceUsd = v;
         renderSellCart();
         renderSellTotals();
       });
@@ -2995,7 +3012,7 @@
       customerId: document.getElementById("sellCustomerSelect").value || null,
       customerName: document.getElementById("sellClientName").value.trim(),
       customerPhone: document.getElementById("sellClientPhone").value.trim(),
-      items: sellCart.map(function(i){ return { productId:i.productId, sku:i.sku, name:i.name, priceType:i.priceType, unitPriceUsd:i.unitPriceUsd, qty:i.qty, discountPct:i.discountPct||0, lineTotalUsd: sellLineTotal(i), adId:i.adId||null, adLabel:i.adLabel||null }; }),
+      items: sellCart.map(function(i){ return { productId:i.productId, sku:i.sku, name:i.name, priceType:i.priceType, unitPriceUsd:i.unitPriceUsd, catalogPriceUsd:i.catalogPriceUsd!=null?i.catalogPriceUsd:i.unitPriceUsd, qty:i.qty, discountPct:i.discountPct||0, lineTotalUsd: sellLineTotal(i), adId:i.adId||null, adLabel:i.adLabel||null }; }),
       subtotalUsd: subtotal,
       discountType: document.getElementById("sellDiscType").value,
       discountValue: parseFloat(document.getElementById("sellDiscValue").value) || 0,
