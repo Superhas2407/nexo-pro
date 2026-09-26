@@ -900,6 +900,10 @@
             <label for="sellDueDate">Fecha límite de pago (solo si queda fiado)</label>
             <input id="sellDueDate" type="date" />
           </div>
+          <div class="field" style="flex:1;">
+            <label for="sellCommission">Comisión vendedor ($) — solo si no cobras tú</label>
+            <input id="sellCommission" class="tabular" type="number" step="0.01" min="0" lang="en" placeholder="0.00" />
+          </div>
         </div>
 
         <div class="sell-code-row">
@@ -1953,11 +1957,12 @@
 
   function exportHistoryCsv(){
     var list = histFiltersActive ? computeFilteredSales() : sellSales;
-    var headers = ["N°","Fecha","Cliente","Teléfono","Vendedor","Productos","Subtotal","Descuento","Recargos","Total","Métodos de pago","Pagado","Saldo (fiado/vuelto)","Fecha límite de pago","Devuelto","Notas"];
+    var headers = ["N°","Fecha","Cliente","Teléfono","Vendedor","Comisión vendedor","Neto negocio","Productos","Subtotal","Descuento","Recargos","Total","Métodos de pago","Pagado","Saldo (fiado/vuelto)","Fecha límite de pago","Devuelto","Notas"];
     var rows = list.map(function(s){
       var itemsSummary = (s.items||[]).map(function(i){ return i.qty + "x " + i.name; }).join("; ");
       var methods = (s.payments||[]).map(function(p){ return p.method + " " + fmtUsd(p.amountUsd||0); }).join("; ");
-      return [padSaleNumber(s.number), fmtDateTime(s.createdAt), s.customerName||"", s.customerPhone||"", s.sellerName||"", itemsSummary,
+      var commission = s.sellerCommissionUsd||0;
+      return [padSaleNumber(s.number), fmtDateTime(s.createdAt), s.customerName||"", s.customerPhone||"", s.sellerName||"", commission.toFixed(2), ((s.totalUsd||0)-commission).toFixed(2), itemsSummary,
         (s.subtotalUsd||0).toFixed(2), (s.discountAmountUsd||0).toFixed(2), (s.surchargeUsd||0).toFixed(2), (s.totalUsd||0).toFixed(2),
         methods, (s.paidUsd||0).toFixed(2), (s.balanceUsd||0).toFixed(2), s.dueDate||"", (s.returnedTotalUsd||0).toFixed(2), s.notes||""];
     });
@@ -3026,6 +3031,10 @@
       notes: document.getElementById("sellNotes").value.trim(),
       sellerName: document.getElementById("sellSeller").value.trim(),
       dueDate: document.getElementById("sellDueDate").value || null,
+      // Cuánto se queda quien hizo la venta (ej. alguien que vendió por ti
+      // sin estar en la tienda) — se descuenta de lo que realmente entra
+      // al negocio, no afecta el total cobrado al cliente.
+      sellerCommissionUsd: parseFloat(document.getElementById("sellCommission").value) || 0,
       createdAt: new Date().toISOString()
     };
 
@@ -3058,6 +3067,7 @@
     document.getElementById("sellClientPhone").value = "";
     document.getElementById("sellNotes").value = "";
     document.getElementById("sellDueDate").value = "";
+    document.getElementById("sellCommission").value = "";
     try{ localStorage.setItem("pulse-stock-last-seller", document.getElementById("sellSeller").value); }catch(e){}
     renderAll();
     renderSellAll();
@@ -3144,10 +3154,13 @@
       var methods = (s.payments||[]).map(function(p){ return p.method; }).join(" + ") || "—";
       var who = s.customerName ? (" · " + s.customerName) : "";
       var seller = s.sellerName ? (" · vendió " + s.sellerName) : "";
+      var commission = s.sellerCommissionUsd > 0.005
+        ? (" · comisión " + fmtUsd(s.sellerCommissionUsd) + " · neto " + fmtUsd((s.totalUsd||0) - s.sellerCommissionUsd))
+        : "";
       var returnedTag = (s.returnedTotalUsd > 0) ? ' <span class="pill warn" style="margin-left:4px;">devuelto ' + fmtUsd(s.returnedTotalUsd) + '</span>' : '';
       return '<div class="low-row">' +
         '<div><div class="name">N° ' + padSaleNumber(s.number) + ' — ' + escapeAttr(itemsSummary) + '</div>' +
-        '<div class="sku">' + fmtDateTime(s.createdAt) + ' · ' + escapeAttr(methods) + escapeAttr(who) + escapeAttr(seller) + '</div></div>' +
+        '<div class="sku">' + fmtDateTime(s.createdAt) + ' · ' + escapeAttr(methods) + escapeAttr(who) + escapeAttr(seller) + escapeAttr(commission) + '</div></div>' +
         '<div style="display:flex;align-items:center;gap:6px;">' +
           '<span class="pill good">' + fmtUsd(s.totalUsd||0) + '</span>' + returnedTag +
           '<button class="btn btn-ghost" data-return-sale="' + s.id + '" style="padding:5px 9px;font-size:10.5px;">Devolver</button>' +
@@ -3479,7 +3492,12 @@
     var abonos = allAbonos.filter(function(a){ return a.createdAt >= shift.openedAt && (!endIso || a.createdAt <= endIso); });
 
     var cashIn = shift.openingCashUsd || 0;
-    sales.forEach(function(s){ (s.payments||[]).forEach(function(p){ if (isCashMethod(p.method)) cashIn += (p.amountUsd||0); }); });
+    sales.forEach(function(s){
+      (s.payments||[]).forEach(function(p){ if (isCashMethod(p.method)) cashIn += (p.amountUsd||0); });
+      // Si alguien vendió por ti y se quedó con una comisión, ese monto
+      // nunca llega a la caja — se resta de lo esperado.
+      cashIn -= (s.sellerCommissionUsd||0);
+    });
     abonos.forEach(function(a){ if (isCashMethod(a.method)) cashIn += (a.amountUsd||0); });
     var cashOut = 0;
     returns.forEach(function(r){ if (isCashMethod(r.refundMethod)) cashOut += (r.totalRefundUsd||0); });
