@@ -585,6 +585,16 @@
   }
   .pill.web{ background:rgba(0,87,255,.1); color:#0057FF; }
 
+  /* ---------- inventario web ---------- */
+  .webinv-head{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  .webinv-thumb{ width:44px; height:44px; object-fit:contain; border-radius:10px; background:#fff; flex:none; }
+  .webinv-name{ font-weight:700; font-size:14px; color:var(--text); }
+  .webinv-sub{ font-size:11px; color:var(--text-muted); font-weight:600; margin-top:2px; }
+  .webinv-row + .webinv-row{ margin-top:14px; padding-top:14px; border-top:1px dashed var(--border); }
+  .webinv-row-label{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--text-muted); margin-bottom:8px; }
+  .webinv-static{ cursor:default; }
+  .webinv-note{ font-size:11px; color:var(--text-muted); margin:-4px 0 10px; }
+
   /* ---------- publicidad ---------- */
   .ads-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
   .ad-card{
@@ -708,6 +718,7 @@
   <nav class="tabs">
     <button class="active" data-tab="home">Inicio</button>
     <button data-tab="inv">Inventario</button>
+    <button data-tab="webinv">Inventario web</button>
     <button data-tab="sell">Vender</button>
     <button data-tab="clients">Clientes</button>
     <button data-tab="rep">Reportes</button>
@@ -855,6 +866,52 @@
       </table>
       <div class="empty" id="emptyState" hidden>No hay productos que coincidan. Ajusta la búsqueda o el filtro.</div>
     </div>
+
+  </section>
+
+  <!-- ===================== INVENTARIO WEB ===================== -->
+  <section id="tab-webinv" hidden>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="label">Productos en la web</div>
+        <div class="value tabular" id="webStatProducts">0</div>
+        <div class="sub">en pulseccs.com</div>
+      </div>
+      <div class="stat">
+        <div class="label">Precios propios</div>
+        <div class="value tabular good" id="webStatOwn">0</div>
+        <div class="sub">filas publicadas desde aquí</div>
+      </div>
+      <div class="stat">
+        <div class="label">Desde Inventario</div>
+        <div class="value tabular" id="webStatLinked">0</div>
+        <div class="sub">vinculadas a un producto del inventario</div>
+      </div>
+      <div class="stat">
+        <div class="label">Precio original</div>
+        <div class="value tabular warn" id="webStatWeb">0</div>
+        <div class="sub">filas que aún usan el precio de la web</div>
+      </div>
+    </div>
+
+    <div class="export-status" id="webInvWarning" hidden style="color:var(--warn);margin-bottom:12px;"></div>
+
+    <div class="toolbar">
+      <div class="search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="webSearchBox" type="text" placeholder="Buscar producto de la web…" />
+      </div>
+      <div class="chip-row">
+        <button class="chip active" data-wfilter="all">Todos</button>
+        <button class="chip" data-wfilter="own">Precio propio</button>
+        <button class="chip" data-wfilter="linked">Desde Inventario</button>
+        <button class="chip" data-wfilter="web">Precio original</button>
+      </div>
+    </div>
+    <div style="color:var(--text-muted);font-size:11.5px;margin-bottom:12px;">Cambia la venta detal o los costos y la web se actualiza sola. Si un producto del Inventario está vinculado a la web, su precio manda.</div>
+
+    <div id="webInvWrap"></div>
 
   </section>
 
@@ -1311,6 +1368,9 @@
   <button data-tab="inv" title="Inventario">
     <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg>
   </button>
+  <button data-tab="webinv" title="Inventario web">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18Z"/></svg>
+  </button>
   <button data-tab="sell" title="Vender">
     <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2.5 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L21 6H6"/></svg>
   </button>
@@ -1573,28 +1633,114 @@
   }
 
   // ---------------- precios en la web ----------------
-  // Cada producto puede vincularse (p.webKeys) con variantes de la tienda
-  // web. Su precio de venta detal se publica en la colección `webPrices`,
-  // que la web lee sin login — solo lleva la clave y el precio, nunca
-  // costos ni márgenes.
-  var webCatalog = [];       // {key, label, price?} — de /web-catalog.json
+  // El precio detal de cada variante de la tienda web sale de, en orden:
+  //   1. un producto del Inventario vinculado a ella (p.webKeys), o
+  //   2. su fila en "Inventario web" (colección `webInventory`, con costos
+  //      y margen igual que el inventario normal).
+  // Se publica por variante en `webPrices`, que la web lee sin login — solo
+  // lleva la clave y el precio, nunca costos ni márgenes. Sin precio
+  // publicado, la web muestra el de products.js.
+  var webCatalog = [];       // productos de /web-catalog.json: {id, name, brand, category, image, variants:[{key, color, storage, price}]}
+  var webCategories = [];    // {id, label}
+  var webCatalogItems = [];  // opciones para vincular: {key, label}
   var webPriceDocs = {};     // docId -> {key, priceUsd}
-  var webSync = { productsLoaded: false, pricesLoaded: false, timer: null };
+  var webInventory = {};     // groupKey -> {key, costUsd, taxPct, shipUsd, costoSupuesto, marginDetalPct, marginMayorPct, priceUsd, priceMayorUsd}
+  var webSync = { productsLoaded: false, pricesLoaded: false, inventoryLoaded: false, pricesError: false, inventoryError: false, timer: null };
+  var webInvState = { search: "", filter: "all", open: {} };
 
   function loadWebCatalog(){
-    fetch("/web-catalog.json").then(function(r){ return r.ok ? r.json() : []; })
-      .then(function(items){
-        webCatalog = items || [];
+    fetch("/web-catalog.json").then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(data){
+        if (!data || !Array.isArray(data.products)) return;
+        webCatalog = data.products;
+        webCategories = data.categories || [];
+        webCatalogItems = [];
+        webCatalog.forEach(function(prod){
+          webCatalogItems.push({ key: prod.id + "|*|*", label: prod.name + " — todas las variantes" });
+          prod.variants.forEach(function(v){
+            webCatalogItems.push({ key: v.key, label: [prod.name, v.color, v.storage].filter(Boolean).join(" · ") });
+          });
+        });
         var dl = document.getElementById("webCatalogList");
         if (!dl){ dl = document.createElement("datalist"); dl.id = "webCatalogList"; document.body.appendChild(dl); }
-        dl.innerHTML = webCatalog.map(function(i){ return '<option value="' + escapeAttr(i.label) + '"></option>'; }).join("");
+        dl.innerHTML = webCatalogItems.map(function(i){ return '<option value="' + escapeAttr(i.label) + '"></option>'; }).join("");
         renderInventoryList();
+        renderWebInventory();
+        scheduleWebPriceSync();
       })
       .catch(function(){});
   }
   function webLabel(key){
-    var item = webCatalog.find(function(i){ return i.key === key; });
+    var item = webCatalogItems.find(function(i){ return i.key === key; });
     return item ? item.label : key;
+  }
+
+  // Filas de precio de un producto web: una por capacidad (vale para todos
+  // sus colores). Si en la web los colores de una misma capacidad tienen
+  // precios distintos, una fila por variante.
+  function webGroups(prod){
+    var byStorage = {}, order = [];
+    prod.variants.forEach(function(v){
+      var s = v.storage || "";
+      if (!byStorage[s]){ byStorage[s] = []; order.push(s); }
+      byStorage[s].push(v);
+    });
+    var groups = [];
+    order.forEach(function(s){
+      var vs = byStorage[s];
+      var samePrice = vs.every(function(v){ return v.price === vs[0].price; });
+      if (samePrice){
+        var colors = vs.filter(function(v){ return v.color; }).length;
+        groups.push({
+          key: prod.id + "|*|" + s, variants: vs, webPrice: vs[0].price,
+          label: (s || "Todas las variantes") + (s && colors > 1 ? " · " + colors + " colores" : "")
+        });
+      } else {
+        vs.forEach(function(v){
+          groups.push({ key: v.key, variants: [v], webPrice: v.price, label: [v.color, v.storage].filter(Boolean).join(" · ") });
+        });
+      }
+    });
+    return groups;
+  }
+
+  function round2(n){ return Math.round(n * 100) / 100; }
+
+  // Precio detal/mayor de una fila del inventario web. Con costos cargados
+  // sale del costo + margen (igual que el inventario); sin costos, del
+  // precio escrito a mano.
+  function webItemPrices(w){
+    if (!w) return { detal: null, mayor: null, c: null };
+    var c = computed(w);
+    if (c.costTotalUsd > 0 && w.marginDetalPct != null){
+      return { detal: c.saleDetalUsd, mayor: w.marginMayorPct != null ? c.saleMayorUsd : null, c: c };
+    }
+    return { detal: w.priceUsd || null, mayor: w.priceMayorUsd || null, c: c };
+  }
+
+  // Productos del Inventario vinculados a la web: clave -> producto.
+  function stockLinkIndex(){
+    var idx = {};
+    state.products.forEach(function(p){
+      (p.webKeys || []).forEach(function(k){ if (!idx[k]) idx[k] = p; });
+    });
+    return idx;
+  }
+  function linkedStockProduct(idx, prodId, variantKey){
+    return idx[variantKey] || idx[prodId + "|*|*"] || null;
+  }
+
+  function saveWebItem(w){
+    webInventory[w.key] = w;
+    if (db) db.collection("webInventory").doc(safeDocId(w.key)).set(w).catch(function(){});
+    scheduleWebPriceSync();
+    renderWebInventory();
+  }
+  function resetWebItem(key){
+    delete webInventory[key];
+    if (db) db.collection("webInventory").doc(safeDocId(key)).delete().catch(function(){});
+    scheduleWebPriceSync();
+    renderWebInventory();
   }
   function linkWebKey(product, key){
     product.webKeys = (product.webKeys || []).filter(function(k){ return k !== key; }).concat([key]);
@@ -1612,15 +1758,18 @@
     webSync.timer = setTimeout(syncWebPrices, 1200);
   }
   function syncWebPrices(){
-    // Espera a tener productos y precios publicados — si no, borraría todo.
-    if (!db || !webSync.productsLoaded || !webSync.pricesLoaded) return;
+    // Espera a tener todo cargado — si no, borraría precios publicados.
+    if (!db || !webCatalog.length || !webSync.productsLoaded || !webSync.pricesLoaded || !webSync.inventoryLoaded) return;
+    var idx = stockLinkIndex();
     var desired = {};
-    state.products.forEach(function(p){
-      var price = Math.round(computed(p).saleDetalUsd * 100) / 100;
-      if (!(price > 0)) return;
-      (p.webKeys || []).forEach(function(key){
-        var id = safeDocId(key);
-        if (!desired[id]) desired[id] = { key: key, priceUsd: price };
+    webCatalog.forEach(function(prod){
+      webGroups(prod).forEach(function(g){
+        var own = webItemPrices(webInventory[g.key]).detal;
+        g.variants.forEach(function(v){
+          var linked = linkedStockProduct(idx, prod.id, v.key);
+          var price = linked ? computed(linked).saleDetalUsd : own;
+          if (price > 0) desired[safeDocId(v.key)] = { key: v.key, priceUsd: round2(price) };
+        });
       });
     });
     Object.keys(desired).forEach(function(id){
@@ -1630,6 +1779,188 @@
     });
     Object.keys(webPriceDocs).forEach(function(id){
       if (!desired[id]) db.collection("webPrices").doc(id).delete().catch(function(){});
+    });
+  }
+
+  // ---------------- render: inventario web ----------------
+  // Categorías que la tienda agrupa bajo otra pestaña del filtro.
+  var WEB_CATEGORY_EXTRA = { "iphone":"iPhone", "dji-audio":"DJI", "meta-fury":"Lentes IA", "consolas":"Gaming" };
+  function webCategoryLabel(id){
+    var c = webCategories.find(function(x){ return x.id === id; });
+    return c ? c.label : (WEB_CATEGORY_EXTRA[id] || id);
+  }
+
+  // Estado de cada fila: "linked" (precio desde el Inventario), "own"
+  // (precio propio en Inventario web) o "web" (precio original de la web).
+  function webRowInfo(idx, prod, g){
+    var linked = null;
+    g.variants.forEach(function(v){ linked = linked || linkedStockProduct(idx, prod.id, v.key); });
+    var allLinked = g.variants.every(function(v){ return linkedStockProduct(idx, prod.id, v.key); });
+    var w = webInventory[g.key] || null;
+    var prices = webItemPrices(w);
+    var status = allLinked ? "linked" : (prices.detal > 0 ? "own" : "web");
+    return { linked: linked, allLinked: allLinked, w: w, prices: prices, status: status };
+  }
+
+  function webInvRowHtml(idx, prod, g, showLabel){
+    var info = webRowInfo(idx, prod, g);
+    var w = info.w || {};
+    var head = showLabel ? '<div class="webinv-row-label">' + escapeAttr(g.label) + '</div>' : '';
+
+    if (info.allLinked){
+      var lc = computed(info.linked);
+      return '<div class="webinv-row">' + head +
+        '<div class="inv-price-grid">' +
+          '<div class="inv-price-tile"><div class="inv-price-label">Venta detal</div><div class="inv-price-input tabular webinv-static">' + fmtInputNum(lc.saleDetalUsd) + '</div><div class="inv-price-sub">margen ' + fmtPct(info.linked.marginDetalPct) + '</div></div>' +
+          '<div class="inv-price-tile alt"><div class="inv-price-label">Venta mayor</div><div class="inv-price-input tabular webinv-static">' + fmtInputNum(lc.saleMayorUsd) + '</div><div class="inv-price-sub">margen ' + fmtPct(info.linked.marginMayorPct) + '</div></div>' +
+        '</div>' +
+        '<div class="inv-card-meta-row"><span>Costo total: <strong class="tabular" style="color:var(--text);">' + fmtUsd(lc.costTotalUsd) + '</strong></span>' +
+          '<span class="pill web">Desde Inventario</span></div>' +
+        '<div class="webinv-note">Precio de «' + escapeAttr(info.linked.name) + '» — edítalo en Inventario.</div>' +
+      '</div>';
+    }
+
+    var c = info.prices.c;
+    var hasCost = c && c.costTotalUsd > 0 && w.marginDetalPct != null;
+    var detalSub = hasCost ? 'margen ' + fmtPct(w.marginDetalPct) : (info.prices.detal ? 'sin costos cargados' : 'en la web: REF ' + g.webPrice.toLocaleString("en-US"));
+    var mayorSub = hasCost && w.marginMayorPct != null ? 'margen ' + fmtPct(w.marginMayorPct) : '—';
+    var pill = info.status === "own"
+      ? '<span class="pill good">Publicado</span>'
+      : '<span class="pill">Precio original</span>';
+    var open = !!webInvState.open[g.key];
+
+    return '<div class="webinv-row" data-group="' + escapeAttr(g.key) + '">' + head +
+      '<div class="inv-price-grid">' +
+        '<div class="inv-price-tile">' +
+          '<div class="inv-price-label">Venta detal</div>' +
+          '<input class="inv-price-input tabular" data-wfield="saleDetalUsd" type="number" step="1" lang="en" placeholder="' + g.webPrice + '" value="' + (info.prices.detal ? fmtInputNum(info.prices.detal) : "") + '" />' +
+          '<div class="inv-price-sub">' + detalSub + '</div>' +
+        '</div>' +
+        '<div class="inv-price-tile alt">' +
+          '<div class="inv-price-label">Venta mayor</div>' +
+          '<input class="inv-price-input tabular" data-wfield="saleMayorUsd" type="number" step="1" lang="en" placeholder="—" value="' + (info.prices.mayor ? fmtInputNum(info.prices.mayor) : "") + '" />' +
+          '<div class="inv-price-sub">' + mayorSub + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="inv-card-meta-row">' +
+        '<span>Costo total: <strong class="tabular" style="color:var(--text);">' + (c && c.costTotalUsd > 0 ? fmtUsd(c.costTotalUsd) : '—') + '</strong></span>' +
+        pill +
+      '</div>' +
+      (info.linked ? '<div class="webinv-note">Algunas variantes usan el precio de «' + escapeAttr(info.linked.name) + '» del Inventario.</div>' : '') +
+      '<button class="btn btn-ghost inv-card-expand" data-wtoggle>' + (open ? 'Ocultar detalles ▴' : 'Editar costos y márgenes ▾') + '</button>' +
+      '<div class="inv-card-detail"' + (open ? '' : ' hidden') + '>' +
+        '<div class="field"><label>Costo Amazon ($)</label><input data-wfield="costUsd" type="number" step="0.01" value="' + (w.costUsd != null ? w.costUsd : "") + '" /></div>' +
+        '<div class="field"><label>% Impuesto</label><input data-wfield="taxPct" type="number" step="0.5" value="' + (w.taxPct != null ? w.taxPct : 8) + '" /></div>' +
+        '<div class="field"><label>Envío ($)</label><input data-wfield="shipUsd" type="number" step="0.01" value="' + (w.shipUsd != null ? w.shipUsd : "") + '" /></div>' +
+        '<div class="field"><label>Costo supuesto ($)</label><input data-wfield="costoSupuesto" type="number" step="0.01" placeholder="—" value="' + (w.costoSupuesto == null ? "" : w.costoSupuesto) + '" /></div>' +
+        '<div class="field"><label>Margen detal %</label><input data-wfield="marginDetalPct" type="number" step="1" lang="en" value="' + (w.marginDetalPct != null ? fmtInputNum(w.marginDetalPct) : "") + '" /></div>' +
+        '<div class="field"><label>Margen mayor %</label><input data-wfield="marginMayorPct" type="number" step="1" lang="en" value="' + (w.marginMayorPct != null ? fmtInputNum(w.marginMayorPct) : "") + '" /></div>' +
+        (c && c.hasSupuesto ? '<div class="field field-wide" style="color:var(--text-muted);font-size:10.5px;">C total: ' + fmtUsd(c.costTotalUsd) + ' · C total supuesto: ' + fmtUsd(c.costTotalSupuestoUsd) + '</div>' : '') +
+        (info.w ? '<div class="field field-wide"><button class="btn btn-ghost" data-wreset type="button">Volver al precio original de la web (REF ' + g.webPrice.toLocaleString("en-US") + ')</button></div>' : '') +
+      '</div>' +
+    '</div>';
+  }
+
+  function renderWebInventory(){
+    var wrap = document.getElementById("webInvWrap");
+    if (!wrap) return;
+    var warn = document.getElementById("webInvWarning");
+    var warnings = [];
+    if (!webCatalog.length) warnings.push("Cargando el catálogo de la web…");
+    if (webSync.pricesError) warnings.push("No se pueden publicar precios: falta la regla de Firebase para «webPrices».");
+    if (webSync.inventoryError) warnings.push("No se puede leer ni guardar el Inventario web: revisa las reglas de Firebase para «webInventory».");
+    warn.hidden = !warnings.length;
+    warn.innerHTML = warnings.map(escapeAttr).join("<br>");
+
+    var idx = stockLinkIndex();
+    var counts = { rows: 0, own: 0, linked: 0, web: 0 };
+    var q = webInvState.search.trim().toLowerCase();
+    var cards = [];
+    webCatalog.forEach(function(prod){
+      var groups = webGroups(prod);
+      var statuses = groups.map(function(g){ return webRowInfo(idx, prod, g).status; });
+      statuses.forEach(function(s){ counts.rows++; counts[s]++; });
+      var matchesQ = !q || (prod.name + " " + prod.brand).toLowerCase().indexOf(q) > -1;
+      var matchesF = webInvState.filter === "all" || statuses.indexOf(webInvState.filter) > -1;
+      if (!matchesQ || !matchesF) return;
+      cards.push(
+        '<div class="inv-card webinv-card" data-prod="' + escapeAttr(prod.id) + '">' +
+          '<div class="webinv-head">' +
+            (prod.image ? '<img class="webinv-thumb" src="' + escapeAttr(prod.image) + '" alt="" loading="lazy" />' : '') +
+            '<div style="min-width:0;">' +
+              '<div class="webinv-name">' + escapeAttr(prod.name) + '</div>' +
+              '<div class="webinv-sub">' + escapeAttr(prod.brand) + ' · ' + escapeAttr(webCategoryLabel(prod.category)) + '</div>' +
+            '</div>' +
+          '</div>' +
+          groups.map(function(g){ return webInvRowHtml(idx, prod, g, groups.length > 1); }).join("") +
+        '</div>'
+      );
+    });
+
+    document.getElementById("webStatProducts").textContent = webCatalog.length;
+    document.getElementById("webStatOwn").textContent = counts.own;
+    document.getElementById("webStatLinked").textContent = counts.linked;
+    document.getElementById("webStatWeb").textContent = counts.web;
+    Array.prototype.forEach.call(document.querySelectorAll("[data-wfilter]"), function(b){
+      b.classList.toggle("active", b.getAttribute("data-wfilter") === webInvState.filter);
+    });
+
+    wrap.innerHTML = cards.length
+      ? '<div class="inv-cards">' + cards.join("") + '</div>'
+      : (webCatalog.length ? '<div class="empty" style="padding:48px 20px;text-align:center;color:var(--text-muted);">No hay productos que coincidan.</div>' : '');
+
+    Array.prototype.forEach.call(wrap.querySelectorAll(".webinv-row[data-group]"), function(row){
+      var key = row.getAttribute("data-group");
+      var prod = webCatalog.find(function(p){ return p.id === row.closest(".webinv-card").getAttribute("data-prod"); });
+      var g = webGroups(prod).find(function(x){ return x.key === key; });
+      wireWebInputs(row, g);
+      row.querySelector("[data-wtoggle]").addEventListener("click", function(){
+        webInvState.open[key] = !webInvState.open[key];
+        renderWebInventory();
+      });
+      var reset = row.querySelector("[data-wreset]");
+      if (reset) reset.addEventListener("click", function(){
+        if (confirm("¿Quitar el precio y los costos de esta fila? La web vuelve a mostrar REF " + g.webPrice + ".")) resetWebItem(key);
+      });
+    });
+  }
+
+  function wireWebInputs(row, g){
+    Array.prototype.forEach.call(row.querySelectorAll("[data-wfield]"), function(input){
+      input.addEventListener("change", function(){
+        var field = input.getAttribute("data-wfield");
+        var raw = input.value.trim();
+        var val = raw === "" ? null : parseFloat(raw);
+        if (val != null && !isFinite(val)) val = null;
+        var w = Object.assign({ key: g.key, taxPct: 8 }, webInventory[g.key] || {});
+        var cost = computed(w).costTotalUsd;
+
+        if (field === "saleDetalUsd" || field === "saleMayorUsd"){
+          var detal = field === "saleDetalUsd";
+          if (cost > 0 && val != null){
+            // Igual que el inventario: escribir el precio recalcula el margen.
+            w[detal ? "marginDetalPct" : "marginMayorPct"] = ((val / cost) - 1) * 100;
+          } else {
+            w[detal ? "priceUsd" : "priceMayorUsd"] = val;
+            if (val == null) w[detal ? "marginDetalPct" : "marginMayorPct"] = null;
+          }
+        } else if (field === "costoSupuesto"){
+          w.costoSupuesto = val;
+        } else if (field === "marginDetalPct" || field === "marginMayorPct"){
+          w[field] = val;
+        } else {
+          w[field] = val == null ? 0 : val;
+          // Al cargar costos por primera vez, el margen arranca en el que
+          // da el precio actual — así el precio no cambia solo.
+          var newCost = computed(w).costTotalUsd;
+          if (newCost > 0 && w.marginDetalPct == null){
+            var current = w.priceUsd || g.webPrice;
+            w.marginDetalPct = ((current / newCost) - 1) * 100;
+            w.marginMayorPct = w.priceMayorUsd ? ((w.priceMayorUsd / newCost) - 1) * 100 : w.marginDetalPct;
+          }
+        }
+        saveWebItem(w);
+      });
     });
   }
 
@@ -1705,8 +2036,19 @@
       webPriceDocs = {};
       qs.docs.forEach(function(d){ webPriceDocs[d.id] = d.data() || {}; });
       webSync.pricesLoaded = true;
+      webSync.pricesError = false;
       scheduleWebPriceSync();
-    }, function(){ /* sin permiso aún — revisar reglas de Firestore */ });
+    }, function(){ webSync.pricesError = true; renderWebInventory(); });
+
+    // costos y precios propios del inventario web
+    db.collection("webInventory").onSnapshot(function(qs){
+      webInventory = {};
+      qs.docs.forEach(function(d){ var w = d.data() || {}; if (w.key) webInventory[w.key] = w; });
+      webSync.inventoryLoaded = true;
+      webSync.inventoryError = false;
+      scheduleWebPriceSync();
+      if (state.tab === "webinv") renderWebInventory();
+    }, function(){ webSync.inventoryError = true; renderWebInventory(); });
     loadWebCatalog();
 
     // sales history (most recent first)
@@ -3905,6 +4247,7 @@
     renderSellProductOptions();
     renderAdProductOptions();
     renderHome();
+    if (state.tab === "webinv") renderWebInventory();
   }
 
   // ---------------- wiring ----------------
@@ -3926,6 +4269,16 @@
   document.getElementById("searchBox").addEventListener("input", function(e){
     state.search = e.target.value;
     renderInventoryList();
+  });
+  document.getElementById("webSearchBox").addEventListener("input", function(e){
+    webInvState.search = e.target.value;
+    renderWebInventory();
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-wfilter]"), function(btn){
+    btn.addEventListener("click", function(){
+      webInvState.filter = btn.getAttribute("data-wfilter");
+      renderWebInventory();
+    });
   });
   document.getElementById("invViewCardsBtn").addEventListener("click", function(){ setInvView("cards"); });
   document.getElementById("invViewTableBtn").addEventListener("click", function(){ setInvView("table"); });
@@ -4002,12 +4355,14 @@
     });
     document.getElementById("tab-home").hidden = state.tab !== "home";
     document.getElementById("tab-inv").hidden = state.tab !== "inv";
+    document.getElementById("tab-webinv").hidden = state.tab !== "webinv";
     document.getElementById("tab-sell").hidden = state.tab !== "sell";
     document.getElementById("tab-clients").hidden = state.tab !== "clients";
     document.getElementById("tab-rep").hidden = state.tab !== "rep";
     document.getElementById("tab-scan").hidden = state.tab !== "scan";
     document.getElementById("tab-ads").hidden = state.tab !== "ads";
     if (state.tab === "home") renderHome();
+    if (state.tab === "webinv") renderWebInventory();
     if (state.tab === "rep") renderReports();
     if (state.tab === "sell") renderSellAll();
     if (state.tab === "clients") renderClientsAll();
