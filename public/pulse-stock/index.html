@@ -594,6 +594,11 @@
   .webinv-row-label{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--text-muted); margin-bottom:8px; }
   .webinv-static{ cursor:default; }
   .webinv-note{ font-size:11px; color:var(--text-muted); margin:-4px 0 10px; }
+  .webinv-stock-btn{
+    border:1px solid var(--good); background:var(--good-soft); color:var(--good);
+    border-radius:99px; padding:6px 14px; min-height:32px; font-size:11px; font-weight:700; cursor:pointer;
+  }
+  .webinv-stock-btn.out{ border-color:var(--critical); background:var(--critical-soft); color:var(--critical); }
 
   /* ---------- publicidad ---------- */
   .ads-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
@@ -893,6 +898,11 @@
         <div class="value tabular warn" id="webStatWeb">0</div>
         <div class="sub">filas que aún usan el precio de la web</div>
       </div>
+      <div class="stat">
+        <div class="label">Agotados</div>
+        <div class="value tabular" id="webStatSoldOut" style="color:var(--critical);">0</div>
+        <div class="sub">filas marcadas como agotadas en la web</div>
+      </div>
     </div>
 
     <div class="export-status" id="webInvWarning" hidden style="color:var(--warn);margin-bottom:12px;"></div>
@@ -907,6 +917,7 @@
         <button class="chip" data-wfilter="own">Precio propio</button>
         <button class="chip" data-wfilter="linked">Desde Inventario</button>
         <button class="chip" data-wfilter="web">Precio original</button>
+        <button class="chip" data-wfilter="soldout">Agotados</button>
       </div>
     </div>
     <div style="color:var(--text-muted);font-size:11.5px;margin-bottom:12px;">Cambia la venta detal o los costos y la web se actualiza sola. Si un producto del Inventario está vinculado a la web, su precio manda.</div>
@@ -1737,6 +1748,11 @@
     renderWebInventory();
   }
   function resetWebItem(key){
+    // Quita precio y costos, pero conserva si está agotado.
+    if (webInventory[key] && webInventory[key].soldOut){
+      saveWebItem({ key: key, taxPct: 8, soldOut: true });
+      return;
+    }
     delete webInventory[key];
     if (db) db.collection("webInventory").doc(safeDocId(key)).delete().catch(function(){});
     scheduleWebPriceSync();
@@ -1765,17 +1781,19 @@
     webCatalog.forEach(function(prod){
       webGroups(prod).forEach(function(g){
         var own = webItemPrices(webInventory[g.key]).detal;
+        var soldOut = !!(webInventory[g.key] && webInventory[g.key].soldOut);
         g.variants.forEach(function(v){
           var linked = linkedStockProduct(idx, prod.id, v.key);
           var price = linked ? computed(linked).saleDetalUsd : own;
-          if (price > 0) desired[safeDocId(v.key)] = { key: v.key, priceUsd: round2(price) };
+          price = price > 0 ? round2(price) : null;
+          if (price || soldOut) desired[safeDocId(v.key)] = { key: v.key, priceUsd: price, soldOut: soldOut };
         });
       });
     });
     Object.keys(desired).forEach(function(id){
-      var cur = webPriceDocs[id];
-      if (cur && cur.key === desired[id].key && cur.priceUsd === desired[id].priceUsd) return;
-      db.collection("webPrices").doc(id).set({ key: desired[id].key, priceUsd: desired[id].priceUsd, updatedAt: Date.now() }).catch(function(){});
+      var cur = webPriceDocs[id], d = desired[id];
+      if (cur && cur.key === d.key && (cur.priceUsd || null) === d.priceUsd && !!cur.soldOut === d.soldOut) return;
+      db.collection("webPrices").doc(id).set({ key: d.key, priceUsd: d.priceUsd, soldOut: d.soldOut, updatedAt: Date.now() }).catch(function(){});
     });
     Object.keys(webPriceDocs).forEach(function(id){
       if (!desired[id]) db.collection("webPrices").doc(id).delete().catch(function(){});
@@ -1799,7 +1817,18 @@
     var w = webInventory[g.key] || null;
     var prices = webItemPrices(w);
     var status = allLinked ? "linked" : (prices.detal > 0 ? "own" : "web");
-    return { linked: linked, allLinked: allLinked, w: w, prices: prices, status: status };
+    return { linked: linked, allLinked: allLinked, w: w, prices: prices, status: status, soldOut: !!(w && w.soldOut) };
+  }
+
+  // Botón Disponible / Agotado de cada fila — se publica a la web.
+  function webSoldOutBtnHtml(soldOut){
+    return '<button type="button" class="webinv-stock-btn' + (soldOut ? ' out' : '') + '" data-wsoldout>' +
+      (soldOut ? 'Agotado' : 'Disponible') + '</button>';
+  }
+  function toggleWebSoldOut(key){
+    var w = Object.assign({ key: key, taxPct: 8 }, webInventory[key] || {});
+    w.soldOut = !w.soldOut;
+    saveWebItem(w);
   }
 
   function webInvRowHtml(idx, prod, g, showLabel){
@@ -1809,13 +1838,13 @@
 
     if (info.allLinked){
       var lc = computed(info.linked);
-      return '<div class="webinv-row">' + head +
+      return '<div class="webinv-row" data-group="' + escapeAttr(g.key) + '">' + head +
         '<div class="inv-price-grid">' +
           '<div class="inv-price-tile"><div class="inv-price-label">Venta detal</div><div class="inv-price-input tabular webinv-static">' + fmtInputNum(lc.saleDetalUsd) + '</div><div class="inv-price-sub">margen ' + fmtPct(info.linked.marginDetalPct) + '</div></div>' +
           '<div class="inv-price-tile alt"><div class="inv-price-label">Venta mayor</div><div class="inv-price-input tabular webinv-static">' + fmtInputNum(lc.saleMayorUsd) + '</div><div class="inv-price-sub">margen ' + fmtPct(info.linked.marginMayorPct) + '</div></div>' +
         '</div>' +
-        '<div class="inv-card-meta-row"><span>Costo total: <strong class="tabular" style="color:var(--text);">' + fmtUsd(lc.costTotalUsd) + '</strong></span>' +
-          '<span class="pill web">Desde Inventario</span></div>' +
+        '<div class="inv-card-meta-row"><span>Costo total: <strong class="tabular" style="color:var(--text);">' + fmtUsd(lc.costTotalUsd) + '</strong></span></div>' +
+        '<div class="inv-card-meta-row"><span class="pill web">Desde Inventario</span>' + webSoldOutBtnHtml(info.soldOut) + '</div>' +
         '<div class="webinv-note">Precio de «' + escapeAttr(info.linked.name) + '» — edítalo en Inventario.</div>' +
       '</div>';
     }
@@ -1844,8 +1873,8 @@
       '</div>' +
       '<div class="inv-card-meta-row">' +
         '<span>Costo total: <strong class="tabular" style="color:var(--text);">' + (c && c.costTotalUsd > 0 ? fmtUsd(c.costTotalUsd) : '—') + '</strong></span>' +
-        pill +
       '</div>' +
+      '<div class="inv-card-meta-row">' + pill + webSoldOutBtnHtml(info.soldOut) + '</div>' +
       (info.linked ? '<div class="webinv-note">Algunas variantes usan el precio de «' + escapeAttr(info.linked.name) + '» del Inventario.</div>' : '') +
       '<button class="btn btn-ghost inv-card-expand" data-wtoggle>' + (open ? 'Ocultar detalles ▴' : 'Editar costos y márgenes ▾') + '</button>' +
       '<div class="inv-card-detail"' + (open ? '' : ' hidden') + '>' +
@@ -1856,7 +1885,7 @@
         '<div class="field"><label>Margen detal %</label><input data-wfield="marginDetalPct" type="number" step="1" lang="en" value="' + (w.marginDetalPct != null ? fmtInputNum(w.marginDetalPct) : "") + '" /></div>' +
         '<div class="field"><label>Margen mayor %</label><input data-wfield="marginMayorPct" type="number" step="1" lang="en" value="' + (w.marginMayorPct != null ? fmtInputNum(w.marginMayorPct) : "") + '" /></div>' +
         (c && c.hasSupuesto ? '<div class="field field-wide" style="color:var(--text-muted);font-size:10.5px;">C total: ' + fmtUsd(c.costTotalUsd) + ' · C total supuesto: ' + fmtUsd(c.costTotalSupuestoUsd) + '</div>' : '') +
-        (info.w ? '<div class="field field-wide"><button class="btn btn-ghost" data-wreset type="button">Volver al precio original de la web (REF ' + g.webPrice.toLocaleString("en-US") + ')</button></div>' : '') +
+        (info.w && (info.prices.detal || info.w.costUsd) ? '<div class="field field-wide"><button class="btn btn-ghost" data-wreset type="button">Volver al precio original de la web (REF ' + g.webPrice.toLocaleString("en-US") + ')</button></div>' : '') +
       '</div>' +
     '</div>';
   }
@@ -1873,13 +1902,18 @@
     warn.innerHTML = warnings.map(escapeAttr).join("<br>");
 
     var idx = stockLinkIndex();
-    var counts = { rows: 0, own: 0, linked: 0, web: 0 };
+    var counts = { rows: 0, own: 0, linked: 0, web: 0, soldout: 0 };
     var q = webInvState.search.trim().toLowerCase();
     var cards = [];
     webCatalog.forEach(function(prod){
       var groups = webGroups(prod);
-      var statuses = groups.map(function(g){ return webRowInfo(idx, prod, g).status; });
-      statuses.forEach(function(s){ counts.rows++; counts[s]++; });
+      var statuses = [];
+      groups.forEach(function(g){
+        var info = webRowInfo(idx, prod, g);
+        counts.rows++; counts[info.status]++;
+        statuses.push(info.status);
+        if (info.soldOut){ counts.soldout++; statuses.push("soldout"); }
+      });
       var matchesQ = !q || (prod.name + " " + prod.brand).toLowerCase().indexOf(q) > -1;
       var matchesF = webInvState.filter === "all" || statuses.indexOf(webInvState.filter) > -1;
       if (!matchesQ || !matchesF) return;
@@ -1901,6 +1935,7 @@
     document.getElementById("webStatOwn").textContent = counts.own;
     document.getElementById("webStatLinked").textContent = counts.linked;
     document.getElementById("webStatWeb").textContent = counts.web;
+    document.getElementById("webStatSoldOut").textContent = counts.soldout;
     Array.prototype.forEach.call(document.querySelectorAll("[data-wfilter]"), function(b){
       b.classList.toggle("active", b.getAttribute("data-wfilter") === webInvState.filter);
     });
@@ -1914,7 +1949,9 @@
       var prod = webCatalog.find(function(p){ return p.id === row.closest(".webinv-card").getAttribute("data-prod"); });
       var g = webGroups(prod).find(function(x){ return x.key === key; });
       wireWebInputs(row, g);
-      row.querySelector("[data-wtoggle]").addEventListener("click", function(){
+      row.querySelector("[data-wsoldout]").addEventListener("click", function(){ toggleWebSoldOut(key); });
+      var toggle = row.querySelector("[data-wtoggle]");
+      if (toggle) toggle.addEventListener("click", function(){
         webInvState.open[key] = !webInvState.open[key];
         renderWebInventory();
       });

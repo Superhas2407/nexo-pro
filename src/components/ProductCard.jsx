@@ -1,6 +1,7 @@
 ﻿import { useState } from 'react'
 import { useShop } from '../context/ShopContext'
 import { useBreakpoint } from '../hooks/useBreakpoint'
+import { isSoldOut } from '../data/products'
 
 const swatchStyle = (cv) => cv.swatchImage
   ? { backgroundImage: `url(${cv.swatchImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }
@@ -31,6 +32,8 @@ export default function ProductCard({ product, onClick, theme = 'light' }) {
   const colorDots       = product.colorVariants.filter(cv => cv.hex)
   const hasColors       = colorDots.length > 1
   const inWish          = isInWishlist(product.id, selectedVariant.color)
+  const allSoldOut      = isSoldOut(product)
+  const tag             = allSoldOut ? 'Agotado' : product.tag
 
   const mainImage  = selectedVariant.image
   const hoverImage = selectedVariant.hoverImage
@@ -85,7 +88,7 @@ export default function ProductCard({ product, onClick, theme = 'light' }) {
               width: '100%', height: '100%',
               objectFit: mainImage.includes('-shop.') ? 'contain' : 'cover',
               padding: mainImage.includes('-shop.') ? '12px' : 0,
-              opacity: (hovered && hoverImage) ? 0 : 1,
+              opacity: (hovered && hoverImage) ? 0 : (allSoldOut ? 0.5 : 1),
               transform: hovered && !hoverImage ? 'scale(1.04)' : 'scale(1)',
               transition: 'opacity 0.45s ease, transform 0.5s ease',
             }}
@@ -136,14 +139,14 @@ export default function ProductCard({ product, onClick, theme = 'light' }) {
         </button>
 
         {/* Tag */}
-        {product.tag && tagColors[product.tag] && (
+        {tag && tagColors[tag] && (
           <span style={{
             position: 'absolute', top: 10, left: 10,
-            background: tagColors[product.tag].bg, color: tagColors[product.tag].color,
+            background: tagColors[tag].bg, color: tagColors[tag].color,
             fontSize: 10, fontWeight: 600, letterSpacing: 0.5,
             padding: '3px 8px', borderRadius: 4, textTransform: 'uppercase',
           }}>
-            {product.tag}
+            {tag}
           </span>
         )}
       </div>
@@ -171,6 +174,9 @@ export default function ProductCard({ product, onClick, theme = 'light' }) {
 
         <p style={{ fontSize: 14, fontWeight: 600, color: textColor, margin: '8px 0 0' }}>
           {fmtPrice(selectedStorage.price)}
+          {selectedStorage.soldOut && !allSoldOut && (
+            <span style={{ color: mutedColor, fontSize: 11 }}> · Agotado</span>
+          )}
         </p>
 
         {product.byOrder && (

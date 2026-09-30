@@ -3921,6 +3921,11 @@ export const brands = [...new Set(products.map(p => p.brand))].sort((a, b) => a.
 export const basePrice = (p) =>
   Math.min(...p.colorVariants.flatMap(cv => cv.storage.map(s => s.price)))
 
+// Agotado = todas sus variantes marcadas como agotadas desde PULSE Stock
+// (`storage[].soldOut`, ver data/webPrices.js)
+export const isSoldOut = (p) =>
+  p.colorVariants.every(cv => cv.storage.every(s => s.soldOut))
+
 // "Modelo compatible" — solo tiene sentido para fundas/accesorios (specs.label === 'Modelo compatible')
 export const compatibleDevice = (p) =>
   p.specs?.find(s => s.label === 'Modelo compatible')?.value ?? null
