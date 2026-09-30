@@ -14,7 +14,6 @@ function webCatalogJson() {
       name: p.name,
       brand: p.brand,
       category: p.category,
-      byOrder: !!p.byOrder,
       image: p.colorVariants[0]?.image ?? null,
       variants: p.colorVariants.flatMap(cv => cv.storage.map(s => ({
         key: webPriceKey(p.id, cv.color, s.label),

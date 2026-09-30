@@ -1790,32 +1790,25 @@
     var desired = {};
     webCatalog.forEach(function(prod){
       webGroups(prod).forEach(function(g){
-        var ownPrices = webItemPrices(webInventory[g.key]);
-        var own = ownPrices.detal;
-        var ownCost = ownPrices.c ? ownPrices.c.costTotalUsd : 0;
+        var own = webItemPrices(webInventory[g.key]).detal;
         var soldOut = !!(webInventory[g.key] && webInventory[g.key].soldOut);
         g.variants.forEach(function(v){
           var linked = linkedStockProduct(idx, prod.id, v.key);
-          var lc = linked ? computed(linked) : null;
-          var price = lc ? lc.saleDetalUsd : own;
+          var price = linked ? computed(linked).saleDetalUsd : own;
           price = price > 0 ? round2(price) : null;
-          // Anticipo de productos bajo pedido = costo total (redondeado hacia
-          // arriba), sin pasar del precio. Sin costo cargado, la web usa 30%.
-          // Solo se publica en los bajo pedido — el resto no muestra anticipo.
-          var cost = lc ? lc.costTotalUsd : ownCost;
-          var deposit = prod.byOrder && cost > 0 ? Math.ceil(cost) : null;
-          if (deposit && price && deposit > price) deposit = Math.ceil(price);
-          if (price || soldOut || deposit) desired[safeDocId(v.key)] = { key: v.key, priceUsd: price, soldOut: soldOut, hidden: false, depositUsd: deposit };
+          if (price || soldOut) desired[safeDocId(v.key)] = { key: v.key, priceUsd: price, soldOut: soldOut, hidden: false };
         });
       });
       // Producto oculto de la web: un doc "producto|*|*" con hidden.
       var hideKey = webHideKey(prod.id);
-      if (isWebHidden(prod.id)) desired[safeDocId(hideKey)] = { key: hideKey, priceUsd: null, soldOut: false, hidden: true, depositUsd: null };
+      if (isWebHidden(prod.id)) desired[safeDocId(hideKey)] = { key: hideKey, priceUsd: null, soldOut: false, hidden: true };
     });
     Object.keys(desired).forEach(function(id){
       var cur = webPriceDocs[id], d = desired[id];
-      if (cur && cur.key === d.key && (cur.priceUsd || null) === d.priceUsd && !!cur.soldOut === d.soldOut && !!cur.hidden === d.hidden && (cur.depositUsd || null) === d.depositUsd) return;
-      db.collection("webPrices").doc(id).set({ key: d.key, priceUsd: d.priceUsd, soldOut: d.soldOut, hidden: d.hidden, depositUsd: d.depositUsd, updatedAt: Date.now() }).catch(function(){});
+      // cur.depositUsd: campo de una versión anterior (anticipo = costo) —
+      // se reescribe el doc para que el costo deje de estar publicado.
+      if (cur && cur.key === d.key && (cur.priceUsd || null) === d.priceUsd && !!cur.soldOut === d.soldOut && !!cur.hidden === d.hidden && cur.depositUsd == null) return;
+      db.collection("webPrices").doc(id).set({ key: d.key, priceUsd: d.priceUsd, soldOut: d.soldOut, hidden: d.hidden, updatedAt: Date.now() }).catch(function(){});
     });
     Object.keys(webPriceDocs).forEach(function(id){
       if (!desired[id]) db.collection("webPrices").doc(id).delete().catch(function(){});

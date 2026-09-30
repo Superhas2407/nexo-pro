@@ -9,7 +9,7 @@ const swatchStyle = (cv) => cv.swatchImage
   ? { backgroundImage: `url(${cv.swatchImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }
   : { background: cv.hex2 ? `linear-gradient(135deg, ${cv.hex} 50%, ${cv.hex2} 50%)` : (cv.hex || '#ccc') }
 
-const DEPOSIT_RATE = 0.3
+const DEPOSIT_RATE = 0.7
 const MAX_SPREAD_ROW = 5 // más de esto en una fila se ve apretado — pasa a grilla de 2 filas
 
 export default function ProductModal({ product, onClose, initialColorIdx = 0, skipSpread = false, theme = 'blue' }) {
@@ -74,8 +74,8 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
 
   const soldOut = selectedStorage.soldOut === true
   const requiresDeposit = product.byOrder && !soldOut
-  // Anticipo = costo publicado desde PULSE Stock; sin costo cargado, 30%.
-  const depositAmount = selectedStorage.deposit ?? Math.round(selectedStorage.price * DEPOSIT_RATE)
+  // Anticipo = precio − 30% (70% del precio); el 30% restante contra entrega.
+  const depositAmount = Math.round(selectedStorage.price * DEPOSIT_RATE * 100) / 100
   const balanceAmount = Math.round((selectedStorage.price - depositAmount) * 100) / 100
 
   const waText = encodeURIComponent(

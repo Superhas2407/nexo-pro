@@ -24,10 +24,8 @@ async function fetchWebPrices() {
       const key = f.key?.stringValue
       if (!key) continue
       const price = Number(f.priceUsd?.doubleValue ?? f.priceUsd?.integerValue)
-      const deposit = Number(f.depositUsd?.doubleValue ?? f.depositUsd?.integerValue)
       entries[key] = {
         price: Number.isFinite(price) && price > 0 ? price : null,
-        deposit: Number.isFinite(deposit) && deposit > 0 ? deposit : null,
         soldOut: f.soldOut?.booleanValue === true,
         hidden: f.hidden?.booleanValue === true,
       }
@@ -56,9 +54,7 @@ function applyWebPrices(entries) {
         if (!staticPrices.has(s)) staticPrices.set(s, s.price)
         const e = entries[webPriceKey(p.id, cv.color, s.label)] ?? all
         s.price = e?.price ?? staticPrices.get(s)
-        s.soldOut = e?.soldOut === true
-        s.deposit = e?.deposit ?? null // anticipo bajo pedido = costo en PULSE Stock
-      }
+        s.soldOut = e?.soldOut === true      }
     }
   }
 }
