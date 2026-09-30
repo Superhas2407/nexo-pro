@@ -15,6 +15,7 @@ import FeaturedProducts from '../components/FeaturedProducts'
 import WhyUs from '../components/WhyUs'
 import Footer from '../components/Footer'
 import WhatsAppFab from '../components/WhatsAppFab'
+import { isCategoryVisible } from '../data/products'
 
 export default function Landing() {
   useEffect(() => {
@@ -35,8 +36,12 @@ export default function Landing() {
       <DjiLines />
       <OakleyReveal />
       <OakleyLines />
-      <FundasReveal />
-      <FundasLines />
+      {isCategoryVisible('fundas') && (
+        <>
+          <FundasReveal />
+          <FundasLines />
+        </>
+      )}
       <FeaturedProducts />
       <WhyUs />
       <Footer />

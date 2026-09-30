@@ -1,7 +1,7 @@
 import { Component, useRef, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Logo from './Logo'
-import { products, basePrice } from '../data/products'
+import { products, basePrice, isCategoryVisible } from '../data/products'
 import { useShop } from '../context/ShopContext'
 import { generateInvoiceImage } from '../utils/invoiceImage'
 
@@ -47,16 +47,22 @@ const dropdownMenus = {
   ],
   DJI:    buildDropdown(['dji-estab', 'dji-audio']),
   Oakley: buildDropdown(['oakley']),
+  // `category` marca las tarjetas que se esconden junto con su categoría
+  // (ver HIDDEN_CATEGORIES en products.js)
   Accesorios: [
-    lineCard('Línea Liquid Air', 'Liquid Air', '/spigen-liquid-air-s26-marble-gray-shop.webp'),
-    lineCard('Línea Tough Armor', 'Tough Armor', '/spigen-tough-armor-s26-violet-shop.webp'),
-    lineCard('Línea Ultra Hybrid', 'Ultra Hybrid', '/spigen-ultra-hybrid-pixel9-clear-shop.webp'),
-    lineCard('Línea Symmetry', 'Symmetry', '/otterbox-symmetry-clear-shop.webp'),
-    lineCard('Línea Pathfinder', 'Pathfinder', '/uag-pathfinder-s26plus-olive-shop.webp'),
+    { ...lineCard('Línea Liquid Air', 'Liquid Air', '/spigen-liquid-air-s26-marble-gray-shop.webp'), category: 'fundas' },
+    { ...lineCard('Línea Tough Armor', 'Tough Armor', '/spigen-tough-armor-s26-violet-shop.webp'), category: 'fundas' },
+    { ...lineCard('Línea Ultra Hybrid', 'Ultra Hybrid', '/spigen-ultra-hybrid-pixel9-clear-shop.webp'), category: 'fundas' },
+    { ...lineCard('Línea Symmetry', 'Symmetry', '/otterbox-symmetry-clear-shop.webp'), category: 'fundas' },
+    { ...lineCard('Línea Pathfinder', 'Pathfinder', '/uag-pathfinder-s26plus-olive-shop.webp'), category: 'fundas' },
     { name: 'Audio',      image: '/shokz-openrun2-hand.webp', link: '/tienda?categoria=audio' },
-    { name: 'Cargadores', image: '/cargador-generico-hand.svg', link: '/tienda?categoria=cargadores' },
-  ],
+    { name: 'Wearables',  image: '/fitbit-air-band-obsidian-shop.webp', link: '/tienda?categoria=wearables' },
+    { name: 'Cargadores', image: '/cargador-generico-hand.svg', link: '/tienda?categoria=cargadores', category: 'cargadores' },
+  ].filter(item => !item.category || isCategoryVisible(item.category)),
 }
+
+// "Accesorios" abre fundas si están visibles; si no, audio.
+const ACCESORIOS_HREF = isCategoryVisible('fundas') ? '/tienda?categoria=fundas' : '/tienda?categoria=audio'
 
 /* —?—? Search overlay —?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—?—? */
 function SearchOverlay({ onClose }) {
@@ -495,7 +501,7 @@ function NavLinks() {
       <MegaMenu label="Teléfono"   items={dropdownMenus.Telefono}   categoryHref="/tienda?categoria=telefonos" accent={accent} dark={isGamingZone} />
       <MegaMenu label="DJI"        items={dropdownMenus.DJI}        categoryHref="/tienda?categoria=dji-estab" accent={accent} dark={isGamingZone} />
       <MegaMenu label="Oakley"     items={dropdownMenus.Oakley}     categoryHref="/tienda?categoria=oakley" accent={accent} dark={isGamingZone} />
-      <MegaMenu label="Accesorios" items={dropdownMenus.Accesorios} categoryHref="/tienda?categoria=fundas" accent={accent} dark={isGamingZone} />
+      <MegaMenu label="Accesorios" items={dropdownMenus.Accesorios} categoryHref={ACCESORIOS_HREF} accent={accent} dark={isGamingZone} />
 
       <a href="/gaming" style={{
         display: 'flex', alignItems: 'center', gap: 6,
@@ -772,7 +778,9 @@ export default function Navbar() {
                 { label: 'Teléfono',    sub: 'iPhone 17 Pro & Samsung Galaxy', image: '/iphone-orange-hand.webp',    href: '/tienda?categoria=telefonos' },
                 { label: 'DJI',         sub: 'Estabilizadores & Audio',        image: '/dji-osmo7p-hand.webp',       href: '/tienda?categoria=dji-estab' },
                 { label: 'Oakley Meta', sub: 'HSTN & Vanguard',                image: '/oakley-hstn-red-hand.webp',  href: '/tienda?categoria=oakley' },
-                { label: 'Accesorios',  sub: 'Fundas, audio, cargadores',      image: '/otterbox-symmetry-clear-shop.webp', href: '/tienda?categoria=fundas' },
+                isCategoryVisible('fundas')
+                  ? { label: 'Accesorios', sub: 'Fundas, audio, cargadores', image: '/otterbox-symmetry-clear-shop.webp', href: ACCESORIOS_HREF }
+                  : { label: 'Accesorios', sub: 'Audio & wearables',         image: '/shokz-openrun2-hand.webp',          href: ACCESORIOS_HREF },
               ].map((item, i) => (
                 <a key={i} href={item.href} onClick={() => setMobileOpen(false)} style={{
                   display: 'flex', alignItems: 'center', gap: 14,

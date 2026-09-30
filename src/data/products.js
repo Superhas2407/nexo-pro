@@ -1,4 +1,4 @@
-﻿export const products = [
+﻿const allProducts = [
   // ── iPhone 17 Pro — un solo producto, 2 colores ──────────
   {
     id: 'iphone-17-pro',
@@ -3883,6 +3883,14 @@
 
 ]
 
+// Categorías escondidas de la web: sus productos siguen arriba por si se
+// vuelven a vender — para mostrarlas otra vez, quítalas de esta lista.
+export const HIDDEN_CATEGORIES = ['fundas', 'cargadores']
+
+export const isCategoryVisible = (id) => !HIDDEN_CATEGORIES.includes(id)
+
+export const products = allProducts.filter(p => isCategoryVisible(p.category))
+
 export const categories = [
   { id: 'all',        label: 'Todo' },
   { id: 'dji-estab', label: 'DJI' },
@@ -3893,7 +3901,7 @@ export const categories = [
   { id: 'gaming',    label: 'Gaming' },
   { id: 'cargadores',label: 'Cargadores' },
   { id: 'wearables', label: 'Wearables' },
-]
+].filter(c => isCategoryVisible(c.id))
 
 // Grupos de categorías que comparten una sola pestaña en el filtro de tienda
 // (el producto conserva su `category` real — solo se agrupan en la UI del filtro)
