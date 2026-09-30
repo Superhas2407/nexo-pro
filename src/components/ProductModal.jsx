@@ -74,13 +74,15 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
 
   const soldOut = selectedStorage.soldOut === true
   const requiresDeposit = product.byOrder && !soldOut
-  const depositAmount = Math.round(selectedStorage.price * DEPOSIT_RATE)
+  // Anticipo = costo publicado desde PULSE Stock; sin costo cargado, 30%.
+  const depositAmount = selectedStorage.deposit ?? Math.round(selectedStorage.price * DEPOSIT_RATE)
+  const balanceAmount = Math.round((selectedStorage.price - depositAmount) * 100) / 100
 
   const waText = encodeURIComponent(
     soldOut
       ? `Hola! Vi que el ${product.name}${selectedStorage.label ? ' ' + selectedStorage.label : ''}${selectedColor.color ? ' · ' + selectedColor.color : ''} está agotado. ¿Cuándo vuelve a estar disponible?`
     : product.byOrder
-      ? `Hola! Quiero hacer un pedido bajo encargo del ${product.name}${selectedStorage.label ? ' ' + selectedStorage.label : ''}${selectedColor.color ? ' · ' + selectedColor.color : ''}. ¿Me pueden dar más info?${requiresDeposit ? ` (Vi que el anticipo es de REF ${depositAmount}, 30%)` : ''}`
+      ? `Hola! Quiero hacer un pedido bajo encargo del ${product.name}${selectedStorage.label ? ' ' + selectedStorage.label : ''}${selectedColor.color ? ' · ' + selectedColor.color : ''}. ¿Me pueden dar más info?${requiresDeposit ? ` (Vi que el anticipo es de REF ${depositAmount})` : ''}`
       : `Hola! Me interesa el ${product.name}${selectedStorage.label ? ' ' + selectedStorage.label : ''}${selectedColor.color ? ' · ' + selectedColor.color : ''}. ¿Está disponible?`
   )
 
@@ -147,7 +149,10 @@ export default function ProductModal({ product, onClose, initialColorIdx = 0, sk
           <svg width={isMobile ? 11 : 13} height={isMobile ? 11 : 13} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 2 }}>
             <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
           </svg>
-          <span>Anticipo 30% (REF {depositAmount}) para reservar · resto contra entrega</span>
+          <span>
+            Anticipo REF {depositAmount.toLocaleString('en-US')} para reservar
+            {balanceAmount > 0 && <> · resto REF {balanceAmount.toLocaleString('en-US')} contra entrega</>}
+          </span>
         </p>
       )}
 
