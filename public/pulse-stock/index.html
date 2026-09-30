@@ -2048,7 +2048,13 @@
       webSync.inventoryError = false;
       scheduleWebPriceSync();
       if (state.tab === "webinv") renderWebInventory();
-    }, function(){ webSync.inventoryError = true; renderWebInventory(); });
+    }, function(){
+      // Sin acceso a webInventory igual se publican los vínculos del Inventario.
+      webSync.inventoryError = true;
+      webSync.inventoryLoaded = true;
+      scheduleWebPriceSync();
+      renderWebInventory();
+    });
     loadWebCatalog();
 
     // sales history (most recent first)
@@ -2278,10 +2284,21 @@
         btn.addEventListener("click", function(){ unlinkWebKey(product, btn.getAttribute("data-web-unlink")); });
       });
       var linkInput = card.querySelector("[data-web-link]");
-      if (linkInput) linkInput.addEventListener("change", function(){
-        var item = webCatalog.find(function(i){ return i.label === linkInput.value; });
-        if (item) linkWebKey(product, item.key);
-      });
+      if (linkInput){
+        // Elegir una opción de la lista vincula al instante; Enter con texto
+        // parcial vincula la primera opción que lo contenga (ej. "7p").
+        var tryLink = function(partial){
+          var q = linkInput.value.trim().toLowerCase();
+          if (!q) return;
+          var item = webCatalogItems.find(function(i){ return i.label.toLowerCase() === q; }) ||
+            (partial ? webCatalogItems.find(function(i){ return i.label.toLowerCase().indexOf(q) > -1; }) : null);
+          if (item) linkWebKey(product, item.key);
+        };
+        linkInput.addEventListener("input", function(){ tryLink(false); });
+        linkInput.addEventListener("keydown", function(e){
+          if (e.key === "Enter"){ e.preventDefault(); tryLink(true); }
+        });
+      }
     });
     // El render reemplaza las tarjetas — deja abierto el detalle que estabas editando.
     if (openDetailId) toggleInvCardDetail(openDetailId);
