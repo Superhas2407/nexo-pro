@@ -2,8 +2,8 @@ import { products } from './products'
 import { WILDCARD, webPriceKey } from './webPriceKey'
 
 // Precios y disponibilidad publicados desde PULSE Stock (colección pública
-// `webPrices` en Firestore). Solo trae el precio de venta detal y si está
-// agotado — costos y márgenes nunca salen de PULSE Stock. Se aplican sobre
+// `webPrices` en Firestore). Solo trae el precio de venta detal, si está
+// agotado y si está oculto — costos y márgenes nunca salen de PULSE Stock. Se aplican sobre
 // `products` antes del primer render, así todos los componentes leen el
 // precio vigente sin cambios. Variantes agotadas: `storage[].soldOut`.
 const WEB_PRICES_URL =
@@ -27,6 +27,7 @@ async function fetchWebPrices() {
       entries[key] = {
         price: Number.isFinite(price) && price > 0 ? price : null,
         soldOut: f.soldOut?.booleanValue === true,
+        hidden: f.hidden?.booleanValue === true,
       }
     }
     pageToken = data.nextPageToken ?? ''
@@ -38,8 +39,15 @@ async function fetchWebPrices() {
 // publicar una variante, vuelve a este.
 const staticPrices = new WeakMap()
 
+// Catálogo completo antes de ocultar nada — "Ocultar de la web" en PULSE
+// Stock publica "producto|*|*" con hidden y el producto sale de `products`.
+const catalog = [...products]
+
 function applyWebPrices(entries) {
-  for (const p of products) {
+  const visible = catalog.filter(p => !entries[webPriceKey(p.id, WILDCARD, WILDCARD)]?.hidden)
+  products.splice(0, products.length, ...visible)
+
+  for (const p of catalog) {
     const all = entries[webPriceKey(p.id, WILDCARD, WILDCARD)]
     for (const cv of p.colorVariants) {
       for (const s of cv.storage) {
