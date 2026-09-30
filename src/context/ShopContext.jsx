@@ -1,4 +1,5 @@
 ﻿import { createContext, useContext, useState, useEffect } from 'react'
+import { products } from '../data/products'
 
 const ShopContext = createContext(null)
 
@@ -7,8 +8,17 @@ const load = (key, fallback) => {
   catch { return fallback }
 }
 
+// El carrito guardado de otra visita puede tener un precio viejo — lo
+// actualiza al precio vigente (products.js + precios de PULSE Stock).
+const withCurrentPrice = (item) => {
+  const cv = products.find(p => p.id === item.productId)?.colorVariants
+    .find(v => (v.color || null) === item.color)
+  const s = cv?.storage.find(o => (o.label || null) === item.storage)
+  return s ? { ...item, price: s.price } : item
+}
+
 export function ShopProvider({ children }) {
-  const [cart, setCart]         = useState(() => load('nexo_cart', []))
+  const [cart, setCart]         = useState(() => load('nexo_cart', []).map(withCurrentPrice))
   const [wishlist, setWishlist] = useState(() => load('nexo_wish', []))
 
   useEffect(() => { localStorage.setItem('nexo_cart', JSON.stringify(cart)) }, [cart])

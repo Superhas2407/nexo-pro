@@ -573,6 +573,17 @@
     border:1px solid var(--border); background:var(--surface-2); border-radius:8px; padding:7px 8px; font-size:12px;
   }
   .inv-card-detail .field-wide{ grid-column:1/-1; }
+  .web-links{ display:flex; flex-wrap:wrap; gap:6px; }
+  .web-links:empty{ display:none; }
+  .web-chip{
+    display:inline-flex; align-items:center; gap:4px; padding:3px 4px 3px 10px;
+    border-radius:99px; background:var(--surface-2); border:1px solid var(--border); font-size:11px;
+  }
+  .web-chip button{
+    border:0; background:none; color:var(--text-muted); cursor:pointer;
+    font-size:15px; line-height:1; min-width:28px; min-height:28px;
+  }
+  .pill.web{ background:rgba(0,87,255,.1); color:#0057FF; }
 
   /* ---------- publicidad ---------- */
   .ads-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
@@ -1534,7 +1545,7 @@
       var body = {
         sku:p.sku, name:p.name, category:p.category, costUsd:p.costUsd, taxPct:p.taxPct, shipUsd:p.shipUsd,
         costoSupuesto:p.costoSupuesto, marginDetalPct:p.marginDetalPct, marginMayorPct:p.marginMayorPct,
-        stock:p.stock, minStock:p.minStock, sold:p.sold
+        stock:p.stock, minStock:p.minStock, sold:p.sold, webKeys:p.webKeys || []
       };
       db.collection("products").doc(p.id).set(body).catch(function(){});
     } else {
@@ -1559,6 +1570,67 @@
     state.products.unshift(p);
     saveProduct(p);
     renderAll();
+  }
+
+  // ---------------- precios en la web ----------------
+  // Cada producto puede vincularse (p.webKeys) con variantes de la tienda
+  // web. Su precio de venta detal se publica en la colección `webPrices`,
+  // que la web lee sin login — solo lleva la clave y el precio, nunca
+  // costos ni márgenes.
+  var webCatalog = [];       // {key, label, price?} — de /web-catalog.json
+  var webPriceDocs = {};     // docId -> {key, priceUsd}
+  var webSync = { productsLoaded: false, pricesLoaded: false, timer: null };
+
+  function loadWebCatalog(){
+    fetch("/web-catalog.json").then(function(r){ return r.ok ? r.json() : []; })
+      .then(function(items){
+        webCatalog = items || [];
+        var dl = document.getElementById("webCatalogList");
+        if (!dl){ dl = document.createElement("datalist"); dl.id = "webCatalogList"; document.body.appendChild(dl); }
+        dl.innerHTML = webCatalog.map(function(i){ return '<option value="' + escapeAttr(i.label) + '"></option>'; }).join("");
+        renderInventoryList();
+      })
+      .catch(function(){});
+  }
+  function webLabel(key){
+    var item = webCatalog.find(function(i){ return i.key === key; });
+    return item ? item.label : key;
+  }
+  function linkWebKey(product, key){
+    product.webKeys = (product.webKeys || []).filter(function(k){ return k !== key; }).concat([key]);
+    saveProduct(product);
+    renderAll();
+  }
+  function unlinkWebKey(product, key){
+    product.webKeys = (product.webKeys || []).filter(function(k){ return k !== key; });
+    saveProduct(product);
+    renderAll();
+  }
+
+  function scheduleWebPriceSync(){
+    clearTimeout(webSync.timer);
+    webSync.timer = setTimeout(syncWebPrices, 1200);
+  }
+  function syncWebPrices(){
+    // Espera a tener productos y precios publicados — si no, borraría todo.
+    if (!db || !webSync.productsLoaded || !webSync.pricesLoaded) return;
+    var desired = {};
+    state.products.forEach(function(p){
+      var price = Math.round(computed(p).saleDetalUsd * 100) / 100;
+      if (!(price > 0)) return;
+      (p.webKeys || []).forEach(function(key){
+        var id = safeDocId(key);
+        if (!desired[id]) desired[id] = { key: key, priceUsd: price };
+      });
+    });
+    Object.keys(desired).forEach(function(id){
+      var cur = webPriceDocs[id];
+      if (cur && cur.key === desired[id].key && cur.priceUsd === desired[id].priceUsd) return;
+      db.collection("webPrices").doc(id).set({ key: desired[id].key, priceUsd: desired[id].priceUsd, updatedAt: Date.now() }).catch(function(){});
+    });
+    Object.keys(webPriceDocs).forEach(function(id){
+      if (!desired[id]) db.collection("webPrices").doc(id).delete().catch(function(){});
+    });
   }
 
   async function initDb(){
@@ -1600,6 +1672,7 @@
         state.recentScans = Array.isArray(data.recentScans) ? data.recentScans : [];
         state.saleCounter = typeof data.saleCounter === "number" ? data.saleCounter : 1;
         if (data.seeded) seeded = true;
+        scheduleWebPriceSync(); // roundTo cambia el precio de venta
         renderAll();
         renderSellDocNumber();
       } else if (!seeded) {
@@ -1622,8 +1695,19 @@
         var data = d.data() || {};
         return Object.assign({ id: d.id }, data);
       });
+      webSync.productsLoaded = true;
+      scheduleWebPriceSync();
       renderAll();
     }, function(){ /* keep last known state on terminal error */ });
+
+    // precios publicados para la web
+    db.collection("webPrices").onSnapshot(function(qs){
+      webPriceDocs = {};
+      qs.docs.forEach(function(d){ webPriceDocs[d.id] = d.data() || {}; });
+      webSync.pricesLoaded = true;
+      scheduleWebPriceSync();
+    }, function(){ /* sin permiso aún — revisar reglas de Firestore */ });
+    loadWebCatalog();
 
     // sales history (most recent first)
     db.collection("sales").orderBy("createdAt", "desc").limit(30).onSnapshot(function(qs){
@@ -1773,6 +1857,8 @@
   function renderInvCards(){
     var el = document.getElementById("invCardsWrap");
     if (!el) return;
+    var openDetail = el.querySelector(".inv-card-detail:not([hidden])");
+    var openDetailId = openDetail ? openDetail.getAttribute("data-detail-for") : null;
     var list = filteredProducts();
     if (!list.length){
       el.innerHTML = '<div class="empty" style="padding:48px 20px;text-align:center;color:var(--text-muted);">No hay productos que coincidan. Ajusta la búsqueda o el filtro.</div>';
@@ -1811,6 +1897,7 @@
         '</div>' +
         '<div class="inv-card-meta-row">' +
           '<span class="pill ' + c.status + '">' + c.statusLabel + ' · ' + p.stock + ' u.</span>' +
+          ((p.webKeys || []).length ? '<span class="pill web">En la web · ' + p.webKeys.length + '</span>' : '') +
         '</div>' +
         '<button class="btn btn-ghost inv-card-expand" data-toggle-detail="' + p.id + '">Editar costos, stock y más ▾</button>' +
         '<div class="inv-card-detail" data-detail-for="' + p.id + '" hidden>' +
@@ -1824,6 +1911,14 @@
           '<div class="field"><label>Margen detal %</label><input data-field="marginDetalPct" type="number" step="1" lang="en" value="' + fmtInputNum(p.marginDetalPct) + '" /></div>' +
           '<div class="field"><label>Margen mayor %</label><input data-field="marginMayorPct" type="number" step="1" lang="en" value="' + fmtInputNum(p.marginMayorPct) + '" /></div>' +
           (c.hasSupuesto ? '<div class="field field-wide" style="color:var(--text-muted);font-size:10.5px;">C total: ' + fmtUsd(c.costTotalUsd) + ' · C total supuesto: ' + fmtUsd(c.costTotalSupuestoUsd) + '</div>' : '') +
+          '<div class="field field-wide">' +
+            '<label>En la web — publica la venta detal</label>' +
+            '<div class="web-links">' + (p.webKeys || []).map(function(key){
+              return '<span class="web-chip">' + escapeAttr(webLabel(key)) +
+                '<button type="button" data-web-unlink="' + escapeAttr(key) + '" title="Quitar de la web">×</button></span>';
+            }).join("") + '</div>' +
+            '<input data-web-link list="webCatalogList" placeholder="Buscar producto de la web para vincular…" />' +
+          '</div>' +
         '</div>' +
       '</div>';
     }).join("") + '</div>';
@@ -1837,7 +1932,17 @@
       if (expandBtn) expandBtn.addEventListener("click", function(){ toggleInvCardDetail(id); });
       var delBtn = card.querySelector('[data-action="delete"]');
       if (delBtn) delBtn.addEventListener("click", function(){ deleteProduct(id); });
+      Array.prototype.forEach.call(card.querySelectorAll("[data-web-unlink]"), function(btn){
+        btn.addEventListener("click", function(){ unlinkWebKey(product, btn.getAttribute("data-web-unlink")); });
+      });
+      var linkInput = card.querySelector("[data-web-link]");
+      if (linkInput) linkInput.addEventListener("change", function(){
+        var item = webCatalog.find(function(i){ return i.label === linkInput.value; });
+        if (item) linkWebKey(product, item.key);
+      });
     });
+    // El render reemplaza las tarjetas — deja abierto el detalle que estabas editando.
+    if (openDetailId) toggleInvCardDetail(openDetailId);
   }
 
   function renderTable(){

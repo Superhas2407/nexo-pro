@@ -1,0 +1,72 @@
+import { products } from './products'
+import { WILDCARD, webPriceKey } from './webPriceKey'
+
+// Precios publicados desde PULSE Stock (colección pública `webPrices` en
+// Firestore). Solo trae el precio de venta detal — costos y márgenes nunca
+// salen de PULSE Stock. Se aplican sobre `products` antes del primer render,
+// así todos los componentes leen el precio vigente sin cambios.
+const WEB_PRICES_URL =
+  'https://firestore.googleapis.com/v1/projects/pulse--stock/databases/(default)/documents/webPrices'
+const CACHE_KEY = 'pulse_web_prices'
+const WAIT_MS = 1500
+
+async function fetchWebPrices() {
+  const prices = {}
+  let pageToken = ''
+  do {
+    const url = `${WEB_PRICES_URL}?pageSize=300${pageToken ? `&pageToken=${encodeURIComponent(pageToken)}` : ''}`
+    const res = await fetch(url)
+    if (!res.ok) throw new Error(`webPrices ${res.status}`)
+    const data = await res.json()
+    for (const doc of data.documents ?? []) {
+      const f = doc.fields ?? {}
+      const key = f.key?.stringValue
+      const price = Number(f.priceUsd?.doubleValue ?? f.priceUsd?.integerValue)
+      if (key && Number.isFinite(price) && price > 0) prices[key] = price
+    }
+    pageToken = data.nextPageToken ?? ''
+  } while (pageToken)
+  return prices
+}
+
+// Precio original de products.js por variante — si PULSE Stock deja de
+// publicar una variante, vuelve a este.
+const staticPrices = new WeakMap()
+
+function applyWebPrices(prices) {
+  for (const p of products) {
+    const all = prices[webPriceKey(p.id, WILDCARD, WILDCARD)]
+    for (const cv of p.colorVariants) {
+      for (const s of cv.storage) {
+        if (!staticPrices.has(s)) staticPrices.set(s, s.price)
+        s.price = prices[webPriceKey(p.id, cv.color, s.label)] ?? all ?? staticPrices.get(s)
+      }
+    }
+  }
+}
+
+const readCache = () => {
+  try { return JSON.parse(localStorage.getItem(CACHE_KEY)) } catch { return null }
+}
+const writeCache = (prices) => {
+  try { localStorage.setItem(CACHE_KEY, JSON.stringify(prices)) } catch { /* sin storage */ }
+}
+
+// Aplica los precios de la última visita al instante y espera un momento por
+// los actuales. Si tardan más de WAIT_MS la página carga igual y los nuevos
+// quedan guardados para la próxima visita.
+export function loadWebPrices() {
+  const cached = readCache()
+  if (cached) applyWebPrices(cached)
+
+  let rendered = false
+  const fresh = fetchWebPrices()
+    .then(prices => {
+      writeCache(prices)
+      if (!rendered) applyWebPrices(prices)
+    })
+    .catch(() => { /* sin conexión o sin permiso — quedan los precios de products.js */ })
+
+  const timeout = new Promise(resolve => setTimeout(resolve, WAIT_MS))
+  return Promise.race([fresh, timeout]).then(() => { rendered = true })
+}
